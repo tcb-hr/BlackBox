@@ -50,9 +50,11 @@ module.exports = function (grunt) {
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
         tasks: ['newer:jshint:all'],
+        /*
         options: {
           livereload: true
         }
+        */
       },
       mochaTest: {
         files: ['test/server/{,*/}*.js'],
@@ -69,6 +71,7 @@ module.exports = function (grunt) {
       gruntfile: {
         files: ['Gruntfile.js']
       },
+      /*
       livereload: {
         files: [
           '<%= yeoman.app %>/views/{,*//*}*.{html,jade}',
@@ -81,6 +84,7 @@ module.exports = function (grunt) {
           livereload: true
         }
       },
+      */
       express: {
         files: [
           'server.js',
