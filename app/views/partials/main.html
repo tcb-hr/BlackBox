@@ -7,12 +7,10 @@
    Messages will go here!
   </p>
 </div>
-<div ng-controller="MainCtrl">
-  <div ng-repeat="chat in Chat">
+  <div ng-repeat="chat in chats">
     <h4>{{chat.user}}</h4>
     <p>{{chat.body}}</p>
   </div>
-</div>
 <div class="chat_form">
 
   <div class="col-lg-6">
