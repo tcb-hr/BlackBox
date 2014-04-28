@@ -3,7 +3,7 @@
 angular.module('feedApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.menu = [{
-      'title': 'Home',
+      'title': 'Twinjet',
       'link': '/'
     }, {
       'title': 'Settings',

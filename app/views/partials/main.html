@@ -3,19 +3,34 @@
 <div class="jumbotron">
   <h1>'Allo, 'Allo <span ng-show="currentUser">{{ currentUser.name }}</span>!</h1>
   <p class="lead">
-    <img src="images/feed.gif" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
+    <img src="images/feed.gif" alt="Feed Me Seymore!"><br>
+   Messages will go here!
   </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p>
 </div>
-
-<div class="row marketing">
-  <div ng-repeat="thing in awesomeThings">
-      <h4>{{thing.name}}</h4>
-      <p>{{thing.info}}</p>
+<div ng-controller="MainCtrl">
+  <div ng-repeat="chat in Chat">
+    <h4>{{chat.user}}</h4>
+    <p>{{chat.body}}</p>
   </div>
+</div>
+<div class="chat_form">
+
+  <div class="col-lg-6">
+    <div class="input-group">
+      <span class="input-group-addon">@</span>
+      <input type="text" class="form-control" placeholder="TCBCourier">
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Send!</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
 </div>
 
 <div class="footer">
-  <p>♥ from the Yeoman team</p>
+  <p align="center">Yo MTV Raps!</p>
 </div>
