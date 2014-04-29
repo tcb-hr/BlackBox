@@ -4,6 +4,7 @@ angular.module('feedApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
+  'angularMoment',
   'ngRoute'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
