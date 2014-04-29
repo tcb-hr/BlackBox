@@ -39,6 +39,9 @@ var server = app.listen(config.port, config.ip, function () {
   console.log('Express server listening on %s:%d, in %s mode', config.ip, config.port, app.get('env'));
 });
 
+// Sockets
+var io = require('socket.io').listen(server);
+
 // Instagram
 var Instagram = require('instagram-node-lib');
 Instagram.set('client_id', 'ce171905d26343f4b73d255d2b2f0087');
@@ -46,13 +49,10 @@ Instagram.set('client_secret', '033e27ced8cc432fac275aa5c4c046a8');
 Instagram.set('callback_url', 'http://localhost:8000/callback');
 Instagram.set('redirect_uri', 'http://localhost:8000');
 
-//Instagram: Receive the Handshake
 app.get('/callback', function(req, res){
-  console.log('callback get');
   var handshake =  Instagram.subscriptions.handshake(req, res);
 });
 
-//Instagram: Handle the POST
 app.post('/callback', function(req, res) {
   console.log('callback post');
   var data = req.body;
@@ -74,19 +74,14 @@ function sendMessage(url) {
   io.sockets.emit('show', { show: url });
 }
 
-// Sockets
-var io = require('socket.io').listen(server);
-
 io.sockets.on('connection', function (socket) {
   Instagram.tags.recent({
-    name: 'nofilter',
+    name: 'tcbcourier',
       complete: function(data) {
         socket.emit('instagramFeed', { instagramFeed: data });
       }
   });
 });
-
-
 
 // Expose app
 exports = module.exports = app;
