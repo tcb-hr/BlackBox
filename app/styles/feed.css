@@ -51,6 +51,9 @@ body {
   display: none;
 }
 .msgBlock {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 56px;
   padding: 4px;
   border-style: solid;
   border-width: 1px;
@@ -87,6 +90,7 @@ body {
   margin-top: 44px;
 }
 .hamburger {
+  display: none;
 }
 .msgMenu {
   display: none;
