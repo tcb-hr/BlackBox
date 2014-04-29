@@ -19,8 +19,8 @@
   <br>
 <div class="jumbotron">
   <h1>'Allo, 'Allo <span ng-show="currentUser">{{ currentUser.name }}</span>!</h1>
-  <p class="lead">
-    <img src="images/feed.gif" alt="Feed Me Seymore!">
+  <p class="lead" align="center">
+    <img src="images/feed.gif" class="img-responsive" align="center" alt="Feed Me Seymore!">
     <br>
     <div ng-repeat="chat in chats | orderBy:'timestamp':true" align="center">
       <h4>{{chat.user}} said {{chat.timestamp}}</h4>
