@@ -18,8 +18,10 @@
     "passport": "~0.2.0",
     "passport-local": "~0.1.6",
     "passport-oauth2": "^1.1.2",
-    "static-favicon": "~1.0.1",
-    "instagram-node-lib": "^0.1.1"
+    "instagram-node-lib": "^0.1.1",
+    "socket.io": "^0.9.16",
+    "static-favicon": "~1.0.1"
+
   },
   "devDependencies": {
     "grunt": "~0.4.1",

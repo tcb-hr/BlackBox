@@ -1,9 +1,11 @@
 'use strict';
 
-angular.module('feedApp', [
+var app = angular.module('feedApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
+  'angularMoment',
+  'flow',
   'ngRoute'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
@@ -56,3 +58,17 @@ angular.module('feedApp', [
       }
     });
   });
+
+app.config(['flowFactoryProvider', function (flowFactoryProvider) {
+  flowFactoryProvider.defaults = {
+    target: 'upload.php',
+    permanentErrors: [404, 500, 501],
+    maxChunkRetries: 1,
+    chunkRetryInterval: 5000,
+    simultaneousUploads: 4,
+    singleFile: true
+  };
+  flowFactoryProvider.on('catchAll', function (event) {
+    console.log('catchAll', arguments);
+  });
+      
