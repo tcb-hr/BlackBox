@@ -22,9 +22,11 @@
   <p class="lead" align="center">
     <img src="images/feed.gif" class="img-responsive" align="center" alt="Feed Me Seymore!">
     <br>
-    <div ng-repeat="chat in chats | orderBy:'timestamp':true" align="center">
-      <h4>{{chat.user}} said <span am-time-ago="chat.timestamp"></span></h4>
-      <p>{{chat.body}}</p>
+    <div ng-repeat="chat in chats | orderBy:'timestamp':true" align="left">
+      <h4>{{chat.user}} said:</h4> 
+      <p>{{chat.body}}<br>
+      <small><span am-time-ago="chat.timestamp"></span></small>
+      </p>
     </div>
   </p>
 </div>
