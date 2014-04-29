@@ -27,6 +27,7 @@ body {
   width: 40px;
   height: 40px;
   text-indent: -9999px;
+  /*text-indent: -3px;*/
 }
 #dashBtn {
   position: absolute; /* or fixed? */
@@ -117,6 +118,7 @@ body {
 #compose {
   position: relative;
   margin: 0 auto;
+  padding-left: 10px;
   top: 6px;
   width: 70%;
   height: 32px;
@@ -125,6 +127,7 @@ body {
   border-width: 1px;
   border-color: #ccc;
   border-radius: 8px;
+  font-size: 14pt;
 }
 #sendBtn {
   position: absolute; /* or fixed? */

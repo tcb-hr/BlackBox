@@ -1,6 +1,6 @@
 <div ng-include="'partials/navbar'"></div>
 
-  <div class="chat_form" name='chat'>
+<!--   <div class="chat_form" name='chat'>
     <div class="col-lg-6">
       <div class="input-group">
         <span class="input-group-addon">@</span>
@@ -13,15 +13,15 @@
         <span class="input-group-btn">
           <button class="btn btn-default" type="button" ng-click="sendChat(chat)">Send!</button>
         </span>
-      </div><!-- /input-group -->
-    </div><!-- /.col-lg-6 -->
+      </div>
+    </div>
   </div>
-  <br>
+  <br> -->
 <div class="jumbotron">
   <h1>'Allo, 'Allo <span ng-show="currentUser">{{ currentUser.name }}</span>!</h1>
-  <p class="lead" align="center">
-    <img src="images/feed.gif" class="img-responsive" align="center" alt="Feed Me Seymore!">
-    <br>
+  <!-- <p class="lead" align="center"> -->
+    <!-- <img src="images/feed.gif" class="img-responsive" align="center" alt="Feed Me Seymore!"> -->
+    <!-- <br> -->
     <div ng-repeat="chat in chats | orderBy:'timestamp':true" align="left">
       <h4>{{chat.user}} said:</h4> 
       <p>{{chat.body}}<br>
@@ -31,6 +31,36 @@
   </p>
 </div>
 
-<div class="footer">
-  <p align="center">Yo MTV Raps!</p>
+<!-- <div class="footer navbar-fixed-bottom"></div> -->
+
+<div id="footer">
+  <div class="content">
+    <div class="chat_form" name="chat">
+      <!-- <div class="col-lg-6">
+        <div class="input-group">
+          <span class="input-group-addon">@</span>
+          <input type="text" class="form-control" placeholder="TCBCourier" ng-model="chat.name">
+        </div>
+      </div> -->
+      <div class="col-lg-6">
+        <div class="input-group">
+          <button type="button" ng-click="attachToChat()" class="button" id="attachBtn">attach</button>
+          <input type="text" class="form-control" ng-model="chat.body" id="compose">
+          <!-- <span class="input-group-btn"> -->
+            <!-- CHANGE THIS SEND BTN TO A SUBMIT -->
+            <button type="button" ng-click="sendChat(chat)" class="button" id="sendBtn">send</button>
+          <!-- </span> -->
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<!-- 
+<div id="footer">
+  <div class="content">
+    <div class="button" id="attachBtn">attach</div>
+    <div id="compose"></div>
+    <div class="button" id="sendBtn">send</div>
+  </div>
+</div>
+ -->
