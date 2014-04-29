@@ -1,32 +1,32 @@
 <div ng-include="'partials/navbar'"></div>
 
+  <div class="chat_form" name='chat'>
+    <div class="col-lg-6">
+      <div class="input-group">
+        <span class="input-group-addon">@</span>
+        <input type="text" class="form-control" placeholder="TCBCourier" ng-model="chat.name">
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="chat.body">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="sendChat(chat)">Send!</button>
+        </span>
+      </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+  </div>
+  <br>
 <div class="jumbotron">
   <h1>'Allo, 'Allo <span ng-show="currentUser">{{ currentUser.name }}</span>!</h1>
   <p class="lead">
     <img src="images/feed.gif" alt="Feed Me Seymore!"><br>
    Messages will go here!
-  </p>
-</div>
-  <div ng-repeat="chat in chats" align="center">
-    <h4>{{chat.user}}</h4>
+  <div ng-repeat="chat in chats | orderBy:'timestamp':true" align="center">
+    <h4>{{chat.user}} said {{chat.timestamp}}</h4>
     <p>{{chat.body}}</p>
   </div>
-<div class="chat_form" name='chat'>
-
-  <div class="col-lg-6">
-    <div class="input-group">
-      <span class="input-group-addon">@</span>
-      <input type="text" class="form-control" placeholder="TCBCourier" ng-model="chat.name">
-    </div>
-  </div>
-  <div class="col-lg-6">
-    <div class="input-group">
-      <input type="text" class="form-control" ng-model="chat.body">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button" ng-click="sendChat(chat)">Send!</button>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
+  </p>
 </div>
 
 <div class="footer">
