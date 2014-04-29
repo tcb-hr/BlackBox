@@ -54,6 +54,19 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
+    <script src="http://localhost:8000/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io.connect('http://localhost:8000');
+      socket.on('connect', function(){
+        console.log('Socket connection established.');
+      })
+      socket.on('news', function(data){
+        console.log(data)
+      });
+      socket.on('message', function(data){
+        console.log(data['greeting']);
+      })
+    </script>
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
