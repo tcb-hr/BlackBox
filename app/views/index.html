@@ -60,12 +60,17 @@
       socket.on('connect', function(){
         console.log('Socket connection established.');
       })
-      socket.on('news', function(data){
-        console.log(data)
+      socket.on('show', function(data){
+        console.log('show', data);
       });
-      socket.on('message', function(data){
-        console.log(data['greeting']);
-      })
+      socket.on('instagramFeed', function(data){
+        for(var i=0; i<data['instagramFeed'].length; i++){
+          var item = data['instagramFeed'][i];
+          console.log(item);
+          var html = '<a href="' + item['link'] + '" title="' + item['caption'] + '" target="_blank"><img src="' + item['images']['standard_resolution']['url'] + '" alt="' + item['caption'] +'" /></a>'
+          $('body').append(html);
+        }
+      });
     </script>
     <!-- endbuild -->
 
