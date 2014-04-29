@@ -5,6 +5,8 @@ body {
   font-family: sans-serif;
 }
 #container {
+  margin: 0;
+  padding: 0;
   min-width: 320px;
 }
 #header {
@@ -35,7 +37,7 @@ body {
 }
 #appLogo {
   position: relative;
-  top: 12px;
+  top: 6px;
   font-size: 14pt;
   font-weight: 700;
   color: #aaa;

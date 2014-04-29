@@ -1,7 +1,27 @@
+<!-- <div id="header">
+  <div class="content">
+    <div class="button" id="dashBtn">dash</div>
+    <div id="appLogo">courier's cockpit</div>
+    <div class="button" id="settingsBtn">settings</div>
+  </div>
+</div>
+ -->
+
+
+<div class="navbar-fixed-top" id="header" ng-controller="NavbarCtrl">
+  <div class="content">
+    <div class="button" id="dashBtn">dash</div>
+    <div id="appLogo">courier's cockpit</div>
+    <div class="button" id="settingsBtn">settings</div>
+  </div>
+</div>
+
+
+<!-- 
 <div class="header" ng-controller="NavbarCtrl">
   <ul class="nav nav-pills pull-right">
     <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-        <a ng-href="{{item.link}}">{{item.title}}</a>
+      <a ng-href="{{item.link}}">{{item.title}}</a>
     </li>
     <li ng-hide="currentUser" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
     <li ng-hide="currentUser" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
