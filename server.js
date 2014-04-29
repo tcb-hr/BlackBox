@@ -42,9 +42,45 @@ var server = app.listen(config.port, config.ip, function () {
 // Sockets
 var io = require('socket.io').listen(server);
 
+// Instagram
+var Instagram = require('instagram-node-lib');
+Instagram.set('client_id', 'ce171905d26343f4b73d255d2b2f0087');
+Instagram.set('client_secret', '033e27ced8cc432fac275aa5c4c046a8');
+Instagram.set('callback_url', 'http://localhost:8000/callback');
+Instagram.set('redirect_uri', 'http://localhost:8000');
+
+app.get('/callback', function(req, res){
+  var handshake =  Instagram.subscriptions.handshake(req, res);
+});
+
+app.post('/callback', function(req, res) {
+  console.log('callback post');
+  var data = req.body;
+  // Grab the hashtag "tag.object_id"
+  // concatenate to the url and send as a argument to the client side
+  data.forEach(function(tag) {
+    var url = 'https://api.instagram.com/v1/tags/' + tag.object_id + '/media/recent?client_id=CLIENT_ID';
+    sendMessage(url);
+  });
+  res.end();
+});
+
+/**
+ * Send the url with the hashtag to the client side
+ * to do the ajax call based on the url
+ * @param  {[string]} url [the url as string with the hashtag]
+ */
+function sendMessage(url) {
+  io.sockets.emit('show', { show: url });
+}
+
 io.sockets.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.emit('message', {greeting: 'hi'});
+  Instagram.tags.recent({
+    name: 'tcbcourier',
+      complete: function(data) {
+        socket.emit('instagramFeed', { instagramFeed: data });
+      }
+  });
 });
 
 // Expose app
