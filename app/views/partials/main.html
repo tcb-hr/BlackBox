@@ -11,19 +11,19 @@
     <h4>{{chat.user}}</h4>
     <p>{{chat.body}}</p>
   </div>
-<div class="chat_form">
+<div class="chat_form" name='chat'>
 
   <div class="col-lg-6">
     <div class="input-group">
       <span class="input-group-addon">@</span>
-      <input type="text" class="form-control" placeholder="TCBCourier">
+      <input type="text" class="form-control" placeholder="TCBCourier" ng-model="chat.name">
     </div>
   </div>
   <div class="col-lg-6">
     <div class="input-group">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" ng-model="chat.body">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button" ng-click="sendChat()">Send!</button>
+        <button class="btn btn-default" type="button" ng-click="sendChat(chat)">Send!</button>
       </span>
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->

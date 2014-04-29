@@ -6,8 +6,10 @@ angular.module('feedApp')
       $scope.chats = chats;
     });
 
-    $scope.sendChat = function(){
-      $http.post('/api/chat', {user:'Ed Lover', body:'he is not Dr Dre'});
+    $scope.sendChat = function(chat){
+      console.log($scope.user, $scope.chat)
+      $http.post('/api/chat', 
+        {user:chat.name, body:chat.body});
     }
 
   });
