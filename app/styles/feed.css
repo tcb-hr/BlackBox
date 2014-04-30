@@ -1,0 +1,139 @@
+body, div, img, a, h1, h2, h3, h4, h5, h6 {
+  margin: 0; padding: 0; border: 0;
+}
+body {
+  font-family: sans-serif;
+}
+#container {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+}
+#header {
+  width: 100%;
+  height: 44px;
+  position: fixed;
+  top: 0;
+  background-color: #eee;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #bbb;
+}
+.content {
+  text-align: center;
+}
+.button {
+  float: left;
+  width: 40px;
+  height: 40px;
+  text-indent: -9999px;
+  /*text-indent: -3px;*/
+}
+#dashBtn {
+  position: absolute; /* or fixed? */
+  top: 2px;
+  left: 2px;
+  background-image: url("../images/dash.png");
+  background-size: 40px 40px;
+}
+#appLogo {
+  position: relative;
+  top: 6px;
+  font-size: 14pt;
+  font-weight: 700;
+  color: #aaa;
+}
+#settingsBtn {
+  position: absolute; /* or fixed? */
+  top: 2px;
+  right: 2px;
+  background-image: url("../images/gear.png");
+  background-size: 40px 40px;
+}
+#pinnedBar {
+  display: none;
+}
+.msgBlock {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 56px;
+  padding: 4px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ddd;
+}
+.author {
+  float: left;
+  width: 32px;
+  height: 32px;
+}
+.avatar {
+  float: left;
+  width: 32px;
+  height: 32px;
+}
+.handle {
+  font-size: 9pt;
+  color: #007aff;
+}
+.msgText {
+  margin-left: 38px;
+  text-align: left;
+  font-size: 10pt;
+}
+.time {
+  float: right;
+  position: relative;
+  top: -14px;
+  text-align: right;
+  font-size: 9pt;
+  color: gray;
+}
+#feed {
+  margin-top: 44px;
+  margin-bottom: 44px;
+}
+.hamburger {
+  display: none;
+}
+.msgMenu {
+  display: none;
+}
+#footer {
+  width: 100%;
+  height: 44px;
+  position: fixed;
+  bottom: 0;
+  background-color: #eee;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #bbb;
+}
+#attachBtn {
+  position: absolute; /* or fixed? */
+  top: 2px;
+  left: 2px;
+  background-image: url("../images/clip.png");
+  background-size: 40px 40px;
+}
+#compose {
+  position: relative;
+  margin: 0 auto;
+  padding-left: 10px;
+  top: 6px;
+  width: 70%;
+  height: 32px;
+  background-color: #fff;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
+  border-radius: 8px;
+  font-size: 14pt;
+}
+#sendBtn {
+  position: absolute; /* or fixed? */
+  top: 2px;
+  right: 2px;
+  background-image: url("../images/send.png");
+  background-size: 40px 40px;
+}
