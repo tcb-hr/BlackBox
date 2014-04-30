@@ -4,8 +4,6 @@ var app = angular.module('feedApp');
 
 app.controller('MainCtrl', function($scope, $http) {
 
-  $scope.glued = true;
-
   $http.get('/api/chat').success(function(chats) {
     $scope.chats = chats;
   });
@@ -34,9 +32,11 @@ app.filter('searchFor', function(){
       return arr;
     }
     var result = [];
+    console.log(arr)
     searchString = searchString.toLowerCase();
-    angular.forEach(arr, function(chats){
-      if(chat.body.toLowerCase().indexOf(searchString) !== -1){
+    angular.forEach(arr, function(chat){
+
+      if(chat.body && chat.body.toLowerCase().indexOf(searchString) !== -1){
         result.push(chat);
       }
     });
