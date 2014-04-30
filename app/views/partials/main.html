@@ -34,7 +34,7 @@
  -->
 
 <div id="feed">
-  <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString" ng-swipe-left="consle.log('hello swipe left')">
+  <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString">
     <div class="content">
       <div class="author">
         <img class="avatar" src="../images/alex.jpg" />
