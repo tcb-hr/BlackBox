@@ -2,9 +2,27 @@
 
 var app = angular.module('feedApp');
 
-app.controller('MainCtrl', function($scope, $http) {
+app.directive('scrollBottom', function($window) {
+  function link(scope, el){
+    var feed = $window.document.getElementById('feed');
+    feed.scrollTop = feed.scrollHeight + 44;
+    feed.scrollTop = 9999;
+  }
+  return {
+    link: link
+  };
+});
 
-  $scope.glued = true;
+app.controller('MainCtrl', function($scope, $http, $document, $window, $location, $rootScope, $anchorScroll) {
+
+  // $scope.gotoBottom = function (){
+  //   // set the location.hash to the id of
+  //   // the element you wish to scroll to.
+  //   $location.hash('bottom');
+
+  //   // call $anchorScroll()
+  //   $anchorScroll();
+  // };
 
   $http.get('/api/chat').success(function(chats) {
     $scope.chats = chats;
@@ -17,17 +35,14 @@ app.controller('MainCtrl', function($scope, $http) {
 
     $http.get('/api/chat').success(function(chats) {
       $scope.chats = chats;
-    });
 
-    // var body = document.body;
-    // body.scrollTop = body.scrollHeight + 44;
+      $location.hash("")
+      // var feed = document.getElementById('feed');
+      feed.scrollTop = feed.scrollHeight + 44;
+      feed.scrollTop = 9999;
+      // debugger;
 
-    var feed = document.getElementById('feed');
-    feed.scrollTop = feed.scrollHeight + 44;
-    console.log(feed);
-    console.log(feed.scrollHeight);
-    console.log(feed.scrollTop);
-    debugger;
+    })
 
   };
 
