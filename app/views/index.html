@@ -27,7 +27,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+    <div id="container" ng-view=""></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -63,23 +63,6 @@
     <script src="bower_components/ng-flow/dist/ng-flow.js"></script>
     <!-- endbower -->
     <script src="http://localhost:8000/socket.io/socket.io.js"></script>
-    <script>
-      var socket = io.connect('http://localhost:8000');
-      socket.on('connect', function(){
-        console.log('Socket connection established.');
-      })
-      socket.on('show', function(data){
-        console.log('show', data);
-      });
-      socket.on('instagramFeed', function(data){
-        for(var i=0; i<data['instagramFeed'].length; i++){
-          var item = data['instagramFeed'][i];
-          console.log(item);
-          var html = '<a href="' + item['link'] + '" title="' + item['caption'] + '" target="_blank"><img src="' + item['images']['standard_resolution']['url'] + '" alt="' + item['caption'] +'" /></a>'
-          $('body').append(html);
-        }
-      });
-    </script>
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->

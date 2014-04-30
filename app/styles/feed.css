@@ -91,6 +91,7 @@ body {
 }
 #feed {
   margin-top: 44px;
+  margin-bottom: 44px;
 }
 .hamburger {
   display: none;
