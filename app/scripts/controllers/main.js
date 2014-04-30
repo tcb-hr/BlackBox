@@ -27,3 +27,20 @@ app.controller('MainCtrl', function($scope, $http) {
   };
 
 });
+
+app.filter('searchFor', function(){
+  // how is arr getting passed in to the filter from the ng-repeat list?
+  return function(arr, searchString){
+    if(!searchString){
+      return arr;
+    }
+    var result = [];
+    searchString = searchString.toLowerCase();
+    angular.forEach(arr, function(chat){
+      if(chat.body.toLowerCase().indexOf(searchString) !== -1){
+        result.push(chat);
+      }
+    });
+    return result;
+  };
+});
