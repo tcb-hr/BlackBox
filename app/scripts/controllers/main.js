@@ -4,8 +4,6 @@ var app = angular.module('feedApp');
 
 app.controller('MainCtrl', function($scope, $http) {
 
-  $scope.glued = true;
-
   $http.get('/api/chat').success(function(chats) {
     $scope.chats = chats;
   });
@@ -29,15 +27,16 @@ app.controller('MainCtrl', function($scope, $http) {
 });
 
 app.filter('searchFor', function(){
-  // how is arr getting passed in to the filter from the ng-repeat list?
   return function(arr, searchString){
     if(!searchString){
       return arr;
     }
     var result = [];
+    console.log(arr)
     searchString = searchString.toLowerCase();
     angular.forEach(arr, function(chat){
-      if(chat.body.toLowerCase().indexOf(searchString) !== -1){
+
+      if(chat.body && chat.body.toLowerCase().indexOf(searchString) !== -1){
         result.push(chat);
       }
     });

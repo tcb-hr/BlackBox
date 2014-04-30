@@ -37,7 +37,7 @@
   <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString">
     <div class="content">
       <div class="author">
-        <img class="avatar" src="../images/alex.jpg" />
+        <img class="avatar" src={{chat.pic}} />
         <span class="handle">{{chat.user || 'guest'}}</span>
       </div>
       <div class="msgText">{{chat.body}}</div>
