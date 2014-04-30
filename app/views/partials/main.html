@@ -1,40 +1,7 @@
 <div ng-include="'partials/navbar'"></div>
 
-<!--   <div class="chat_form" name='chat'>
-    <div class="col-lg-6">
-      <div class="input-group">
-        <span class="input-group-addon">@</span>
-        <input type="text" class="form-control" placeholder="TCBCourier" ng-model="chat.name">
-      </div>
-    </div>
-    <div class="col-lg-6">
-      <div class="input-group">
-        <input type="text" class="form-control" ng-model="chat.body">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button" ng-click="sendChat(chat)">Send!</button>
-        </span>
-      </div>
-    </div>
-  </div>
-  <br> -->
-
-<!-- <div class="jumbotron">
-  <h1><span ng-show="currentUser">{{ currentUser.name }}</span>!</h1>
-  <p class="lead" align="center">
-    <img src="images/feed.gif" class="img-responsive" align="center" alt="Feed Me Seymore!">
-    <br>
-    <div ng-repeat="chat in chats | orderBy:'timestamp':false" align="left">
-      <h4>{{chat.user}} said:</h4> 
-      <p>{{chat.body}}<br>
-      <small><span am-time-ago="chat.timestamp"></span></small>
-      </p>
-    </div>
-  </p>
-</div>
- -->
-
 <div id="feed">
-  <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString">
+  <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString" scroll-bottom>
     <div class="content">
       <div class="author">
         <img class="avatar" src={{chat.pic}} />
@@ -74,6 +41,7 @@
 </div>
  -->
 <!-- <div class="footer navbar-fixed-bottom"></div> -->
+
 <div flow-init="{singleFile:true}"
  flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
 <h3>
@@ -88,9 +56,7 @@
   <span class="btn btn-primary" ng-show="!$flow.files.length" flow-btn>Select image</span>
   <span class="btn btn-info" ng-show="$flow.files.length" flow-btn>Change</span>
   <span class="btn btn-danger" ng-show="$flow.files.length"
-     ng-click="$flow.cancel()">
-    Remove
-  </span>
+     ng-click="$flow.cancel()">Remove</span>
   <span class="flow-btn"></span>
 </div>
 <p>
@@ -101,32 +67,14 @@
 <div id="footer">
   <div class="content">
     <form class="chat_form" name="chat" ng-submit="sendChat(chat)">
-      <!-- <div class="col-lg-6">
-        <div class="input-group">
-          <span class="input-group-addon">@</span>
-          <input type="text" class="form-control" placeholder="TCBCourier" ng-model="chat.name">
-        </div>
-      </div> -->
       <div class="col-lg-6">
         <div class="input-group">
           <button type="button" ng-click="attachToChat()" class="button" id="attachBtn">attach</button>
-          <input type="text" ng-model="searchString" placeholder="Search for..." ><!-- id="compose"/> -->
+          <input type="text" ng-model="searchString" placeholder="Search for…" >
           <input type="text" class="form-control" ng-model="chat.body" ><!-- id="compose"> -->
-          <!-- <span class="input-group-btn"> -->
-            <!-- CHANGE THIS SEND BTN TO A SUBMIT -->
-            <button type="submit" class="button" id="sendBtn">send</button>
-          <!-- </span> -->
+          <button type="submit" class="button" id="sendBtn">send</button>
         </div>
       </div>
     </form>
   </div>
 </div>
-<!-- 
-<div id="footer">
-  <div class="content">
-    <div class="button" id="attachBtn">attach</div>
-    <div id="compose"></div>
-    <div class="button" id="sendBtn">send</div>
-  </div>
-</div>
- -->
