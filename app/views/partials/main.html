@@ -1,6 +1,6 @@
 <div ng-include="'partials/navbar'"></div>
 
-  <div class="chat_form" name='chat'>
+<!--   <div class="chat_form" name='chat'>
     <div class="col-lg-6">
       <div class="input-group">
         <span class="input-group-addon">@</span>
@@ -13,16 +13,17 @@
         <span class="input-group-btn">
           <button class="btn btn-default" type="button" ng-click="sendChat(chat)">Send!</button>
         </span>
-      </div><!-- /input-group -->
-    </div><!-- /.col-lg-6 -->
+      </div>
+    </div>
   </div>
-  <br>
-<div class="jumbotron">
-  <h1>'Allo, 'Allo <span ng-show="currentUser">{{ currentUser.name }}</span>!</h1>
+  <br> -->
+
+<!-- <div class="jumbotron">
+  <h1><span ng-show="currentUser">{{ currentUser.name }}</span>!</h1>
   <p class="lead" align="center">
     <img src="images/feed.gif" class="img-responsive" align="center" alt="Feed Me Seymore!">
     <br>
-    <div ng-repeat="chat in chats | orderBy:'timestamp':true" align="left">
+    <div ng-repeat="chat in chats | orderBy:'timestamp':false" align="left">
       <h4>{{chat.user}} said:</h4> 
       <p>{{chat.body}}<br>
       <small><span am-time-ago="chat.timestamp"></span></small>
@@ -30,7 +31,78 @@
     </div>
   </p>
 </div>
+ -->
 
-<div class="footer">
-  <p align="center">Yo MTV Raps!</p>
+<div id="feed" scroll-glue ng-model="glued">
+  <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false">
+    <div class="content">
+      <div class="author">
+        <img class="avatar" src="../images/alex.jpg" />
+        <span class="handle">{{chat.user || 'guest'}}</span>
+      </div>
+      <div class="msgText">{{chat.body}}</div>
+      <div class="time" am-time-ago="chat.timestamp"></div>
+    </div>
+  </div>
+  <div class="hamburger"></div>
+  <div class="msgMenu">
+    <div>reply</div>
+    <div>mute</div>
+    <div>grab</div>
+    <div>more info</div>
+  </div>
 </div>
+
+<!-- <div id="feed">
+  <div class="msgBlock">
+    <div class="content">
+      <div class="author">
+        <img class="avatar" src="../images/alex.jpg" />
+        <span class="handle">Alex</span>
+      </div>
+      <div class="msgText">Lorem ipsum kolobnev dwars door vlaanderen gp ouest france plouay vos molteni, bartali forest of arenberg het volk jens bretagne.</div>
+      <div class="time">5m</div>
+    </div>
+  </div>
+  <div class="hamburger"></div>
+  <div class="msgMenu">
+    <div>reply</div>
+    <div>mute</div>
+    <div>grab</div>
+    <div>more info</div>
+  </div>
+</div>
+ -->
+<!-- <div class="footer navbar-fixed-bottom"></div> -->
+
+<div id="footer">
+  <div class="content">
+    <form class="chat_form" name="chat" ng-submit="sendChat(chat)">
+      <!-- <div class="col-lg-6">
+        <div class="input-group">
+          <span class="input-group-addon">@</span>
+          <input type="text" class="form-control" placeholder="TCBCourier" ng-model="chat.name">
+        </div>
+      </div> -->
+      <div class="col-lg-6">
+        <div class="input-group">
+          <button type="button" ng-click="attachToChat()" class="button" id="attachBtn">attach</button>
+          <input type="text" class="form-control" ng-model="chat.body" id="compose">
+          <!-- <span class="input-group-btn"> -->
+            <!-- CHANGE THIS SEND BTN TO A SUBMIT -->
+            <button type="submit" class="button" id="sendBtn">send</button>
+          <!-- </span> -->
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- 
+<div id="footer">
+  <div class="content">
+    <div class="button" id="attachBtn">attach</div>
+    <div id="compose"></div>
+    <div class="button" id="sendBtn">send</div>
+  </div>
+</div>
+ -->
