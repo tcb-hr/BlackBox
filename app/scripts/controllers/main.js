@@ -25,7 +25,8 @@ app.controller('MainCtrl', function($scope, $http) {
 
     $http.post('/api/chat', {
       user: chat.name,
-      body: chat.body
+      body: chat.body,
+      image: ""
     });
 
     $http.get('/api/chat').success(function(chats) {
