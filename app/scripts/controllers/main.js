@@ -57,9 +57,11 @@ app.controller('MainCtrl', function($scope, $http) {
     $scope.map.addLayer($scope.layer);
     $scope.marker = L.marker([37.7, -122.4]).addTo($scope.map);
     
+
+
     $("#map").height($(window).height());
     $scope.map.invalidateSize();
-    
+  
     $('#map').click(function(){
       $('#map').hide();
     });
@@ -77,12 +79,19 @@ app.controller('MainCtrl', function($scope, $http) {
               "street_address": "565 Ellis St"
           }
   */ 
-  $scope.showMap = function(latLng){
-    if(latLng !== ''){
-      $scope.marker.setLatLng([50, 50]); //change to chat.latLng
-      console.log(chat);
-      $('#map').show();
-    }
+  $scope.showMap = function(chat){
+    console.log(chat);
+    var location = {
+      "street": "565 Ellis St",
+      "city": "San Francisco",
+      "state": "CA",
+      "postalCode": "94109"
+    };
+
+    MQ.geocode({ map: $scope.map }).search(location);
+    $scope.marker.setLatLng([50, 50]); //change to chat.latLng
+    console.log(chat);
+    $('#map').show();
   };
 
 });
