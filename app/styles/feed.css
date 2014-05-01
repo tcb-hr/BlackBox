@@ -94,8 +94,15 @@ body {
   color: gray;
 }
 #feed {
-  margin-top: 44px;
-  margin-bottom: 44px;
+  /*margin-top: 44px;*/
+  /*margin-bottom: 44px;*/
+  top: 44px;
+  bottom: 44px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .hamburger {
   display: none;
