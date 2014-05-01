@@ -61,8 +61,24 @@
     <script src="bower_components/angular-moment/angular-moment.js"></script>
     <script src="bower_components/flow.js/dist/flow.js"></script>
     <script src="bower_components/ng-flow/dist/ng-flow.js"></script>
+
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+    <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.4"></script>
+
     <!-- endbower -->
-    <script src="http://localhost:8000/socket.io/socket.io.js"></script>
+
+    <!-- Sockets
+    <script type="text/javascript" src="http://localhost:8000/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io.connect('http://localhost:8000');
+      socket.on('news', function (data) {
+        console.log(data);
+        alert(data['hello'])
+      });
+    </script>
+    -->
+
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->

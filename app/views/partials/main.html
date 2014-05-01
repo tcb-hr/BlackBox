@@ -1,4 +1,4 @@
-<div ng-include="'partials/navbar'"></div>
+<div ng-include="'partials/navbar'" ng-init="createMap()"></div>
 
 <!--   <div class="chat_form" name='chat'>
     <div class="col-lg-6">
@@ -32,9 +32,9 @@
   </p>
 </div>
  -->
-
+<div id="map"></div>
 <div id="feed">
-  <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString">
+  <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString" ng-click="showMap(chat.latLng)">
     <div class="content">
       <div class="author">
         <img class="avatar" src={{chat.pic}} />
