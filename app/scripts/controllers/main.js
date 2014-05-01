@@ -2,15 +2,24 @@
 
 var app = angular.module('feedApp');
 
-app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO SEPARATE FILE?
+app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARATE FILE?
 
-  var link = function(){
-    var feed = $window.document.getElementById('feed');
-    feed.scrollTop = feed.scrollHeight + 44;
+  var scrollBottomWrap = function() {
+
+    var scrollToBottom = function() {
+      var feed = $window.document.getElementById('feed');
+      feed.scrollTop = feed.scrollHeight + 44;
+    };
+    scrollToBottom();
+
+    $window.addEventListener('resize', function() {
+      scrollToBottom();
+    });
+
   };
 
   return {
-    link: link
+    link: scrollBottomWrap
   };
 
 });
