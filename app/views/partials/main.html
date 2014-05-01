@@ -18,7 +18,56 @@
     <div>grab</div>
     <div>more info</div>
   </div>
+                <div flow-init="{singleFile:true}"
+                 flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
+                <h3>
+                <a name="image-example" class="anchor" href="#image-example"><span class="octicon octicon-link"></span></a>Pic-A-Pic</h3>
+                <div class="thumbnail" ng-show="!$flow.files.length">
+                  <img src="../images/Alfred_E_Neuman.jpg" />
+                </div>
+                <div class="thumbnail" ng-show="$flow.files.length">
+                  <img flow-img="$flow.files[0]" />
+                </div>
+                <div>
+                  <span class="btn btn-primary" ng-show="!$flow.files.length" flow-btn>Select image</span>
+                  <span class="btn btn-info" ng-show="$flow.files.length" flow-btn>Change</span>
+                  <span class="btn btn-danger" ng-show="$flow.files.length"
+                     ng-click="$flow.cancel()">Remove</span>
+                  <span class="btn btn-danger" ng-show="$flow.files.length"
+                     ng-click="$flow.upload()">Upload</span>
+                </div>
+                <p>
+                  <small>Only PNG,GIF,JPG,JEPG files allowed.</small>
+                </p>
+                <table>
+                <tr ng-repeat="file in transfers"> <td>{{$index+1}}</td> <td>{{file.name}}</td> </tr>
+                </table>
+                  
+                </div>
 </div>
+
+<!-- <div id="feed">
+  <div class="msgBlock">
+    <div class="content">
+      <div class="author">
+        <img class="avatar" src="../images/alex.jpg" />
+        <span class="handle">Alex</span>
+      </div>
+      <div class="msgText">Lorem ipsum kolobnev dwars door vlaanderen gp ouest france plouay vos molteni, bartali forest of arenberg het volk jens bretagne.</div>
+      <div class="time">5m</div>
+    </div>
+  </div>
+  <div class="hamburger"></div>
+  <div class="msgMenu">
+    <div>reply</div>
+    <div>mute</div>
+    <div>grab</div>
+    <div>more info</div>
+  </div>
+</div>
+ -->
+<!-- <div class="footer navbar-fixed-bottom"></div> -->
+
 
 <div id="footer">
   <div class="content">

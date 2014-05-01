@@ -9,7 +9,7 @@ var app = angular.module('feedApp', [
   'ngTouch',
   'ngRoute'
 ])
-  .config(function ($routeProvider, $locationProvider, $httpProvider) {
+  .config(function ($routeProvider, $locationProvider, $httpProvider, flowFactoryProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'partials/main',
@@ -48,6 +48,19 @@ var app = angular.module('feedApp', [
         }
       };
     }]);
+    //ngFlow pic uploader
+    flowFactoryProvider.defaults = {
+      target: './upload',
+      permanentErrors: [404, 500, 501],
+      maxChunkRetries: 3,
+      chunkRetryInterval: 5000,
+      simultaneousUploads: 1,
+      singleFile: true
+    };
+    flowFactoryProvider.on('catchAll', function (event) {
+      console.log('catchAll', arguments);
+    });
+
   })
   .run(function ($rootScope, $location, Auth) {
 
@@ -60,15 +73,4 @@ var app = angular.module('feedApp', [
     });
   });
 
-// app.config(['flowFactoryProvider', function (flowFactoryProvider) {
-//   flowFactoryProvider.defaults = {
-//     target: 'upload.php',
-//     permanentErrors: [404, 500, 501],
-//     maxChunkRetries: 1,
-//     chunkRetryInterval: 5000,
-//     simultaneousUploads: 4,
-//     singleFile: true
-//   };
-//   flowFactoryProvider.on('catchAll', function (event) {
-//     console.log('catchAll', arguments);
-//   });
+
