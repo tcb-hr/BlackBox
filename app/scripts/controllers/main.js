@@ -46,7 +46,8 @@ app.controller('MainCtrl', function($scope, $http) {
   
   $scope.layer;
   $scope.map;
-  $scope.marker;
+  $scope.dropMarker;
+  $scope.pickMarker;
 
 
   $scope.createMap = function(){
@@ -56,9 +57,21 @@ app.controller('MainCtrl', function($scope, $http) {
       zoom: 12
     });
     $scope.map.addLayer($scope.layer);
-    $scope.marker = L.marker([37.7, -122.4]).addTo($scope.map);
-    
 
+    //drop Location
+    var redMarker = L.AwesomeMarkers.icon({
+      icon: 'coffee',
+      markerColor: 'red'
+    });
+
+    //pick Location
+    var greenMarker = L.AwesomeMarkers.icon({
+      icon: 'coffee',
+      markerColor: 'green'
+    });
+
+    $scope.pickMarker = L.marker([37.8, -120], {icon: greenMarker}).addTo($scope.map); 
+    $scope.dropMarker = L.marker([37.7, -122.4], {icon: redMarker}).addTo($scope.map);
 
     $("#map").height($(window).height());
     $scope.map.invalidateSize();
@@ -86,9 +99,13 @@ app.controller('MainCtrl', function($scope, $http) {
     var pickLng = JSON.parse(chat.pickCoordinates).lng;
     var dropLat = JSON.parse(chat.dropCoordinates).lat;
     var dropLng = JSON.parse(chat.dropCoordinates).lng; 
-    $scope.map.panTo(new L.LatLng(pickLat, pickLng));
-    $scope.marker.setLatLng([pickLat, pickLng]);
-    //$scope.market.setLatLng([dropLat, dropLng]);
+    $scope.map.panTo(new L.LatLng(dropLat, dropLng));
+    $scope.dropMarker.setLatLng([dropLat, dropLng]);
+    if((pickLat === dropLat) && (pickLng === dropLng)){
+      $scope.pickMarker.setLatLng([0,0]);
+    }else{
+      $scope.pickMarker.setLatLng([pickLat, pickLng]);
+    }
     $('#map').show();
   };
 
