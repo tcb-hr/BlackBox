@@ -7,7 +7,7 @@
         <img class="avatar" src={{chat.pic}} />
         <span class="handle">{{chat.user || 'guest'}}</span>
       </div>
-      <div class="msgText">{{chat.body}}</div>
+      <div class="msgText">{{chat.body}}<br>{{chat.slogan}}</div>
       <div class="time" am-time-ago="chat.timestamp"></div>
     </div>
   </div>
@@ -37,11 +37,7 @@
                 </div>
                 <p>
                   <small>Only PNG,GIF,JPG,JEPG files allowed.</small>
-                </p>
-                <table>
-                <tr ng-repeat="file in transfers"> <td>{{$index+1}}</td> <td>{{file.name}}</td> </tr>
-                </table>
-                  
+                </p>              
                 </div>
 </div>
 
