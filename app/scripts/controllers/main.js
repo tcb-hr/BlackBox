@@ -82,16 +82,13 @@ app.controller('MainCtrl', function($scope, $http) {
   */ 
   $scope.showMap = function(chat){
     console.log(chat);
-    var location = {
-      "street": "565 Ellis St",
-      "city": "San Francisco",
-      "state": "CA",
-      "postalCode": "94109"
-    };
-
-    MQ.geocode({ map: $scope.map }).search(location);
-    $scope.marker.setLatLng([50, 50]); //change to chat.latLng
-    console.log(chat);
+    var pickLat = JSON.parse(chat.pickCoordinates).lat;
+    var pickLng = JSON.parse(chat.pickCoordinates).lng;
+    var dropLat = JSON.parse(chat.dropCoordinates).lat;
+    var dropLng = JSON.parse(chat.dropCoordinates).lng; 
+    $scope.map.panTo(new L.LatLng(pickLat, pickLng));
+    $scope.marker.setLatLng([pickLat, pickLng]);
+    //$scope.market.setLatLng([dropLat, dropLng]);
     $('#map').show();
   };
 
