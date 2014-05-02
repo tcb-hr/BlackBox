@@ -144,3 +144,7 @@ body {
   background-image: url("../images/send.png");
   background-size: 40px 40px;
 }
+.thumbnail img{
+  width: 300px;
+  height: auto;
+}

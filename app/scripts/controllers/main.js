@@ -37,6 +37,7 @@ app.controller('MainCtrl', function($scope, $http) {
 
 });
 
+
 app.filter('searchFor', function() {
   return function(arr, searchString) {
     if(!searchString) {

@@ -48,10 +48,10 @@ var app = angular.module('feedApp', [
         }
       };
     }]);
-    //ngFlow pic uploader
+    // ngFlow pic uploader
     flowFactoryProvider.defaults = {
       target: './upload',
-      permanentErrors: [404, 500, 501],
+      permanentErrors: [404, 501], //500
       maxChunkRetries: 3,
       chunkRetryInterval: 5000,
       simultaneousUploads: 1,
