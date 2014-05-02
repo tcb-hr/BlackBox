@@ -54,7 +54,7 @@ app.controller('MainCtrl', function($scope, $http) {
     $scope.layer = new L.StamenTileLayer("toner");
     $scope.map = new L.Map("map", {
       center: new L.LatLng(37.7, -122.4),
-      zoom: 12
+      zoom: 14
     });
     $scope.map.addLayer($scope.layer);
 
