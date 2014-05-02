@@ -30,15 +30,10 @@ body {
   float: left;
   width: 40px;
   height: 40px;
+  background-repeat: no-repeat;
   text-indent: -9999px;
   /*text-indent: -3px;*/
-}
-#dashBtn {
-  position: absolute; /* or fixed? */
-  top: 2px;
-  left: 2px;
-  background-image: url("../images/dash.png");
-  background-size: 40px 40px;
+  outline: none;
 }
 #appLogo {
   position: relative;
@@ -52,6 +47,13 @@ body {
   top: 2px;
   right: 2px;
   background-image: url("../images/gear.png");
+  background-size: 40px 40px;
+}
+#dashBtn {
+  position: absolute; /* or fixed? */
+  top: 2px;
+  left: 2px;
+  background-image: url("../images/dash.png");
   background-size: 40px 40px;
 }
 #pinnedBar {
@@ -120,33 +122,72 @@ body {
   border-width: 1px;
   border-color: #bbb;
 }
-#attachBtn {
+#toolbox {
+  width: 100%;
+  height: 120px;
+  position: fixed;
+  bottom: 44px;
+  background-color: #eee;
+}
+.tool {
+  height: 40px;
+}
+#toolsBtn {
   position: absolute; /* or fixed? */
   top: 2px;
   left: 2px;
-  background-image: url("../images/clip.png");
-  background-size: 40px 40px;
+  background-image: url("../images/tool.png");
+  background-size: 27px 27px;
+  background-position: 4px 4px;
 }
-#compose {
+.textField {
   position: relative;
-  margin: 0 auto;
   padding-left: 10px;
   top: 6px;
-  width: 70%;
-  height: 32px;
+  /*width: 90%;*/
+  /*height: 24px;*/
   background-color: #fff;
   border-style: solid;
   border-width: 1px;
   border-color: #ccc;
-  border-radius: 8px;
-  font-size: 14pt;
+  border-radius: 6px;
+  font-size: 12pt;
+  /*padding-top: 0;*/
+}
+#searchField {
+  /*position: relative;*/
+  /*padding-left: 10px;*/
+  /*top: 6px;*/
+  width: 90%;
+  height: 24px;
+  /*background-color: #fff;*/
+  /*border-style: solid;*/
+  /*border-width: 1px;*/
+  /*border-color: #ccc;*/
+  /*border-radius: 6px;*/
+  /*font-size: 12pt;*/
+  padding-top: 0;
+}
+#composeField {
+  /*position: relative;*/
+  /*padding-left: 10px;*/
+  /*top: 6px;*/
+  width: 67%;
+  height: 30px;
+  /*background-color: #fff;*/
+  /*border-style: solid;*/
+  /*border-width: 1px;*/
+  /*border-color: #ccc;*/
+  /*border-radius: 6px;*/
+  font-size: 12pt;
 }
 #sendBtn {
   position: absolute; /* or fixed? */
   top: 2px;
   right: 2px;
   background-image: url("../images/send.png");
-  background-size: 40px 40px;
+  background-size: 54px 54px;
+  background-position: -9px -9px;
 }
 
 .thumbnail img{

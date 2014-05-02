@@ -1,6 +1,9 @@
 <div ng-include="'partials/navbar'" ng-init="createMap()"></div>
+
 <div id="map"></div>
-<div id="feed">
+
+<div id="feed" scroll-bottom>
+
   <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString" ng-click="showMap(chat)" scroll-bottom>
     <div class="content">
       <div class="author">
@@ -11,38 +14,45 @@
       <div class="time" am-time-ago="chat.timestamp"></div>
     </div>
   </div>
+
   <div class="hamburger"></div>
+
   <div class="msgMenu">
     <div>reply</div>
     <div>mute</div>
     <div>grab</div>
     <div>more info</div>
   </div>
-                <div flow-init="{singleFile:true}" flow-name="image"
-                 flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
-                 flow-files-submitted="$flow.upload()">
-                <h3>Pic-A-Pic</h3>
-                <div class="thumbnail" ng-show="!$flow.files.length">
-                  <img src="../images/Alfred_E_Neuman.jpg" />
-                </div>
-                <div class="thumbnail" ng-show="$flow.files.length">
-                  <img flow-img="$flow.files[0]" />
-                </div>
-                <div>
-                  <span class="btn btn-primary" ng-show="!$flow.files.length" flow-btn>Select image</span>
-                  <span class="btn btn-info" ng-show="$flow.files.length" flow-btn>Change</span>
-                  <span class="btn btn-danger" ng-show="$flow.files.length"
-                     ng-click="$flow.cancel()">Remove</span>
-                  <span ng-show="$flow.files.length"> {{$flow.timeRemaining()}} seconds remain</span>
-                </div>
-                <p>
-                  <small>Only PNG,GIF,JPG,JEPG files allowed.</small>
-                </p>
-                <table>
-                <tr ng-repeat="file in transfers"> <td>{{$index+1}}</td> <td>{{file.name}}</td> </tr>
-                </table>
-                  
-                </div>
+
+  <div
+    flow-init="{singleFile:true}"
+    flow-name="image"
+    flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+    flow-files-submitted="$flow.upload()">
+
+    <h3>Pick-a-Pic</h3>
+    <div class="thumbnail" ng-show="!$flow.files.length">
+      <img src="../images/Alfred_E_Neuman.jpg" />
+    </div>
+    <div class="thumbnail" ng-show="$flow.files.length">
+      <img flow-img="$flow.files[0]" />
+    </div>
+    <div>
+      <span class="btn btn-primary" ng-show="!$flow.files.length" flow-btn>Select image</span>
+      <span class="btn btn-info" ng-show="$flow.files.length" flow-btn>Change</span>
+      <span class="btn btn-danger" ng-show="$flow.files.length" ng-click="$flow.cancel()">Remove</span>
+      <span ng-show="$flow.files.length">{{$flow.timeRemaining()}} seconds remain</span>
+    </div>
+    <p><small>Only PNG,GIF,JPG,JPEG files allowed.</small></p>
+    <table>
+      <tr ng-repeat="file in transfers">
+        <td>{{$index+1}}</td>
+        <td>{{file.name}}</td>
+      </tr>
+    </table>
+
+  </div>
+
 </div>
 
 <!-- <div id="feed">
@@ -67,18 +77,30 @@
  -->
 <!-- <div class="footer navbar-fixed-bottom"></div> -->
 
-
 <div id="footer">
   <div class="content">
-    <form class="chat_form" name="chat" ng-submit="sendChat(chat)">
-      <div class="col-lg-6">
-        <div class="input-group">
-          <button type="button" ng-click="attachToChat()" class="button" id="attachBtn">attach</button>
-          <input type="text" ng-model="searchString" placeholder="Search for…" >
-          <input type="text" class="form-control" ng-model="chat.body" ><!-- id="compose"> -->
-          <button type="submit" class="button" id="sendBtn">send</button>
+
+    <div id="toolbox" ng-show="showTools()">
+      <div id="tools">
+        <div class="tool">
+          <input type="text" class="textField" id="searchField" ng-model="searchString" placeholder="search" />
+        </div>
+        <div class="tool">
+          <input type="text" class="textField" id="cannedPicker" placeholder="canned" />
+        </div>
+        <div class="tool">
+          <input type="text" class="textField" id="photoUploader" placeholder="pic" />
         </div>
       </div>
+    </div>
+
+    <form class="chat_form" name="chat" ng-submit="sendChat(chat)">
+      <div>
+        <button type="button" class="button" id="toolsBtn" ng-click="toggleTools()">tools</button>
+        <input type="text" class="form-control textField" id="composeField" ng-model="chat.body" placeholder="compose" />
+        <button type="submit" class="button" id="sendBtn">send</button>
+      </div>
     </form>
+
   </div>
 </div>
