@@ -11,17 +11,19 @@
     "errorhandler": "~1.0.0",
     "express": "~4.0.0",
     "express-session": "~1.0.2",
+    "fileupload": "^0.3.0",
+    "flow.js": "git://github.com/flowjs/flow.js",
+    "instagram-node-lib": "^0.1.1",
     "lodash": "~2.4.1",
     "method-override": "~1.0.0",
     "mongoose": "~3.8.8",
     "morgan": "~1.0.0",
+    "multer": "0.0.5",
     "passport": "~0.2.0",
     "passport-local": "~0.1.6",
     "passport-oauth2": "^1.1.2",
-    "instagram-node-lib": "^0.1.1",
     "socket.io": "^0.9.16",
     "static-favicon": "~1.0.1"
-
   },
   "devDependencies": {
     "grunt": "~0.4.1",

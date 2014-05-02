@@ -149,6 +149,11 @@ body {
   background-size: 40px 40px;
 }
 
+.thumbnail img{
+  width: 300px;
+  height: auto;
+}
+
 #map { 
   height: 100%;
   width: 100%;

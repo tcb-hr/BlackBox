@@ -18,10 +18,10 @@
     <div>grab</div>
     <div>more info</div>
   </div>
-                <div flow-init="{singleFile:true}"
-                 flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
-                <h3>
-                <a name="image-example" class="anchor" href="#image-example"><span class="octicon octicon-link"></span></a>Pic-A-Pic</h3>
+                <div flow-init="{singleFile:true}" flow-name="image"
+                 flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+                 flow-files-submitted="$flow.upload()">
+                <h3>Pic-A-Pic</h3>
                 <div class="thumbnail" ng-show="!$flow.files.length">
                   <img src="../images/Alfred_E_Neuman.jpg" />
                 </div>
@@ -33,8 +33,7 @@
                   <span class="btn btn-info" ng-show="$flow.files.length" flow-btn>Change</span>
                   <span class="btn btn-danger" ng-show="$flow.files.length"
                      ng-click="$flow.cancel()">Remove</span>
-                  <span class="btn btn-danger" ng-show="$flow.files.length"
-                     ng-click="$flow.upload()">Upload</span>
+                  <span ng-show="$flow.files.length"> {{$flow.timeRemaining()}} seconds remain</span>
                 </div>
                 <p>
                   <small>Only PNG,GIF,JPG,JEPG files allowed.</small>
