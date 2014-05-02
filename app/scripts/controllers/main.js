@@ -95,20 +95,21 @@ app.controller('MainCtrl', function($scope, $http) {
   */ 
   $scope.showMap = function(chat){
     console.log(chat);
-    var pickLat = JSON.parse(chat.pickCoordinates).lat;
-    var pickLng = JSON.parse(chat.pickCoordinates).lng;
-    var dropLat = JSON.parse(chat.dropCoordinates).lat;
-    var dropLng = JSON.parse(chat.dropCoordinates).lng; 
-    $scope.map.panTo(new L.LatLng(dropLat, dropLng));
-    $scope.dropMarker.setLatLng([dropLat, dropLng]);
-    if((pickLat === dropLat) && (pickLng === dropLng)){
-      $scope.pickMarker.setLatLng([0,0]);
-    }else{
-      $scope.pickMarker.setLatLng([pickLat, pickLng]);
-    }
-    $('#map').show();
+    if(chat.pickCoordinates !== undefined){
+      var pickLat = JSON.parse(chat.pickCoordinates).lat;
+      var pickLng = JSON.parse(chat.pickCoordinates).lng;
+      var dropLat = JSON.parse(chat.dropCoordinates).lat;
+      var dropLng = JSON.parse(chat.dropCoordinates).lng; 
+      $scope.map.panTo(new L.LatLng(dropLat, dropLng));
+      $scope.dropMarker.setLatLng([dropLat, dropLng]);
+      if((pickLat === dropLat) && (pickLng === dropLng)){
+        $scope.pickMarker.setLatLng([0,0]);
+      }else{
+        $scope.pickMarker.setLatLng([pickLat, pickLng]);
+      }
+      $('#map').show();
+    } 
   };
-
 });
   
 
