@@ -189,7 +189,6 @@ body {
   background-size: 54px 54px;
   background-position: -9px -9px;
 }
-
 .thumbnail img{
   width: 300px;
   height: auto;
@@ -198,6 +197,12 @@ body {
 #map { 
   height: 100%;
   width: 100%;
+  z-index: 100;
+}
+
+#pic {
+  width: 100%;
+  position: relative;
   z-index: 100;
 }
 /*
@@ -209,3 +214,20 @@ body {
   border: 2px solid black;
 }
 */
+
+.navigation {
+  
+  /* Collapsed */
+  width: 0; 
+
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.page-wrap {
+  width: 100%;
+  float: right;
+}

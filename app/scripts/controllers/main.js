@@ -47,6 +47,7 @@ app.controller('MainCtrl', function($scope, $http, $window) {
     $scope.chats = chats;
   });
 
+
   $scope.sendChat = function(chat) {
     $http.post('/api/chat', {
       user: chat.name,
@@ -62,7 +63,11 @@ app.controller('MainCtrl', function($scope, $http, $window) {
   $scope.map;
   $scope.dropMarker;
   $scope.pickMarker;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> d68c185e5c47a8105f467ca6ac5a241cc91c57d3
   $scope.createMap = function(){
     $scope.layer = new L.StamenTileLayer("toner");
     $scope.map = new L.Map("map", {
@@ -93,8 +98,16 @@ app.controller('MainCtrl', function($scope, $http, $window) {
       $('#map').hide();
     });
     $('#map').hide();
+
+<<<<<<< HEAD
+=======
+    $('#pic').height($(window).height());
+    $('#pic').click(function(){
+      $('#pic').hide();
+    });
   };
 
+>>>>>>> d68c185e5c47a8105f467ca6ac5a241cc91c57d3
   /* Sample address input
    "drop_address": {
               "city": "San Francisco",
@@ -105,9 +118,21 @@ app.controller('MainCtrl', function($scope, $http, $window) {
               "street_address": "565 Ellis St"
           }
   */
+<<<<<<< HEAD
 
   $scope.showMap = function(chat){
+=======
+  $scope.hidePic = function(){
+    $('#pic').css('display', 'none');
+  }
+ 
+  $scope.showMapOrPic = function(chat){
+>>>>>>> d68c185e5c47a8105f467ca6ac5a241cc91c57d3
     console.log(chat);
+    if(chat.image !== undefined){
+      $('#pic').css('display', 'block');  
+      $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center');
+    }
     if(chat.pickCoordinates !== undefined){
       var pickLat = JSON.parse(chat.pickCoordinates).lat;
       var pickLng = JSON.parse(chat.pickCoordinates).lng;
@@ -124,7 +149,11 @@ app.controller('MainCtrl', function($scope, $http, $window) {
     } 
   };
 });
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> d68c185e5c47a8105f467ca6ac5a241cc91c57d3
 app.filter('searchFor', function() {
   return function(arr, searchString) {
     if(!searchString) {
