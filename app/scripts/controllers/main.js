@@ -67,7 +67,7 @@ app.controller('MainCtrl', function($scope, $http, $window) {
     $scope.layer = new L.StamenTileLayer("toner");
     $scope.map = new L.Map("map", {
       center: new L.LatLng(37.7, -122.4),
-      zoom: 12
+      zoom: 14
     });
     $scope.map.addLayer($scope.layer);
 
@@ -108,20 +108,21 @@ app.controller('MainCtrl', function($scope, $http, $window) {
 
   $scope.showMap = function(chat){
     console.log(chat);
-    var pickLat = JSON.parse(chat.pickCoordinates).lat;
-    var pickLng = JSON.parse(chat.pickCoordinates).lng;
-    var dropLat = JSON.parse(chat.dropCoordinates).lat;
-    var dropLng = JSON.parse(chat.dropCoordinates).lng;
-    $scope.map.panTo(new L.LatLng(dropLat, dropLng));
-    $scope.dropMarker.setLatLng([dropLat, dropLng]);
-    if((pickLat === dropLat) && (pickLng === dropLng)){
-      $scope.pickMarker.setLatLng([0,0]);
-    }else{
-      $scope.pickMarker.setLatLng([pickLat, pickLng]);
-    }
-    $('#map').show();
+    if(chat.pickCoordinates !== undefined){
+      var pickLat = JSON.parse(chat.pickCoordinates).lat;
+      var pickLng = JSON.parse(chat.pickCoordinates).lng;
+      var dropLat = JSON.parse(chat.dropCoordinates).lat;
+      var dropLng = JSON.parse(chat.dropCoordinates).lng; 
+      $scope.map.panTo(new L.LatLng(dropLat, dropLng));
+      $scope.dropMarker.setLatLng([dropLat, dropLng]);
+      if((pickLat === dropLat) && (pickLng === dropLng)){
+        $scope.pickMarker.setLatLng([0,0]);
+      }else{
+        $scope.pickMarker.setLatLng([pickLat, pickLng]);
+      }
+      $('#map').show();
+    } 
   };
-
 });
 
 app.filter('searchFor', function() {
