@@ -43,19 +43,23 @@ body {
   font-weight: 700;
   color: #aaa;
 }
-#settingsBtn {
-  position: absolute; /* or fixed? */
-  top: 2px;
-  left: 2px;
-  background-image: url("../images/gear.png");
-  background-size: 40px 40px;
+#settingsButton {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  font-size: 30px;
+  height: 30px;
+  padding: 6px 10px;
+  color: darkgrey;
 }
-#dashBtn {
-  position: absolute; /* or fixed? */
-  top: 2px;
-  right: 2px;
-  background-image: url("../images/dash.png");
-  background-size: 40px 40px;
+#dashboardButton {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  font-size: 30px;
+  height: 30px;
+  padding: 6px 10px;
+  color: darkgrey;
 }
 #pinnedBar {
   display: none;
