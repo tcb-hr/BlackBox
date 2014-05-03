@@ -63,11 +63,7 @@ app.controller('MainCtrl', function($scope, $http, $window) {
   $scope.map;
   $scope.dropMarker;
   $scope.pickMarker;
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> d68c185e5c47a8105f467ca6ac5a241cc91c57d3
   $scope.createMap = function(){
     $scope.layer = new L.StamenTileLayer("toner");
     $scope.map = new L.Map("map", {
@@ -99,45 +95,27 @@ app.controller('MainCtrl', function($scope, $http, $window) {
     });
     $('#map').hide();
 
-<<<<<<< HEAD
-=======
     $('#pic').height($(window).height());
     $('#pic').click(function(){
       $('#pic').hide();
     });
   };
 
->>>>>>> d68c185e5c47a8105f467ca6ac5a241cc91c57d3
-  /* Sample address input
-   "drop_address": {
-              "city": "San Francisco",
-              "name": "Haus",
-              "zip": "94109-8140",
-              "floor": "",
-              "state": "CA",
-              "street_address": "565 Ellis St"
-          }
-  */
-<<<<<<< HEAD
-
-  $scope.showMap = function(chat){
-=======
   $scope.hidePic = function(){
     $('#pic').css('display', 'none');
   }
  
   $scope.showMapOrPic = function(chat){
->>>>>>> d68c185e5c47a8105f467ca6ac5a241cc91c57d3
     console.log(chat);
     if(chat.image !== undefined){
-      $('#pic').css('display', 'block');  
+      $('#pic').css('display', 'block');
       $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center');
     }
     if(chat.pickCoordinates !== undefined){
       var pickLat = JSON.parse(chat.pickCoordinates).lat;
       var pickLng = JSON.parse(chat.pickCoordinates).lng;
       var dropLat = JSON.parse(chat.dropCoordinates).lat;
-      var dropLng = JSON.parse(chat.dropCoordinates).lng; 
+      var dropLng = JSON.parse(chat.dropCoordinates).lng;
       $scope.map.panTo(new L.LatLng(dropLat, dropLng));
       $scope.dropMarker.setLatLng([dropLat, dropLng]);
       if((pickLat === dropLat) && (pickLng === dropLng)){
@@ -146,14 +124,10 @@ app.controller('MainCtrl', function($scope, $http, $window) {
         $scope.pickMarker.setLatLng([pickLat, pickLng]);
       }
       $('#map').show();
-    } 
+    }
   };
 });
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> d68c185e5c47a8105f467ca6ac5a241cc91c57d3
 app.filter('searchFor', function() {
   return function(arr, searchString) {
     if(!searchString) {
