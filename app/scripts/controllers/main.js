@@ -80,6 +80,11 @@ app.controller('MainCtrl', function($scope, $http) {
       $('#map').hide();
     });
     $('#map').hide();
+
+    $('#pic').height($(window).height());
+    $('#pic').click(function(){
+      $('#pic').hide();
+    });
   };
 
 
@@ -92,9 +97,17 @@ app.controller('MainCtrl', function($scope, $http) {
               "state": "CA",
               "street_address": "565 Ellis St"
           }
-  */ 
-  $scope.showMap = function(chat){
+  */
+  $scope.hidePic = function(){
+    $('#pic').css('display', 'none');
+  }
+ 
+  $scope.showMapOrPic = function(chat){
     console.log(chat);
+    if(chat.image !== undefined){
+      $('#pic').css('display', 'block');  
+      $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center');
+    }
     if(chat.pickCoordinates !== undefined){
       var pickLat = JSON.parse(chat.pickCoordinates).lat;
       var pickLng = JSON.parse(chat.pickCoordinates).lng;
