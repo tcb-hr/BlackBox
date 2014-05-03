@@ -6,6 +6,7 @@
     "bson": "^0.2.7",
     "compression": "~1.0.1",
     "connect-mongo": "mrzepinski/connect-mongo#2135988",
+    "connect-multiparty": "^1.0.3",
     "cookie-parser": "~1.0.1",
     "ejs": "~0.8.4",
     "errorhandler": "~1.0.0",
@@ -24,8 +25,7 @@
     "passport-oauth2": "^1.1.2",
     "qs": "^0.6.6",
     "socket.io": "^0.9.16",
-    "static-favicon": "~1.0.1",
-    "qs": "^0.6.6"
+    "static-favicon": "~1.0.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
