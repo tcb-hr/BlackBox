@@ -24,7 +24,24 @@ app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARA
 
 });
 
-app.controller('MainCtrl', function($scope, $http) {
+app.controller('MainCtrl', function($scope, $http, $window) {
+
+  var toolsVisible = false;
+  $scope.showTools = function() {
+    return toolsVisible;
+  };
+  $scope.toggleTools = function() {
+    var feed = $window.document.getElementById('feed');
+    if(toolsVisible === true) {
+      toolsVisible = false;
+      feed.style.bottom = '44px';
+      feed.scrollTop = feed.scrollHeight + 44;
+    } else {
+      toolsVisible = true;
+      feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools
+      feed.scrollTop = feed.scrollHeight + (44 + 40 * 3); // 3 tools.
+    }
+  };
 
   $http.get('/api/chat').success(function(chats) {
     $scope.chats = chats;
@@ -32,24 +49,21 @@ app.controller('MainCtrl', function($scope, $http) {
 
 
   $scope.sendChat = function(chat) {
-
     $http.post('/api/chat', {
       user: chat.name,
       body: chat.body,
-      image: ""
+      image: ''
     });
-
     $http.get('/api/chat').success(function(chats) {
       $scope.chats = chats;
     });
-
   };
   
   $scope.layer;
   $scope.map;
   $scope.dropMarker;
   $scope.pickMarker;
-  
+
   $scope.createMap = function(){
     $scope.layer = new L.StamenTileLayer("toner");
     $scope.map = new L.Map("map", {
@@ -87,16 +101,6 @@ app.controller('MainCtrl', function($scope, $http) {
     });
   };
 
-  /* Sample address input
-   "drop_address": {
-              "city": "San Francisco",
-              "name": "Haus",
-              "zip": "94109-8140",
-              "floor": "",
-              "state": "CA",
-              "street_address": "565 Ellis St"
-          }
-  */
   $scope.hidePic = function(){
     $('#pic').css('display', 'none');
   }
@@ -104,14 +108,14 @@ app.controller('MainCtrl', function($scope, $http) {
   $scope.showMapOrPic = function(chat){
     console.log(chat);
     if(chat.image !== undefined){
-      $('#pic').css('display', 'block');  
+      $('#pic').css('display', 'block');
       $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center');
     }
     if(chat.pickCoordinates !== undefined){
       var pickLat = JSON.parse(chat.pickCoordinates).lat;
       var pickLng = JSON.parse(chat.pickCoordinates).lng;
       var dropLat = JSON.parse(chat.dropCoordinates).lat;
-      var dropLng = JSON.parse(chat.dropCoordinates).lng; 
+      var dropLng = JSON.parse(chat.dropCoordinates).lng;
       $scope.map.panTo(new L.LatLng(dropLat, dropLng));
       $scope.dropMarker.setLatLng([dropLat, dropLng]);
       if((pickLat === dropLat) && (pickLng === dropLng)){
@@ -120,10 +124,10 @@ app.controller('MainCtrl', function($scope, $http) {
         $scope.pickMarker.setLatLng([pickLat, pickLng]);
       }
       $('#map').show();
-    } 
+    }
   };
 });
-  
+
 app.filter('searchFor', function() {
   return function(arr, searchString) {
     if(!searchString) {
