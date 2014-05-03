@@ -24,20 +24,21 @@ body {
   border-color: #bbb;
 }
 .content {
+  margin: 0 auto;
   text-align: center;
 }
 .button {
-  float: left;
+  position: relative;
   width: 40px;
   height: 40px;
   background-repeat: no-repeat;
   text-indent: -9999px;
-  /*text-indent: -3px;*/
   outline: none;
+  vertical-align: middle;
 }
 #appLogo {
   position: relative;
-  top: 6px;
+  top: 8px;
   font-size: 14pt;
   font-weight: 700;
   color: #aaa;
@@ -45,14 +46,14 @@ body {
 #settingsBtn {
   position: absolute; /* or fixed? */
   top: 2px;
-  right: 2px;
+  left: 2px;
   background-image: url("../images/gear.png");
   background-size: 40px 40px;
 }
 #dashBtn {
   position: absolute; /* or fixed? */
   top: 2px;
-  left: 2px;
+  right: 2px;
   background-image: url("../images/dash.png");
   background-size: 40px 40px;
 }
@@ -96,8 +97,6 @@ body {
   color: gray;
 }
 #feed {
-  /*margin-top: 44px;*/
-  /*margin-bottom: 44px;*/
   top: 44px;
   bottom: 44px;
   position: fixed;
@@ -140,45 +139,46 @@ body {
   background-size: 27px 27px;
   background-position: 4px 4px;
 }
+#picBtn {
+  position: relative;
+  top: 6px;
+  font-size: 12pt;
+  width: 90%;
+  height: 28px;
+  padding-top: 0;
+}
+#thumb {
+  display: inline-block;
+}
+#thumb img {
+  height: 40px;
+  vertical-align: middle;
+}
+#removeBtn {
+  background-image: url("../images/cancel-icon.png");
+  background-size: 30px 30px;
+  background-position: 3px 3px;
+}
 .textField {
   position: relative;
   padding-left: 10px;
   top: 6px;
-  /*width: 90%;*/
-  /*height: 24px;*/
   background-color: #fff;
   border-style: solid;
   border-width: 1px;
   border-color: #ccc;
   border-radius: 6px;
   font-size: 12pt;
-  /*padding-top: 0;*/
+  text-align: center;
 }
 #searchField {
-  /*position: relative;*/
-  /*padding-left: 10px;*/
-  /*top: 6px;*/
   width: 90%;
   height: 24px;
-  /*background-color: #fff;*/
-  /*border-style: solid;*/
-  /*border-width: 1px;*/
-  /*border-color: #ccc;*/
-  /*border-radius: 6px;*/
-  /*font-size: 12pt;*/
   padding-top: 0;
 }
 #composeField {
-  /*position: relative;*/
-  /*padding-left: 10px;*/
-  /*top: 6px;*/
   width: 67%;
   height: 30px;
-  /*background-color: #fff;*/
-  /*border-style: solid;*/
-  /*border-width: 1px;*/
-  /*border-color: #ccc;*/
-  /*border-radius: 6px;*/
   font-size: 12pt;
 }
 #sendBtn {
@@ -189,12 +189,6 @@ body {
   background-size: 54px 54px;
   background-position: -9px -9px;
 }
-
-.thumbnail img{
-  width: 300px;
-  height: auto;
-}
-
 #map { 
   height: 100%;
   width: 100%;
