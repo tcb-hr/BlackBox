@@ -30,6 +30,7 @@ app.controller('MainCtrl', function($scope, $http) {
     $scope.chats = chats;
   });
 
+
   $scope.sendChat = function(chat) {
 
     $http.post('/api/chat', {
@@ -48,8 +49,7 @@ app.controller('MainCtrl', function($scope, $http) {
   $scope.map;
   $scope.dropMarker;
   $scope.pickMarker;
-
-
+  
   $scope.createMap = function(){
     $scope.layer = new L.StamenTileLayer("toner");
     $scope.map = new L.Map("map", {
@@ -86,7 +86,6 @@ app.controller('MainCtrl', function($scope, $http) {
       $('#pic').hide();
     });
   };
-
 
   /* Sample address input
    "drop_address": {
@@ -125,8 +124,6 @@ app.controller('MainCtrl', function($scope, $http) {
   };
 });
   
-
-
 app.filter('searchFor', function() {
   return function(arr, searchString) {
     if(!searchString) {

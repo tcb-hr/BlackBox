@@ -148,7 +148,6 @@ body {
   background-image: url("../images/send.png");
   background-size: 40px 40px;
 }
-
 .thumbnail img{
   width: 300px;
   height: auto;
@@ -174,3 +173,20 @@ body {
   border: 2px solid black;
 }
 */
+
+.navigation {
+  
+  /* Collapsed */
+  width: 0; 
+
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.page-wrap {
+  width: 100%;
+  float: right;
+}

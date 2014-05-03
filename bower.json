@@ -15,7 +15,9 @@
     "angular-touch": "~1.2.16",
     "angular-moment": "~0.7.0",
     "ng-flow": "~2.4.0",
-    "angular-leaflet-directive": "~0.7.6"
+    "angular-leaflet-directive": "~0.7.6",
+    "Leaflet.awesome-markers": "~2.0.2",
+    "mobile-angular-ui": "~1.1.0-beta.15"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",
