@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('feedApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+var app = angular.module('feedApp');
+
+app.controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.menu = [{
       'title': 'Dashboard',
       'link': '/dashboard'
@@ -24,3 +25,4 @@ angular.module('feedApp')
       return route === $location.path();
     };
   });
+
