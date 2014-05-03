@@ -53,6 +53,7 @@ var app = angular.module('feedApp', [
       target: './upload',
       permanentErrors: [404, 501], //500
       maxChunkRetries: 3,
+      chunkSize: 15000,
       chunkRetryInterval: 5000,
       simultaneousUploads: 1,
       singleFile: true
