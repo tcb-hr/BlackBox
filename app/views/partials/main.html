@@ -10,7 +10,7 @@
         <span class="handle">{{chat.user || 'guest'}}</span>
       </div>
       <div class="msgText">{{chat.body}}</div>      
-      <div class="msgText">{{chat.slogan}}</div>
+      <div class="msgText">{{chat.slogan || chat.image}}</div>
       <div class="time" am-time-ago="chat.timestamp"></div>
     </div>
   </div>
@@ -27,19 +27,16 @@
 </div>
 
 <div id="footer">
+    <form class="chat_form" name="chat" ng-submit="sendChat(chat)">
   <div class="content">
 
     <div id="toolbox" ng-show="showTools()">
       <div id="tools">
-
         <div class="tool">
-          <input type="text" class="textField" id="searchField" ng-model="searchString" placeholder="search" />
+          <input type="text" class="textField" id="cannedPicker" placeholder="canned response" />
         </div>
-
         <div class="tool">
-
           <div flow-init="{ singleFile: true }" flow-name="image" flow-file-added="!!{ png: 1, gif: 1, jpg: 1, jpeg: 1 }[$file.getExtension()]" flow-files-submitted="$flow.upload()">
-
             <div class="content">
               <button class="btn btn-primary" id="picBtn" ng-show="!$flow.files.length" flow-btn>add pic</button>
               <!-- <span ng-show="$flow.files.length">{{$flow.timeRemaining()}} sec to upload</span> -->
@@ -48,21 +45,16 @@
             </div>
           </div>
         </div>
-
         <div class="tool">
-          <input type="text" class="textField" id="cannedPicker" placeholder="canned response" />
+          <input type="text" class="textField" id="searchField" ng-model="searchString" placeholder="search" />
         </div>
-
       </div>
     </div>
-
-    <form class="chat_form" name="chat" ng-submit="sendChat(chat)">
       <div>
         <button type="button" class="button" id="toolsBtn" ng-click="toggleTools()">tools</button>
         <input type="text" class="form-control textField" id="composeField" ng-model="chat.body" placeholder="compose" />
         <button type="submit" class="button" id="sendBtn">send</button>
       </div>
-    </form>
-
   </div>
+    </form>
 </div>

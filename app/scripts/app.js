@@ -61,6 +61,10 @@ var app = angular.module('feedApp', [
     flowFactoryProvider.on('catchAll', function (event) {
       console.log('catchAll', arguments);
     });
+    flowFactoryProvider.on('complete', function(){
+      console.log("WE WRITIN")
+      
+    })
 
   })
   .run(function ($rootScope, $location, Auth) {
