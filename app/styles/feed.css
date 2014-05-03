@@ -159,6 +159,12 @@ body {
   width: 100%;
   z-index: 100;
 }
+
+#pic {
+  width: 100%;
+  position: relative;
+  z-index: 100;
+}
 /*
 .leaflet-control-zoom-in, .leaflet-control-zoom-out {
   padding: 30px 10px;
