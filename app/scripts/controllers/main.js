@@ -24,7 +24,10 @@ app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARA
 
 });
 
-app.controller('MainCtrl', function($scope, $http, $window) {
+app.controller('MainCtrl', function($scope, $http, $window, socket) {
+  socket.on('message', function(data){
+    console.log(data['hello']);
+  });
 
   var toolsVisible = false;
   $scope.showTools = function() {
