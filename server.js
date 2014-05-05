@@ -39,14 +39,28 @@ var server = app.listen(config.port, config.ip, function () {
   console.log('Express server listening on %s:%d, in %s mode', config.ip, config.port, app.get('env'));
 });
 
-/*
 // Sockets
 var io = require('socket.io').listen(server);
-io.sockets.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-});
-*/
 
+io.sockets.on('connection', function (socket) {
+  socket.emit('init');
+  fs.watchFile('/var/lib/mongodb/fullstack-dev.0', function(curr, prev){
+    if(curr.mtime.getTime() !== prev.mtime.getTime()){  
+      console.log('Database has been updated')
+      var Chat = require('./lib/models/chat');
+      Chat.chatModel.find().sort({_id: -1}).limit(1).exec(function(err, chat){
+        if(err){
+          console.log(err);
+        }  
+        console.log('newest', chat);
+        socket.emit('newMessage', {data: chat});
+      });
+     }
+  });
+});
+
+
+//module.exports.io = io;
 
 // Expose app
 exports = module.exports = app;
