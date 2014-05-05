@@ -47,8 +47,15 @@ io.sockets.on('connection', function (socket) {
   fs.watchFile('/var/lib/mongodb/fullstack-dev.0', function(curr, prev){
     if(curr.mtime.getTime() !== prev.mtime.getTime()){  
       console.log('Database has been updated')
-      socket.emit('newMessage', {data: "newMessage"});
-    }
+      var Chat = require('./lib/models/chat');
+      Chat.chatModel.find().sort({_id: -1}).limit(1).exec(function(err, chat){
+        if(err){
+          console.log(err);
+        }  
+        console.log('newest', chat);
+        socket.emit('newMessage', {data: chat});
+      });
+     }
   });
 });
 
