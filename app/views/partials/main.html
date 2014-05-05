@@ -1,7 +1,8 @@
 <div ng-include="'partials/navbar'" ng-init="createMap()"></div>
 
 <div id="map"></div>
-<div id="pic"></div>
+<!-- <div id="pic"></div> -->
+
 <div id="feed" scroll-bottom>
   <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString" ng-click="showMapOrPic(chat)" scroll-bottom>
     <div class="content">
