@@ -54,9 +54,9 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   });
 
   socket.on('newMessage', function(data){
-    $http.get('/api/chat').success(function(chats){
-      $scope.chats = chats;
-    });
+    var newChat = data['data'][0];  
+    console.log('newChat', newChat);
+    $scope.chats.push(newChat);
   });
 
   var toolsVisible = false;
