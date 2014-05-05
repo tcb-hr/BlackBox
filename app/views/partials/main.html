@@ -1,7 +1,8 @@
 <div ng-include="'partials/navbar'" ng-init="createMap()"></div>
 
-<div id="map"></div>
-<div id="pic"></div>
+<div id="map"></div><!-- Remove either this div... -->
+<div id="pic"></div><!-- ...or this, and the bug disappears. -->
+
 <div id="feed" scroll-bottom>
   <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString" ng-click="showMapOrPic(chat)" scroll-bottom>
     <div class="content">
@@ -41,11 +42,12 @@
 
             <div class="content">
               <button class="btn btn-primary" id="picBtn" ng-show="!$flow.files.length" flow-btn>add pic</button>
-              <!-- <span ng-show="$flow.files.length">{{$flow.timeRemaining()}} sec to upload</span> -->
               <button class="button" id="removeBtn" ng-show="$flow.files.length" ng-click="$flow.cancel()">remove</button>
               <div id="thumb" ng-show="$flow.files.length"><img flow-img="$flow.files[0]" /></div>
             </div>
+
           </div>
+
         </div>
 
         <div class="tool">
