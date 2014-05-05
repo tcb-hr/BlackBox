@@ -39,14 +39,21 @@ var server = app.listen(config.port, config.ip, function () {
   console.log('Express server listening on %s:%d, in %s mode', config.ip, config.port, app.get('env'));
 });
 
-
 // Sockets
 var io = require('socket.io').listen(server);
+
 io.sockets.on('connection', function (socket) {
-  socket.emit('message', { hello: 'world' });
+  socket.emit('init');
+  fs.watchFile('/var/lib/mongodb/fullstack-dev.0', function(curr, prev){
+    if(curr.mtime.getTime() !== prev.mtime.getTime()){  
+      console.log('Database has been updated')
+      socket.emit('newMessage', {data: "newMessage"});
+    }
+  });
 });
 
 
+//module.exports.io = io;
 
 // Expose app
 exports = module.exports = app;
