@@ -36,7 +36,7 @@
           <input type="text" class="textField" id="cannedPicker" placeholder="canned response" />
         </div>
         <div class="tool">
-          <div flow-init="{ singleFile: true }" flow-name="image" flow-file-added="!!{ png: 1, gif: 1, jpg: 1, jpeg: 1 }[$file.getExtension()]" flow-files-submitted="$flow.upload()">
+          <div flow-init="{ singleFile: true }" flow-name="image" flow-file-added="!!{ png: 1, gif: 1, jpg: 1, jpeg: 1 }[$file.getExtension()]" flow-files-submitted="$flow.upload()" flow-complete="doneUp()">
             <div class="content">
               <button class="btn btn-primary" id="picBtn" ng-show="!$flow.files.length" flow-btn>add pic</button>
               <!-- <span ng-show="$flow.files.length">{{$flow.timeRemaining()}} sec to upload</span> -->
