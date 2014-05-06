@@ -2,6 +2,26 @@
 
 var app = angular.module('feedApp');
 
+app.directive('panelSlide', ['$swipe', function($swipe) { // MOVE DIRECTIVES TO A SEPARATE FILE?
+  return {
+    restrict: 'EA',
+    link: function(scope, ele, attrs, ctrl) {
+      debugger;
+      var startX, pointX;
+      $swipe.bind(ele, {
+        'start': function(coords) {
+          startX = coords.x;
+          pointX = coords.y;
+        }, 'move': function(coords) {
+          var delta = coords.x - pointX;
+        }, 'end': function(coords) {
+        }, 'cancel': function(coords) {
+        }
+      });
+    }
+  };
+}]);
+
 app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARATE FILE?
 
   var scrollBottomWrap = function() {
@@ -25,39 +45,47 @@ app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARA
 });
 
 app.factory('socket', function($rootScope) {
-	var socket = io.connect();
-	return {
-		on: function(eventName, callback) {
-			socket.on(eventName, function() {
-				var args = arguments;
-				$rootScope.$apply(function() {
-					callback.apply(socket, args);
-				});
-			});
-		},
-		emit: function(eventName, data, callback) {
-			socket.emit(eventName, data, function() {
-				var args = arguments;
-				$rootScope.$apply(function() {
-					if(callback) {
-						callback.apply(socket, args);
-					}
-				});
-			});
-		}
-	};
+  var socket = io.connect();
+  return {
+    on: function(eventName, callback) {
+      socket.on(eventName, function() {
+        var args = arguments;
+        $rootScope.$apply(function() {
+          callback.apply(socket, args);
+        });
+      });
+    },
+    emit: function(eventName, data, callback) {
+      socket.emit(eventName, data, function() {
+        var args = arguments;
+        $rootScope.$apply(function() {
+          if(callback) {
+            callback.apply(socket, args);
+          }
+        });
+      });
+    }
+  };
 });
 
 app.controller('MainCtrl', function($scope, $http, $window, socket) {
-  socket.on('init', function(data){
+  socket.on('init', function(data) {
     console.log('Socket connection established');
   });
 
   socket.on('newMessage', function(data){
-    var newChat = data['data'][0];  
-    console.log('newChat', newChat);
-    $scope.chats.push(newChat);
+    var newChat = data['data'][0];
+    var idOfLastItem = $scope.chats[$scope.chats.length-1]._id;
+    if(idOfLastItem !== newChat._id){
+      $scope.chats.push(newChat);
+      console.log('new message added');
+    }
   });
+
+  $scope.showmenu = false;
+  $scope.toggleMenu = function() {
+    $scope.showmenu = ($scope.showmenu) ? false : true;
+  };
 
   var toolsVisible = false;
   $scope.showTools = function() {
@@ -86,19 +114,18 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $http.get('/upload').success(
       $http.get('/download').success( function(){
       console.log('so let it be written');
-    }))
+    }));
   }
-
 
   $scope.sendChat = function(chat) {
     $http.post('/api/chat', {
-      user: chat.name,
+      user: $scope.currentUser.name,
       body: chat.body,
       image: ''
     });
-    $http.get('/api/chat').success(function(chats) {
-      $scope.chats = chats;
-    });
+    // $http.get('/api/chat').success(function(chats) {
+    //   $scope.chats = chats;
+    // });
   };
   
   $scope.layer;
@@ -145,8 +172,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
   $scope.hidePic = function(){
     $('#pic').css('display', 'none');
-  }
- 
+  };
+
   $scope.showMapOrPic = function(chat){
     console.log(chat);
     if(chat.image !== undefined){
