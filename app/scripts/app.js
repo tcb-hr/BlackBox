@@ -13,7 +13,7 @@ var app = angular.module('feedApp', [
     $routeProvider
       .when('/', {
         templateUrl: 'partials/main',
-        // authenticate: true,
+        authenticate: true,
         controller: 'MainCtrl'
       })
       .when('/login', {
@@ -28,6 +28,12 @@ var app = angular.module('feedApp', [
         templateUrl: 'partials/settings',
         controller: 'SettingsCtrl',
         authenticate: true
+      })
+      .when('/auth/google',{
+        redirectTo:'/auth/google'
+      })
+      .when('/auth/google/callback',{
+        redirectTo:'/auth/google/callback'
       })
       .otherwise({
         redirectTo: '/'

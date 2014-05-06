@@ -1,5 +1,5 @@
-<div id="menuleft" ng-class="{ hide: !showmenu, slide: showmenu }">
-  <button class="button closeBtn floatRight" id="closeLeftMenu" ng-click="toggleMenu()">close</button>
+<div class="panel" id="panelLeft" ng-class="{ hide: !showPanelLeft, slide: showPanelLeft }">
+  <button class="button closeBtnLeft floatRight" id="closePanelLeft" ng-click="togglePanelLeft()">close</button>
   <h1>Settings</h1>
   <h1>Zones</h1>
   <button class="zoneFilterButton" ng-repeat="zone in zones" ng-click="zone.state = !zone.state" ng-class="{'on':zone.state}">{{zone.label}}</button>
@@ -7,16 +7,28 @@
   <button class="typeFilterButton" ng-repeat="type in messageTypes" ng-click="type.state = !type.state" ng-class="{'on':type.state}">{{type.label}}</button>
 </div>
 
-<div id="all" ng-class="{ hide: showmenu, slide: !showmenu }">
+<div class="panel" id="panelRight" ng-class="{ hide: !showPanelRight, slide: showPanelRight }">
+  <button class="button closeBtnRight floatLeft" id="closePanelRight" ng-click="togglePanelRight()">close</button>
+  <div class="panelContent">
+    <h1>Dashboard</h1>
+    <ul>
+      <li>Dash stat 1</li>
+      <li>Dash stat 2</li>
+      <li>Dash stat 3</li>
+    </ul>
+  </div>
+</div>
 
-  <div class="overlay" ng-class="{ show: showmenu }" ng-swipe-left="showmenu = false"></div>
+<div id="map" ng-init="createMap()" ng-hide="hideMap" ng-click="hideMap = !hideMap"></div>
+<div id="pic" ng-init="createPic()" ng-hide="hidePic" ng-click="hidePic = !hidePic"></div>
 
-    <div ng-include="'partials/navbar'" ng-init="createMap()"></div>
+<div id="all" ng-class="{ hide: showPanelLeft || showPanelRight, slide: !showPanelLeft && !showPanelRight }">
 
-    <div id="map"></div>
-    <!-- <div id="pic"></div> -->
+  <div class="overlay" ng-class="{ show: showPanelLeft || showPanelRight }" ng-swipe-left="showPanelLeft = false" ng-swipe-right="showPanelRight = false"></div>
 
-    <div id="feed" scroll-bottom>
+    <div ng-include="'partials/navbar'"></div>
+    
+   <div id="feed" scroll-bottom>
       <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString" ng-click="showMapOrPic(chat)" scroll-bottom>
         <div class="content">
           <div class="author">
@@ -26,7 +38,7 @@
           <!-- <div class="msgText">{{chat.body}}<br>{{chat.slogan}}</div> -->
           <!-- <div class="time" am-time-ago="chat.timestamp"></div> -->
           <div class="msgText">{{chat.body}}</div>
-          <div class="msgText">{{chat.slogan }}</div>
+          <div class="msgText">{{chat.slogan}}</div>
           <div class="time" am-time-ago="chat.timestamp"></div>
         </div>
       </div>
@@ -57,7 +69,7 @@
           <div flow-init="{ singleFile: true }" flow-name="image" flow-file-added="!!{ png: 1, gif: 1, jpg: 1, jpeg: 1 }[$file.getExtension()]" flow-files-submitted="$flow.upload()" flow-complete="doneUp()">
             <div class="content">
               <button class="btn btn-primary" id="picBtn" ng-show="!$flow.files.length" flow-btn>add pic</button>
-              <button class="button" id="removeBtn" ng-show="$flow.files.length" ng-click="$flow.cancel()">remove</button>
+              <button class="button" id="cancelBtn" ng-show="$flow.files.length" ng-click="$flow.cancel()">remove</button>
               <div id="thumb" ng-show="$flow.files.length"><img flow-img="$flow.files[0]" /></div>-->
     <div id="footer">
       <div class="content">
@@ -76,7 +88,7 @@
                 <div class="content">
                   <button class="btn btn-primary" id="picBtn" ng-show="!$flow.files.length" flow-btn>add pic</button>
                   <!-- <span ng-show="$flow.files.length">{{$flow.timeRemaining()}} sec to upload</span> -->
-                  <button class="button" id="removeBtn" ng-show="$flow.files.length" ng-click="$flow.cancel()">remove</button>
+                  <button class="button" id="cancelBtn" ng-show="$flow.files.length" ng-click="$flow.cancel()">remove</button>
                   <div id="thumb" ng-show="$flow.files.length"><img flow-img="$flow.files[0]" /></div>
                 </div>
               </div>

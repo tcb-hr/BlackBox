@@ -2,11 +2,10 @@
 
 var app = angular.module('feedApp');
 
-app.directive('panelSlide', ['$swipe', function($swipe) { // MOVE DIRECTIVES TO A SEPARATE FILE?
+app.directive('slidePanel', ['$swipe', function($swipe) { // MOVE DIRECTIVES TO A SEPARATE FILE?
   return {
     restrict: 'EA',
     link: function(scope, ele, attrs, ctrl) {
-      debugger;
       var startX, pointX;
       $swipe.bind(ele, {
         'start': function(coords) {
@@ -44,7 +43,7 @@ app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARA
 
 });
 
-app.factory('socket', function($rootScope) {
+app.factory('socket', function($rootScope) { // MOVE FACTORIES TO A SEPARATE FILE?
   var socket = io.connect();
   return {
     on: function(eventName, callback) {
@@ -69,6 +68,8 @@ app.factory('socket', function($rootScope) {
 });
 
 app.controller('MainCtrl', function($scope, $http, $window, socket) {
+  // BREAK SOME OF THESE PIECES BELOW INTO SEPARATE CONTROLLERS?
+
   socket.on('init', function(data) {
     console.log('Socket connection established');
   });
@@ -163,9 +164,14 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }
   });
 
-  $scope.showmenu = false;
-  $scope.toggleMenu = function() {
-    $scope.showmenu = ($scope.showmenu) ? false : true;
+  $scope.showPanelLeft = false;
+  $scope.togglePanelLeft = function() {
+    $scope.showPanelLeft = ($scope.showPanelLeft) ? false : true;
+  };
+
+  $scope.showPanelRight = false;
+  $scope.togglePanelRight = function() {
+    $scope.showPanelRight = ($scope.showPanelRight) ? false : true;
   };
 
   var toolsVisible = false;
@@ -191,19 +197,18 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
   $scope.doneUp = function(){
     // console.log('doneUp', arguments)
-    $http.get('/download').success(function(){
+
+    $http.get('/upload').success(
+      $http.get('/download').success( function(){
       console.log('so let it be written');
-    });
-  };
+    }));
+  }
 
   $scope.sendChat = function(chat) {
     $http.post('/api/chat', {
-      user: chat.name,
+      user: $scope.currentUser.name,
       body: chat.body,
       image: ''
-    });
-    $http.get('/api/chat').success(function(chats) {
-      $scope.chats = chats;
     });
   };
   
@@ -212,6 +217,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.dropMarker;
   $scope.pickMarker;
 
+  $scope.hideMap = true;
   $scope.createMap = function(){
     $scope.layer = new L.StamenTileLayer("toner");
     $scope.map = new L.Map("map", {
@@ -237,27 +243,19 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
     $("#map").height($(window).height());
     $scope.map.invalidateSize();
-  
-    $('#map').click(function(){
-      $('#map').hide();
-    });
-    $('#map').hide();
 
-    $('#pic').height($(window).height());
-    $('#pic').click(function(){
-      $('#pic').hide();
-    });
   };
-
-  $scope.hidePic = function(){
-    $('#pic').css('display', 'none');
+  $scope.hidePic = true; 
+  $scope.createPic = function(){
+    $('#pic').height($(window).height());
   };
 
   $scope.showMapOrPic = function(chat){
     console.log(chat);
     if(chat.image !== undefined){
-      $('#pic').css('display', 'block');
       $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center');
+      console.log('showin pic');
+      $scope.hidePic = false;
     }
     if(chat.pickCoordinates !== undefined){
       var pickLat = JSON.parse(chat.pickCoordinates).lat;
@@ -271,12 +269,30 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       }else{
         $scope.pickMarker.setLatLng([pickLat, pickLng]);
       }
-      $('#map').show();
+      console.log('showing map');
+      $scope.hideMap = false;
     }
   };
 });
 
 app.filter('searchFor', function() {
+  return function(arr, searchString) {
+    if(!searchString) {
+      return arr;
+    }
+    var result = [];
+    searchString = searchString.toLowerCase();
+    angular.forEach(arr, function(chat) {
+      if(chat.body && chat.body.toLowerCase().indexOf(searchString) !== -1) {
+        result.push(chat);
+      }
+    });
+    return result;
+  };
+});
+
+
+app.filter('jobFilters', function() {
   return function(arr, searchString) {
     if(!searchString) {
       return arr;
