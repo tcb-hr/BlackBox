@@ -117,13 +117,13 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
   $scope.sendChat = function(chat) {
     $http.post('/api/chat', {
-      user: chat.name,
+      user: $scope.currentUser.name,
       body: chat.body,
       image: ''
     });
-    $http.get('/api/chat').success(function(chats) {
-      $scope.chats = chats;
-    });
+    // $http.get('/api/chat').success(function(chats) {
+    //   $scope.chats = chats;
+    // });
   };
   
   $scope.layer;
