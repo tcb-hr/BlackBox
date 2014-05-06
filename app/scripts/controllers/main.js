@@ -2,7 +2,7 @@
 
 var app = angular.module('feedApp');
 
-app.directive('mySlideController', ['$swipe', function($swipe) {
+app.directive('panelSlide', ['$swipe', function($swipe) { // MOVE DIRECTIVES TO A SEPARATE FILE?
   return {
     restrict: 'EA',
     link: function(scope, ele, attrs, ctrl) {
@@ -72,7 +72,6 @@ app.controller('MainCtrl', function($scope, $http, $window) {
     $scope.chats = chats;
   });
 
-
   $scope.sendChat = function(chat) {
     $http.post('/api/chat', {
       user: chat.name,
@@ -128,8 +127,8 @@ app.controller('MainCtrl', function($scope, $http, $window) {
 
   $scope.hidePic = function(){
     $('#pic').css('display', 'none');
-  }
- 
+  };
+
   $scope.showMapOrPic = function(chat){
     console.log(chat);
     if(chat.image !== undefined){
