@@ -66,17 +66,19 @@
     <script src="bower_components/ng-flow/dist/ng-flow-standalone.min.js"></script>
     <script src="bower_components/flow.js/dist/flow.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
-    <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.4"></script>
-    <script src="bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js"></script>    
+    <script src="http://maps.stamen.com/js/tile.stamen.js?v1.2.4"></script>
+    <script src="bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js"></script>
     <script src="http://www.mapquestapi.com/sdk/leaflet/v1.0/mq-map.js?key=Fmjtd%7Cluub2g6bl1%2Cra%3Do5-9ual56"></script>
     <script src="http://www.mapquestapi.com/sdk/leaflet/v1.0/mq-geocoding.js?key=Fmjtd%7Cluub2g6bl1%2Cra%3Do5-9ual56"></script>
     
     <!-- endbower -->
 
-    <script type="text/javascript" src="http://138.91.64.150:8000/socket.io/socket.io.js"></script>
-    
+<!--     <script type="text/javascript" src="http://138.91.64.150:8000/socket.io/socket.io.js"></script> -->
+    <script type="text/javascript" src="./socket.io/socket.io.js"></script>
+
     <script>
-      var socket = io.connect('http://138.91.64.150:8000');
+      // var socket = io.connect('http://138.91.64.150:8000');
+      var socket = io.connect('http://localhost:8000');
       socket.on('news', function (data) {
         console.log(data);
         alert(data['hello'])
