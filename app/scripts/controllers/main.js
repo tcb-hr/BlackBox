@@ -82,9 +82,11 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
   $scope.doneUp = function(){
     // console.log('doneUp', arguments)
-    $http.get('/download').success(function(){
+
+    $http.get('/upload').success(
+      $http.get('/download').success( function(){
       console.log('so let it be written');
-    })
+    }))
   }
 
 

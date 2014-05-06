@@ -13,7 +13,7 @@ var app = angular.module('feedApp', [
     $routeProvider
       .when('/', {
         templateUrl: 'partials/main',
-        // authenticate: true,
+        authenticate: true,
         controller: 'MainCtrl'
       })
       .when('/login', {
