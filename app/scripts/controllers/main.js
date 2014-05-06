@@ -136,6 +136,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.dropMarker;
   $scope.pickMarker;
 
+  $scope.hideMap = true;
   $scope.createMap = function(){
     $scope.layer = new L.StamenTileLayer("toner");
     $scope.map = new L.Map("map", {
@@ -161,27 +162,19 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
     $("#map").height($(window).height());
     $scope.map.invalidateSize();
-  
-    $('#map').click(function(){
-      $('#map').hide();
-    });
-    $('#map').hide();
 
-    $('#pic').height($(window).height());
-    $('#pic').click(function(){
-      $('#pic').hide();
-    });
   };
-
-  $scope.hidePic = function(){
-    $('#pic').css('display', 'none');
+  $scope.hidePic = true; 
+  $scope.createPic = function(){
+    $('#pic').height($(window).height());
   };
 
   $scope.showMapOrPic = function(chat){
     console.log(chat);
     if(chat.image !== undefined){
-      $('#pic').css('display', 'block');
       $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center');
+      console.log('showin pic');
+      $scope.hidePic = false;
     }
     if(chat.pickCoordinates !== undefined){
       var pickLat = JSON.parse(chat.pickCoordinates).lat;
@@ -195,7 +188,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       }else{
         $scope.pickMarker.setLatLng([pickLat, pickLng]);
       }
-      $('#map').show();
+      console.log('showing map');
+      $scope.hideMap = false;
     }
   };
 });
