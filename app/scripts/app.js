@@ -29,6 +29,12 @@ var app = angular.module('feedApp', [
         controller: 'SettingsCtrl',
         authenticate: true
       })
+      .when('/auth/google',{
+        redirectTo:'/auth/google'
+      })
+      .when('/auth/google/callback',{
+        redirectTo:'/auth/google/callback'
+      })
       .otherwise({
         redirectTo: '/'
       });
