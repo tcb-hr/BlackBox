@@ -20,7 +20,7 @@
 
 <div id="all" ng-class="{ hide: showPanelLeft || showPanelRight, slide: !showPanelLeft && !showPanelRight }">
 
-  <div class="overlay" ng-class="{ show: showPanelLeft || showPanelRight }" ng-swipe-left="showPanelLeft = false"></div>
+  <div class="overlay" ng-class="{ show: showPanelLeft || showPanelRight }" ng-swipe-left="showPanelLeft = false" ng-swipe-right="showPanelRight = false"></div>
 
     <div ng-include="'partials/navbar'" ng-init="createMap()"></div>
 
