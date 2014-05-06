@@ -209,3 +209,20 @@ app.filter('searchFor', function() {
     return result;
   };
 });
+
+
+app.filter('jobFilters', function() {
+  return function(arr, searchString) {
+    if(!searchString) {
+      return arr;
+    }
+    var result = [];
+    searchString = searchString.toLowerCase();
+    angular.forEach(arr, function(chat) {
+      if(chat.body && chat.body.toLowerCase().indexOf(searchString) !== -1) {
+        result.push(chat);
+      }
+    });
+    return result;
+  };
+});
