@@ -13,7 +13,7 @@ var app = angular.module('feedApp', [
     $routeProvider
       .when('/', {
         templateUrl: 'partials/main',
-        authenticate: true,
+        // authenticate: true,
         controller: 'MainCtrl'
       })
       .when('/login', {
@@ -29,12 +29,12 @@ var app = angular.module('feedApp', [
         controller: 'SettingsCtrl',
         authenticate: true
       })
-      .when('/auth/google',{
-        redirectTo:'/auth/google'
-      })
-      .when('/auth/google/callback',{
-        redirectTo:'/auth/google/callback'
-      })
+      // .when('/auth/google',{
+      //   redirectTo:'http://localhost:8000/auth/google'
+      // })
+      // .when('/auth/google/callback',{
+      //   redirectTo:'http://localhost:8000/auth/google/callback'
+      // })
       .otherwise({
         redirectTo: '/'
       });
@@ -90,3 +90,5 @@ var app = angular.module('feedApp', [
       }
     });
   });
+
+

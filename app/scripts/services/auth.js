@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('feedApp')
-  .factory('Auth', function Auth($location, $rootScope, Session, User, $cookieStore) {
+var app = angular.module('feedApp');
+
+app.factory('Auth', function Auth($location, $rootScope, Session, User, $cookieStore) {
     
     // Get currentUser from cookie
     $rootScope.currentUser = $cookieStore.get('user') || null;

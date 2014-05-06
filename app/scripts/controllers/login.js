@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('feedApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location) {
+var app = angular.module('feedApp')
+  
+app.controller('LoginCtrl', function ($scope, Auth, $location) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -24,3 +25,23 @@ angular.module('feedApp')
       }
     };
   });
+
+// app.factory('Auth', function($http, $rootScope, $cookieStore){
+
+//     var accessLevels = routingConfig.accessLevels
+//         , userRoles = routingConfig.userRoles
+//         , currentUser = $cookieStore.get('user') || 
+//                         { username: '', role: userRoles.public };
+
+//     // ...
+
+//     return {
+
+//         // ...
+
+//         accessLevels: accessLevels,
+//         userRoles: userRoles,
+//         user: currentUser
+//     };
+
+// });
