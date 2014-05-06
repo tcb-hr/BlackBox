@@ -3,11 +3,11 @@
 var app = angular.module('feedApp', [
   'ngCookies',
   'ngResource',
+  'ngRoute',
   'ngSanitize',
-  'angularMoment',
-  'flow',
   'ngTouch',
-  'ngRoute'
+  'angularMoment',
+  'flow'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider, flowFactoryProvider) {
     $routeProvider
@@ -78,11 +78,9 @@ var app = angular.module('feedApp', [
 
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$routeChangeStart', function (event, next) {
-      
+
       if (next.authenticate && !Auth.isLoggedIn()) {
         $location.path('/login');
       }
     });
   });
-
-
