@@ -197,15 +197,22 @@ body {
   height: 40px;
   vertical-align: middle;
 }
-#removeBtn {
+#cancelBtn {
   background-image: url("../images/cancel-icon.png");
   background-size: 30px 30px;
   background-position: 3px 3px;
 }
-.closeBtn {
-  background-image: url("../images/cancel-icon.png");
-  background-size: 30px 30px;
-  background-position: 3px 3px;
+.closeBtnLeft {
+  background-image: url("../images/arrow-angular-left.png");
+  background-size: 40px 50px;
+  background-position: 0 0;
+  margin-bottom: 9999px;
+}
+.closeBtnRight {
+  background-image: url("../images/arrow-angular-right.png");
+  background-size: 40px 50px;
+  background-position: 0 0;
+  margin-bottom: 9999px;
 }
 .textField {
   position: relative;
@@ -257,7 +264,7 @@ body {
   background-color: #e9e9e9;
   /*display: block;*/
   box-sizing: border-box;
-  padding: 8px;
+  /*padding: 8px;*/
   font-size: 11pt;
 }
 #panelLeft {
@@ -272,11 +279,23 @@ body {
 #panelRight.slide {
   right: 0;
 }
-.panel h1 {
+.panelContent {
+  margin-top: 12px;
+  /*display: inline-block;*/
+}
+#panelLeft .panelContent {
+  margin-left: 12px;
+  margin-right: 36px;
+}
+#panelRight .panelContent {
+  margin-right: 12px;
+  margin-left: 36px;
+}
+.panelContent h1 {
   font-weight: 700;
   font-size: 12pt;
 }
-.panel li {
+.panelContent li {
   /*display: block;*/
   padding: 10px 4px;
   border-bottom: 1px solid #aaa;

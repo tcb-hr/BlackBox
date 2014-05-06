@@ -1,21 +1,25 @@
 <div class="panel" id="panelLeft" ng-class="{ hide: !showPanelLeft, slide: showPanelLeft }">
-  <button class="button closeBtn floatRight" id="closePanelLeft" ng-click="togglePanelLeft()">close</button>
-  <h1>Settings</h1>
-  <ul>
-    <li>Setting 1</li>
-    <li>Setting 2</li>
-    <li>Setting 3</li>
-  </ul>
+  <button class="button closeBtnLeft floatRight" id="closePanelLeft" ng-click="togglePanelLeft()">close</button>
+  <div class="panelContent">
+    <h1>Settings</h1>
+    <ul>
+      <li>Setting 1</li>
+      <li>Setting 2</li>
+      <li>Setting 3</li>
+    </ul>
+  </div>
 </div>
 
 <div class="panel" id="panelRight" ng-class="{ hide: !showPanelRight, slide: showPanelRight }">
-  <button class="button closeBtn floatLeft" id="closePanelRight" ng-click="togglePanelRight()">close</button>
-  <h1>Dashboard</h1>
-  <ul>
-    <li>Dash stat 1</li>
-    <li>Dash stat 2</li>
-    <li>Dash stat 3</li>
-  </ul>
+  <button class="button closeBtnRight floatLeft" id="closePanelRight" ng-click="togglePanelRight()">close</button>
+  <div class="panelContent">
+    <h1>Dashboard</h1>
+    <ul>
+      <li>Dash stat 1</li>
+      <li>Dash stat 2</li>
+      <li>Dash stat 3</li>
+    </ul>
+  </div>
 </div>
 
 <div id="all" ng-class="{ hide: showPanelLeft || showPanelRight, slide: !showPanelLeft && !showPanelRight }">
@@ -68,7 +72,7 @@
           <div flow-init="{ singleFile: true }" flow-name="image" flow-file-added="!!{ png: 1, gif: 1, jpg: 1, jpeg: 1 }[$file.getExtension()]" flow-files-submitted="$flow.upload()" flow-complete="doneUp()">
             <div class="content">
               <button class="btn btn-primary" id="picBtn" ng-show="!$flow.files.length" flow-btn>add pic</button>
-              <button class="button" id="removeBtn" ng-show="$flow.files.length" ng-click="$flow.cancel()">remove</button>
+              <button class="button" id="cancelBtn" ng-show="$flow.files.length" ng-click="$flow.cancel()">remove</button>
               <div id="thumb" ng-show="$flow.files.length"><img flow-img="$flow.files[0]" /></div>-->
     <div id="footer">
       <div class="content">
@@ -87,7 +91,7 @@
                 <div class="content">
                   <button class="btn btn-primary" id="picBtn" ng-show="!$flow.files.length" flow-btn>add pic</button>
                   <!-- <span ng-show="$flow.files.length">{{$flow.timeRemaining()}} sec to upload</span> -->
-                  <button class="button" id="removeBtn" ng-show="$flow.files.length" ng-click="$flow.cancel()">remove</button>
+                  <button class="button" id="cancelBtn" ng-show="$flow.files.length" ng-click="$flow.cancel()">remove</button>
                   <div id="thumb" ng-show="$flow.files.length"><img flow-img="$flow.files[0]" /></div>
                 </div>
               </div>
