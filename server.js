@@ -52,7 +52,6 @@ io.sockets.on('connection', function (socket) {
         if(err){
           console.log(err);
         }  
-        console.log('newest', chat);
         socket.emit('newMessage', {data: chat});
       });
      }

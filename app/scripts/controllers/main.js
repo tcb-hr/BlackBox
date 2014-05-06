@@ -55,8 +55,11 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
   socket.on('newMessage', function(data){
     var newChat = data['data'][0];  
-    console.log('newChat', newChat);
-    $scope.chats.push(newChat);
+    var idOfLastItem = $scope.chats[$scope.chats.length-1]._id;
+    if(idOfLastItem !== newChat._id){
+      $scope.chats.push(newChat);
+      console.log('new message added');
+    }    
   });
 
   var toolsVisible = false;
