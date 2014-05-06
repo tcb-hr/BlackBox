@@ -44,7 +44,7 @@ app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARA
 
 });
 
-app.factory('socket', function($rootScope) {
+app.factory('socket', function($rootScope) { // MOVE FACTORIES TO A SEPARATE FILE?
   var socket = io.connect();
   return {
     on: function(eventName, callback) {
