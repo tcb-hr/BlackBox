@@ -22,16 +22,16 @@
   </div>
 </div>
 
+<div id="map" ng-init="createMap()" ng-hide="hideMap" ng-click="hideMap = !hideMap"></div>
+<div id="pic" ng-init="createPic()" ng-hide="hidePic" ng-click="hidePic = !hidePic"></div>
+
 <div id="all" ng-class="{ hide: showPanelLeft || showPanelRight, slide: !showPanelLeft && !showPanelRight }">
 
   <div class="overlay" ng-class="{ show: showPanelLeft || showPanelRight }" ng-swipe-left="showPanelLeft = false" ng-swipe-right="showPanelRight = false"></div>
 
-    <div ng-include="'partials/navbar'" ng-init="createMap()"></div>
-
-    <div id="map"></div>
-    <!-- <div id="pic"></div> -->
-
-    <div id="feed" scroll-bottom>
+    <div ng-include="'partials/navbar'"></div>
+    
+   <div id="feed" scroll-bottom>
       <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString" ng-click="showMapOrPic(chat)" scroll-bottom>
         <div class="content">
           <div class="author">
@@ -41,7 +41,7 @@
           <!-- <div class="msgText">{{chat.body}}<br>{{chat.slogan}}</div> -->
           <!-- <div class="time" am-time-ago="chat.timestamp"></div> -->
           <div class="msgText">{{chat.body}}</div>
-          <div class="msgText">{{chat.slogan }}</div>
+          <div class="msgText">{{chat.slogan}}</div>
           <div class="time" am-time-ago="chat.timestamp"></div>
         </div>
       </div>
