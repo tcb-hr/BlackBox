@@ -123,9 +123,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       body: chat.body,
       image: ''
     });
-    // $http.get('/api/chat').success(function(chats) {
-    //   $scope.chats = chats;
-    // });
   };
   
   $scope.layer;
