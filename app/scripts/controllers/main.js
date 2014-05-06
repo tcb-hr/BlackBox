@@ -110,19 +110,18 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
   $scope.doneUp = function(){
     // console.log('doneUp', arguments)
-    $http.get('/download').success(function(){
+
+    $http.get('/upload').success(
+      $http.get('/download').success( function(){
       console.log('so let it be written');
-    });
-  };
+    }));
+  }
 
   $scope.sendChat = function(chat) {
     $http.post('/api/chat', {
-      user: chat.name,
+      user: $scope.currentUser.name,
       body: chat.body,
       image: ''
-    });
-    $http.get('/api/chat').success(function(chats) {
-      $scope.chats = chats;
     });
   };
   
