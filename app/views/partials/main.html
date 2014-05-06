@@ -26,10 +26,10 @@
 
   <div class="overlay" ng-class="{ show: showPanelLeft || showPanelRight }" ng-swipe-left="showPanelLeft = false" ng-swipe-right="showPanelRight = false"></div>
 
-    <div ng-include="'partials/navbar'" ng-init="createMap()"></div>
+    <div ng-include="'partials/navbar'"></div>
 
-    <div id="map"></div>
-    <!-- <div id="pic"></div> -->
+    <div id="map" ng-init="createMap()"></div>
+    <div id="pic"></div>
 
     <div id="feed" scroll-bottom>
       <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString" ng-click="showMapOrPic(chat)" scroll-bottom>
