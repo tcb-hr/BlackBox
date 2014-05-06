@@ -74,6 +74,87 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     console.log('Socket connection established');
   });
 
+  $scope.zones = [{
+    label: '1',
+    state: true
+  }, {
+    label: '2',
+    state: true
+  }, {
+    label: '3',
+    state: true
+  }, {
+    label: '4',
+    state: true
+  }, {
+    label: '5',
+    state: true
+  }, {
+    label: '6',
+    state: true
+  }, {
+    label: '7',
+    state: true
+  }];
+
+  $scope.messageTypes = [{
+    label: 'Chats',
+    state: true
+  }, {
+    label: 'Instagram',
+    state: true
+  }, {
+    label: 'Courier check-in',
+    dbLabel: 'courier_check_in',
+    state: true
+  }, {
+    label: 'Courier check-out',
+    dbLabel: 'courier_check_out',
+    state: true
+  }, {
+    label: 'Job created',
+    dbLabel: 'job_created',
+    state: true
+  }, {
+    label: 'Job cancelled',
+    dbLabel: 'job_cancelled',
+    state: true
+  }, {
+    label: 'Job edited',
+    dbLabel: 'job_edited',
+    state: true
+  }, {
+    label: 'Job ready',
+    dbLabel: 'job_ready',
+    state: true
+  }, {
+    label: 'Job assigned',
+    dbLabel: 'job_assigned',
+    state: true
+  }, {
+    label: 'Job picked', 
+    dbLabel: 'job_picked',
+    state: true
+  }, {
+    label: 'Job delivered',
+    dbLabel: 'job_delivered',
+    state: true
+  }, {
+    label: 'Job complete',
+    dbLabel: 'job_complete',
+    state: true
+  }, {
+    label: 'Job late',
+    dbLabel: 'job_late',
+    state: true
+  }];
+
+  $scope.toggle = function () {
+    console.log('state', this.state);
+    this.state = !this.state;
+    console.log('state', this.state);
+  };
+
   socket.on('newMessage', function(data){
     var newChat = data['data'][0];
     var idOfLastItem = $scope.chats[$scope.chats.length-1]._id;

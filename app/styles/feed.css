@@ -333,3 +333,19 @@ body {
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 9999;
 }
+
+.on{
+  background-color: lightgreen;
+}
+
+.zoneFilterButton{
+  font-size: 16px;
+  margin: 1px;
+  width: 100%;
+}
+
+.typeFilterButton{
+  font-size: 16px;
+  margin: 1px;
+  width: 100%;
+}
