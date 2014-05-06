@@ -1,12 +1,32 @@
-body, div, img, a, h1, h2, h3, h4, h5, h6 {
-  margin: 0; padding: 0; border: 0;
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+margin: 0;
+padding: 0;
+border: 0;
+font-size: 100%;
+font: inherit;
+vertical-align: baseline;
+}
+button, a {
+  outline: 0;
+  overflow: visible;
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+}
+ul, li {
+  list-style-type: none;
+}
+.floatRight {
+  float: right;
 }
 body {
   font-family: sans-serif;
   width: 100%;
   height: 100%;
-  padding: 0;
-  margin: 0;
+  color: #000;
+  background-color: #fff;
+  /*padding: 0;*/
+  /*margin: 0;*/
 }
 #container {
   margin: 0;
@@ -22,6 +42,7 @@ body {
   border-style: solid;
   border-width: 1px;
   border-color: #bbb;
+  box-sizing: border-box;
 }
 .content {
   margin: 0 auto;
@@ -43,6 +64,7 @@ body {
   font-weight: 700;
   color: #aaa;
 }
+/*<<<<<<< HEAD
 #settingsButton {
   position: absolute;
   right: 0px;
@@ -60,6 +82,20 @@ body {
   height: 30px;
   padding: 6px 10px;
   color: darkgrey;
+=======*/
+#settingsBtn {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background-image: url("../images/gear.png");
+  background-size: 40px 40px;
+}
+#dashBtn {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-image: url("../images/dash.png");
+  background-size: 40px 40px;
 }
 #pinnedBar {
   display: none;
@@ -136,7 +172,7 @@ body {
   height: 40px;
 }
 #toolsBtn {
-  position: absolute; /* or fixed? */
+  position: absolute;
   top: 2px;
   left: 2px;
   background-image: url("../images/tool.png");
@@ -159,6 +195,11 @@ body {
   vertical-align: middle;
 }
 #removeBtn {
+  background-image: url("../images/cancel-icon.png");
+  background-size: 30px 30px;
+  background-position: 3px 3px;
+}
+.closeBtn {
   background-image: url("../images/cancel-icon.png");
   background-size: 30px 30px;
   background-position: 3px 3px;
@@ -186,7 +227,7 @@ body {
   font-size: 12pt;
 }
 #sendBtn {
-  position: absolute; /* or fixed? */
+  position: absolute;
   top: 2px;
   right: 2px;
   background-image: url("../images/send.png");
@@ -203,24 +244,62 @@ body {
   position: relative;
   z-index: 100;
 }
-/*
-.leaflet-control-zoom-in, .leaflet-control-zoom-out {
-  padding: 30px 10px;
-  width: 100%;
-  font-size: 72px;
-  text-align: center;
-  border: 2px solid black;
+#menuleft {
+  left: -75%;
+  position: fixed;
+  /*top: 0;*/
+  width: 75%;
+  height: 100%;
+  z-index: 1000;
+  border-right: 1px solid #000;
+  background-color: #e9e9e9;
+  /*display: block;*/
+  box-sizing: border-box;
+  padding: 8px;
+  font-size: 11pt;
 }
-.navigation {
-  width: 0;
-  overflow: hidden;
+#menuleft.slide {
+  left: 0;
+}
+#menuleft h1 {
+  font-weight: 700;
+  font-size: 12pt;
+}
+#menuleft li {
+  /*display: block;*/
+  padding: 10px 0 10px 2%;
+  border-bottom: 1px solid #aaa;
+}
+#all {
+  /*display: block;*/
+  /*width: 100%;*/
+}
+#all.hide {
+  position: fixed;
+  /*left: 75%;*/
+  /*top: 0;*/
+  /*width: 100%;*/
+}
+#all.slide {
+  /*position: relative;*/
+}
+.slide, .hide {
+  transition: all 0.2s ease; /* Speed of panel's movement. */
+}
+.overlay {
   position: fixed;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
-  height: 100%;
+  transition: all 0.2s ease; /* Speed of overlay's darkening. */
 }
-.page-wrap {
-  width: 100%;
-  float: right;
+.overlay.show {
+  /*position: fixed;*/
+  /*top: 0;*/
+  /*right: 0;*/
+  /*bottom: 0;*/
+  /*left: 0;*/
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
 }
-*/
