@@ -1,5 +1,5 @@
-<div id="menuleft" ng-class="{ hide: !showmenu, slide: showmenu }">
-  <button class="button closeBtn floatRight" id="closeLeftMenu" ng-click="toggleMenu()">close</button>
+<div id="panelLeft" ng-class="{ hide: !showPanelLeft, slide: showPanelLeft }">
+  <button class="button closeBtn floatRight" id="closePanelLeft" ng-click="togglePanelLeft()">close</button>
   <h1>Settings</h1>
   <ul>
     <li>Setting 1</li>
@@ -8,9 +8,9 @@
   </ul>
 </div>
 
-<div id="all" ng-class="{ hide: showmenu, slide: !showmenu }">
+<div id="all" ng-class="{ hide: showPanelLeft, slide: !showPanelLeft }">
 
-  <div class="overlay" ng-class="{ show: showmenu }" ng-swipe-left="showmenu = false"></div>
+  <div class="overlay" ng-class="{ show: showPanelLeft }" ng-swipe-left="showPanelLeft = false"></div>
 
     <div ng-include="'partials/navbar'" ng-init="createMap()"></div>
 

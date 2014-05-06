@@ -69,6 +69,8 @@ app.factory('socket', function($rootScope) { // MOVE FACTORIES TO A SEPARATE FIL
 });
 
 app.controller('MainCtrl', function($scope, $http, $window, socket) {
+  // BREAK SOME OF THESE PIECES BELOW INTO SEPARATE CONTROLLERS?
+
   socket.on('init', function(data) {
     console.log('Socket connection established');
   });
@@ -82,9 +84,9 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }
   });
 
-  $scope.showmenu = false;
-  $scope.toggleMenu = function() {
-    $scope.showmenu = ($scope.showmenu) ? false : true;
+  $scope.showPanelLeft = false;
+  $scope.togglePanelLeft = function() {
+    $scope.showPanelLeft = ($scope.showPanelLeft) ? false : true;
   };
 
   var toolsVisible = false;

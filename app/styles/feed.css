@@ -244,7 +244,7 @@ body {
   position: relative;
   z-index: 100;
 }
-#menuleft {
+#panelLeft {
   left: -75%;
   position: fixed;
   /*top: 0;*/
@@ -258,14 +258,14 @@ body {
   padding: 8px;
   font-size: 11pt;
 }
-#menuleft.slide {
+#panelLeft.slide {
   left: 0;
 }
-#menuleft h1 {
+#panelLeft h1 {
   font-weight: 700;
   font-size: 12pt;
 }
-#menuleft li {
+#panelLeft li {
   /*display: block;*/
   padding: 10px 0 10px 2%;
   border-bottom: 1px solid #aaa;
