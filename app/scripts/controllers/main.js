@@ -80,6 +80,13 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.chats = chats;
   });
 
+  $scope.doneUp = function(){
+    // console.log('doneUp', arguments)
+    $http.get('/download').success(function(){
+      console.log('so let it be written');
+    })
+  }
+
 
   $scope.sendChat = function(chat) {
     $http.post('/api/chat', {

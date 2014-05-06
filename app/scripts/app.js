@@ -13,6 +13,7 @@ var app = angular.module('feedApp', [
     $routeProvider
       .when('/', {
         templateUrl: 'partials/main',
+        // authenticate: true,
         controller: 'MainCtrl'
       })
       .when('/login', {
@@ -61,13 +62,19 @@ var app = angular.module('feedApp', [
     flowFactoryProvider.on('catchAll', function (event) {
       console.log('catchAll', arguments);
     });
-    flowFactoryProvider.on('complete', function(){
-      console.log("WE WRITIN")
-      
-    })
+    // flowFactoryProvider.on('complete', function ($http){
+    //   $http({method: 'GET', url: './download'}).
+    //     success(function(data, status, headers, config) {
+    //       console.log("WE WRITIN", data, status, headers, config);
+    //     }).
+    //     error(function(data, status, headers, config) {
+    //       // called asynchronously if an error occurs
+    //       // or server returns response with an error status.
+    //   });      
+    // })
 
   })
-  .run(function ($rootScope, $location, Auth) {
+  .run(function ($rootScope, $location, $http, Auth) {
 
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$routeChangeStart', function (event, next) {
