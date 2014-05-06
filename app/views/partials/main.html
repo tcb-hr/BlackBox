@@ -1,11 +1,10 @@
 <div id="menuleft" ng-class="{ hide: !showmenu, slide: showmenu }">
   <button class="button closeBtn floatRight" id="closeLeftMenu" ng-click="toggleMenu()">close</button>
   <h1>Settings</h1>
-  <ul>
-    <li>Setting 1</li>
-    <li>Setting 2</li>
-    <li>Setting 3</li>
-  </ul>
+  <h1>Zones</h1>
+  <button class="zoneFilterButton" ng-repeat="zone in zones" ng-click="zone.state = !zone.state" ng-class="{'on':zone.state}">{{zone.label}}</button>
+  <h1>Posts</h1>
+  <button class="typeFilterButton" ng-repeat="type in messageTypes" ng-click="type.state = !type.state" ng-class="{'on':type.state}">{{type.label}}</button>
 </div>
 
 <div id="all" ng-class="{ hide: showmenu, slide: !showmenu }">
