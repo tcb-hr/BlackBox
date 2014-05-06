@@ -1,4 +1,4 @@
-<div id="panelLeft" ng-class="{ hide: !showPanelLeft, slide: showPanelLeft }">
+<div class="panel" id="panelLeft" ng-class="{ hide: !showPanelLeft, slide: showPanelLeft }">
   <button class="button closeBtn floatRight" id="closePanelLeft" ng-click="togglePanelLeft()">close</button>
   <h1>Settings</h1>
   <ul>
@@ -8,9 +8,19 @@
   </ul>
 </div>
 
-<div id="all" ng-class="{ hide: showPanelLeft, slide: !showPanelLeft }">
+<div class="panel" id="panelRight" ng-class="{ hide: !showPanelRight, slide: showPanelRight }">
+  <button class="button closeBtn floatLeft" id="closePanelRight" ng-click="togglePanelRight()">close</button>
+  <h1>Dashboard</h1>
+  <ul>
+    <li>Dash stat 1</li>
+    <li>Dash stat 2</li>
+    <li>Dash stat 3</li>
+  </ul>
+</div>
 
-  <div class="overlay" ng-class="{ show: showPanelLeft }" ng-swipe-left="showPanelLeft = false"></div>
+<div id="all" ng-class="{ hide: showPanelLeft || showPanelRight, slide: !showPanelLeft && !showPanelRight }">
+
+  <div class="overlay" ng-class="{ show: showPanelLeft || showPanelRight }" ng-swipe-left="showPanelLeft = false"></div>
 
     <div ng-include="'partials/navbar'" ng-init="createMap()"></div>
 

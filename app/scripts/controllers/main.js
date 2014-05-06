@@ -2,11 +2,10 @@
 
 var app = angular.module('feedApp');
 
-app.directive('panelSlide', ['$swipe', function($swipe) { // MOVE DIRECTIVES TO A SEPARATE FILE?
+app.directive('slidePanel', ['$swipe', function($swipe) { // MOVE DIRECTIVES TO A SEPARATE FILE?
   return {
     restrict: 'EA',
     link: function(scope, ele, attrs, ctrl) {
-      debugger;
       var startX, pointX;
       $swipe.bind(ele, {
         'start': function(coords) {
@@ -87,6 +86,11 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.showPanelLeft = false;
   $scope.togglePanelLeft = function() {
     $scope.showPanelLeft = ($scope.showPanelLeft) ? false : true;
+  };
+
+  $scope.showPanelRight = false;
+  $scope.togglePanelRight = function() {
+    $scope.showPanelRight = ($scope.showPanelRight) ? false : true;
   };
 
   var toolsVisible = false;
