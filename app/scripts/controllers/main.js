@@ -229,6 +229,10 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       console.log('chat.body is empty.');
       return;
     }
+    if(chat.body.length > 140) {
+      console.log('chat.body is > 140 chars.');
+      return;
+    }
     $http.post('/api/chat', {
       user: chat.name,
       body: chat.body,
