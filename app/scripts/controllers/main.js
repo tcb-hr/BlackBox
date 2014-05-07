@@ -210,11 +210,10 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     });
   };
 
-    // $http.get('/upload').success(
-      $http.get('/download').success( function(){
-      console.log('so let it be written');
-    });//);
-  }
+    // // $http.get('/upload').success(
+    //   $http.get('/download').success( function(){
+    //   console.log('so let it be written');
+    // });//);
   // This function called if user makes a dropdown selection.
   // User's dropdown selection will be added to the composition field.
   $scope.composeCanned = function() {
@@ -231,7 +230,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.sendChat = function(chat) {
     console.log('sendChat invoked');
     $http.post('/api/chat', {
-      user: chat.name, //$scope.currentUser.name,
+      user: chat.name,
       body: chat.body,
       image: ''
     }).success(function() {
