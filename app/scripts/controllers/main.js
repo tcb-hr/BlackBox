@@ -165,6 +165,10 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     });  
   };
 
+  $scope.updateFilters = function(){
+    console.log('change');
+  }
+
   $scope.toggle = function () {
     console.log('show', this.show);
     this.show = !this.show;
@@ -183,7 +187,15 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.showPanelLeft = false;
   $scope.togglePanelLeft = function() {
     $scope.showPanelLeft = ($scope.showPanelLeft) ? false : true;
-  };
+    /*
+    $http.post('/api/userSettings', {
+      user: chat.name,
+      body: chat.body,
+      image: ''
+    }).success(function() {
+      console.log('POST success!');
+    */
+   };
 
   $scope.showPanelRight = false;
   $scope.togglePanelRight = function() {
