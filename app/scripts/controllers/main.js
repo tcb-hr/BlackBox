@@ -104,10 +104,28 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }
   };
 
+  $http.get('/api/chat').success(function(chats) {
+    console.log('GET success!');
+    $scope.chats = chats;
+  }).error(function(data, status, headers, config) {
+    console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
+  });
+
+  $scope.doneUp = function() {
+    // console.log('doneUp', arguments)
+    $http.get('/download').success(function() {
+      console.log('GET success!');
+    }).error(function(data, status, headers, config) {
+      console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
+    });
+  };
+
+  // This function called if user makes a dropdown selection.
+  // User's dropdown selection will be added to the composition field.
   $scope.composeCanned = function() {
     console.log('composeCanned invoked');
-    var cannedSelect = document.getElementById('cannedSelect');
     var composeField = document.getElementById('composeField');
+    var cannedSelect = document.getElementById('cannedSelect');
     if(composeField.value === '') {
       composeField.value = cannedSelect.options[cannedSelect.selectedIndex].text;
     } else {
@@ -115,33 +133,30 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }
   };
 
-  $http.get('/api/chat').success(function(chats) {
-    $scope.chats = chats;
-  });
-
-  $scope.doneUp = function() {
-    // console.log('doneUp', arguments)
-    $http.get('/download').success(function() {
-      console.log('so let it be written');
-    });
-  };
-
   $scope.sendChat = function(chat) {
-    // var cannedSelect = document.getElementById('cannedSelect');
-    // cannedSelect.value = 'canned';
-    // $http.post('/someUrl', data).success(successCallback); // Doc code.
-    $http.post('/api/chat', {
+    console.log('sendChat invoked');
+    $http.post('/api/chat', { // THIS POST IS TIMING-OUT.
       user: chat.name,
       body: chat.body,
       image: ''
     }).success(function() {
-      console.log('successful post!');
+      console.log('POST success!');
+      $http.get('/api/chat').success(function(chats) {
+        console.log('GET success!');
+        $scope.chats = chats;
+      }).error(function(data, status, headers, config) {
+        console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
+      });
+      // Reset canned-selector & clear composition field.
+      document.getElementById('cannedSelect').value = '0';
+      document.getElementById('composeField').value = '';
+    }).error(function(data, status, headers, config) {
+      console.log('POST error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
     });
-    $http.get('/api/chat').success(function(chats) {
-      $scope.chats = chats;
-    });
-    // var composeField = document.getElementById('composeField');
-    // composeField.value = '';
+    // THESE LINES BELOW ARE TEMPORARILY DUPLICATED FROM POST-SUCCESS ABOVE UNTIL POST ERROR CORRECTED.
+    // Reset canned-message-selector & clear composition field.
+    document.getElementById('cannedSelect').value = '';
+    document.getElementById('composeField').value = '';
   };
   
   $scope.layer;

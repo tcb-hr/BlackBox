@@ -70,7 +70,6 @@
                 <div flow-init="{ singleFile: true }" flow-name="image" flow-file-added="!!{ png: 1, gif: 1, jpg: 1, jpeg: 1 }[$file.getExtension()]" flow-files-submitted="$flow.upload()">
                   <div class="content">
                     <button class="btn btn-primary" id="picBtn" ng-show="!$flow.files.length" flow-btn>add pic</button>
-                    <!-- <span ng-show="$flow.files.length">{{$flow.timeRemaining()}} sec to upload</span> -->
                     <button class="button" id="cancelBtn" ng-show="$flow.files.length" ng-click="$flow.cancel()">remove</button>
                     <div id="thumb" ng-show="$flow.files.length"><img flow-img="$flow.files[0]" /></div>
                   </div>
@@ -79,7 +78,7 @@
 
               <div class="tool" id="cannedTool">
                 <select id="cannedSelect" ng-model="cannedModel" ng-change="composeCanned()">
-                  <option selected disabled>canned msg</option>
+                  <option></option>
                   <option>10-4</option>
                   <option>on my way</option>
                   <option>need help</option>
