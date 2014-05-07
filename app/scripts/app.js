@@ -27,7 +27,7 @@ var app = angular.module('feedApp', [
       .when('/settings', {
         templateUrl: 'partials/settings',
         controller: 'SettingsCtrl',
-        authenticate: true
+        //authenticate: true
       })
       // .when('/auth/google',{
       //   redirectTo:'http://localhost:8000/auth/google'
