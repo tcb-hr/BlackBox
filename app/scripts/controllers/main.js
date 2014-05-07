@@ -80,76 +80,76 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.zones = [{
     label: '1',
     show: true
-    }, {
-      label: '2',
-      show: true
-    }, {
-      label: '3',
-      show: true
-    }, {
-      label: '4',
-      show: true
-    }, {
-      label: '5',
-      show: true
-    }, {
-      label: '6',
-      show: true
-    }, {
-      label: '7',
-      show: true
+  }, {
+    label: '2',
+    show: true
+  }, {
+    label: '3',
+    show: true
+  }, {
+    label: '4',
+    show: true
+  }, {
+    label: '5',
+    show: true
+  }, {
+    label: '6',
+    show: true
+  }, {
+    label: '7',
+    show: true
   }];
 
   $scope.messageTypes = [{
-      label: 'Chats',
-      show: true
-    }, {
-      label: 'Instagram',
-      show: true,
-    }, {
-      label: 'Courier check-in',
-      dbLabel: 101,
-      show: true
-    }, {
-      label: 'Courier check-out',
-      dbLabel: 102,
-      show: true
-    }, {
-      label: 'Job created',
-      dbLabel: 103,
-      show: true
-    }, {
-      label: 'Job cancelled',
-      dbLabel: 104,
-      show: true
-    }, {
-      label: 'Job edited',
-      dbLabel: 105,
-      show: true
-    }, {
-      label: 'Job ready',
-      dbLabel: 106,
-      show: true
-    }, {
-      label: 'Job assigned',
-      dbLabel: 107,
-      show: true
-    }, {
-      label: 'Job picked', 
-      dbLabel: 108,
-      show: true
-    }, {
-      label: 'Job delivered',
-      dbLabel: 109,
-      show: true
-    }, {
-      label: 'Job complete',
-      dbLabel: 110,
-      show: true
-    }, {
-      label: 'Job late',
-      dbLabel: 111,
-      show: true
+    label: 'Chats',
+    show: true
+  }, {
+    label: 'Instagram',
+    show: true,
+  }, {
+    label: 'Courier check-in',
+    dbLabel: 101,
+    show: true
+  }, {
+    label: 'Courier check-out',
+    dbLabel: 102,
+    show: true
+  }, {
+    label: 'Job created',
+    dbLabel: 103,
+    show: true
+  }, {
+    label: 'Job cancelled',
+    dbLabel: 104,
+    show: true
+  }, {
+    label: 'Job edited',
+    dbLabel: 105,
+    show: true
+  }, {
+    label: 'Job ready',
+    dbLabel: 106,
+    show: true
+  }, {
+    label: 'Job assigned',
+    dbLabel: 107,
+    show: true
+  }, {
+    label: 'Job picked',
+    dbLabel: 108,
+    show: true
+  }, {
+    label: 'Job delivered',
+    dbLabel: 109,
+    show: true
+  }, {
+    label: 'Job complete',
+    dbLabel: 110,
+    show: true
+  }, {
+    label: 'Job late',
+    dbLabel: 111,
+    show: true
   }];
 
   $scope.toggle = function () {
@@ -210,10 +210,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     });
   };
 
-    // // $http.get('/upload').success(
-    //   $http.get('/download').success( function(){
-    //   console.log('so let it be written');
-    // });//);
   // This function called if user makes a dropdown selection.
   // User's dropdown selection will be added to the composition field.
   $scope.composeCanned = function() {
@@ -281,9 +277,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.pickMarker = L.marker([37.8, -120], { icon: greenMarker }).addTo($scope.map);
     $scope.dropMarker = L.marker([37.7, -122.4], { icon: redMarker }).addTo($scope.map);
 
-    $("#map").height($(window).height());
+    $('#map').height($(window).height());
     $scope.map.invalidateSize();
-  
     $('#map').click(function() {
       $('#map').hide();
     });
