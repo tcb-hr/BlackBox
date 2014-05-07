@@ -65,7 +65,7 @@
     </div>
 
     <div id="footer">
-      <form id="chatForm" name="chat" ng-submit="sendChat(chat)">
+      <form id="chatForm" name="chat" ng-init="getUsername()" ng-submit="sendChat(chat)">
         <div class="content">
 
           <div id="toolbox" ng-show="showTools()">

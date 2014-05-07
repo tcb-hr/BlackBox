@@ -262,6 +262,13 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     document.getElementById('composeField').value = '';
     chat.body = undefined;
   };
+  
+  $scope.getUsername = function(){
+    $http.get('/api/users/me').success(function(user){
+      console.log('Hello, ', user.name);
+      $scope.currentUser = user.name;
+    });  
+  }
 
   $scope.sendChat = function(chat) {
     console.log('sendChat invoked. chat.name:', chat.name, 'chat.body:', chat.body);
@@ -270,7 +277,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       return;
     }
     $http.post('/api/chat', {
-      user: chat.name,
+      user: $scope.currentUser,
       body: chat.body,
       image: ''
     }).success(function() {
