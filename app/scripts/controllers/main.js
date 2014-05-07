@@ -22,25 +22,19 @@ app.directive('slidePanel', ['$swipe', function($swipe) { // MOVE DIRECTIVES TO 
 }]);
 
 app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARATE FILE?
-
   var scrollBottomWrap = function() {
-
     var scrollToBottom = function() {
       var feed = $window.document.getElementById('feed');
       feed.scrollTop = feed.scrollHeight + 44;
     };
     scrollToBottom();
-
     $window.addEventListener('resize', function() {
       scrollToBottom();
     });
-
   };
-
   return {
     link: scrollBottomWrap
   };
-
 });
 
 app.factory('socket', function($rootScope) { // MOVE FACTORIES TO A SEPARATE FILE?
@@ -71,13 +65,13 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   // BREAK SOME OF THESE PIECES BELOW INTO SEPARATE CONTROLLERS?
 
   socket.on('init', function(data) {
-    console.log('Socket connection established');
+    console.log('Socket connection established.');
   });
 
-  socket.on('newMessage', function(data){
+  socket.on('newMessage', function(data) {
     var newChat = data['data'][0];
     var idOfLastItem = $scope.chats[$scope.chats.length-1]._id;
-    if(idOfLastItem !== newChat._id){
+    if(idOfLastItem !== newChat._id) {
       $scope.chats.push(newChat);
       console.log('new message added');
     }
@@ -110,26 +104,44 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }
   };
 
+  $scope.composeCanned = function() {
+    console.log('composeCanned invoked');
+    var cannedSelect = document.getElementById('cannedSelect');
+    var composeField = document.getElementById('composeField');
+    if(composeField.value === '') {
+      composeField.value = cannedSelect.options[cannedSelect.selectedIndex].text;
+    } else {
+      composeField.value += ' ' + cannedSelect.options[cannedSelect.selectedIndex].text;
+    }
+  };
+
   $http.get('/api/chat').success(function(chats) {
     $scope.chats = chats;
   });
 
-  $scope.doneUp = function(){
+  $scope.doneUp = function() {
     // console.log('doneUp', arguments)
-    $http.get('/download').success(function(){
+    $http.get('/download').success(function() {
       console.log('so let it be written');
     });
   };
 
   $scope.sendChat = function(chat) {
+    // var cannedSelect = document.getElementById('cannedSelect');
+    // cannedSelect.value = 'canned';
+    // $http.post('/someUrl', data).success(successCallback); // Doc code.
     $http.post('/api/chat', {
       user: chat.name,
       body: chat.body,
       image: ''
+    }).success(function() {
+      console.log('successful post!');
     });
     $http.get('/api/chat').success(function(chats) {
       $scope.chats = chats;
     });
+    // var composeField = document.getElementById('composeField');
+    // composeField.value = '';
   };
   
   $scope.layer;
@@ -137,7 +149,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.dropMarker;
   $scope.pickMarker;
 
-  $scope.createMap = function(){
+  $scope.createMap = function() {
     $scope.layer = new L.StamenTileLayer("toner");
     $scope.map = new L.Map("map", {
       center: new L.LatLng(37.7, -122.4),
@@ -163,37 +175,37 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $("#map").height($(window).height());
     $scope.map.invalidateSize();
   
-    $('#map').click(function(){
+    $('#map').click(function() {
       $('#map').hide();
     });
     $('#map').hide();
 
     $('#pic').height($(window).height());
-    $('#pic').click(function(){
+    $('#pic').click(function() {
       $('#pic').hide();
     });
   };
 
-  $scope.hidePic = function(){
+  $scope.hidePic = function() {
     $('#pic').css('display', 'none');
   };
 
-  $scope.showMapOrPic = function(chat){
+  $scope.showMapOrPic = function(chat) {
     console.log(chat);
-    if(chat.image !== undefined){
+    if(chat.image !== undefined) {
       $('#pic').css('display', 'block');
       $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center');
     }
-    if(chat.pickCoordinates !== undefined){
+    if(chat.pickCoordinates !== undefined) {
       var pickLat = JSON.parse(chat.pickCoordinates).lat;
       var pickLng = JSON.parse(chat.pickCoordinates).lng;
       var dropLat = JSON.parse(chat.dropCoordinates).lat;
       var dropLng = JSON.parse(chat.dropCoordinates).lng;
       $scope.map.panTo(new L.LatLng(dropLat, dropLng));
       $scope.dropMarker.setLatLng([dropLat, dropLng]);
-      if((pickLat === dropLat) && (pickLng === dropLng)){
+      if((pickLat === dropLat) && (pickLng === dropLng)) {
         $scope.pickMarker.setLatLng([0,0]);
-      }else{
+      } else {
         $scope.pickMarker.setLatLng([pickLat, pickLng]);
       }
       $('#map').show();
