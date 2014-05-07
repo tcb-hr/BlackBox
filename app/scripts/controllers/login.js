@@ -24,6 +24,9 @@ app.controller('LoginCtrl', function ($scope, Auth, $location) {
         });
       }
     };
+    $scope.loginOauth = function(provider) {
+      $window.location.href = '/auth/' + provider;
+    }
   });
 
 // app.factory('Auth', function($http, $rootScope, $cookieStore){
