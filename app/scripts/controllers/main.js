@@ -80,76 +80,78 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.zones = [{
     label: '1',
     show: true
-    }, {
-      label: '2',
-      show: true
-    }, {
-      label: '3',
-      show: true
-    }, {
-      label: '4',
-      show: true
-    }, {
-      label: '5',
-      show: true
-    }, {
-      label: '6',
-      show: true
-    }, {
-      label: '7',
-      show: true
+  }, {
+    label: '2',
+    show: true
+  }, {
+    label: '3',
+    show: true
+  }, {
+    label: '4',
+    show: true
+  }, {
+    label: '5',
+    show: true
+  }, {
+    label: '6',
+    show: true
+  }, {
+    label: '7',
+    show: true
   }];
 
   $scope.messageTypes = [{
-      label: 'Chats',
-      show: true
-    }, {
-      label: 'Instagram',
-      show: true,
-    }, {
-      label: 'Courier check-in',
-      dbLabel: 101,
-      show: true
-    }, {
-      label: 'Courier check-out',
-      dbLabel: 102,
-      show: true
-    }, {
-      label: 'Job created',
-      dbLabel: 103,
-      show: true
-    }, {
-      label: 'Job cancelled',
-      dbLabel: 104,
-      show: true
-    }, {
-      label: 'Job edited',
-      dbLabel: 105,
-      show: true
-    }, {
-      label: 'Job ready',
-      dbLabel: 106,
-      show: true
-    }, {
-      label: 'Job assigned',
-      dbLabel: 107,
-      show: true
-    }, {
-      label: 'Job picked', 
-      dbLabel: 108,
-      show: true
-    }, {
-      label: 'Job delivered',
-      dbLabel: 109,
-      show: true
-    }, {
-      label: 'Job complete',
-      dbLabel: 110,
-      show: true
-    }, {
-      label: 'Job late',
-      dbLabel: 111,
-      show: true
+    label: 'Chats',
+    dbLabel: 200,
+    show: true
+  }, {
+    label: 'Instagram',
+    dbLabel: 300,
+    show: true,
+  }, {
+    label: 'Courier check-in',
+    dbLabel: 101,
+    show: true
+  }, {
+    label: 'Courier check-out',
+    dbLabel: 102,
+    show: true
+  }, {
+    label: 'Job created',
+    dbLabel: 103,
+    show: true
+  }, {
+    label: 'Job cancelled',
+    dbLabel: 104,
+    show: true
+  }, {
+    label: 'Job edited',
+    dbLabel: 105,
+    show: true
+  }, {
+    label: 'Job ready',
+    dbLabel: 106,
+    show: true
+  }, {
+    label: 'Job assigned',
+    dbLabel: 107,
+    show: true
+  }, {
+    label: 'Job picked',
+    dbLabel: 108,
+    show: true
+  }, {
+    label: 'Job delivered',
+    dbLabel: 109,
+    show: true
+  }, {
+    label: 'Job complete',
+    dbLabel: 110,
+    show: true
+  }, {
+    label: 'Job late',
+    dbLabel: 111,
+    show: true
   }];
 
   $scope.toggle = function () {
@@ -210,10 +212,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     });
   };
 
-    // // $http.get('/upload').success(
-    //   $http.get('/download').success( function(){
-    //   console.log('so let it be written');
-    // });//);
   // This function called if user makes a dropdown selection.
   // User's dropdown selection will be added to the composition field.
   $scope.composeCanned = function() {
@@ -227,8 +225,27 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }
   };
 
+  var isChatValid = function(chat) {
+    if(chat.body === undefined || chat.body.length > 140) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  var resetChatForm = function(chat) {
+    console.log('Resetting chat form.');
+    document.getElementById('cannedSelect').value = '0';
+    document.getElementById('composeField').value = '';
+    chat.body = undefined;
+  };
+
   $scope.sendChat = function(chat) {
-    console.log('sendChat invoked');
+    console.log('sendChat invoked. chat.name:', chat.name, 'chat.body:', chat.body);
+    if(!isChatValid(chat)) {
+      console.log('Invalid chat, overriding "send".');
+      return;
+    }
     $http.post('/api/chat', {
       user: chat.name,
       body: chat.body,
@@ -241,16 +258,10 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       }).error(function(data, status, headers, config) {
         console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
       });
-      // Reset canned-selector & clear composition field.
-      document.getElementById('cannedSelect').value = '0';
-      document.getElementById('composeField').value = '';
+      resetChatForm(chat);
     }).error(function(data, status, headers, config) {
       console.log('POST error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
     });
-    // THESE LINES BELOW ARE TEMPORARILY DUPLICATED FROM POST-SUCCESS ABOVE UNTIL POST ERROR CORRECTED. ************
-    // Reset canned-message-selector & clear composition field.
-    document.getElementById('cannedSelect').value = '';
-    document.getElementById('composeField').value = '';
   };
   
   $scope.layer;
@@ -281,29 +292,20 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.pickMarker = L.marker([37.8, -120], { icon: greenMarker }).addTo($scope.map);
     $scope.dropMarker = L.marker([37.7, -122.4], { icon: redMarker }).addTo($scope.map);
 
-    $("#map").height($(window).height());
+    $('#map').height($(window).height());
     $scope.map.invalidateSize();
-  
-    $('#map').click(function() {
-      $('#map').hide();
-    });
-    $('#map').hide();
-
-    $('#pic').height($(window).height());
-    $('#pic').click(function() {
-      $('#pic').hide();
-    });
   };
 
-  $scope.hidePic = function() {
-    $('#pic').css('display', 'none');
+  $scope.hidePic = true;
+  $scope.createPic = function(){
+    $('#pic').height($(window).height());
   };
 
   $scope.showMapOrPic = function(chat) {
     console.log(chat);
     if(chat.image !== undefined) {
-      $('#pic').css('display', 'block');
       $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center');
+      $scope.hidePic = false;
     }
     if(chat.pickCoordinates !== undefined) {
       var pickLat = JSON.parse(chat.pickCoordinates).lat;
