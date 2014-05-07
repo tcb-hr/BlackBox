@@ -22,25 +22,19 @@ app.directive('slidePanel', ['$swipe', function($swipe) { // MOVE DIRECTIVES TO 
 }]);
 
 app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARATE FILE?
-
   var scrollBottomWrap = function() {
-
     var scrollToBottom = function() {
       var feed = $window.document.getElementById('feed');
       feed.scrollTop = feed.scrollHeight + 44;
     };
     scrollToBottom();
-
     $window.addEventListener('resize', function() {
       scrollToBottom();
     });
-
   };
-
   return {
     link: scrollBottomWrap
   };
-
 });
 
 app.factory('socket', function($rootScope) { // MOVE FACTORIES TO A SEPARATE FILE?
@@ -87,76 +81,76 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.zones = [{
     label: '1',
     show: true
-  }, {
-    label: '2',
-    show: true
-  }, {
-    label: '3',
-    show: true
-  }, {
-    label: '4',
-    show: true
-  }, {
-    label: '5',
-    show: true
-  }, {
-    label: '6',
-    show: true
-  }, {
-    label: '7',
-    show: true
+    }, {
+      label: '2',
+      show: true
+    }, {
+      label: '3',
+      show: true
+    }, {
+      label: '4',
+      show: true
+    }, {
+      label: '5',
+      show: true
+    }, {
+      label: '6',
+      show: true
+    }, {
+      label: '7',
+      show: true
   }];
 
   $scope.messageTypes = [{
-    label: 'Chats',
-    show: true
-  }, {
-    label: 'Instagram',
-    show: true,
-  }, {
-    label: 'Courier check-in',
-    dbLabel: 101,
-    show: true
-  }, {
-    label: 'Courier check-out',
-    dbLabel: 102,
-    show: true
-  }, {
-    label: 'Job created',
-    dbLabel: 103,
-    show: true
-  }, {
-    label: 'Job cancelled',
-    dbLabel: 104,
-    show: true
-  }, {
-    label: 'Job edited',
-    dbLabel: 105,
-    show: true
-  }, {
-    label: 'Job ready',
-    dbLabel: 106,
-    show: true
-  }, {
-    label: 'Job assigned',
-    dbLabel: 107,
-    show: true
-  }, {
-    label: 'Job picked', 
-    dbLabel: 108,
-    show: true
-  }, {
-    label: 'Job delivered',
-    dbLabel: 109,
-    show: true
-  }, {
-    label: 'Job complete',
-    dbLabel: 110,
-    show: true
-  }, {
-    label: 'Job late',
-    dbLabel: 111,
-    show: true
+      label: 'Chats',
+      show: true
+    }, {
+      label: 'Instagram',
+      show: true,
+    }, {
+      label: 'Courier check-in',
+      dbLabel: 101,
+      show: true
+    }, {
+      label: 'Courier check-out',
+      dbLabel: 102,
+      show: true
+    }, {
+      label: 'Job created',
+      dbLabel: 103,
+      show: true
+    }, {
+      label: 'Job cancelled',
+      dbLabel: 104,
+      show: true
+    }, {
+      label: 'Job edited',
+      dbLabel: 105,
+      show: true
+    }, {
+      label: 'Job ready',
+      dbLabel: 106,
+      show: true
+    }, {
+      label: 'Job assigned',
+      dbLabel: 107,
+      show: true
+    }, {
+      label: 'Job picked', 
+      dbLabel: 108,
+      show: true
+    }, {
+      label: 'Job delivered',
+      dbLabel: 109,
+      show: true
+    }, {
+      label: 'Job complete',
+      dbLabel: 110,
+      show: true
+    }, {
+      label: 'Job late',
+      dbLabel: 111,
+      show: true
   }];
 
   $scope.toggle = function () {
@@ -209,10 +203,10 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.doneUp = function(){
     // console.log('doneUp', arguments)
 
-    $http.get('/upload').success(
+    // $http.get('/upload').success(
       $http.get('/download').success( function(){
       console.log('so let it be written');
-    }));
+    });//);
   }
 
   $scope.sendChat = function(chat) {
