@@ -24,7 +24,7 @@ app.directive('slidePanel', ['$swipe', function($swipe) { // MOVE DIRECTIVES TO 
 app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARATE FILE?
   var scrollBottomWrap = function() {
     var scrollToBottom = function() {
-      var feed = $window.document.getElementById('feed');
+      var feed = document.getElementById('feed');
       feed.scrollTop = feed.scrollHeight + 44;
     };
     scrollToBottom();
@@ -184,11 +184,13 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     return toolsVisible;
   };
   $scope.toggleTools = function() {
-    var feed = $window.document.getElementById('feed');
+    var feed = document.getElementById('feed');
     if(toolsVisible === true) {
       toolsVisible = false;
       feed.style.bottom = '44px';
       feed.scrollTop = feed.scrollHeight + 44;
+      $scope.searchString = '';
+      document.getElementById('cannedSelect').value = '0';
     } else {
       toolsVisible = true;
       feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools
@@ -234,7 +236,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   };
 
   var resetChatForm = function(chat) {
-    console.log('Resetting chat form.');
+    // console.log('Resetting chat form.');
     document.getElementById('cannedSelect').value = '0';
     document.getElementById('composeField').value = '';
     chat.body = undefined;
