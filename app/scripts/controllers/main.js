@@ -269,6 +269,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.dropMarker;
   $scope.pickMarker;
 
+  $scope.hideMap = true;
   $scope.createMap = function() {
     $scope.layer = new L.StamenTileLayer("toner");
     $scope.map = new L.Map("map", {
@@ -319,7 +320,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       } else {
         $scope.pickMarker.setLatLng([pickLat, pickLng]);
       }
-      $('#map').show();
+      $scope.hideMap = false;
     }
   };
 });
