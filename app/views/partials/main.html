@@ -58,7 +58,7 @@
     </div>
 
     <div id="footer">
-      <!-- <form id="chatForm" name="chat" ng-submit="sendChat(chat)"> -->
+      <!-- <form id="chatForm" name="chat" ng-submit="sendChat(chat)"> --> <!-- Placing 'form' here causes 'return' keypress anywhere in form to trigger 'flow.js'. -->
         <div class="content">
 
           <div id="toolbox" ng-show="showTools()">
@@ -93,13 +93,14 @@
           <form id="chatForm" name="chat" ng-submit="sendChat(chat)">
             <div id="bottomRow">
               <button type="button" class="button" id="toolsBtn" ng-click="toggleTools()">tools</button>
-              <input type="text" class="form-control textField" id="composeField" ng-model="chat.body" ng-keyup="$event.keyCode === 13 ? sendChat(chat) : null" placeholder="compose" />
+              <!-- If 'form' encloses 'toolbox' need to add the following 'ng-keyup' --> <!-- ng-keyup="$event.keyCode === 13 ? sendChat(chat) : null" -->
+              <input type="text" class="form-control textField" id="composeField" ng-model="chat.body" placeholder="compose" />
               <button type="submit" class="button" id="sendBtn">send</button>
             </div>
           </form>
 
         </div>
-      <!-- </form> -->
+      <!-- </form> --> <!-- Placing 'form' here causes 'return' keypress anywhere in form to trigger 'flow.js'. -->
     </div>
 
   </div>
