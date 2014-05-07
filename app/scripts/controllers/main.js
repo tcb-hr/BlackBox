@@ -109,9 +109,11 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
   $scope.messageTypes = [{
     label: 'Chats',
+    dbLabel: 200,
     show: true
   }, {
     label: 'Instagram',
+    dbLabel: 300,
     show: true,
   }, {
     label: 'Courier check-in',
