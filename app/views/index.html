@@ -75,11 +75,11 @@
     <!-- endbower -->
 
     <script type="text/javascript" src="http://138.91.64.150:8000/socket.io/socket.io.js"></script>
-    <!-- // <script src="./socket.io/socket.io.js"></script> -->
+    <script src="./socket.io/socket.io.js"></script>
 
     <script>
       var socket = io.connect('http://138.91.64.150:8000');
-      // var socket = io.connect('http://localhost:8000');
+      var socket = io.connect('http://localhost:8000');
       socket.on('news', function (data) {
         console.log(data);
         alert(data['hello'])
