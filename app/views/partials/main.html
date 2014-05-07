@@ -38,7 +38,7 @@
             <span class="handle">{{chat.user || 'guest'}}</span> -->
 
       <div id="feed" scroll-bottom>
-        <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString" ng-click="showMapOrPic(chat)" scroll-bottom>
+        <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString | filter: messageFilter" ng-click="showMapOrPic(chat)" scroll-bottom>
           <div class="content">
             <div class="author">
               <img class="avatar" src={{chat.pic}} />
