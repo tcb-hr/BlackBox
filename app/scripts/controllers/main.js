@@ -294,26 +294,18 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
     $('#map').height($(window).height());
     $scope.map.invalidateSize();
-    $('#map').click(function() {
-      $('#map').hide();
-    });
-    $('#map').hide();
-
-    $('#pic').height($(window).height());
-    $('#pic').click(function() {
-      $('#pic').hide();
-    });
   };
 
-  $scope.hidePic = function() {
-    $('#pic').css('display', 'none');
+  $scope.hidePic = true;
+  $scope.createPic = function(){
+    $('#pic').height($(window).height());
   };
 
   $scope.showMapOrPic = function(chat) {
     console.log(chat);
     if(chat.image !== undefined) {
-      $('#pic').css('display', 'block');
       $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center');
+      $scope.hidePic = false;
     }
     if(chat.pickCoordinates !== undefined) {
       var pickLat = JSON.parse(chat.pickCoordinates).lat;
