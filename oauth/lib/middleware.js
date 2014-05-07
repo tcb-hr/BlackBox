@@ -21,14 +21,5 @@ module.exports = {
       res.cookie('user', JSON.stringify(req.user.userInfo));
     }
     next();
-  },
-  isLoggedIn: function(req, res, next) {
-    console.log('he cool?');
-    // if user is authenticated in the session, carry on
-    if (req.isAuthenticated())
-      console.log('he ai-ight');
-      return next();
-    // if they aren't redirect them to the home page
-    res.redirect('/');
   }
 };

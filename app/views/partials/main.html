@@ -29,26 +29,32 @@
   <div class="overlay" ng-class="{ show: showPanelLeft || showPanelRight }" ng-swipe-left="showPanelLeft = false" ng-swipe-right="showPanelRight = false"></div>
 
     <div ng-include="'partials/navbar'"></div>
-    
-   <div id="feed" scroll-bottom>
+
+<!--    <div id="feed" scroll-bottom>
       <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString | filter: messageFilter" ng-click="showMapOrPic(chat)" scroll-bottom>
         <div class="content">
           <div class="author">
             <img class="avatar" src={{chat.pic}} />
-            <span class="handle">{{chat.user || 'guest'}}</span>
+            <span class="handle">{{chat.user || 'guest'}}</span> -->
+
+      <div id="feed" scroll-bottom>
+        <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString" ng-click="showMapOrPic(chat)" scroll-bottom>
+          <div class="content">
+            <div class="author">
+              <img class="avatar" src={{chat.pic}} />
+              <span class="handle">{{chat.user || 'guest'}}</span>
+            </div>
+            <!-- <div class="msgText">{{chat.body}}<br>{{chat.slogan}}</div> -->
+            <!-- <div class="time" am-time-ago="chat.timestamp"></div> -->
+            <div class="msgText">{{chat.body}}</div>
+            <div class="msgText">{{chat.slogan}}</div>
+            <div class="time" am-time-ago="chat.timestamp"></div>
           </div>
-          <!-- <div class="msgText">{{chat.body}}<br>{{chat.slogan}}</div> -->
-          <!-- <div class="time" am-time-ago="chat.timestamp"></div> -->
-          <div class="msgText">{{chat.body}}</div>
-          <div class="msgText">{{chat.slogan}}</div>
-          <div class="time" am-time-ago="chat.timestamp"></div>
         </div>
       </div>
     </div>
-  </div>
 
       <div class="hamburger"></div>
-
       <div class="msgMenu">
         <div>reply</div>
         <div>mute</div>
@@ -58,74 +64,49 @@
 
     </div>
 
-<!-- <div id="footer">
-    <form class="chat_form" name="chat" ng-submit="sendChat(chat)">
-  <div class="content">
-
-    <div id="toolbox" ng-show="showTools()">
-      <div id="tools">
-        <div class="tool">
-          <input type="text" class="textField" id="cannedPicker" placeholder="canned response" />
-        </div>
-        <div class="tool">
-          <div flow-init="{ singleFile: true }" flow-name="image" flow-file-added="!!{ png: 1, gif: 1, jpg: 1, jpeg: 1 }[$file.getExtension()]" flow-files-submitted="$flow.upload()" flow-complete="doneUp()">
-            <div class="content">
-              <button class="btn btn-primary" id="picBtn" ng-show="!$flow.files.length" flow-btn>add pic</button>
-              <button class="button" id="cancelBtn" ng-show="$flow.files.length" ng-click="$flow.cancel()">remove</button>
-              <div id="thumb" ng-show="$flow.files.length"><img flow-img="$flow.files[0]" /></div>-->
     <div id="footer">
-      <div class="content">
+      <form id="chatForm" name="chat" ng-submit="sendChat(chat)">
+        <div class="content">
 
-        <div id="toolbox" ng-show="showTools()">
-          <div id="tools">
+          <div id="toolbox" ng-show="showTools()">
+            <div id="tools">
 
-            <div class="tool">
-              <input type="text" class="textField" id="searchField" ng-model="searchString" placeholder="search" />
-            </div>
+              <div class="tool" id="searchTool">
+                <input type="text" class="textField" id="searchField" ng-model="searchString" placeholder="search" />
+              </div>
 
-            <div class="tool">
-
-              <div flow-init="{ singleFile: true }" flow-name="image" flow-file-added="!!{ png: 1, gif: 1, jpg: 1, jpeg: 1 }[$file.getExtension()]" flow-files-submitted="$flow.upload()">
-
-                <div class="content">
-                  <button class="btn btn-primary" id="picBtn" ng-show="!$flow.files.length" flow-btn>add pic</button>
-                  <!-- <span ng-show="$flow.files.length">{{$flow.timeRemaining()}} sec to upload</span> -->
-                  <button class="button" id="cancelBtn" ng-show="$flow.files.length" ng-click="$flow.cancel()">remove</button>
-                  <div id="thumb" ng-show="$flow.files.length"><img flow-img="$flow.files[0]" /></div>
+              <div class="tool" id="picTool">
+                <div flow-init="{ singleFile: true }" flow-name="image" flow-file-added="!!{ png: 1, gif: 1, jpg: 1, jpeg: 1 }[$file.getExtension()]" flow-files-submitted="$flow.upload()">
+                  <div class="content">
+                    <button class="btn btn-primary" id="picBtn" ng-show="!$flow.files.length" flow-btn>add pic</button>
+                    <button class="button" id="cancelBtn" ng-show="$flow.files.length" ng-click="$flow.cancel()">remove</button>
+                    <div id="thumb" ng-show="$flow.files.length"><img flow-img="$flow.files[0]" /></div>
+                  </div>
                 </div>
               </div>
+
+              <div class="tool" id="cannedTool">
+                <select id="cannedSelect" ng-model="cannedModel" ng-change="composeCanned()">
+                  <option></option>
+                  <option>10-4</option>
+                  <option>on my way</option>
+                  <option>need help</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+
+            <div id="bottomRow">
+              <button type="button" class="button" id="toolsBtn" ng-click="toggleTools()">tools</button>
+              <input type="text" class="form-control textField" id="composeField" ng-model="chat.body" placeholder="compose" />
+              <button type="submit" class="button" id="sendBtn">send</button>
             </div>
 
-            <div class="tool">
-              <input type="text" class="textField" id="cannedPicker" placeholder="canned response" />
-            </div>
-
-          </div>
         </div>
 
-<!--         <div class="tool">
-          <input type="text" class="textField" id="searchField" ng-model="searchString" placeholder="search" />
-        </div>
-      </div>
-    </div>
-      <div>
-        <button type="button" class="button" id="toolsBtn" ng-click="toggleTools()">tools</button>
-        <input type="text" class="form-control textField" id="composeField" ng-model="chat.body" placeholder="compose" />
-        <button type="submit" class="button" id="sendBtn">send</button>
-      </div>
-  </div>
-    </form>
-</div> -->
+      </form>
 
-        <form class="chat_form" name="chat" ng-submit="sendChat(chat)">
-          <div>
-            <button type="button" class="button" id="toolsBtn" ng-click="toggleTools()">tools</button>
-            <input type="text" class="form-control textField" id="composeField" ng-model="chat.body" placeholder="compose" />
-            <button type="submit" class="button" id="sendBtn">send</button>
-          </div>
-        </form>
-
-      </div>
     </div>
   </div>
 </div>
