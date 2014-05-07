@@ -241,7 +241,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   };
 
   $scope.sendChat = function(chat) {
-    console.log('sendChat invoked. chat.name:', chat.name, 'chat.body:', chat.body);
+    console.log('sendChat invoked. chat.name:', chat.name, 'chat.body:', chat.body, 'this:', this);
     if(!isChatValid(chat)) {
       console.log('Invalid chat, overriding "send".');
       return;
