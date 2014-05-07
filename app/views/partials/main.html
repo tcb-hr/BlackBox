@@ -30,13 +30,6 @@
 
     <div ng-include="'partials/navbar'"></div>
 
-<!--    <div id="feed" scroll-bottom>
-      <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString | filter: messageFilter" ng-click="showMapOrPic(chat)" scroll-bottom>
-        <div class="content">
-          <div class="author">
-            <img class="avatar" src={{chat.pic}} />
-            <span class="handle">{{chat.user || 'guest'}}</span> -->
-
       <div id="feed" scroll-bottom>
         <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString" ng-click="showMapOrPic(chat)" scroll-bottom>
           <div class="content">
@@ -65,7 +58,7 @@
     </div>
 
     <div id="footer">
-      <form id="chatForm" name="chat" ng-submit="sendChat(chat)">
+      <!-- <form id="chatForm" name="chat" ng-submit="sendChat(chat)"> -->
         <div class="content">
 
           <div id="toolbox" ng-show="showTools()">
@@ -97,16 +90,17 @@
             </div>
           </div>
 
+          <form id="chatForm" name="chat" ng-submit="sendChat(chat)">
             <div id="bottomRow">
               <button type="button" class="button" id="toolsBtn" ng-click="toggleTools()">tools</button>
               <input type="text" class="form-control textField" id="composeField" ng-model="chat.body" ng-keyup="$event.keyCode === 13 ? sendChat(chat) : null" placeholder="compose" />
               <button type="submit" class="button" id="sendBtn">send</button>
             </div>
+          </form>
 
         </div>
-
-      </form>
-
+      <!-- </form> -->
     </div>
+
   </div>
 </div>
