@@ -187,15 +187,16 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.showPanelLeft = false;
   $scope.togglePanelLeft = function() {
     $scope.showPanelLeft = ($scope.showPanelLeft) ? false : true;
-    /*
-    $http.post('/api/userSettings', {
-      user: chat.name,
-      body: chat.body,
-      image: ''
+    // compare current settings with the settings in the database
+    if(Object.keys($scope.currentUser.settings).sort() !== Object.keys($scope.settings).sort()){
+    console.log('Settings changed!);
+    $http.post('/api/users/me', {
+      newSettings: $scope.settings,
+      userId: $scope.currentUser._id
     }).success(function() {
       console.log('POST success!');
-    */
-   };
+   });
+  };
 
   $scope.showPanelRight = false;
   $scope.togglePanelRight = function() {
@@ -265,8 +266,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   
   $scope.getUsername = function(){
     $http.get('/api/users/me').success(function(user){
-      console.log('Hello, ', user.name);
-      $scope.currentUser = user.name;
+      $scope.currentUser = user;
     });  
   }
 
@@ -277,7 +277,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       return;
     }
     $http.post('/api/chat', {
-      user: $scope.currentUser,
+      user: $scope.currentUser.name,
       body: chat.body,
       image: ''
     }).success(function() {
