@@ -223,14 +223,25 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }
   };
 
+  var isChatValid = function(chat) {
+    if(chat.body === undefined || chat.body.length > 140) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  var resetChatForm = function(chat) {
+    console.log('Resetting chat form.');
+    document.getElementById('cannedSelect').value = '0';
+    document.getElementById('composeField').value = '';
+    chat.body = undefined;
+  };
+
   $scope.sendChat = function(chat) {
     console.log('sendChat invoked. chat.name:', chat.name, 'chat.body:', chat.body);
-    if(chat.body === undefined) {
-      console.log('chat.body is empty.');
-      return;
-    }
-    if(chat.body.length > 140) {
-      console.log('chat.body is > 140 chars.');
+    if(!isChatValid(chat)) {
+      console.log('Invalid chat, overriding "send".');
       return;
     }
     $http.post('/api/chat', {
@@ -245,10 +256,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       }).error(function(data, status, headers, config) {
         console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
       });
-      // Reset canned-selector, composition field, chat.body.
-      document.getElementById('cannedSelect').value = '0';
-      document.getElementById('composeField').value = '';
-      chat.body = undefined;
+      resetChatForm(chat);
     }).error(function(data, status, headers, config) {
       console.log('POST error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
     });
