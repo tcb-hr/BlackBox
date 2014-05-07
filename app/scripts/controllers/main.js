@@ -22,25 +22,19 @@ app.directive('slidePanel', ['$swipe', function($swipe) { // MOVE DIRECTIVES TO 
 }]);
 
 app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARATE FILE?
-
   var scrollBottomWrap = function() {
-
     var scrollToBottom = function() {
       var feed = $window.document.getElementById('feed');
       feed.scrollTop = feed.scrollHeight + 44;
     };
     scrollToBottom();
-
     $window.addEventListener('resize', function() {
       scrollToBottom();
     });
-
   };
-
   return {
     link: scrollBottomWrap
   };
-
 });
 
 app.factory('socket', function($rootScope) { // MOVE FACTORIES TO A SEPARATE FILE?
@@ -71,7 +65,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   // BREAK SOME OF THESE PIECES BELOW INTO SEPARATE CONTROLLERS?
 
   socket.on('init', function(data) {
-    console.log('Socket connection established');
+    console.log('Socket connection established.');
   });
 
   $scope.messageFilter = function(chat) {
@@ -201,25 +195,58 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   };
 
   $http.get('/api/chat').success(function(chats) {
+    console.log('GET success!');
     $scope.chats = chats;
+  }).error(function(data, status, headers, config) {
+    console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
   });
 
   $scope.doneUp = function() {
     // console.log('doneUp', arguments)
     $http.get('/download').success(function() {
-      console.log('so let it be written');
+      console.log('GET success!');
+    }).error(function(data, status, headers, config) {
+      console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
     });
   };
 
+  // This function called if user makes a dropdown selection.
+  // User's dropdown selection will be added to the composition field.
+  $scope.composeCanned = function() {
+    console.log('composeCanned invoked');
+    var composeField = document.getElementById('composeField');
+    var cannedSelect = document.getElementById('cannedSelect');
+    if(composeField.value === '') {
+      composeField.value = cannedSelect.options[cannedSelect.selectedIndex].text;
+    } else {
+      composeField.value += ' ' + cannedSelect.options[cannedSelect.selectedIndex].text;
+    }
+  };
+
   $scope.sendChat = function(chat) {
-    $http.post('/api/chat', {
+    console.log('sendChat invoked');
+    $http.post('/api/chat', { // THIS POST IS TIMING-OUT. ***************************************************
       user: chat.name,
       body: chat.body,
       image: ''
+    }).success(function() {
+      console.log('POST success!');
+      $http.get('/api/chat').success(function(chats) {
+        console.log('GET success!');
+        $scope.chats = chats;
+      }).error(function(data, status, headers, config) {
+        console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
+      });
+      // Reset canned-selector & clear composition field.
+      document.getElementById('cannedSelect').value = '0';
+      document.getElementById('composeField').value = '';
+    }).error(function(data, status, headers, config) {
+      console.log('POST error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
     });
-    $http.get('/api/chat').success(function(chats) {
-      $scope.chats = chats;
-    });
+    // THESE LINES BELOW ARE TEMPORARILY DUPLICATED FROM POST-SUCCESS ABOVE UNTIL POST ERROR CORRECTED. ************
+    // Reset canned-message-selector & clear composition field.
+    document.getElementById('cannedSelect').value = '';
+    document.getElementById('composeField').value = '';
   };
   
   $scope.layer;
@@ -283,7 +310,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       $scope.dropMarker.setLatLng([dropLat, dropLng]);
       if((pickLat === dropLat) && (pickLng === dropLng)) {
         $scope.pickMarker.setLatLng([0,0]);
-      }else{
+      } else {
         $scope.pickMarker.setLatLng([pickLat, pickLng]);
       }
       $('#map').show();
