@@ -74,86 +74,97 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     console.log('Socket connection established');
   });
 
+  $scope.messageFilter = function(chat){
+    for(var i=0; i<$scope.messageTypes.length; i++){ 
+      if((chat.type === $scope.messageTypes[i].dbLabel) && $scope.messageTypes[i].show){
+        return true;
+      }
+    }
+    return false;
+  };
+
+
   $scope.zones = [{
     label: '1',
-    state: true
+    show: true
   }, {
     label: '2',
-    state: true
+    show: true
   }, {
     label: '3',
-    state: true
+    show: true
   }, {
     label: '4',
-    state: true
+    show: true
   }, {
     label: '5',
-    state: true
+    show: true
   }, {
     label: '6',
-    state: true
+    show: true
   }, {
     label: '7',
-    state: true
+    show: true
   }];
 
   $scope.messageTypes = [{
     label: 'Chats',
-    state: true
+    show: true
   }, {
     label: 'Instagram',
-    state: true
+    show: true,
   }, {
     label: 'Courier check-in',
-    dbLabel: 'courier_check_in',
-    state: true
+    dbLabel: 101,
+    show: true
   }, {
     label: 'Courier check-out',
-    dbLabel: 'courier_check_out',
-    state: true
+    dbLabel: 102,
+    show: true
   }, {
     label: 'Job created',
-    dbLabel: 'job_created',
-    state: true
+    dbLabel: 103,
+    show: true
   }, {
     label: 'Job cancelled',
-    dbLabel: 'job_cancelled',
-    state: true
+    dbLabel: 104,
+    show: true
   }, {
     label: 'Job edited',
-    dbLabel: 'job_edited',
-    state: true
+    dbLabel: 105,
+    show: true
   }, {
     label: 'Job ready',
-    dbLabel: 'job_ready',
-    state: true
+    dbLabel: 106,
+    show: true
   }, {
     label: 'Job assigned',
-    dbLabel: 'job_assigned',
-    state: true
+    dbLabel: 107,
+    show: true
   }, {
     label: 'Job picked', 
-    dbLabel: 'job_picked',
-    state: true
+    dbLabel: 108,
+    show: true
   }, {
     label: 'Job delivered',
-    dbLabel: 'job_delivered',
-    state: true
+    dbLabel: 109,
+    show: true
   }, {
     label: 'Job complete',
-    dbLabel: 'job_complete',
-    state: true
+    dbLabel: 110,
+    show: true
   }, {
     label: 'Job late',
-    dbLabel: 'job_late',
-    state: true
+    dbLabel: 111,
+    show: true
   }];
 
   $scope.toggle = function () {
-    console.log('state', this.state);
-    this.state = !this.state;
-    console.log('state', this.state);
+    console.log('show', this.show);
+    this.show = !this.show;
+    console.log('show', this.show);
   };
+
 
   socket.on('newMessage', function(data){
     var newChat = data['data'][0];
@@ -291,19 +302,3 @@ app.filter('searchFor', function() {
   };
 });
 
-
-app.filter('jobFilters', function() {
-  return function(arr, searchString) {
-    if(!searchString) {
-      return arr;
-    }
-    var result = [];
-    searchString = searchString.toLowerCase();
-    angular.forEach(arr, function(chat) {
-      if(chat.body && chat.body.toLowerCase().indexOf(searchString) !== -1) {
-        result.push(chat);
-      }
-    });
-    return result;
-  };
-});
