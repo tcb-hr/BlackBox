@@ -341,6 +341,7 @@ body {
 .zoneFilterButton{
   font-size: 16px;
   margin: 1px 2%;
+  padding: 5px 0px;
   width: 96%;
 }
 
@@ -350,4 +351,13 @@ body {
   padding: 5px 0px;
   width: 96%;
 }
-
+.groupTitleButton{
+  border-color: white;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+  font-size: 24px;
+  padding: 5px;
+}
+i {
+width: 30px;
+}
