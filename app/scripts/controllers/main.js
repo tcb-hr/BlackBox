@@ -190,6 +190,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       feed.style.bottom = '44px';
       feed.scrollTop = feed.scrollHeight + 44;
       $scope.searchString = '';
+      document.getElementById('cannedSelect').value = '0';
     } else {
       toolsVisible = true;
       feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools
@@ -235,7 +236,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   };
 
   var resetChatForm = function(chat) {
-    console.log('Resetting chat form.');
+    // console.log('Resetting chat form.');
     document.getElementById('cannedSelect').value = '0';
     document.getElementById('composeField').value = '';
     chat.body = undefined;
