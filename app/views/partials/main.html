@@ -2,9 +2,9 @@
   <button class="button closeBtnLeft floatRight" id="closePanelLeft" ng-click="togglePanelLeft()">close</button>
   <h1>Settings</h1>
   <h1>Zones</h1>
-  <button class="zoneFilterButton" ng-repeat="zone in zones" ng-click="zone.show = !zone.show" ng-class="{'on':zone.show}">{{zone.label}}</button>
+  <button class="zoneFilterButton" ng-repeat="zone in zones" ng-click="zone.show = !zone.show" ng-class="{ 'on': zone.show }">{{zone.label}}</button>
   <h1>Posts</h1>
-  <button class="typeFilterButton" ng-repeat="type in messageTypes" ng-click="type.show = !type.show" ng-class="{'on':type.show}">{{type.label}}</button>
+  <button class="typeFilterButton" ng-repeat="type in messageTypes" ng-click="type.show = !type.show" ng-class="{ 'on': type.show }">{{type.label}}</button>
 </div>
 
 <div class="panel" id="panelRight" ng-class="{ hide: !showPanelRight, slide: showPanelRight }">
