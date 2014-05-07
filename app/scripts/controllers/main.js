@@ -154,6 +154,17 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     show: true
   }];
 
+  $scope.showUsers = false;
+
+  $scope.getUserList = function(){
+    $http.get('/api/users').success(function(users) {
+      $scope.users = users;
+      console.log(users);
+    }).error(function(data, status, headers, config) {
+      console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
+    });  
+  };
+
   $scope.toggle = function () {
     console.log('show', this.show);
     this.show = !this.show;
