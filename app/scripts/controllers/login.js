@@ -2,7 +2,7 @@
 
 var app = angular.module('feedApp')
   
-app.controller('LoginCtrl', function ($scope, Auth, $location) {
+app.controller('LoginCtrl', function ($scope, Auth, $location, $window) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -28,23 +28,3 @@ app.controller('LoginCtrl', function ($scope, Auth, $location) {
       $window.location.href = '/auth/' + provider;
     }
   });
-
-// app.factory('Auth', function($http, $rootScope, $cookieStore){
-
-//     var accessLevels = routingConfig.accessLevels
-//         , userRoles = routingConfig.userRoles
-//         , currentUser = $cookieStore.get('user') || 
-//                         { username: '', role: userRoles.public };
-
-//     // ...
-
-//     return {
-
-//         // ...
-
-//         accessLevels: accessLevels,
-//         userRoles: userRoles,
-//         user: currentUser
-//     };
-
-// });

@@ -13,7 +13,7 @@ var app = angular.module('feedApp', [
     $routeProvider
       .when('/', {
         templateUrl: 'partials/main',
-        // authenticate: true,
+        authenticate: true,
         controller: 'MainCtrl'
       })
       .when('/login', {
@@ -27,14 +27,8 @@ var app = angular.module('feedApp', [
       .when('/settings', {
         templateUrl: 'partials/settings',
         controller: 'SettingsCtrl',
-        //authenticate: true
+        authenticate: true
       })
-      // .when('/auth/google',{
-      //   redirectTo:'http://localhost:8000/auth/google'
-      // })
-      // .when('/auth/google/callback',{
-      //   redirectTo:'http://localhost:8000/auth/google/callback'
-      // })
       .otherwise({
         redirectTo: '/'
       });
@@ -68,17 +62,6 @@ var app = angular.module('feedApp', [
     flowFactoryProvider.on('catchAll', function (event) {
       console.log('catchAll', arguments);
     });
-    // flowFactoryProvider.on('complete', function ($http){
-    //   $http({method: 'GET', url: './download'}).
-    //     success(function(data, status, headers, config) {
-    //       console.log("WE WRITIN", data, status, headers, config);
-    //     }).
-    //     error(function(data, status, headers, config) {
-    //       // called asynchronously if an error occurs
-    //       // or server returns response with an error status.
-    //   });      
-    // })
-
   })
   .run(function ($rootScope, $location, $http, Auth) {
 
