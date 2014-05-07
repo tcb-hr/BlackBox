@@ -74,87 +74,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     console.log('Socket connection established');
   });
 
-  $scope.zones = [{
-    label: '1',
-    state: true
-  }, {
-    label: '2',
-    state: true
-  }, {
-    label: '3',
-    state: true
-  }, {
-    label: '4',
-    state: true
-  }, {
-    label: '5',
-    state: true
-  }, {
-    label: '6',
-    state: true
-  }, {
-    label: '7',
-    state: true
-  }];
-
-  $scope.messageTypes = [{
-    label: 'Chats',
-    state: true
-  }, {
-    label: 'Instagram',
-    state: true
-  }, {
-    label: 'Courier check-in',
-    dbLabel: 'courier_check_in',
-    state: true
-  }, {
-    label: 'Courier check-out',
-    dbLabel: 'courier_check_out',
-    state: true
-  }, {
-    label: 'Job created',
-    dbLabel: 'job_created',
-    state: true
-  }, {
-    label: 'Job cancelled',
-    dbLabel: 'job_cancelled',
-    state: true
-  }, {
-    label: 'Job edited',
-    dbLabel: 'job_edited',
-    state: true
-  }, {
-    label: 'Job ready',
-    dbLabel: 'job_ready',
-    state: true
-  }, {
-    label: 'Job assigned',
-    dbLabel: 'job_assigned',
-    state: true
-  }, {
-    label: 'Job picked', 
-    dbLabel: 'job_picked',
-    state: true
-  }, {
-    label: 'Job delivered',
-    dbLabel: 'job_delivered',
-    state: true
-  }, {
-    label: 'Job complete',
-    dbLabel: 'job_complete',
-    state: true
-  }, {
-    label: 'Job late',
-    dbLabel: 'job_late',
-    state: true
-  }];
-
-  $scope.toggle = function () {
-    console.log('state', this.state);
-    this.state = !this.state;
-    console.log('state', this.state);
-  };
-
   socket.on('newMessage', function(data){
     var newChat = data['data'][0];
     var idOfLastItem = $scope.chats[$scope.chats.length-1]._id;
@@ -197,18 +116,19 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
   $scope.doneUp = function(){
     // console.log('doneUp', arguments)
-
-    $http.get('/upload').success(
-      $http.get('/download').success( function(){
+    $http.get('/download').success(function(){
       console.log('so let it be written');
-    }));
-  }
+    });
+  };
 
   $scope.sendChat = function(chat) {
     $http.post('/api/chat', {
-      user: $scope.currentUser.name,
+      user: chat.name,
       body: chat.body,
       image: ''
+    });
+    $http.get('/api/chat').success(function(chats) {
+      $scope.chats = chats;
     });
   };
   
@@ -217,7 +137,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.dropMarker;
   $scope.pickMarker;
 
-  $scope.hideMap = true;
   $scope.createMap = function(){
     $scope.layer = new L.StamenTileLayer("toner");
     $scope.map = new L.Map("map", {
@@ -243,19 +162,27 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
     $("#map").height($(window).height());
     $scope.map.invalidateSize();
+  
+    $('#map').click(function(){
+      $('#map').hide();
+    });
+    $('#map').hide();
 
-  };
-  $scope.hidePic = true; 
-  $scope.createPic = function(){
     $('#pic').height($(window).height());
+    $('#pic').click(function(){
+      $('#pic').hide();
+    });
+  };
+
+  $scope.hidePic = function(){
+    $('#pic').css('display', 'none');
   };
 
   $scope.showMapOrPic = function(chat){
     console.log(chat);
     if(chat.image !== undefined){
+      $('#pic').css('display', 'block');
       $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center');
-      console.log('showin pic');
-      $scope.hidePic = false;
     }
     if(chat.pickCoordinates !== undefined){
       var pickLat = JSON.parse(chat.pickCoordinates).lat;
@@ -269,30 +196,12 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       }else{
         $scope.pickMarker.setLatLng([pickLat, pickLng]);
       }
-      console.log('showing map');
-      $scope.hideMap = false;
+      $('#map').show();
     }
   };
 });
 
 app.filter('searchFor', function() {
-  return function(arr, searchString) {
-    if(!searchString) {
-      return arr;
-    }
-    var result = [];
-    searchString = searchString.toLowerCase();
-    angular.forEach(arr, function(chat) {
-      if(chat.body && chat.body.toLowerCase().indexOf(searchString) !== -1) {
-        result.push(chat);
-      }
-    });
-    return result;
-  };
-});
-
-
-app.filter('jobFilters', function() {
   return function(arr, searchString) {
     if(!searchString) {
       return arr;
