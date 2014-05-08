@@ -24,7 +24,7 @@ app.directive('slidePanel', ['$swipe', function($swipe) { // MOVE DIRECTIVES TO 
 app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARATE FILE?
   var scrollBottomWrap = function() {
     var scrollToBottom = function() {
-      var feed = $window.document.getElementById('feed');
+      var feed = document.getElementById('feed');
       feed.scrollTop = feed.scrollHeight + 44;
     };
     scrollToBottom();
@@ -256,14 +256,16 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     return toolsVisible;
   };
   $scope.toggleTools = function() {
-    var feed = $window.document.getElementById('feed');
+    var feed = document.getElementById('feed');
     if(toolsVisible === true) {
       toolsVisible = false;
       feed.style.bottom = '44px';
       feed.scrollTop = feed.scrollHeight + 44;
+      $scope.searchString = '';
+      $scope.cannedModel = '';
     } else {
       toolsVisible = true;
-      feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools
+      feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools.
       feed.scrollTop = feed.scrollHeight + (44 + 40 * 3); // 3 tools.
     }
   };
@@ -276,7 +278,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   });
 
   $scope.doneUp = function() {
-    // console.log('doneUp', arguments)
     $http.get('/download').success(function() {
       console.log('GET success!');
     }).error(function(data, status, headers, config) {
@@ -284,16 +285,13 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     });
   };
 
-  // This function called if user makes a dropdown selection.
+  // This function is called if the user makes a dropdown selection.
   // User's dropdown selection will be added to the composition field.
-  $scope.composeCanned = function() {
-    console.log('composeCanned invoked');
-    var composeField = document.getElementById('composeField');
-    var cannedSelect = document.getElementById('cannedSelect');
-    if(composeField.value === '') {
-      composeField.value = cannedSelect.options[cannedSelect.selectedIndex].text;
+  $scope.composeCanned = function(chat) {
+    if(chat.body === undefined) {
+      chat.body = $scope.cannedModel;
     } else {
-      composeField.value += ' ' + cannedSelect.options[cannedSelect.selectedIndex].text;
+      chat.body += ' ' + $scope.cannedModel;
     }
   };
 
@@ -306,9 +304,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   };
 
   var resetChatForm = function(chat) {
-    console.log('Resetting chat form.');
-    document.getElementById('cannedSelect').value = '0';
-    document.getElementById('composeField').value = '';
+    $scope.cannedModel = '';
     chat.body = undefined;
   };
   
@@ -321,7 +317,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   }
 
   $scope.sendChat = function(chat) {
-    console.log('sendChat invoked. chat.name:', chat.name, 'chat.body:', chat.body);
+    console.log('sendChat invoked. chat.name:', chat.name, 'chat.body:', chat.body, 'this:', this);
     if(!isChatValid(chat)) {
       console.log('Invalid chat, overriding "send".');
       return;

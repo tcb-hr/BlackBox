@@ -1,27 +1,35 @@
 {
   "name": "feed",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "dependencies": {
-    "angular": ">=1.2.*",
-    "json3": "~3.2.6",
-    "es5-shim": "~2.1.0",
-    "jquery": "~1.11.0",
-    "bootstrap": "~3.1.1",
-    "angular-resource": ">=1.2.*",
-    "angular-cookies": ">=1.2.*",
-    "angular-sanitize": ">=1.2.*",
-    "angular-route": ">=1.2.*",
-    "angular-strap": "~2.0.2",
-    "angular-touch": "~1.2.16",
-    "angular-moment": "~0.7.0",
-    "ng-flow": "~2.4.0",
-    "angular-leaflet-directive": "~0.7.6",
-    "Leaflet.awesome-markers": "~2.0.2",
-    "mobile-angular-ui": "~1.1.0-beta.15"
+    "foundation": "zurb/bower-foundation#~5.2.2"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",
     "angular-scenario": ">=1.2.*"
   },
-  "testPath": "test/client/spec"
+  "testPath": "test/client/spec",
+  "homepage": "https://github.com/tcb-hr/feed",
+  "authors": [
+    "AlexFarioletti <alex@tcbcourier.com>"
+  ],
+  "description": "facebook yammer for bike messengers",
+  "main": "app.js",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "feed",
+    "me"
+  ],
+  "license": "copyright 2014",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ]
 }
