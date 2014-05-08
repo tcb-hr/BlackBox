@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 var app = angular.module('feedApp');
 
@@ -158,17 +158,54 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   users: []
   }; 
 
-  $scope.showUsers = false;
+//  $scope.showUsers = false;
 
-  $scope.getUserList = function(){
-    $http.get('/api/users').success(function(users) {
-      $scope.settings.users = users;
-      console.log(users);
+  $scope.configureUserSettings = function(){
+  // sets up settings for a logged in user
+    $http.get('/api/users/me').success(function(user) {
+      $scope.user = user;
+      if(user.settings.zones === undefined){
+        $http.get('/api/users').success(function(currentUsers){
+          $scope.settings.users = currentUsers; // currenUsers will need to be manipulated
+          $http.post('/api/users/me', {
+            newSettings: $scope.settings,
+            userId: $scope.user._id
+          }).success(function() {
+            console.log('User settings updated in db');
+          });
+        });
+      } else{
+        // check to see if their user list is up to date
+        $http.get('/api/users').success(function(currentUsers){
+          var updated = false;
+          for(var i=0; i<currentUsers.length; i++){
+            user = currentUsers[i].name;
+            var found = false;
+            for(var j=0; j<$scope.settings.users.length; j++){
+              if($scope.settings.users[j].name === user){
+                found = true;
+                updated = true;
+              }
+            }
+            if(found === false){
+              $scope.settings.users.push({name: user, show: true}); 
+            }
+          }
+         if(updated){
+           $http.post('/api/users/me', {
+             newSettings: $scope.settings,
+             userId: $scope.user._id
+           }).success(function() {
+             console.log('User people prefernces updated');
+           }); 
+         }
+      });
+    }
     }).error(function(data, status, headers, config) {
       console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
     });  
   };
-
+  
   $scope.updateFilters = function(){
     console.log('change');
   }
@@ -272,6 +309,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.getUsername = function(){
     $http.get('/api/users/me').success(function(user){
       $scope.currentUser = user;
+      $scope.settings.users = user.settings.users;
+      console.log($scope.settings.users);
     });  
   }
 
