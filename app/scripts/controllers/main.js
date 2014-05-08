@@ -190,12 +190,10 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       feed.style.bottom = '44px';
       feed.scrollTop = feed.scrollHeight + 44;
       $scope.searchString = '';
-      // document.getElementById('cannedSelect').value = '0';
-      // document.getElementById('cannedSelect').selectedIndex = 0;
       $scope.cannedModel = '';
     } else {
       toolsVisible = true;
-      feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools
+      feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools.
       feed.scrollTop = feed.scrollHeight + (44 + 40 * 3); // 3 tools.
     }
   };
@@ -208,7 +206,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   });
 
   $scope.doneUp = function() {
-    // console.log('doneUp', arguments)
     $http.get('/download').success(function() {
       console.log('GET success!');
     }).error(function(data, status, headers, config) {
@@ -219,16 +216,9 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   // This function is called if the user makes a dropdown selection.
   // User's dropdown selection will be added to the composition field.
   $scope.composeCanned = function(chat) {
-    // var composeField = document.getElementById('composeField');
-    // var cannedSelect = document.getElementById('cannedSelect');
-    // if(composeField.value === '') {
     if(chat.body === undefined) {
-      // composeField.value = cannedSelect.options[cannedSelect.selectedIndex].text;
-      // chat.body = cannedSelect.options[cannedSelect.selectedIndex].text;
       chat.body = $scope.cannedModel;
     } else {
-      // composeField.value += ' ' + cannedSelect.options[cannedSelect.selectedIndex].text;
-      // chat.body += ' ' + cannedSelect.options[cannedSelect.selectedIndex].text;
       chat.body += ' ' + $scope.cannedModel;
     }
   };
@@ -242,10 +232,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   };
 
   var resetChatForm = function(chat) {
-    // document.getElementById('cannedSelect').selectedIndex = 0;
-    // document.getElementById('cannedSelect').value = '0';
     $scope.cannedModel = '';
-    // document.getElementById('composeField').value = '';
     chat.body = undefined;
   };
 
