@@ -364,3 +364,11 @@ body {
 i {
 width: 30px;
 }
+.warning {
+  /*background-color: #fcf8e3;*/
+  background-color: yellow;
+}
+.danger {
+  /*background-color: #f2dede;*/
+  background-color: red;
+}

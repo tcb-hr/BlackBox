@@ -37,6 +37,38 @@ app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARA
   };
 });
 
+// Adapted from https://github.com/igreulich/angular-charlimit
+app.directive('charLimit', function() { // MOVE DIRECTIVES TO A SEPARATE FILE?
+  return {
+    restrict: 'A',
+    link: function($scope, $element, $attributes) {
+      var limit = $attributes.charLimit;
+      var element = $element;
+      // $element.bind('keyup', function(event) {
+      element.bind('keyup', function(event) {
+        // var element = $element;
+        // element.toggleClass('warning', limit - $element.val().length <= 10);
+        // element.toggleClass('danger', limit <= $element.val().length);
+        // $element.toggleClass('warning', limit - $element.val().length <= 5);
+        // $element.toggleClass('danger', limit <= $element.val().length);
+        element.toggleClass('warning', limit - element.val().length <= 5);
+        element.toggleClass('danger', limit <= element.val().length);
+      });
+      // $element.bind('keypress', function(event) {
+      element.bind('keypress', function(event) {
+        // If limit is met or exceeded, prevent additional keypresses.
+        // if($element.val().length >= limit) {
+        if(element.val().length >= limit) {
+          // Allow backspace.
+          if(event.keyCode !== 8) {
+            event.preventDefault();
+          }
+        }
+      });
+    }
+  };
+});
+
 app.factory('socket', function($rootScope) { // MOVE FACTORIES TO A SEPARATE FILE?
   var socket = io.connect();
   return {
@@ -294,7 +326,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   };
 
   $scope.hidePic = true;
-  $scope.createPic = function(){
+  $scope.createPic = function() {
     $('#pic').height($(window).height());
   };
 

@@ -92,7 +92,7 @@
             <div id="bottomRow">
               <button type="button" class="button" id="toolsBtn" ng-click="toggleTools()">tools</button>
               <!-- If 'form' encloses 'toolbox' need to add the following 'ng-keyup' --> <!-- ng-keyup="$event.keyCode === 13 ? sendChat(chat) : null" -->
-              <input type="text" class="form-control textField" id="composeField" ng-model="chat.body" placeholder="compose" />
+              <input type="text" placeholder="compose" id="composeField" class="form-control textField" ng-model="chat.body" char-limit="10" />
               <button type="submit" class="button" id="sendBtn">send</button>
             </div>
           </form>
