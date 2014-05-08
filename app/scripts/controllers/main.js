@@ -2,6 +2,30 @@
 
 var app = angular.module('feedApp');
 
+app.factory('socket', function($rootScope) { // MOVE FACTORIES TO A SEPARATE FILE?
+  var socket = io.connect();
+  return {
+    on: function(eventName, callback) {
+      socket.on(eventName, function() {
+        var args = arguments;
+        $rootScope.$apply(function() {
+          callback.apply(socket, args);
+        });
+      });
+    },
+    emit: function(eventName, data, callback) {
+      socket.emit(eventName, data, function() {
+        var args = arguments;
+        $rootScope.$apply(function() {
+          if(callback) {
+            callback.apply(socket, args);
+          }
+        });
+      });
+    }
+  };
+});
+
 app.directive('slidePanel', ['$swipe', function($swipe) { // MOVE DIRECTIVES TO A SEPARATE FILE?
   return {
     restrict: 'EA',
@@ -44,6 +68,9 @@ app.directive('charLimit', function() { // MOVE DIRECTIVES TO A SEPARATE FILE?
     link: function($scope, $element, $attributes) {
       var limit = $attributes.charLimit;
       var element = $element;
+      // INSTEAD OF BINDING TO KEYUP, HOW ABOUT CHECKING $SCOPE.CHAT.BODY.LENGTH AGAINST LIMIT?
+      // OTHERWISE, CAN OTHER EVENTS BE BOUND HERE?
+      // ALSO, WOULD NG-CLASS BE OF USE IN THE HTML?
       element.bind('keyup', function(event) {
         element.toggleClass('warning', limit - element.val().length <= 5);
         element.toggleClass('danger', limit <= element.val().length);
@@ -60,32 +87,18 @@ app.directive('charLimit', function() { // MOVE DIRECTIVES TO A SEPARATE FILE?
   };
 });
 
-app.factory('socket', function($rootScope) { // MOVE FACTORIES TO A SEPARATE FILE?
-  var socket = io.connect();
-  return {
-    on: function(eventName, callback) {
-      socket.on(eventName, function() {
-        var args = arguments;
-        $rootScope.$apply(function() {
-          callback.apply(socket, args);
-        });
-      });
-    },
-    emit: function(eventName, data, callback) {
-      socket.emit(eventName, data, function() {
-        var args = arguments;
-        $rootScope.$apply(function() {
-          if(callback) {
-            callback.apply(socket, args);
-          }
-        });
-      });
-    }
-  };
-});
-
 app.controller('MainCtrl', function($scope, $http, $window, socket) {
   // BREAK SOME OF THESE PIECES BELOW INTO SEPARATE CONTROLLERS?
+
+  // This function is called if the user makes a dropdown selection.
+  // User's dropdown selection will be added to the composition field.
+  $scope.composeCanned = function(chat) {
+    if(chat.body === undefined) {
+      chat.body = $scope.cannedModel;
+    } else {
+      chat.body += ' ' + $scope.cannedModel;
+    }
+  };
 
   socket.on('init', function(data) {
     console.log('Socket connection established.');
@@ -234,16 +247,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }).error(function(data, status, headers, config) {
       console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
     });
-  };
-
-  // This function is called if the user makes a dropdown selection.
-  // User's dropdown selection will be added to the composition field.
-  $scope.composeCanned = function(chat) {
-    if(chat.body === undefined) {
-      chat.body = $scope.cannedModel;
-    } else {
-      chat.body += ' ' + $scope.cannedModel;
-    }
   };
 
   var isChatValid = function(chat) {
