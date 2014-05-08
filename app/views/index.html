@@ -54,7 +54,7 @@
     <!-- bower:js -->
 
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
     <!-- // <script src="bower_components/foundation"></script> -->
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -78,8 +78,8 @@
     <!-- <script src="http://138.91.64.150:8000/socket.io/socket.io.js"></script> -->
 
     <script>
-      var socket = io.connect('http://localhost:8000');
-      // var socket = io.connect('http://138.91.64.150:8000');
+      //var socket = io.connect('http://localhost:8000');
+      var socket = io.connect('http://138.91.64.150:8000');
       socket.on('news', function (data) {
         console.log(data);
         alert(data['hello'])
