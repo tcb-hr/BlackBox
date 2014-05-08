@@ -1,12 +1,12 @@
 <div class="panel" id="panelLeft" ng-class="{ hide: !showPanelLeft, slide: showPanelLeft }">
   <button class="button closeBtnLeft floatRight" id="closePanelLeft" ng-click="togglePanelLeft()">close</button>
   <h1 class="panelTitle">Settings</h1>
-  <div class="groupTitleButton" ng-click="showZones = !showZones" ng-init="showZones = false"><i class="fa fa-map-marker"></i>Zones</div>
-  <button class="filterButton" ng-repeat="zone in settings.zones" ng-show="showZones"ng-click="zone.show = !zone.show" ng-class="{'on':zone.show}"><i ng-hide="zone.show" class="fa fa-circle-o"></i><i ng-show="zone.show" class="fa fa-check-circle-o"></i>{{zone.label}}</button>
-  <div class="groupTitleButton" ng-click="showTypes = !showTypes" ng-init="showTypes = false"><i class="fa fa-envelope"></i>Message Types</div>
-  <button class="filterButton" ng-repeat="type in settings.messageTypes" ng-show="showTypes" ng-click="type.show = !type.show" ng-class="{'on':type.show}"><i ng-hide="type.show" class="fa fa-circle-o"></i><i ng-show="type.show" class="fa fa-check-circle-o"></i>{{type.label}}</button>
-  <div class="groupTitleButton" ng-click="showUsers = !showUsers" ng-init="showUsers = false"><i class="fa fa-user"></i>Users</div>
-  <button class="filterButton" ng-repeat="user in settings.users" ng-show="showUsers" ng-click="user.show = !user.show" ng-class="{'on':user.show}"><i ng-hide="user.show" class="fa fa-circle-o"></i><i ng-show="user.show" class="fa fa-check-circle-o"></i>{{user.name}}</button>  
+  <div class="groupTitleButton" ng-click="displaySection='zones'"><i class="fa fa-map-marker"></i>Zones</div>
+  <button class="filterButton" ng-repeat="zone in settings.zones" ng-show="displaySection=='zones'" ng-click="zone.show = !zone.show"><i ng-hide="zone.show" class="fa fa-circle-o"></i><i ng-show="zone.show" class="fa fa-check-circle-o"></i>{{zone.label}}</button>
+  <div class="groupTitleButton" ng-click="displaySection='types'"><i class="fa fa-envelope"></i>Message Types</div>
+  <button class="filterButton" ng-repeat="type in settings.messageTypes" ng-show="displaySection=='types'" ng-click="type.show = !type.show" ng-class="{'on':type.show}"><i ng-hide="type.show" class="fa fa-circle-o"></i><i ng-show="type.show" class="fa fa-check-circle-o"></i>{{type.label}}</button>
+  <div class="groupTitleButton" ng-click="displaySection='users'" ng-init="showUsers = false"><i class="fa fa-user"></i>Users</div>
+  <button class="filterButton" ng-repeat="user in settings.users" ng-show="displaySection=='users'" ng-click="user.show = !user.show" ng-class="{'on':user.show}"><i ng-hide="user.show" class="fa fa-circle-o"></i><i ng-show="user.show" class="fa fa-check-circle-o"></i>{{user.name}}</button>  
 </div>
 
 <div class="panel" id="panelRight" ng-class="{ hide: !showPanelRight, slide: showPanelRight }">
