@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 var app = angular.module('feedApp');
 
@@ -69,15 +69,16 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   });
 
   $scope.messageFilter = function(chat) {
-    for(var i = 0; i < $scope.messageTypes.length; i++) {
-      if((chat.type === $scope.messageTypes[i].dbLabel) && $scope.messageTypes[i].show) {
+    for(var i = 0; i < $scope.settings.messageTypes.length; i++) {
+      if((chat.type === $scope.settings.messageTypes[i].dbLabel) && $scope.settings.messageTypes[i].show) {
         return true;
       }
     }
     return false;
   };
 
-  $scope.zones = [{
+  $scope.settings = {
+    zones: [{
     label: '1',
     show: true
   }, {
@@ -98,9 +99,9 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   }, {
     label: '7',
     show: true
-  }];
-
-  $scope.messageTypes = [{
+  }],
+  
+  messageTypes: [{
     label: 'Chats',
     dbLabel: 200,
     show: true
@@ -152,7 +153,70 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     label: 'Job late',
     dbLabel: 111,
     show: true
-  }];
+  }],
+
+  users: []
+  }; 
+
+//  $scope.showUsers = false;
+
+  $scope.configureUserSettings = function(){
+  // sets up settings for a logged in user
+    $http.get('/api/users/me').success(function(user) {
+      $scope.user = user || 'guest'; 
+      if(user.settings === undefined){
+        console.log('new user or guest');
+        $http.get('/api/users').success(function(currentUsers){
+          var userFilter = [];
+          for(var i=0; i<currentUsers.length; i++){
+            userFilter.push({name: currentUsers[i].name, show: true});
+          }
+          $scope.settings.users = userFilter;
+          if($scope.user !== 'guest'){
+            $http.post('/api/users/me', {
+              newSettings: $scope.settings,
+              userId: $scope.user._id
+            }).success(function() {
+              console.log('User settings updated in db');
+            });
+          }
+        });
+      } else{
+        // check to see if their user list is up to date
+        $scope.settings = user.settings;
+        $http.get('/api/users').success(function(currentUsers){
+          var updated = false;
+          for(var i=0; i<currentUsers.length; i++){
+            user = currentUsers[i].name;
+            var found = false;
+            for(var j=0; j<$scope.settings.users.length; j++){
+              if($scope.settings.users[j].name === user){
+                found = true;
+                updated = true;
+              }
+            }
+            if(found === false){
+              $scope.settings.users.push({name: user, show: true}); 
+            }
+          }
+         if(updated){
+           $http.post('/api/users/me', {
+             newSettings: $scope.settings,
+             userId: $scope.user._id
+           }).success(function() {
+             console.log('User people prefernces updated');
+           }); 
+         }
+      });
+    }
+    }).error(function(data, status, headers, config) {
+      console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
+    });  
+  };
+  
+  $scope.updateFilters = function(){
+    console.log('change');
+  }
 
   $scope.toggle = function () {
     console.log('show', this.show);
@@ -172,7 +236,15 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.showPanelLeft = false;
   $scope.togglePanelLeft = function() {
     $scope.showPanelLeft = ($scope.showPanelLeft) ? false : true;
-  };
+    if($scope.user !== 'guest'){
+      $http.post('/api/users/me', {
+        newSettings: $scope.settings,
+        userId: $scope.user._id
+      }).success(function() {
+        console.log('POST success!');
+      });
+    }
+  }
 
   $scope.showPanelRight = false;
   $scope.togglePanelRight = function() {
@@ -235,6 +307,14 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.cannedModel = '';
     chat.body = undefined;
   };
+  
+  $scope.getUsername = function(){
+    $http.get('/api/users/me').success(function(user){
+      $scope.currentUser = user;
+      $scope.settings.users = user.settings.users;
+      console.log($scope.settings.users);
+    });  
+  }
 
   $scope.sendChat = function(chat) {
     console.log('sendChat invoked. chat.name:', chat.name, 'chat.body:', chat.body, 'this:', this);
@@ -243,7 +323,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       return;
     }
     $http.post('/api/chat', {
-      user: chat.name,
+      user: $scope.user.name,
       body: chat.body,
       image: ''
     }).success(function() {
