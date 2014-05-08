@@ -69,15 +69,16 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   });
 
   $scope.messageFilter = function(chat) {
-    for(var i = 0; i < $scope.messageTypes.length; i++) {
-      if((chat.type === $scope.messageTypes[i].dbLabel) && $scope.messageTypes[i].show) {
+    for(var i = 0; i < $scope.settings.messageTypes.length; i++) {
+      if((chat.type === $scope.settings.messageTypes[i].dbLabel) && $scope.settings.messageTypes[i].show) {
         return true;
       }
     }
     return false;
   };
 
-  $scope.zones = [{
+  $scope.settings = {
+    zones: [{
     label: '1',
     show: true
   }, {
@@ -98,9 +99,9 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   }, {
     label: '7',
     show: true
-  }];
-
-  $scope.messageTypes = [{
+  }],
+  
+  messageTypes: [{
     label: 'Chats',
     dbLabel: 200,
     show: true
@@ -152,13 +153,16 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     label: 'Job late',
     dbLabel: 111,
     show: true
-  }];
+  }],
+
+  users: []
+  }; 
 
   $scope.showUsers = false;
 
   $scope.getUserList = function(){
     $http.get('/api/users').success(function(users) {
-      $scope.users = users;
+      $scope.settings.users = users;
       console.log(users);
     }).error(function(data, status, headers, config) {
       console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
@@ -189,14 +193,15 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.showPanelLeft = ($scope.showPanelLeft) ? false : true;
     // compare current settings with the settings in the database
     if(Object.keys($scope.currentUser.settings).sort() !== Object.keys($scope.settings).sort()){
-    console.log('Settings changed!);
+    console.log('Settings changed!');
     $http.post('/api/users/me', {
       newSettings: $scope.settings,
       userId: $scope.currentUser._id
     }).success(function() {
       console.log('POST success!');
    });
-  };
+  }
+ };
 
   $scope.showPanelRight = false;
   $scope.togglePanelRight = function() {
