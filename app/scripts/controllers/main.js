@@ -163,17 +163,23 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.configureUserSettings = function(){
   // sets up settings for a logged in user
     $http.get('/api/users/me').success(function(user) {
-      $scope.user = user;
-      if(user.settings.zones === undefined){
-        console.log('new user'); 
+      $scope.user = user || 'guest'; 
+      if(user.settings === undefined){
+        console.log('new user or guest');
         $http.get('/api/users').success(function(currentUsers){
-          $scope.settings.users = currentUsers; // currenUsers will need to be manipulated
-          $http.post('/api/users/me', {
-            newSettings: $scope.settings,
-            userId: $scope.user._id
-          }).success(function() {
-            console.log('User settings updated in db');
-          });
+          var userFilter = [];
+          for(var i=0; i<currentUsers.length; i++){
+            userFilter.push({name: currentUsers[i].name, show: true});
+          }
+          $scope.settings.users = userFilter;
+          if($scope.user !== 'guest'){
+            $http.post('/api/users/me', {
+              newSettings: $scope.settings,
+              userId: $scope.user._id
+            }).success(function() {
+              console.log('User settings updated in db');
+            });
+          }
         });
       } else{
         // check to see if their user list is up to date
@@ -230,12 +236,14 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.showPanelLeft = false;
   $scope.togglePanelLeft = function() {
     $scope.showPanelLeft = ($scope.showPanelLeft) ? false : true;
-    $http.post('/api/users/me', {
-      newSettings: $scope.settings,
-      userId: $scope.user._id
-    }).success(function() {
-      console.log('POST success!');
-   });
+    if($scope.user !== 'guest'){
+      $http.post('/api/users/me', {
+        newSettings: $scope.settings,
+        userId: $scope.user._id
+      }).success(function() {
+        console.log('POST success!');
+      });
+    }
   }
 
   $scope.showPanelRight = false;
@@ -319,7 +327,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       return;
     }
     $http.post('/api/chat', {
-      user: $scope.currentUser.name,
+      user: $scope.user.name,
       body: chat.body,
       image: ''
     }).success(function() {
