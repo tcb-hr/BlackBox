@@ -244,7 +244,10 @@ body {
   background-size: 54px 54px;
   background-position: -9px -9px;
 }
-#map { 
+#cannedSelect {
+  /*width: 90%;*/
+}
+#map {
   height: 100%;
   width: 100%;
   z-index: 100;

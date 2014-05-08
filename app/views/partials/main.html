@@ -34,11 +34,9 @@
         <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString | filter: messageFilter" ng-click="showMapOrPic(chat)" scroll-bottom>
           <div class="content">
             <div class="author">
-<!--               <img class="avatar" src={{chat.pic}} />
- -->              <span class="handle">{{chat.user || 'guest'}}</span>
+               <img class="avatar" src={{chat.pic}} />
+               <span class="handle">{{chat.user || 'guest'}}</span>
             </div>
-            <!-- <div class="msgText">{{chat.body}}<br>{{chat.slogan}}</div> -->
-            <!-- <div class="time" am-time-ago="chat.timestamp"></div> -->
             <div class="msgText">{{chat.body}}</div>
             <div class="msgText">{{chat.slogan}}</div>
             <div class="time" am-time-ago="chat.timestamp"></div>
@@ -79,7 +77,7 @@
               </div>
 
               <div class="tool" id="cannedTool">
-                <select id="cannedSelect" ng-model="cannedModel" ng-change="composeCanned()">
+                <select id="cannedSelect" ng-model="cannedModel" ng-change="composeCanned(chat)">
                   <option></option>
                   <option>10-4</option>
                   <option>on my way</option>
