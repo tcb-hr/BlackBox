@@ -1,0 +1,45 @@
+    <div id="footer" ng-controller="FootCtrl">
+      <!-- <form id="chatForm" name="chat" ng-submit="sendChat(chat)"> --> <!-- Placing 'form' here causes 'return' keypress anywhere in form to trigger 'flow.js'. -->
+        <div class="content">
+
+          <div id="toolbox" ng-show="showTools()">
+            <div id="tools">
+
+              <div class="tool" id="searchTool">
+                <input type="text" class="textField" id="searchField" ng-model="searchString" placeholder="search" />
+              </div>
+
+              <div class="tool" id="picTool">
+                <div flow-init="{ singleFile: true }" flow-name="image" flow-file-added="!!{ png: 1, gif: 1, jpg: 1, jpeg: 1 }[$file.getExtension()]" flow-files-submitted="$flow.upload()">
+                  <div class="content">
+                    <button class="btn btn-primary" id="picBtn" ng-show="!$flow.files.length" flow-btn>add pic</button>
+                    <button class="button" id="cancelBtn" ng-show="$flow.files.length" ng-click="$flow.cancel()">remove</button>
+                    <div id="thumb" ng-show="$flow.files.length"><img flow-img="$flow.files[0]" /></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tool" id="cannedTool">
+                <select id="cannedSelect" ng-model="cannedModel" ng-change="composeCanned(chat)">
+                  <option></option>
+                  <option>10-4</option>
+                  <option>on my way</option>
+                  <option>need help</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+
+          <form id="chatForm" name="chat" ng-init="configureUserSettings()" ng-submit="sendChat(chat)">
+            <div id="bottomRow">
+              <button type="button" class="button" id="toolsBtn" ng-click="toggleTools()">tools</button>
+              <!-- If 'form' encloses 'toolbox' need to add the following 'ng-keyup' --> <!-- ng-keyup="$event.keyCode === 13 ? sendChat(chat) : null" -->
+              <input type="text" class="form-control textField" id="composeField" ng-model="chat.body" placeholder="compose" />
+              <button type="submit" class="button" id="sendBtn">send</button>
+            </div>
+          </form>
+
+        </div>
+      <!-- </form> --> <!-- Placing 'form' here causes 'return' keypress anywhere in form to trigger 'flow.js'. -->
+    </div>
