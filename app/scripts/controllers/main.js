@@ -165,6 +165,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $http.get('/api/users/me').success(function(user) {
       $scope.user = user;
       if(user.settings.zones === undefined){
+        console.log('new user'); 
         $http.get('/api/users').success(function(currentUsers){
           $scope.settings.users = currentUsers; // currenUsers will need to be manipulated
           $http.post('/api/users/me', {
@@ -176,6 +177,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         });
       } else{
         // check to see if their user list is up to date
+        $scope.settings = user.settings;
         $http.get('/api/users').success(function(currentUsers){
           var updated = false;
           for(var i=0; i<currentUsers.length; i++){
@@ -228,17 +230,13 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.showPanelLeft = false;
   $scope.togglePanelLeft = function() {
     $scope.showPanelLeft = ($scope.showPanelLeft) ? false : true;
-    // compare current settings with the settings in the database
-    if(Object.keys($scope.currentUser.settings).sort() !== Object.keys($scope.settings).sort()){
-    console.log('Settings changed!');
     $http.post('/api/users/me', {
       newSettings: $scope.settings,
-      userId: $scope.currentUser._id
+      userId: $scope.user._id
     }).success(function() {
       console.log('POST success!');
    });
   }
- };
 
   $scope.showPanelRight = false;
   $scope.togglePanelRight = function() {
