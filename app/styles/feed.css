@@ -372,3 +372,9 @@ width: 30px;
   /*background-color: #f2dede;*/
   background-color: red;
 }
+.bgYellow {
+  background-color: yellow;
+}
+.bgRed {
+  background-color: red;
+}

@@ -68,6 +68,7 @@ app.directive('charLimit', function() { // MOVE DIRECTIVES TO A SEPARATE FILE?
     link: function($scope, $element, $attributes) {
       var limit = $attributes.charLimit;
       var element = $element;
+      // NEED TO TRUNCATE MESSAGE OR PREVENT SENDING IF > 140.
       // INSTEAD OF BINDING TO KEYUP, HOW ABOUT CHECKING $SCOPE.CHAT.BODY.LENGTH AGAINST LIMIT?
       // OTHERWISE, CAN OTHER EVENTS BE BOUND HERE?
       // ALSO, WOULD NG-CLASS BE OF USE IN THE HTML?

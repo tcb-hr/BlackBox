@@ -2,11 +2,11 @@
   <button class="button closeBtnLeft floatRight" id="closePanelLeft" ng-click="togglePanelLeft()">close</button>
   <h1>Settings</h1>
   <div class="groupTitleButton" ng-click="showZones = !showZones" ng-init="showZones = false"><i class="fa fa-map-marker"></i>Zones</div>
-  <button class="zoneFilterButton" ng-repeat="zone in zones" ng-show="showZones"ng-click="zone.show = !zone.show" ng-class="{'on':zone.show}">{{zone.label}}</button>
+  <button class="zoneFilterButton" ng-repeat="zone in zones" ng-show="showZones"ng-click="zone.show = !zone.show" ng-class="{ 'on': zone.show }">{{zone.label}}</button>
   <div class="groupTitleButton" ng-click="showTypes = !showTypes" ng-init="showTypes = false"><i class="fa fa-envelope"></i>Message Types</div>
-  <button class="typeFilterButton" ng-repeat="type in messageTypes" ng-show="showTypes" ng-click="type.show = !type.show" ng-class="{'on':type.show}">{{type.label}}</button>
+  <button class="typeFilterButton" ng-repeat="type in messageTypes" ng-show="showTypes" ng-click="type.show = !type.show" ng-class="{ 'on': type.show }">{{type.label}}</button>
   <div class="groupTitleButton" ng-click="showUsers = !showUsers" ng-init="showUsers = false"><i class="fa fa-user"></i>Users</div>
-  <button class="userFilterButton" ng-repeat="user in users" ng-show="showUsers" ng-click="user.show = !user.show" ng-class="{'on':user.show}">{{user.label}}</button>
+  <button class="userFilterButton" ng-repeat="user in users" ng-show="showUsers" ng-click="user.show = !user.show" ng-class="{ 'on': user.show }">{{user.label}}</button>
 </div>
 
 <div class="panel" id="panelRight" ng-class="{ hide: !showPanelRight, slide: showPanelRight }">
@@ -92,7 +92,8 @@
             <div id="bottomRow">
               <button type="button" class="button" id="toolsBtn" ng-click="toggleTools()">tools</button>
               <!-- If 'form' encloses 'toolbox' need to add the following 'ng-keyup' --> <!-- ng-keyup="$event.keyCode === 13 ? sendChat(chat) : null" -->
-              <input type="text" placeholder="compose" id="composeField" class="form-control textField" ng-model="chat.body" char-limit="10" />
+              <!-- <input type="text" placeholder="compose" id="composeField" class="form-control textField" ng-model="chat.body" char-limit="10" /> -->
+              <input type="text" placeholder="compose" id="composeField" class="form-control textField" ng-model="chat.body" ng-class="{ bgYellow: 5 <= chat.body.length, bgRed: 10 <= chat.body.length }" />
               <button type="submit" class="button" id="sendBtn">send</button>
             </div>
           </form>
