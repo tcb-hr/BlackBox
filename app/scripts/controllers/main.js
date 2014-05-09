@@ -79,27 +79,27 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
   $scope.settings = {
     zones: [{
-    label: '1',
-    show: true
-  }, {
-    label: '2',
-    show: true
-  }, {
-    label: '3',
-    show: true
-  }, {
-    label: '4',
-    show: true
-  }, {
-    label: '5',
-    show: true
-  }, {
-    label: '6',
-    show: true
-  }, {
-    label: '7',
-    show: true
-  }],
+        label: '1',
+        show: true
+      }, {
+        label: '2',
+        show: true
+      }, {
+        label: '3',
+        show: true
+      }, {
+        label: '4',
+        show: true
+      }, {
+        label: '5',
+        show: true
+      }, {
+        label: '6',
+        show: true
+      }, {
+        label: '7',
+        show: true
+    }],
   
   messageTypes: [{
     label: 'Chats',
