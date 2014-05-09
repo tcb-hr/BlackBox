@@ -356,10 +356,16 @@ body {
 }
 i {
 width: 30px;
+text-align: center;
+padding-right: 10px;
 }
 .panelTitle{
 font-size: 24px;
 letter-spacing: 3px;
 margin: 15px;
 font-weight: bold;
+}
+.selectAllButton{
+font-size: 20px;
+font-style: italic;
 }
