@@ -77,6 +77,23 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     return false;
   };
 
+  $scope.toggleZones = function(){
+    $scope.displayZones = !$scope.displayZones;
+    $scope.displayMessageTypes = false;
+    $scope.displayUsers = false;
+  }
+
+  $scope.toggleMessageTypes = function(){
+    $scope.displayMessageTypes = !$scope.displayMessageTypes;
+    $scope.displayZones = false;
+    $scope.displayUsers = false;
+  }
+
+  $scope.toggleUsers = function(){
+    $scope.displayUsers = !$scope.displayUsers;
+    $scope.displayZones = false;
+    $scope.displayMessageTypes = false;
+  }
   $scope.selectAllZones = true;
   $scope.selectAllMessageTypes = true;
   $scope.selectAllUsers = true;
