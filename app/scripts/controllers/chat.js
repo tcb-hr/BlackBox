@@ -1,5 +1,7 @@
 'use strict';
 
+var app = angular.module('feedApp');
+
 app.controller('ChatCtrl', function($scope, $http, $window) {
   $scope.$on('flow::complete', function (event, $flow, flowFile) {
     console.log('we writing, yo');

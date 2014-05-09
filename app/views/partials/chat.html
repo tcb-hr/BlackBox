@@ -1,0 +1,12 @@
+          <div class="content" ng-controller"ChatCtrl">
+            <div class="author">
+<!--               <img class="avatar" src={{chat.pic}} />
+ -->              <span class="handle">{{chat.user || 'guest'}}</span>
+            </div>
+            <!-- <div class="msgText">{{chat.body}}<br>{{chat.slogan}}</div> -->
+            <!-- <div class="time" am-time-ago="chat.timestamp"></div> -->
+            <div class="msgText">{{chat.body}}</div>
+            <div class="msgText">{{chat.slogan}}</div>
+            <div class="time" am-time-ago="chat.timestamp"></div>
+          </div>
+        </div>
