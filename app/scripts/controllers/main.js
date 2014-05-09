@@ -77,6 +77,28 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     return false;
   };
 
+  $scope.selectAllZones = true;
+  $scope.selectAllMessageTypes = true;
+  $scope.selectAllUsers = true;
+
+  $scope.selectAll = function(arr){
+    if(arr === $scope.settings.zones){
+      $scope.selectAllZones = !$scope.selectAllZones;
+      var value = $scope.selectAllZones;
+    }
+    if(arr === $scope.settings.messageTypes){
+      $scope.selectAllMessageTypes = !$scope.selectAllMessageTypes;
+      var value = $scope.selectAllMessageTypes;
+    }
+    if(arr === $scope.settings.users){
+      $scope.selectAllUsers = !$scope.selectAllUsers;
+      var value = $scope.selectAllUsers;
+    }
+    for(var i=0; i<arr.length; i++){
+      arr[i].show = value; 
+    }
+  }
+
   $scope.settings = {
     zones: [{
     label: '1',

@@ -363,3 +363,7 @@ letter-spacing: 3px;
 margin: 15px;
 font-weight: bold;
 }
+.selectAllButton{
+font-size: 20px;
+font-style: italic;
+}
