@@ -57,7 +57,8 @@ var app = angular.module('feedApp', [
       chunkSize: 15000,
       chunkRetryInterval: 5000,
       simultaneousUploads: 1,
-      singleFile: true
+      singleFile: true,
+      testChunks: false
     };
     flowFactoryProvider.on('catchAll', function (event) {
       console.log('catchAll', arguments);
