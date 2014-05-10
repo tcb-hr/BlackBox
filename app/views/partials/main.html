@@ -26,13 +26,24 @@
 </div>
 
 <div class="panel" id="panelRight" ng-class="{ hide: !showPanelRight, slide: showPanelRight }">
+  <h1 class="dashboardTitle">Dashboard</h1>
   <button class="dashboardButton" ng-click="togglePanelRight()"><i class="fa fa-user"></i></button>
+  
   <div class="panelContent">
-  <h1 class="panelTitle">My Profile</h1>  
-    <input id="avatarInput" type="file" accept="image/*" capture="camera"></i>
-    <div id="avatarDisplay"></div>
-    <img id="avatarImage">
-    <button id="submitAvatar" ng-click="previewAvatar()"><i class="fa fa-check"></i> Use this photo</button>
+    <div class="groupTitleButton" ng-click="toggleStats()" ng-init="showStats = false"><i class="fa fa-usd"></i> Stats</div>
+    
+    <div class="dashboardCategory" ng-show="showStats">Total Jobs:<br><span id="jobsStat">122</span></div>
+    <div class="dashboardCategory" ng-show="showStats">Total Earnings:<br><span id="earningsStat">$1024</span></div>
+    <div class="dashboardCategory" ng-show="showStats">On-Time:<br><span id="onTimeStat">86.7%</span></div>
+
+    <div class="groupTitleButton" ng-click="toggleAvatar()" ng-init="showAvatar = false"><i class="fa fa-camera-retro"></i> Profile Picture</div>
+    <div class="dashboardCategory" ng-show="showAvatar">My Profile Pic:<br>
+      <div id="avatarDisplay" ng-show="showAvatar" ng-init="loadAvatar()"></div><br>
+      <input id="avatarInput" ng-show="showAvatar" type="file" accept="image/*" capture="camera"></i>
+      <img id="avatarImage" ng-show="showAvatar">
+      <button id="submitAvatar" ng-show="showAvatar" ng-click="saveAvatar()"><i class="fa fa-check"></i> Use this photo</button>
+    </div>
+
   </div>
 </div>
 

@@ -292,8 +292,8 @@ body {
   margin-right: 36px;
 }
 #panelRight .panelContent {
-  margin-right: 12px;
-  margin-left: 36px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 .settingsTitle {
   font-size: 24px;
@@ -369,12 +369,31 @@ padding-right: 10px;
 font-size: 20px;
 font-style: italic;
 }
+
 #avatarDisplay{
+  background-color: white;
   background-position: center center;
   background-repeat: no-repeat;
+  border: 1px solid black;
   height: 80px;
   width: 80px;
 }
+.dashboardTitle{
+  font-size: 24px;
+  font-weight: 700;
+  margin: 10px;
+  letter-spacing: 5px;
+}
+.dashboardCategory{
+  border-color: white;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+  font-size: 18px;
+  padding: 5px 0 5px 50px;
+}
+#jobsStat, #earningsStat, #onTimeStat{
+  font-size: 48px;
+} 
 .warning {
   background-color: #ffff66;
 }

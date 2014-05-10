@@ -344,6 +344,64 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.showPanelRight = ($scope.showPanelRight) ? false : true;
   };
 
+  $scope.loadAvatar = function(){
+    $http.get('/api/users/me').success(function(user) {
+      user.avatar
+      var str = "url('" + user.avatar + "')";
+      $('#avatarDisplay').css('background-image', str);
+
+    }).error(function(data, status, headers, config) {
+      console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
+    });
+  }
+
+  $scope.saveAvatar = function(){
+    console.log('preview avatar');
+    var preview = $('#avatarImage');
+    var file = $('input[type=file]')[0].files[0];
+
+    var reader = new FileReader();
+    reader.onloadend = function(){
+      console.log('done loading');
+      preview.src= reader.result;
+      var str = "url('" + preview.src + "')";
+      console.log('loaded', str);
+      $('#avatarDisplay').css('background-image', str);
+      $http.post('/api/users/me', {
+        propertyValue: $('#avatarImage').src,
+        propertyKey: 'avatar',
+        userId: $scope.user._id
+      }).success(function() {
+        console.log('Image saved to database');
+      });
+    }
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else { 
+      preview.src = "";
+    }
+  };
+
+ $scope.toggleStats = function(){
+    $scope.showStats = !$scope.showStats;
+    $scope.showAvatar = false;
+  }
+
+  $scope.toggleAvatar = function(){
+    $scope.showAvatar = !$scope.showAvatar;
+    $scope.showStats = false;
+  }
+
+
+ 
+
+//--------------------------------------------------
+//
+//  MAIN PANEL
+//
+//-------------------------------------------------
+
   var toolsVisible = false;
   $scope.showTools = function() {
     return toolsVisible;
