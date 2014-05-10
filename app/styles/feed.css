@@ -292,8 +292,8 @@ body {
   margin-right: 36px;
 }
 #panelRight .panelContent {
-  margin-right: 12px;
-  margin-left: 36px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 .settingsTitle {
   font-size: 24px;
@@ -385,4 +385,14 @@ font-style: italic;
   margin: 0px;
   top: 0px;
   letter-spacing: 5px;
-}  
+}
+.dashboardCategory{
+  border-color: white;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+  font-size: 18px;
+  padding: 5px 0;
+}
+#jobsStat, #earningsStat, #onTimeStat{
+  font-size: 48px;
+} 
