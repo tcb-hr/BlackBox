@@ -64,9 +64,11 @@ app.factory('socket', function($rootScope) { // MOVE FACTORIES TO A SEPARATE FIL
 app.controller('MainCtrl', function($scope, $http, $window, socket) {
   // BREAK SOME OF THESE PIECES BELOW INTO SEPARATE CONTROLLERS?
 
-  socket.on('init', function(data) {
-    console.log('Socket connection established.');
-  });
+//------------------------------------------------------------------------------
+//
+//  LEFT PANEL / FILTERING
+//
+//------------------------------------------------------------------------------
 
   $scope.messageFilter = function(chat) {
     for(var i = 0; i < $scope.settings.messageTypes.length; i++) {
@@ -197,7 +199,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   users: []
   }; 
 
-//  $scope.showUsers = false;
 
   $scope.configureUserSettings = function(){
   // sets up settings for a logged in user
@@ -213,7 +214,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
           $scope.settings.users = userFilter;
           if($scope.user !== 'guest'){
             $http.post('/api/users/me', {
-              newSettings: $scope.settings,
+              propertyValue: $scope.settings,
+              propertyKey: 'settings',
               userId: $scope.user._id
             }).success(function() {
               console.log('User settings updated in db');
@@ -240,7 +242,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
           }
          if(updated){
            $http.post('/api/users/me', {
-             newSettings: $scope.settings,
+             propertyValue: $scope.settings, 
+             propertyKey: 'settings',
              userId: $scope.user._id
            }).success(function() {
              console.log('User people prefernces updated');
@@ -253,15 +256,37 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     });  
   };
   
-  $scope.updateFilters = function(){
-    console.log('change');
-  }
-
   $scope.toggle = function () {
     console.log('show', this.show);
     this.show = !this.show;
     console.log('show', this.show);
   };
+
+
+  $scope.showPanelLeft = false;
+  $scope.togglePanelLeft = function() {
+    $scope.showPanelLeft = ($scope.showPanelLeft) ? false : true;
+    if($scope.user !== 'guest'){
+      $http.post('/api/users/me', {
+        propertyKey: 'settings',
+        propertyValue: $scope.settings,
+        userId: $scope.user._id
+      }).success(function() {
+        console.log('POST success!');
+      });
+    }
+  }
+
+
+//--------------------------------------------------
+//
+//  SOCKETS
+//
+//--------------------------------------------------
+
+  socket.on('init', function(data) {
+    console.log('Socket connection established.');
+  });
 
   socket.on('newMessage', function(data) {
     var newChat = data['data'][0];
@@ -272,23 +297,54 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }
   });
 
-  $scope.showPanelLeft = false;
-  $scope.togglePanelLeft = function() {
-    $scope.showPanelLeft = ($scope.showPanelLeft) ? false : true;
-    if($scope.user !== 'guest'){
-      $http.post('/api/users/me', {
-        newSettings: $scope.settings,
-        userId: $scope.user._id
-      }).success(function() {
-        console.log('POST success!');
-      });
-    }
-  }
-
+//--------------------------------------------------
+//
+//  RIGHT PANEL / DASHBOARD
+//
+//--------------------------------------------------
   $scope.showPanelRight = false;
   $scope.togglePanelRight = function() {
     $scope.showPanelRight = ($scope.showPanelRight) ? false : true;
   };
+
+  $scope.displayAvatar = function(){
+    
+  }
+
+  $scope.previewAvatar = function(){
+    var preview = $('#avatarImage');
+    console.log('preview', preview)
+    var file = $('input[type=file]')[0].files[0];
+    console.log('file', file);
+
+    var reader = new FileReader();
+
+    reader.onloadend = function(){
+      preview.src = reader.result;
+      console.log('preview.src', preview.src);
+      $http.post('/api/users/me', {
+        propertyValue: preview.src,
+        propertyKey: 'avatar',
+        userId: $scope.user._id
+      }).success(function() {
+        console.log('Image saved to database');
+        var str = "url('" + reader.result + "')";
+        $('#avatarDisplay').css('background-image', str); 
+      });
+    }
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else { 
+      preview.src = "";
+    }
+  };
+
+//--------------------------------------------------
+//
+//  MAIN PANEL
+//
+//-------------------------------------------------
 
   var toolsVisible = false;
   $scope.showTools = function() {
@@ -378,6 +434,28 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       console.log('POST error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
     });
   };
+
+app.filter('searchFor', function() {
+  return function(arr, searchString) {
+    if(!searchString) {
+      return arr;
+    }
+    var result = [];
+    searchString = searchString.toLowerCase();
+    angular.forEach(arr, function(chat) {
+      if(chat.body && chat.body.toLowerCase().indexOf(searchString) !== -1) {
+        result.push(chat);
+      }
+    });
+    return result;
+  };
+});
+
+//--------------------------------------
+//
+//  MAP
+//
+//-------------------------------------
   
   $scope.layer;
   $scope.map;
@@ -438,20 +516,5 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       $scope.hideMap = false;
     }
   };
-});
 
-app.filter('searchFor', function() {
-  return function(arr, searchString) {
-    if(!searchString) {
-      return arr;
-    }
-    var result = [];
-    searchString = searchString.toLowerCase();
-    angular.forEach(arr, function(chat) {
-      if(chat.body && chat.body.toLowerCase().indexOf(searchString) !== -1) {
-        result.push(chat);
-      }
-    });
-    return result;
-  };
 });
