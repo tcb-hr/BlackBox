@@ -316,14 +316,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
   });
 
-  $scope.doneUp = function() {
-    $http.get('/download').success(function() {
-      console.log('GET success!');
-    }).error(function(data, status, headers, config) {
-      console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
-    });
-  };
-
   // This function is called if the user makes a dropdown selection.
   // User's dropdown selection will be added to the composition field.
   $scope.composeCanned = function(chat) {
