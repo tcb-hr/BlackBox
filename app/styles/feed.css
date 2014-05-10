@@ -374,4 +374,10 @@ font-style: italic;
   background-repeat: no-repeat;
   height: 80px;
   width: 80px;
-}  
+}
+.warning {
+  background-color: #ffff66;
+}
+.danger {
+  background-color: #ff5050;
+}

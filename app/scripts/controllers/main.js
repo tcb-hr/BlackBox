@@ -2,41 +2,6 @@
 
 var app = angular.module('feedApp');
 
-app.directive('slidePanel', ['$swipe', function($swipe) { // MOVE DIRECTIVES TO A SEPARATE FILE?
-  return {
-    restrict: 'EA',
-    link: function(scope, ele, attrs, ctrl) {
-      var startX, pointX;
-      $swipe.bind(ele, {
-        'start': function(coords) {
-          startX = coords.x;
-          pointX = coords.y;
-        }, 'move': function(coords) {
-          var delta = coords.x - pointX;
-        }, 'end': function(coords) {
-        }, 'cancel': function(coords) {
-        }
-      });
-    }
-  };
-}]);
-
-app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARATE FILE?
-  var scrollBottomWrap = function() {
-    var scrollToBottom = function() {
-      var feed = document.getElementById('feed');
-      feed.scrollTop = feed.scrollHeight + 44;
-    };
-    scrollToBottom();
-    $window.addEventListener('resize', function() {
-      scrollToBottom();
-    });
-  };
-  return {
-    link: scrollBottomWrap
-  };
-});
-
 app.factory('socket', function($rootScope) { // MOVE FACTORIES TO A SEPARATE FILE?
   var socket = io.connect();
   return {
@@ -61,6 +26,81 @@ app.factory('socket', function($rootScope) { // MOVE FACTORIES TO A SEPARATE FIL
   };
 });
 
+app.directive('slidePanel', ['$swipe', function($swipe) { // MOVE DIRECTIVES TO A SEPARATE FILE?
+  return {
+    restrict: 'EA',
+    link: function(scope, elem, attrs, ctrl) {
+      var startX, pointX;
+      $swipe.bind(elem, {
+        'start': function(coords) {
+          startX = coords.x;
+          pointX = coords.y;
+        },
+        'move': function(coords) {
+          var delta = coords.x - pointX;
+        },
+        'end': function(coords) {
+        },
+        'cancel': function(coords) {
+        }
+      });
+    }
+  };
+}]);
+
+app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARATE FILE?
+  var scrollBottomWrap = function() {
+    var scrollToBottom = function() {
+      var feed = document.getElementById('feed');
+      feed.scrollTop = feed.scrollHeight + 44;
+    };
+    scrollToBottom();
+    $window.addEventListener('resize', function() {
+      scrollToBottom();
+    });
+  };
+  return {
+    link: scrollBottomWrap
+  };
+});
+
+var feedbackPerLength = function(length) {
+  var composeField = document.getElementById('composeField');
+  var limit = composeField.attributes.getNamedItem('char-limit').value;
+  switch(true) {
+    case (limit <= length):
+      composeField.classList.add('danger');
+      break;
+    case (limit - length <= 20):
+      composeField.classList.remove('danger');
+      composeField.classList.add('warning');
+      break;
+    default:
+      composeField.classList.remove('danger');
+      composeField.classList.remove('warning');
+  }
+};
+
+app.directive('charLimit', function() { // MOVE DIRECTIVES TO A SEPARATE FILE?
+  return {
+    restrict: 'A',
+    link: function(scope, elem, attrs) {
+      var limit = attrs.charLimit;
+      elem.bind('keyup', function(event) {
+        var length = elem.val().length;
+        feedbackPerLength(length); // Color the field if text too long.
+      });
+      elem.bind('keypress', function(event) {
+        if(elem.val().length >= limit) {
+          if(event.keyCode !== 8) { // Prevent non-backspace keypresses if length exceeds limit.
+            event.preventDefault();
+          }
+        }
+      });
+    }
+  };
+});
+
 app.controller('MainCtrl', function($scope, $http, $window, socket) {
   // BREAK SOME OF THESE PIECES BELOW INTO SEPARATE CONTROLLERS?
 
@@ -69,6 +109,21 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 //  LEFT PANEL / FILTERING
 //
 //------------------------------------------------------------------------------
+
+  // This function is called if the user makes a dropdown selection.
+  $scope.composeCanned = function(chat) {
+    // Add user's dropdown selection to the composition field.
+    if(chat.body === undefined) {
+      chat.body = $scope.cannedModel;
+    } else {
+      chat.body += ' ' + $scope.cannedModel;
+    }
+    feedbackPerLength(chat.body.length); // Color the field if text too long.
+  };
+
+  socket.on('init', function(data) {
+    console.log('Socket connection established.');
+  });
 
   $scope.messageFilter = function(chat) {
     for(var i = 0; i < $scope.settings.messageTypes.length; i++) {
@@ -257,9 +312,9 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   };
   
   $scope.toggle = function () {
-    console.log('show', this.show);
+    // console.log('show', this.show);
     this.show = !this.show;
-    console.log('show', this.show);
+    // console.log('show', this.show);
   };
 
 
@@ -380,16 +435,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     });
   };
 
-  // This function is called if the user makes a dropdown selection.
-  // User's dropdown selection will be added to the composition field.
-  $scope.composeCanned = function(chat) {
-    if(chat.body === undefined) {
-      chat.body = $scope.cannedModel;
-    } else {
-      chat.body += ' ' + $scope.cannedModel;
-    }
-  };
-
   var isChatValid = function(chat) {
     if(chat.body === undefined || chat.body.length > 140) {
       return false;
@@ -412,7 +457,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   }
 
   $scope.sendChat = function(chat) {
-    console.log('sendChat invoked. chat.name:', chat.name, 'chat.body:', chat.body, 'this:', this);
+    // console.log('sendChat invoked. chat.name:', chat.name, 'chat.body:', chat.body, 'this:', this);
     if(!isChatValid(chat)) {
       console.log('Invalid chat, overriding "send".');
       return;
@@ -491,12 +536,12 @@ app.filter('searchFor', function() {
   };
 
   $scope.hidePic = true;
-  $scope.createPic = function(){
+  $scope.createPic = function() {
     $('#pic').height($(window).height());
   };
 
   $scope.showMapOrPic = function(chat) {
-    console.log(chat);
+    // console.log(chat);
     if(chat.image !== undefined) {
       $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center');
       $scope.hidePic = false;
