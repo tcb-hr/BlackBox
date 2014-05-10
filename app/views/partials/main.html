@@ -81,16 +81,6 @@
                 <input type="text" class="textField" id="searchField" ng-model="searchString" placeholder="search" />
               </div>
 
-              <div class="tool" id="picTool">
-                <div flow-init="{ singleFile: true }" flow-name="image" flow-file-added="!!{ png: 1, gif: 1, jpg: 1, jpeg: 1 }[$file.getExtension()]" flow-files-submitted="$flow.upload()">
-                  <div class="content">
-                    <button class="btn btn-primary" id="picBtn" ng-show="!$flow.files.length" flow-btn>add pic</button>
-                    <button class="button" id="cancelBtn" ng-show="$flow.files.length" ng-click="$flow.cancel()">remove</button>
-                    <div id="thumb" ng-show="$flow.files.length"><img flow-img="$flow.files[0]" /></div>
-                  </div>
-                </div>
-              </div>
-
               <div class="tool" id="cannedTool">
                 <select id="cannedSelect" ng-model="cannedModel" ng-change="composeCanned(chat)" ng-disabled="140 <= chat.body.length">
                   <option></option>
