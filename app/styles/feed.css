@@ -394,3 +394,9 @@ font-style: italic;
 #jobsStat, #earningsStat, #onTimeStat{
   font-size: 48px;
 } 
+.warning {
+  background-color: #ffff66;
+}
+.danger {
+  background-color: #ff5050;
+}
