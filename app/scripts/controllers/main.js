@@ -2,41 +2,6 @@
 
 var app = angular.module('feedApp');
 
-app.directive('slidePanel', ['$swipe', function($swipe) { // MOVE DIRECTIVES TO A SEPARATE FILE?
-  return {
-    restrict: 'EA',
-    link: function(scope, ele, attrs, ctrl) {
-      var startX, pointX;
-      $swipe.bind(ele, {
-        'start': function(coords) {
-          startX = coords.x;
-          pointX = coords.y;
-        }, 'move': function(coords) {
-          var delta = coords.x - pointX;
-        }, 'end': function(coords) {
-        }, 'cancel': function(coords) {
-        }
-      });
-    }
-  };
-}]);
-
-app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARATE FILE?
-  var scrollBottomWrap = function() {
-    var scrollToBottom = function() {
-      var feed = document.getElementById('feed');
-      feed.scrollTop = feed.scrollHeight + 44;
-    };
-    scrollToBottom();
-    $window.addEventListener('resize', function() {
-      scrollToBottom();
-    });
-  };
-  return {
-    link: scrollBottomWrap
-  };
-});
-
 app.factory('socket', function($rootScope) { // MOVE FACTORIES TO A SEPARATE FILE?
   var socket = io.connect();
   return {
@@ -61,14 +26,98 @@ app.factory('socket', function($rootScope) { // MOVE FACTORIES TO A SEPARATE FIL
   };
 });
 
+app.directive('slidePanel', ['$swipe', function($swipe) { // MOVE DIRECTIVES TO A SEPARATE FILE?
+  return {
+    restrict: 'EA',
+    link: function(scope, elem, attrs, ctrl) {
+      var startX, pointX;
+      $swipe.bind(elem, {
+        'start': function(coords) {
+          startX = coords.x;
+          pointX = coords.y;
+        },
+        'move': function(coords) {
+          var delta = coords.x - pointX;
+        },
+        'end': function(coords) {
+        },
+        'cancel': function(coords) {
+        }
+      });
+    }
+  };
+}]);
+
+app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARATE FILE?
+  var scrollBottomWrap = function() {
+    var scrollToBottom = function() {
+      var feed = document.getElementById('feed');
+      feed.scrollTop = feed.scrollHeight + 44;
+    };
+    scrollToBottom();
+    $window.addEventListener('resize', function() {
+      scrollToBottom();
+    });
+  };
+  return {
+    link: scrollBottomWrap
+  };
+});
+
+var feedbackPerLength = function(length) {
+  var composeField = document.getElementById('composeField');
+  var limit = composeField.attributes.getNamedItem('char-limit').value;
+  switch(true) {
+    case (limit <= length):
+      composeField.classList.add('danger');
+      break;
+    case (limit - length <= 20):
+      composeField.classList.remove('danger');
+      composeField.classList.add('warning');
+      break;
+    default:
+      composeField.classList.remove('danger');
+      composeField.classList.remove('warning');
+  }
+};
+
+app.directive('charLimit', function() { // MOVE DIRECTIVES TO A SEPARATE FILE?
+  return {
+    restrict: 'A',
+    link: function(scope, elem, attrs) {
+      var limit = attrs.charLimit;
+      elem.bind('keyup', function(event) {
+        var length = elem.val().length;
+        feedbackPerLength(length); // Color the field if text too long.
+      });
+      elem.bind('keypress', function(event) {
+        if(elem.val().length >= limit) {
+          if(event.keyCode !== 8) { // Prevent non-backspace keypresses if length exceeds limit.
+            event.preventDefault();
+          }
+        }
+      });
+    }
+  };
+});
+
 app.controller('MainCtrl', function($scope, $http, $window, socket) {
   // BREAK SOME OF THESE PIECES BELOW INTO SEPARATE CONTROLLERS?
 
-//------------------------------------------------------------------------------
-//
-//  LEFT PANEL / FILTERING
-//
-//------------------------------------------------------------------------------
+  // This function is called if the user makes a dropdown selection.
+  $scope.composeCanned = function(chat) {
+    // Add user's dropdown selection to the composition field.
+    if(chat.body === undefined) {
+      chat.body = $scope.cannedModel;
+    } else {
+      chat.body += ' ' + $scope.cannedModel;
+    }
+    feedbackPerLength(chat.body.length); // Color the field if text too long.
+  };
+
+  socket.on('init', function(data) {
+    console.log('Socket connection established.');
+  });
 
   $scope.messageFilter = function(chat) {
     for(var i = 0; i < $scope.settings.messageTypes.length; i++) {
@@ -120,27 +169,27 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
   $scope.settings = {
     zones: [{
-        label: '1',
-        show: true
-      }, {
-        label: '2',
-        show: true
-      }, {
-        label: '3',
-        show: true
-      }, {
-        label: '4',
-        show: true
-      }, {
-        label: '5',
-        show: true
-      }, {
-        label: '6',
-        show: true
-      }, {
-        label: '7',
-        show: true
-    }],
+    label: '1',
+    show: true
+  }, {
+    label: '2',
+    show: true
+  }, {
+    label: '3',
+    show: true
+  }, {
+    label: '4',
+    show: true
+  }, {
+    label: '5',
+    show: true
+  }, {
+    label: '6',
+    show: true
+  }, {
+    label: '7',
+    show: true
+  }],
   
   messageTypes: [{
     label: 'Chats',
@@ -199,6 +248,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   users: []
   }; 
 
+//  $scope.showUsers = false;
 
   $scope.configureUserSettings = function(){
   // sets up settings for a logged in user
@@ -256,12 +306,24 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     });  
   };
   
+  $scope.updateFilters = function(){
+    console.log('change');
+  }
+
   $scope.toggle = function () {
-    console.log('show', this.show);
+    // console.log('show', this.show);
     this.show = !this.show;
-    console.log('show', this.show);
+    // console.log('show', this.show);
   };
 
+  socket.on('newMessage', function(data) {
+    var newChat = data['data'][0];
+    var idOfLastItem = $scope.chats[$scope.chats.length-1]._id;
+    if(idOfLastItem !== newChat._id) {
+      $scope.chats.push(newChat);
+      console.log('new message added');
+    }
+  });
 
   $scope.showPanelLeft = false;
   $scope.togglePanelLeft = function() {
@@ -277,74 +339,10 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }
   }
 
-
-//--------------------------------------------------
-//
-//  SOCKETS
-//
-//--------------------------------------------------
-
-  socket.on('init', function(data) {
-    console.log('Socket connection established.');
-  });
-
-  socket.on('newMessage', function(data) {
-    var newChat = data['data'][0];
-    var idOfLastItem = $scope.chats[$scope.chats.length-1]._id;
-    if(idOfLastItem !== newChat._id) {
-      $scope.chats.push(newChat);
-      console.log('new message added');
-    }
-  });
-
-//--------------------------------------------------
-//
-//  RIGHT PANEL / DASHBOARD
-//
-//--------------------------------------------------
   $scope.showPanelRight = false;
   $scope.togglePanelRight = function() {
     $scope.showPanelRight = ($scope.showPanelRight) ? false : true;
   };
-
-  $scope.displayAvatar = function(){
-    
-  }
-
-  $scope.previewAvatar = function(){
-    var preview = $('#avatarImage');
-    console.log('preview', preview)
-    var file = $('input[type=file]')[0].files[0];
-    console.log('file', file);
-
-    var reader = new FileReader();
-
-    reader.onloadend = function(){
-      preview.src = reader.result;
-      console.log('preview.src', preview.src);
-      $http.post('/api/users/me', {
-        propertyValue: preview.src,
-        propertyKey: 'avatar',
-        userId: $scope.user._id
-      }).success(function() {
-        console.log('Image saved to database');
-        var str = "url('" + reader.result + "')";
-        $('#avatarDisplay').css('background-image', str); 
-      });
-    }
-
-    if (file) {
-      reader.readAsDataURL(file);
-    } else { 
-      preview.src = "";
-    }
-  };
-
-//--------------------------------------------------
-//
-//  MAIN PANEL
-//
-//-------------------------------------------------
 
   var toolsVisible = false;
   $scope.showTools = function() {
@@ -371,14 +369,13 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   }).error(function(data, status, headers, config) {
     console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
   });
-  // This function is called if the user makes a dropdown selection.
-  // User's dropdown selection will be added to the composition field.
-  $scope.composeCanned = function(chat) {
-    if(chat.body === undefined) {
-      chat.body = $scope.cannedModel;
-    } else {
-      chat.body += ' ' + $scope.cannedModel;
-    }
+
+  $scope.doneUp = function() {
+    $http.get('/download').success(function() {
+      console.log('GET success!');
+    }).error(function(data, status, headers, config) {
+      console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
+    });
   };
 
   var isChatValid = function(chat) {
@@ -403,7 +400,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   }
 
   $scope.sendChat = function(chat) {
-    console.log('sendChat invoked. chat.name:', chat.name, 'chat.body:', chat.body, 'this:', this);
+    // console.log('sendChat invoked. chat.name:', chat.name, 'chat.body:', chat.body, 'this:', this);
     if(!isChatValid(chat)) {
       console.log('Invalid chat, overriding "send".');
       return;
@@ -425,12 +422,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       console.log('POST error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
     });
   };
-
-//--------------------------------------
-//
-//  MAP
-//
-//-------------------------------------
   
   $scope.layer;
   $scope.map;
@@ -466,12 +457,12 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   };
 
   $scope.hidePic = true;
-  $scope.createPic = function(){
+  $scope.createPic = function() {
     $('#pic').height($(window).height());
   };
 
   $scope.showMapOrPic = function(chat) {
-    console.log(chat);
+    // console.log(chat);
     if(chat.image !== undefined) {
       $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center');
       $scope.hidePic = false;
@@ -491,7 +482,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       $scope.hideMap = false;
     }
   };
-
 });
 
 app.filter('searchFor', function() {
