@@ -426,22 +426,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     });
   };
 
-app.filter('searchFor', function() {
-  return function(arr, searchString) {
-    if(!searchString) {
-      return arr;
-    }
-    var result = [];
-    searchString = searchString.toLowerCase();
-    angular.forEach(arr, function(chat) {
-      if(chat.body && chat.body.toLowerCase().indexOf(searchString) !== -1) {
-        result.push(chat);
-      }
-    });
-    return result;
-  };
-});
-
 //--------------------------------------
 //
 //  MAP
@@ -508,4 +492,20 @@ app.filter('searchFor', function() {
     }
   };
 
+});
+
+app.filter('searchFor', function() {
+  return function(arr, searchString) {
+    if(!searchString) {
+      return arr;
+    }
+    var result = [];
+    searchString = searchString.toLowerCase();
+    angular.forEach(arr, function(chat) {
+      if(chat.body && chat.body.toLowerCase().indexOf(searchString) !== -1) {
+        result.push(chat);
+      }
+    });
+    return result;
+  };
 });
