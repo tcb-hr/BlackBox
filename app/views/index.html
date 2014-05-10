@@ -63,8 +63,6 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/angular-moment/angular-moment.js"></script>
-    <script src="bower_components/ng-flow/dist/ng-flow-standalone.min.js"></script>
-    <script src="bower_components/flow.js/dist/flow.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
     <script src="http://maps.stamen.com/js/tile.stamen.js?v1.2.4"></script>
     <script src="bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js"></script>
@@ -76,11 +74,11 @@
     <!-- endbower -->
 
     <script src="./socket.io/socket.io.js"></script>
-    <!-- <script src="http://138.91.64.150:80/socket.io/socket.io.js"></script> -->
-
+    <script src="http://138.91.64.150:80/socket.io/socket.io.js"></script>
+    
     <script>
       var socket = io.connect('http://localhost:80');
-      // var socket = io.connect('http://138.91.64.150:80');
+      var socket = io.connect('http://138.91.64.150:80');
       socket.on('news', function (data) {
         console.log(data);
         alert(data['hello'])
