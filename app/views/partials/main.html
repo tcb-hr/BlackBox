@@ -20,9 +20,10 @@
 <div class="panel" id="panelRight" ng-class="{ hide: !showPanelRight, slide: showPanelRight }">
   <button class="dashboardButton" ng-click="togglePanelRight()"><i class="fa fa-user"></i></button>
   <div class="panelContent">
-    <h1 class="panelTitle">My Profile</h1>  
-    <input type="file" accept="image/*" capture="camera"></i>
-    <button id="submitPhoto" ng-click="savePhoto()"><i class="fa fa-check"></i> Use this photo</button>
+  <h1 class="panelTitle">My Profile</h1>  
+    <input id="avatarInput" type="file" accept="image/*" capture="camera"></i>
+    <img id="avatarImage" src="" height="200" alt="Image preview...">
+    <button id="submitAvatar" ng-click="previewAvatar()"><i class="fa fa-check"></i> Use this photo</button>
   </div>
 </div>
 

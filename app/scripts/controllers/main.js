@@ -307,6 +307,33 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.showPanelRight = ($scope.showPanelRight) ? false : true;
   };
 
+  $scope.previewAvatar = function(){
+    var preview = $('.avatarImage');
+    console.log('preview', preview)
+    var file = $('input[type=file]')[0].files[0];
+    console.log('file', file);
+
+    var reader = new FileReader();
+
+    reader.onloadend = function(){
+      preview.src = reader.result;
+      console.log('preview.src', preview.src);
+      $http.post('/api/users/me', {
+        propertyValue: preview.src,
+        propertyKey: 'avatar',
+        userId: $scope.user._id
+      }).success(function() {
+        console.log('Image saved to database');
+      });
+    }
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else { 
+      preview.src = "";
+    }
+  };
+
 //--------------------------------------------------
 //
 //  MAIN PANEL
