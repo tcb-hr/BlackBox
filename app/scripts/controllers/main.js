@@ -71,7 +71,7 @@ var feedbackPerLength = function(length) {
     case (limit <= length):
       composeField.classList.add('danger');
       break;
-    case (limit - length <= 5):
+    case (limit - length <= 20):
       composeField.classList.remove('danger');
       composeField.classList.add('warning');
       break;
