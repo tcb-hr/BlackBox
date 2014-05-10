@@ -213,7 +213,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
           $scope.settings.users = userFilter;
           if($scope.user !== 'guest'){
             $http.post('/api/users/me', {
-              newSettings: $scope.settings,
+              propertyValue: $scope.settings,
+              propertyKey: 'settings',
               userId: $scope.user._id
             }).success(function() {
               console.log('User settings updated in db');
@@ -240,7 +241,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
           }
          if(updated){
            $http.post('/api/users/me', {
-             newSettings: $scope.settings,
+             propertyValue: $scope.settings, 
+             propertyKey: 'settings',
              userId: $scope.user._id
            }).success(function() {
              console.log('User people prefernces updated');
@@ -277,7 +279,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.showPanelLeft = ($scope.showPanelLeft) ? false : true;
     if($scope.user !== 'guest'){
       $http.post('/api/users/me', {
-        newSettings: $scope.settings,
+        propertyKey: 'settings',
+        propertyValue: $scope.settings,
         userId: $scope.user._id
       }).success(function() {
         console.log('POST success!');
