@@ -64,9 +64,11 @@ app.factory('socket', function($rootScope) { // MOVE FACTORIES TO A SEPARATE FIL
 app.controller('MainCtrl', function($scope, $http, $window, socket) {
   // BREAK SOME OF THESE PIECES BELOW INTO SEPARATE CONTROLLERS?
 
-  socket.on('init', function(data) {
-    console.log('Socket connection established.');
-  });
+//------------------------------------------------------------------------------
+//
+//  LEFT PANEL / FILTERING
+//
+//------------------------------------------------------------------------------
 
   $scope.messageFilter = function(chat) {
     for(var i = 0; i < $scope.settings.messageTypes.length; i++) {
@@ -197,7 +199,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   users: []
   }; 
 
-//  $scope.showUsers = false;
 
   $scope.configureUserSettings = function(){
   // sets up settings for a logged in user
@@ -255,24 +256,12 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     });  
   };
   
-  $scope.updateFilters = function(){
-    console.log('change');
-  }
-
   $scope.toggle = function () {
     console.log('show', this.show);
     this.show = !this.show;
     console.log('show', this.show);
   };
 
-  socket.on('newMessage', function(data) {
-    var newChat = data['data'][0];
-    var idOfLastItem = $scope.chats[$scope.chats.length-1]._id;
-    if(idOfLastItem !== newChat._id) {
-      $scope.chats.push(newChat);
-      console.log('new message added');
-    }
-  });
 
   $scope.showPanelLeft = false;
   $scope.togglePanelLeft = function() {
@@ -288,10 +277,41 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }
   }
 
+
+//--------------------------------------------------
+//
+//  SOCKETS
+//
+//--------------------------------------------------
+
+  socket.on('init', function(data) {
+    console.log('Socket connection established.');
+  });
+
+  socket.on('newMessage', function(data) {
+    var newChat = data['data'][0];
+    var idOfLastItem = $scope.chats[$scope.chats.length-1]._id;
+    if(idOfLastItem !== newChat._id) {
+      $scope.chats.push(newChat);
+      console.log('new message added');
+    }
+  });
+
+//--------------------------------------------------
+//
+//  RIGHT PANEL / DASHBOARD
+//
+//--------------------------------------------------
   $scope.showPanelRight = false;
   $scope.togglePanelRight = function() {
     $scope.showPanelRight = ($scope.showPanelRight) ? false : true;
   };
+
+//--------------------------------------------------
+//
+//  MAIN PANEL
+//
+//-------------------------------------------------
 
   var toolsVisible = false;
   $scope.showTools = function() {
@@ -381,6 +401,28 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       console.log('POST error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
     });
   };
+
+app.filter('searchFor', function() {
+  return function(arr, searchString) {
+    if(!searchString) {
+      return arr;
+    }
+    var result = [];
+    searchString = searchString.toLowerCase();
+    angular.forEach(arr, function(chat) {
+      if(chat.body && chat.body.toLowerCase().indexOf(searchString) !== -1) {
+        result.push(chat);
+      }
+    });
+    return result;
+  };
+});
+
+//--------------------------------------
+//
+//  MAP
+//
+//-------------------------------------
   
   $scope.layer;
   $scope.map;
@@ -441,20 +483,5 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       $scope.hideMap = false;
     }
   };
-});
 
-app.filter('searchFor', function() {
-  return function(arr, searchString) {
-    if(!searchString) {
-      return arr;
-    }
-    var result = [];
-    searchString = searchString.toLowerCase();
-    angular.forEach(arr, function(chat) {
-      if(chat.body && chat.body.toLowerCase().indexOf(searchString) !== -1) {
-        result.push(chat);
-      }
-    });
-    return result;
-  };
 });
