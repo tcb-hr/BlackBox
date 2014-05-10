@@ -62,7 +62,7 @@ var app = angular.module('feedApp', [
   //   flowFactoryProvider.on('catchAll', function (event) {
   //     console.log('catchAll', arguments);
   //   });
-  // })
+  })
   .run(function ($rootScope, $location, $http, Auth) {
 
     // Redirect to login if route requires auth and you're not logged in
