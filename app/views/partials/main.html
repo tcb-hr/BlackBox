@@ -31,7 +31,7 @@
     <div class="groupTitleButton" ng-click="toggleAvatar()" ng-init="showAvatar = false"><i class="fa fa-camera-retro"></i> Profile Picture</div>
     <div class="dashboardCategory" ng-show="showAvatar">My Profile Pic:<br>
       <div id="avatarDisplay" ng-show="showAvatar" ng-init="loadAvatar()"></div><br>
-      <input id="avatarInput" ng-show="showAvatar" type="file" accept="image/*" capture="camera" ng-model="avatarModel" onchange="previewAvatar()"></i>
+      <input id="avatarInput" ng-show="showAvatar" type="file" accept="image/*" capture="camera"></i>
       <img id="avatarImage" ng-show="showAvatar">
       <button id="submitAvatar" ng-show="showAvatar" ng-click="saveAvatar()"><i class="fa fa-check"></i> Use this photo</button>
     </div>

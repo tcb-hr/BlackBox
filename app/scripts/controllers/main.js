@@ -318,7 +318,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     });
   }
 
-  $scope.previewAvatar = function(){
+  $scope.saveAvatar = function(){
     console.log('preview avatar');
     var preview = $('#avatarImage');
     var file = $('input[type=file]')[0].files[0];
@@ -330,6 +330,13 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       var str = "url('" + preview.src + "')";
       console.log('loaded', str);
       $('#avatarDisplay').css('background-image', str);
+      $http.post('/api/users/me', {
+        propertyValue: $('#avatarImage').src,
+        propertyKey: 'avatar',
+        userId: $scope.user._id
+      }).success(function() {
+        console.log('Image saved to database');
+      });
     }
 
     if (file) {
@@ -338,16 +345,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       preview.src = "";
     }
   };
-
-  $scope.saveAvatar = function(){
-    $http.post('/api/users/me', {
-      propertyValue: $('#avatarImage').src,
-      propertyKey: 'avatar',
-      userId: $scope.user._id
-    }).success(function() {
-      console.log('Image saved to database');
-   });
-  }
 
  $scope.toggleStats = function(){
     $scope.showStats = !$scope.showStats;
