@@ -307,8 +307,12 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.showPanelRight = ($scope.showPanelRight) ? false : true;
   };
 
+  $scope.displayAvatar = function(){
+    
+  }
+
   $scope.previewAvatar = function(){
-    var preview = $('.avatarImage');
+    var preview = $('#avatarImage');
     console.log('preview', preview)
     var file = $('input[type=file]')[0].files[0];
     console.log('file', file);
@@ -324,6 +328,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         userId: $scope.user._id
       }).success(function() {
         console.log('Image saved to database');
+        var str = "url('" + reader.result + "')";
+        $('#avatarDisplay').css('background-image', str); 
       });
     }
 

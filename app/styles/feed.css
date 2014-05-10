@@ -369,3 +369,9 @@ padding-right: 10px;
 font-size: 20px;
 font-style: italic;
 }
+#avatarDisplay{
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 80px;
+  width: 80px;
+}  
