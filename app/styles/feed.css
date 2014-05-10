@@ -369,3 +369,9 @@ padding-right: 10px;
 font-size: 20px;
 font-style: italic;
 }
+.warning {
+  background-color: #ffff66;
+}
+.danger {
+  background-color: #ff5050;
+}
