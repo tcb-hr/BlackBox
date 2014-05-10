@@ -349,6 +349,19 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
    });
   }
 
+ $scope.toggleStats = function(){
+    $scope.showStats = !$scope.showStats;
+    $scope.showAvatar = false;
+  }
+
+  $scope.toggleAvatar = function(){
+    $scope.showAvatar = !$scope.showAvatar;
+    $scope.showStats = false;
+  }
+
+
+ 
+
 //--------------------------------------------------
 //
 //  MAIN PANEL
