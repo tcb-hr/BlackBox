@@ -6,8 +6,7 @@ var app = angular.module('feedApp', [
   'ngRoute',
   'ngSanitize',
   'ngTouch',
-  'angularMoment'//,
-  // 'flow'
+  'angularMoment'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider

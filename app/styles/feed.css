@@ -67,8 +67,16 @@ body {
   font-weight: 700;
   color: #aaa;
 }
-/*<<<<<<< HEAD
-#settingsButton {
+.settingsButton {
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  font-size: 30px;
+  height: 40px;
+  width: 60px;
+  color: darkgrey;
+}
+.dashboardButton {
   position: absolute;
   right: 0px;
   top: 0px;
@@ -77,15 +85,7 @@ body {
   padding: 6px 10px;
   color: darkgrey;
 }
-#dashboardButton {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  font-size: 30px;
-  height: 30px;
-  padding: 6px 10px;
-  color: darkgrey;
-=======*/
+/*
 #settingsBtn {
   position: absolute;
   top: 2px;
@@ -100,6 +100,7 @@ body {
   background-image: url("../images/dash.png");
   background-size: 40px 40px;
 }
+*/
 #pinnedBar {
   display: none;
 }
@@ -294,9 +295,14 @@ body {
   margin-right: 12px;
   margin-left: 36px;
 }
-.panelContent h1 {
+.settingsTitle {
+  font-size: 24px;
   font-weight: 700;
-  font-size: 12pt;
+  padding-left: 45px;
+  height: 40px;
+  margin: 0px;
+  top: 0px;
+  letter-spacing: 5px;
 }
 .panelContent li {
   /*display: block;*/
@@ -359,13 +365,13 @@ width: 30px;
 text-align: center;
 padding-right: 10px;
 }
-.panelTitle{
-font-size: 24px;
-letter-spacing: 3px;
-margin: 15px;
-font-weight: bold;
-}
 .selectAllButton{
 font-size: 20px;
 font-style: italic;
 }
+#avatarDisplay{
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 80px;
+  width: 80px;
+}  
