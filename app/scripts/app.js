@@ -6,10 +6,10 @@ var app = angular.module('feedApp', [
   'ngRoute',
   'ngSanitize',
   'ngTouch',
-  'angularMoment',
-  'flow'
+  'angularMoment'//,
+  // 'flow'
 ])
-  .config(function ($routeProvider, $locationProvider, $httpProvider, flowFactoryProvider) {
+  .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'partials/main',
@@ -36,33 +36,33 @@ var app = angular.module('feedApp', [
     $locationProvider.html5Mode(true);
       
     // Intercept 401s and redirect you to login
-    $httpProvider.interceptors.push(['$q', '$location', function($q, $location) {
-      return {
-        'responseError': function(response) {
-          if(response.status === 401) {
-            $location.path('/login');
-            return $q.reject(response);
-          }
-          else {
-            return $q.reject(response);
-          }
-        }
-      };
-    }]);
-    // ngFlow pic uploader
-    flowFactoryProvider.defaults = {
-      target: './upload',
-      permanentErrors: [404, 501], //500
-      maxChunkRetries: 3,
-      chunkSize: 15000,
-      chunkRetryInterval: 5000,
-      simultaneousUploads: 1,
-      singleFile: true
-    };
-    flowFactoryProvider.on('catchAll', function (event) {
-      console.log('catchAll', arguments);
-    });
-  })
+  //   $httpProvider.interceptors.push(['$q', '$location', function($q, $location) {
+  //     return {
+  //       'responseError': function(response) {
+  //         if(response.status === 401) {
+  //           $location.path('/login');
+  //           return $q.reject(response);
+  //         }
+  //         else {
+  //           return $q.reject(response);
+  //         }
+  //       }
+  //     };
+  //   }]);
+  //   // ngFlow pic uploader
+  //   flowFactoryProvider.defaults = {
+  //     target: './upload',
+  //     permanentErrors: [404, 501], //500
+  //     maxChunkRetries: 3,
+  //     chunkSize: 15000,
+  //     chunkRetryInterval: 5000,
+  //     simultaneousUploads: 1,
+  //     singleFile: true
+  //   };
+  //   flowFactoryProvider.on('catchAll', function (event) {
+  //     console.log('catchAll', arguments);
+  //   });
+  // })
   .run(function ($rootScope, $location, $http, Auth) {
 
     // Redirect to login if route requires auth and you're not logged in
