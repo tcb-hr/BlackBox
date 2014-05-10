@@ -132,42 +132,40 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.displayZones = !$scope.displayZones;
     $scope.displayMessageTypes = false;
     $scope.displayUsers = false;
-  };
+  }
 
   $scope.toggleMessageTypes = function(){
     $scope.displayMessageTypes = !$scope.displayMessageTypes;
     $scope.displayZones = false;
     $scope.displayUsers = false;
-  };
+  }
 
   $scope.toggleUsers = function(){
     $scope.displayUsers = !$scope.displayUsers;
     $scope.displayZones = false;
     $scope.displayMessageTypes = false;
-  };
-
+  }
   $scope.selectAllZones = true;
   $scope.selectAllMessageTypes = true;
   $scope.selectAllUsers = true;
 
   $scope.selectAll = function(arr){
-    var value, i;
     if(arr === $scope.settings.zones){
       $scope.selectAllZones = !$scope.selectAllZones;
-      value = $scope.selectAllZones;
+      var value = $scope.selectAllZones;
     }
     if(arr === $scope.settings.messageTypes){
       $scope.selectAllMessageTypes = !$scope.selectAllMessageTypes;
-      value = $scope.selectAllMessageTypes;
+      var value = $scope.selectAllMessageTypes;
     }
     if(arr === $scope.settings.users){
       $scope.selectAllUsers = !$scope.selectAllUsers;
-      value = $scope.selectAllUsers;
+      var value = $scope.selectAllUsers;
     }
-    for(i=0; i<arr.length; i++){
-      arr[i].show = value;
+    for(var i=0; i<arr.length; i++){
+      arr[i].show = value; 
     }
-  };
+  }
 
   $scope.settings = {
     zones: [{
@@ -192,8 +190,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     label: '7',
     show: true
   }],
-
-    messageTypes: [{
+  
+  messageTypes: [{
     label: 'Chats',
     dbLabel: 200,
     show: true
@@ -248,7 +246,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   }],
 
   users: []
-  };
+  }; 
 
 //  $scope.showUsers = false;
 
@@ -378,6 +376,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }).error(function(data, status, headers, config) {
       console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
     });
+  };
 
   var isChatValid = function(chat) {
     if(chat.body === undefined || chat.body.length > 140) {
@@ -423,13 +422,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       console.log('POST error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
     });
   };
-
-//--------------------------------------
-//
-//  MAP
-//
-//-------------------------------------
-
+  
   $scope.layer;
   $scope.map;
   $scope.dropMarker;
