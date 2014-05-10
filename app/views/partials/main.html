@@ -1,33 +1,49 @@
 <div class="panel" id="panelLeft" ng-class="{ hide: !showPanelLeft, slide: showPanelLeft }">
-  <button class="button closeBtnLeft floatRight" id="closePanelLeft" ng-click="togglePanelLeft()">close</button>
-  <h1 class="panelTitle">Settings</h1>
+  <button class="settingsButton" ng-click="togglePanelLeft()"><i class="fa fa-arrow-circle-left"></i></button>
+  <div class="panelContent">
+    <h1 class="settingsTitle">Settings</h1>
+    <div class="groupTitleButton" ng-click="toggleZones()"><i class="fa fa-map-marker"></i>Zones</div>
+    <button class="selectAllButton" ng-show="displayZones" ng-click="selectAll(settings.zones)"><i ng-show="selectAllZones" class="fa fa-check-square-o"></i><i ng-hide="selectAllZones" class="fa fa-square-o"></i> Select All</button>
+    <button class="filterButton" ng-repeat="zone in settings.zones" ng-show="displayZones" ng-click="zone.show = !zone.show"><i ng-hide="zone.show" class="fa fa-circle-o"></i><i ng-show="zone.show" class="fa fa-check-circle-o"></i>{{zone.label}}</button>
 
-  <button class="groupTitleButton"><i class="fa fa-smile-o"></i>My Profile</button>
-  <input type="file" accept="image/*" capture="camera"></i>  
-
-  <div class="groupTitleButton" ng-click="toggleZones()"><i class="fa fa-map-marker"></i>Zones</div>
-  <button class="selectAllButton" ng-show="displayZones" ng-click="selectAll(settings.zones)"><i ng-show="selectAllZones" class="fa fa-check-square-o"></i><i ng-hide="selectAllZones" class="fa fa-square-o"></i> Select All</button>
-  <button class="filterButton" ng-repeat="zone in settings.zones" ng-show="displayZones" ng-click="zone.show = !zone.show"><i ng-hide="zone.show" class="fa fa-circle-o"></i><i ng-show="zone.show" class="fa fa-check-circle-o"></i>{{zone.label}}</button>
-
-  <div class="groupTitleButton" ng-click="toggleMessageTypes()"><i class="fa fa-envelope"></i>Message Types</div>
-  <button class="selectAllButton" ng-show="displayMessageTypes" ng-click="selectAll(settings.messageTypes)"><i ng-show="selectAllMessageTypes" class="fa fa-check-square-o"></i><i ng-hide="selectAllMessageTypes" class="fa fa-square-o"></i>Select All</button>
-  <button class="filterButton" ng-repeat="type in settings.messageTypes" ng-show="displayMessageTypes" ng-click="type.show = !type.show" ng-class="{'on':type.show}"><i ng-hide="type.show" class="fa fa-circle-o"></i><i ng-show="type.show" class="fa fa-check-circle-o"></i>{{type.label}}</button>
+    <div class="groupTitleButton" ng-click="toggleMessageTypes()"><i class="fa fa-envelope"></i>Message Types</div>
+    <button class="selectAllButton" ng-show="displayMessageTypes" ng-click="selectAll(settings.messageTypes)"><i ng-show="selectAllMessageTypes" class="fa fa-check-square-o"></i><i ng-hide="selectAllMessageTypes" class="fa fa-square-o"></i>Select All</button>
+    <button class="filterButton" ng-repeat="type in settings.messageTypes" ng-show="displayMessageTypes" ng-click="type.show = !type.show" ng-class="{'on':type.show}"><i ng-hide="type.show" class="fa fa-circle-o"></i><i ng-show="type.show" class="fa fa-check-circle-o"></i>{{type.label}}</button>
 
 
-  <div class="groupTitleButton" ng-click="toggleUsers()" ng-init="showUsers = false"><i class="fa fa-user"></i>Users</div>
+    <div class="groupTitleButton" ng-click="toggleUsers()" ng-init="showUsers = false"><i class="fa fa-user"></i>Users</div>
   <button class="selectAllButton" ng-show="displayUsers" ng-click="selectAll(settings.users)"><i ng-show="selectAllUsers" class="fa fa-check-square-o"></i><i ng-hide="selectAllUsers" class="fa fa-square-o"></i>Select All</button>
-  <button class="filterButton" ng-repeat="user in settings.users" ng-show="displayUsers" ng-click="user.show = !user.show" ng-class="{'on':user.show}"><i ng-hide="user.show" class="fa fa-circle-o"></i><i ng-show="user.show" class="fa fa-check-circle-o"></i>{{user.name}}</button>  
+    <button class="filterButton" ng-repeat="user in settings.users" ng-show="displayUsers" ng-click="user.show = !user.show" ng-class="{'on':user.show}"><i ng-hide="user.show" class="fa fa-circle-o"></i><i ng-show="user.show" class="fa fa-check-circle-o"></i>{{user.name}}</button>  
+  </div>
+<!--   <button class="button closeBtnLeft floatRight" id="closePanelLeft" ng-click="togglePanelLeft()">close</button>
+  <h1>Settings</h1>
+  <div class="groupTitleButton" ng-click="showZones = !showZones" ng-init="showZones = false"><i class="fa fa-map-marker"></i>Zones</div>
+  <button class="zoneFilterButton" ng-repeat="zone in zones" ng-show="showZones"ng-click="zone.show = !zone.show" ng-class="{ 'on': zone.show }">{{zone.label}}</button>
+  <div class="groupTitleButton" ng-click="showTypes = !showTypes" ng-init="showTypes = false"><i class="fa fa-envelope"></i>Message Types</div>
+  <button class="typeFilterButton" ng-repeat="type in messageTypes" ng-show="showTypes" ng-click="type.show = !type.show" ng-class="{ 'on': type.show }">{{type.label}}</button>
+  <div class="groupTitleButton" ng-click="showUsers = !showUsers" ng-init="showUsers = false"><i class="fa fa-user"></i>Users</div>
+  <button class="userFilterButton" ng-repeat="user in users" ng-show="showUsers" ng-click="user.show = !user.show" ng-class="{ 'on': user.show }">{{user.label}}</button> -->
 </div>
 
 <div class="panel" id="panelRight" ng-class="{ hide: !showPanelRight, slide: showPanelRight }">
-  <button class="button closeBtnRight floatLeft" id="closePanelRight" ng-click="togglePanelRight()">close</button>
+  <h1 class="dashboardTitle">Dashboard</h1>
+  <button class="dashboardButton" ng-click="togglePanelRight()"><i class="fa fa-user"></i></button>
+  
   <div class="panelContent">
-    <h1>Dashboard</h1>
-    <ul>
-      <li>Dash stat 1</li>
-      <li>Dash stat 2</li>
-      <li>Dash stat 3</li>
-    </ul>
+    <div class="groupTitleButton" ng-click="toggleStats()" ng-init="showStats = false"><i class="fa fa-usd"></i> Stats</div>
+    
+    <div class="dashboardCategory" ng-show="showStats">Total Jobs:<br><span id="jobsStat">122</span></div>
+    <div class="dashboardCategory" ng-show="showStats">Total Earnings:<br><span id="earningsStat">$1024</span></div>
+    <div class="dashboardCategory" ng-show="showStats">On-Time:<br><span id="onTimeStat">86.7%</span></div>
+
+    <div class="groupTitleButton" ng-click="toggleAvatar()" ng-init="showAvatar = false"><i class="fa fa-camera-retro"></i> Profile Picture</div>
+    <div class="dashboardCategory" ng-show="showAvatar">My Profile Pic:<br>
+      <div id="avatarDisplay" ng-show="showAvatar" ng-init="loadAvatar()"></div><br>
+      <input id="avatarInput" ng-show="showAvatar" type="file" accept="image/*" capture="camera"></i>
+      <img id="avatarImage" ng-show="showAvatar">
+      <button id="submitAvatar" ng-show="showAvatar" ng-click="saveAvatar()"><i class="fa fa-check"></i> Use this photo</button>
+    </div>
+
   </div>
 </div>
 
@@ -76,18 +92,8 @@
                 <input type="text" class="textField" id="searchField" ng-model="searchString" placeholder="search" />
               </div>
 
-              <div class="tool" id="picTool">
-                <div flow-init="{ singleFile: true }" flow-name="image" flow-file-added="!!{ png: 1, gif: 1, jpg: 1, jpeg: 1 }[$file.getExtension()]" flow-files-submitted="$flow.upload()">
-                  <div class="content">
-                    <button class="btn btn-primary" id="picBtn" ng-show="!$flow.files.length" flow-btn>add pic</button>
-                    <button class="button" id="cancelBtn" ng-show="$flow.files.length" ng-click="$flow.cancel()">remove</button>
-                    <div id="thumb" ng-show="$flow.files.length"><img flow-img="$flow.files[0]" /></div>
-                  </div>
-                </div>
-              </div>
-
               <div class="tool" id="cannedTool">
-                <select id="cannedSelect" ng-model="cannedModel" ng-change="composeCanned(chat)">
+                <select id="cannedSelect" ng-model="cannedModel" ng-change="composeCanned(chat)" ng-disabled="140 <= chat.body.length">
                   <option></option>
                   <option>10-4</option>
                   <option>on my way</option>
@@ -101,13 +107,11 @@
           <form id="chatForm" name="chat" ng-init="configureUserSettings()" ng-submit="sendChat(chat)">
             <div id="bottomRow">
               <button type="button" class="button" id="toolsBtn" ng-click="toggleTools()">tools</button>
-              <!-- If 'form' encloses 'toolbox' need to add the following 'ng-keyup' --> <!-- ng-keyup="$event.keyCode === 13 ? sendChat(chat) : null" -->
-              <input type="text" class="form-control textField" id="composeField" ng-model="chat.body" placeholder="compose" />
+              <input type="text" placeholder="compose" id="composeField" class="form-control textField" ng-model="chat.body" char-limit="140" />
               <button type="submit" class="button" id="sendBtn">send</button>
             </div>
           </form>
 
-        </div>
       <!-- </form> --> <!-- Placing 'form' here causes 'return' keypress anywhere in form to trigger 'flow.js'. -->
     </div>
 
