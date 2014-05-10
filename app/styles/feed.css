@@ -378,3 +378,9 @@ width: 30px;
 .bgRed {
   background-color: red;
 }
+/*input.ng-invalid.ng-dirty {
+  background-color: #FA787E;
+}*/
+/*input.ng-valid.ng-dirty {
+  background-color: #fff;
+}*/

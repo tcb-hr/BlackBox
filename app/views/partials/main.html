@@ -77,7 +77,7 @@
               </div>
 
               <div class="tool" id="cannedTool">
-                <select id="cannedSelect" ng-model="cannedModel" ng-change="composeCanned(chat)">
+                <select id="cannedSelect" ng-model="cannedModel" ng-change="composeCanned(chat)" ng-disabled="10 <= chat.body.length">
                   <option></option>
                   <option>10-4</option>
                   <option>on my way</option>
@@ -91,9 +91,12 @@
           <form id="chatForm" name="chat" ng-submit="sendChat(chat)">
             <div id="bottomRow">
               <button type="button" class="button" id="toolsBtn" ng-click="toggleTools()">tools</button>
-              <!-- If 'form' encloses 'toolbox' need to add the following 'ng-keyup' --> <!-- ng-keyup="$event.keyCode === 13 ? sendChat(chat) : null" -->
+              <!-- If 'form' encloses 'toolbox' need to add the following 'ng-keyup' to capture 'return' keypresses:--> <!-- ng-keyup="$event.keyCode === 13 ? sendChat(chat) : null" -->
               <!-- <input type="text" placeholder="compose" id="composeField" class="form-control textField" ng-model="chat.body" char-limit="10" /> -->
-              <input type="text" placeholder="compose" id="composeField" class="form-control textField" ng-model="chat.body" ng-class="{ bgYellow: 5 <= chat.body.length, bgRed: 10 <= chat.body.length }" />
+              <!-- <input type="text" placeholder="compose" id="composeField" class="form-control textField" ng-model="chat.body" ng-class="{ bgYellow: 5 <= chat.body.length, bgRed: 10 <= chat.body.length }" /> -->
+              <!-- <input type="text" placeholder="compose" id="composeField" class="form-control textField" ng-model="chat.body" ng-disabled="10 <= chat.body.length" <= chat.body.length" /> -->
+              <!-- <input type="text" placeholder="compose" id="composeField" class="form-control textField" ng-model="chat.body" ng-maxlength="8" /> -->
+              <input type="text" placeholder="compose" id="composeField" class="form-control textField" ng-model="chat.body" char-limit="10" />
               <button type="submit" class="button" id="sendBtn">send</button>
             </div>
           </form>

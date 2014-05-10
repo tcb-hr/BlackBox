@@ -29,16 +29,19 @@ app.factory('socket', function($rootScope) { // MOVE FACTORIES TO A SEPARATE FIL
 app.directive('slidePanel', ['$swipe', function($swipe) { // MOVE DIRECTIVES TO A SEPARATE FILE?
   return {
     restrict: 'EA',
-    link: function(scope, ele, attrs, ctrl) {
+    link: function(scope, elem, attrs, ctrl) {
       var startX, pointX;
-      $swipe.bind(ele, {
+      $swipe.bind(elem, {
         'start': function(coords) {
           startX = coords.x;
           pointX = coords.y;
-        }, 'move': function(coords) {
+        },
+        'move': function(coords) {
           var delta = coords.x - pointX;
-        }, 'end': function(coords) {
-        }, 'cancel': function(coords) {
+        },
+        'end': function(coords) {
+        },
+        'cancel': function(coords) {
         }
       });
     }
@@ -61,25 +64,18 @@ app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARA
   };
 });
 
-// Adapted from https://github.com/igreulich/angular-charlimit
 app.directive('charLimit', function() { // MOVE DIRECTIVES TO A SEPARATE FILE?
   return {
     restrict: 'A',
-    link: function($scope, $element, $attributes) {
-      var limit = $attributes.charLimit;
-      var element = $element;
-      // NEED TO TRUNCATE MESSAGE OR PREVENT SENDING IF > 140.
-      // INSTEAD OF BINDING TO KEYUP, HOW ABOUT CHECKING $SCOPE.CHAT.BODY.LENGTH AGAINST LIMIT?
-      // OTHERWISE, CAN OTHER EVENTS BE BOUND HERE?
-      // ALSO, WOULD NG-CLASS BE OF USE IN THE HTML?
-      element.bind('keyup', function(event) {
-        element.toggleClass('warning', limit - element.val().length <= 5);
-        element.toggleClass('danger', limit <= element.val().length);
+    link: function(scope, elem, attrs) {
+      var limit = attrs.charLimit;
+      elem.bind('keyup', function(event) {
+        elem.toggleClass('warning', limit - elem.val().length <= 5);
+        elem.toggleClass('danger', limit <= elem.val().length);
       });
-      element.bind('keypress', function(event) {
-        // Prevent non-backspace keypresses if length exceeds limit.
-        if(element.val().length >= limit) {
-          if(event.keyCode !== 8) {
+      elem.bind('keypress', function(event) {
+        if(elem.val().length >= limit) {
+          if(event.keyCode !== 8) { // Prevent non-backspace keypresses if length exceeds limit.
             event.preventDefault();
           }
         }
@@ -92,12 +88,21 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   // BREAK SOME OF THESE PIECES BELOW INTO SEPARATE CONTROLLERS?
 
   // This function is called if the user makes a dropdown selection.
-  // User's dropdown selection will be added to the composition field.
   $scope.composeCanned = function(chat) {
+    // Add user's dropdown selection to the composition field.
     if(chat.body === undefined) {
       chat.body = $scope.cannedModel;
     } else {
       chat.body += ' ' + $scope.cannedModel;
+    }
+    // Give user feedback if chat too large.
+    var composeField = document.getElementById('composeField');
+    var limit = composeField.attributes.getNamedItem('char-limit').value;
+    if(limit <= chat.body.length) {
+      composeField.classList.toggle('danger');
+      document.getElementById('cannedSelect').disabled = true;
+    } else if(limit - chat.body.length <= 5) {
+      composeField.classList.toggle('warning');
     }
   };
 
@@ -192,9 +197,9 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   }];
 
   $scope.toggle = function () {
-    console.log('show', this.show);
+    // console.log('show', this.show);
     this.show = !this.show;
-    console.log('show', this.show);
+    // console.log('show', this.show);
   };
 
   socket.on('newMessage', function(data) {
@@ -264,7 +269,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   };
 
   $scope.sendChat = function(chat) {
-    console.log('sendChat invoked. chat.name:', chat.name, 'chat.body:', chat.body, 'this:', this);
+    // console.log('sendChat invoked. chat.name:', chat.name, 'chat.body:', chat.body, 'this:', this);
     if(!isChatValid(chat)) {
       console.log('Invalid chat, overriding "send".');
       return;
@@ -326,7 +331,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   };
 
   $scope.showMapOrPic = function(chat) {
-    console.log(chat);
+    // console.log(chat);
     if(chat.image !== undefined) {
       $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center');
       $scope.hidePic = false;
