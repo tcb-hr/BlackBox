@@ -355,7 +355,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     });
   }
 
-  $scope.saveAvatar = function(){
+  $scope.previewAvatar = function(){
     console.log('preview avatar');
     var preview = $('#avatarImage');
     var file = $('input[type=file]')[0].files[0];
@@ -364,9 +364,11 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     reader.onloadend = function(){
       console.log('done loading');
       preview.src= reader.result;
+      $scope.encodedImage = reader.result;
       var str = "url('" + preview.src + "')";
       console.log('loaded', str);
       $('#avatarDisplay').css('background-image', str);
+      /*
       $http.post('/api/users/me', {
         propertyValue: $('#avatarImage').src,
         propertyKey: 'avatar',
@@ -374,6 +376,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       }).success(function() {
         console.log('Image saved to database');
       });
+      */
     }
 
     if (file) {
@@ -382,6 +385,17 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       preview.src = "";
     }
   };
+
+  $scope.saveAvatar = function(){
+    console.log('src', $scope.encodedImage);
+    $http.post('/api/users/me', {
+      propertyValue: $scope.encodedImage,
+      propertyKey: 'avatar',
+      userId: $scope.user._id
+    }).success(function() {
+      console.log('Image saved to database');
+    });
+  }
 
  $scope.toggleStats = function(){
     $scope.showStats = !$scope.showStats;
@@ -393,8 +407,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.showStats = false;
   }
 
-
- 
 
 //--------------------------------------------------
 //
