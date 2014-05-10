@@ -307,8 +307,15 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.showPanelRight = ($scope.showPanelRight) ? false : true;
   };
 
-  $scope.displayAvatar = function(){
-    
+  $scope.loadAvatar = function(){
+    $http.get('/api/users/me').success(function(user) {
+      user.avatar
+      var str = "url('" + user.avatar + "')";
+      $('#avatarDisplay').css('background-image', str);
+
+    }).error(function(data, status, headers, config) {
+      console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
+    });
   }
 
   $scope.previewAvatar = function(){
