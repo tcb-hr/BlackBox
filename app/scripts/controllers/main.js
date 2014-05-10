@@ -64,14 +64,31 @@ app.directive('scrollBottom', function($window) { // MOVE DIRECTIVES TO A SEPARA
   };
 });
 
+var feedbackPerLength = function(length) {
+  var composeField = document.getElementById('composeField');
+  var limit = composeField.attributes.getNamedItem('char-limit').value;
+  switch(true) {
+    case (limit <= length):
+      composeField.classList.add('danger');
+      break;
+    case (limit - length <= 5):
+      composeField.classList.remove('danger');
+      composeField.classList.add('warning');
+      break;
+    default:
+      composeField.classList.remove('danger');
+      composeField.classList.remove('warning');
+  }
+};
+
 app.directive('charLimit', function() { // MOVE DIRECTIVES TO A SEPARATE FILE?
   return {
     restrict: 'A',
     link: function(scope, elem, attrs) {
       var limit = attrs.charLimit;
       elem.bind('keyup', function(event) {
-        elem.toggleClass('warning', limit - elem.val().length <= 5);
-        elem.toggleClass('danger', limit <= elem.val().length);
+        var length = elem.val().length;
+        feedbackPerLength(length); // Color the field if text too long.
       });
       elem.bind('keypress', function(event) {
         if(elem.val().length >= limit) {
@@ -95,15 +112,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     } else {
       chat.body += ' ' + $scope.cannedModel;
     }
-    // Give user feedback if chat too large.
-    var composeField = document.getElementById('composeField');
-    var limit = composeField.attributes.getNamedItem('char-limit').value;
-    if(limit <= chat.body.length) {
-      composeField.classList.toggle('danger');
-      document.getElementById('cannedSelect').disabled = true;
-    } else if(limit - chat.body.length <= 5) {
-      composeField.classList.toggle('warning');
-    }
+    feedbackPerLength(chat.body.length); // Color the field if text too long.
   };
 
   socket.on('init', function(data) {
