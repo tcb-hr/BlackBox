@@ -365,22 +365,8 @@ i {
 width: 30px;
 }
 .warning {
-  /*background-color: #fcf8e3;*/
-  background-color: yellow;
+  background-color: #ffff66;
 }
 .danger {
-  /*background-color: #f2dede;*/
-  background-color: red;
+  background-color: #ff5050;
 }
-.bgYellow {
-  background-color: yellow;
-}
-.bgRed {
-  background-color: red;
-}
-/*input.ng-invalid.ng-dirty {
-  background-color: #FA787E;
-}*/
-/*input.ng-valid.ng-dirty {
-  background-color: #fff;
-}*/
