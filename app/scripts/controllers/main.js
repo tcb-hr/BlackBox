@@ -319,7 +319,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.chats = [];
 
   socket.on('newMessage', function(data) {
-    console.log('fishon')
+    console.log('fishon', data);
     var newChat = data['data'];
     if ($scope.chats.length !== 0){
       var idOfLastItem = $scope.chats[$scope.chats.length-1]._id;
