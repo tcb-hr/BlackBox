@@ -55,17 +55,17 @@ io.sockets.on('connection', function (socket) {
   }).on('error', function(err) {
     return res.send(err);
   });
-  fs.watchFile('/var/lib/mongodb/fullstack-dev.0', function(curr, prev){
-    if(curr.mtime.getTime() !== prev.mtime.getTime()){  
-      console.log('Database has been updated')
-      Chat.chatModel.find().sort({_id: -1}).limit(1).exec(function(err, chat){
-        if(err){
-          console.log(err);
-        }  
-        socket.emit('newMessage', {data: chat});
-      });
-     }
-  });
+  // fs.watchFile('/var/lib/mongodb/fullstack-dev.0', function(curr, prev){
+  //   if(curr.mtime.getTime() !== prev.mtime.getTime()){  
+  //     console.log('Database has been updated')
+  //     Chat.chatModel.find().sort({_id: -1}).limit(1).exec(function(err, chat){
+  //       if(err){
+  //         console.log(err);
+  //       }  
+  //       socket.emit('newMessage', {data: chat});
+  //     });
+  //    }
+  // });
   socket.on('newChat', function (chat) {
     console.log('herro', chat);
     var newChat = new Chat.chatModel(chat);
@@ -76,11 +76,12 @@ io.sockets.on('connection', function (socket) {
       if (err) {
         console.log('err', err);
       } else {
-        Chat.chatModel.find().sort({_id: -1}).limit(1).exec(function(err, chat){
+        Chat.chatModel.find().sort({_id: -1}).limit(1).exec(function(err, chatFromDb){
           if(err){
             console.log(err);
           }  
-          socket.emit('newMessage', {data: chat});
+          console.log('lookie!!!!!!!!!!!!!!!!!!!!!!!!',chatFromDb);
+          socket.emit('newMessage', {data: chatFromDb});
         });
       }
     });
