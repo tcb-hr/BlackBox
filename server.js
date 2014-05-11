@@ -81,7 +81,9 @@ io.sockets.on('connection', function (socket) {
             console.log(err);
           }  
           console.log('lookie!!!!!!!!!!!!!!!!!!!!!!!!',chatFromDb);
-          socket.emit('newMessage', {data: chatFromDb});
+          socket.emit('newMessage', {data: chatFromDb}).on('error', function(err) {
+            console.log(err);
+          });
         });
       }
     });
