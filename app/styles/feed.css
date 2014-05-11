@@ -266,6 +266,7 @@ body {
   z-index: 1000;
   border: 1px solid #080808;
   background-color: #222;
+  color: lightgrey;
   /*display: block;*/
   box-sizing: border-box;
   /*padding: 8px;*/
