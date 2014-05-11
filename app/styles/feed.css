@@ -12,6 +12,7 @@ button, a {
   cursor: pointer;
   border: 0;
   background-color: transparent;
+  color: lightgrey;
 }
 ul, li {
   list-style-type: none;
