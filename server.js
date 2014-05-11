@@ -66,7 +66,7 @@ io.sockets.on('connection', function (socket) {
       });
      }
   });
-  sockets.on('newChat', function (chat) {
+  socket.on('newChat', function (chat) {
     console.log('herro', chat);
     var newChat = new Chat.chatModel(chat);
     console.log('chat create invoked');
