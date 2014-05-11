@@ -75,6 +75,13 @@ io.sockets.on('connection', function (socket) {
     newChat.save(function(err) {
       if (err) {
         console.log('err', err);
+      } else {
+        Chat.chatModel.find().sort({_id: -1}).limit(1).exec(function(err, chat){
+          if(err){
+            console.log(err);
+          }  
+          socket.emit('newMessage', {data: chat});
+        });
       }
     });
   });
