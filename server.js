@@ -66,25 +66,25 @@ io.sockets.on('connection', function (socket) {
       });
      }
   });
-});
+  sockets.on('newChat', function (chat) {
+    console.log('herro', chat);
+    var newChat = new Chat.chatModel(chat);
+    console.log('chat create invoked');
+    newChat.provider = 'local';
+    console.log('creating');
+    newChat.save(function(err) {
+      if (err) {
+        console.log('err', err);
+        return res.json(400, err);
+      } else{
+        return res.end();
+      }
+    });
 
-io.sockets.on('newChat', function (chat) {
-  console.log('herro', chat);
-  var newChat = new Chat.chatModel(chat);
-  console.log('chat create invoked');
-  newChat.provider = 'local';
-  console.log('creating');
-  newChat.save(function(err) {
-    if (err) {
-      console.log('err', err);
-      return res.json(400, err);
-    } else{
-      return res.end();
-    }
+
   });
-
-
 });
+
 
 
 //module.exports.io = io;
