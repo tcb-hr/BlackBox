@@ -316,12 +316,19 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     // console.log('show', this.show);
   };
 
+  $scope.chats = [];
+
   socket.on('newMessage', function(data) {
-    var newChat = data['data'][0];
-    var idOfLastItem = $scope.chats[$scope.chats.length-1]._id;
-    if(idOfLastItem !== newChat._id) {
-      $scope.chats.push(newChat);
-      console.log('new message added');
+    var newChat = data['data'];
+    if ($scope.chats.length > 0){
+      var idOfLastItem = $scope.chats[$scope.chats.length-1]._id;
+      if (idOfLastItem !== newChat._id) {
+        $scope.chats.push(newChat);
+        console.log('new message added');
+      }
+    } else {
+        $scope.chats.push(newChat);
+        console.log('freshie');
     }
   });
 
@@ -433,12 +440,12 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }
   };
 
-  $http.get('/api/chat').success(function(chats) {
-    console.log('GET success!');
-    $scope.chats = chats;
-  }).error(function(data, status, headers, config) {
-    console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
-  });
+  // $http.get('/api/chat').success(function(chats) {
+  //   console.log('GET success!');
+  //   $scope.chats = chats;
+  // }).error(function(data, status, headers, config) {
+  //   console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
+  // });
 
   $scope.doneUp = function() {
     $http.get('/download').success(function() {
