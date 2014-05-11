@@ -393,6 +393,10 @@ font-style: italic;
 }
 #jobsStat, #earningsStat, #onTimeStat{
   font-size: 48px;
+}
+#submitAvatar, #cancelAvatar {
+  font-size: 18px;
+  padding: 10px 0;
 } 
 .warning {
   background-color: #ffff66;

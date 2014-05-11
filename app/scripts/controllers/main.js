@@ -346,7 +346,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
   $scope.loadAvatar = function(){
     $http.get('/api/users/me').success(function(user) {
-      user.avatar
       var str = "url('" + user.avatar + "')";
       $('#avatarDisplay').css('background-image', str);
 
@@ -354,12 +353,26 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
     });
   }
-
+  
   $scope.previewAvatar = function(){
-    console.log('preview avatar');
     var preview = $('#avatarImage');
     var file = $('input[type=file]')[0].files[0];
+    /*
+    // scale image
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    var img = new Image();
 
+    img.onload=function(){
+      canvas.width = 80;
+      canvas.height= 80;
+      ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, 80, 80);
+    }
+
+    img.src = "http://photos-b.ak.instagram.com/hphotos-ak-prn/10349597_231346097060593_998036877_n.jpg";
+    */
+
+    
     var reader = new FileReader();
     reader.onloadend = function(){
       console.log('done loading');
@@ -367,7 +380,9 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       $scope.encodedImage = reader.result;
       var str = "url('" + preview.src + "')";
       console.log('loaded', str);
-      $('#avatarDisplay').css('background-image', str);
+      //$('#avatarDisplay').css('background-image', str);
+      $('#avatarImage').attr('src', preview.src);
+
       /*
       $http.post('/api/users/me', {
         propertyValue: $('#avatarImage').src,
@@ -377,6 +392,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         console.log('Image saved to database');
       });
       */
+   
+   
     }
 
     if (file) {
@@ -384,6 +401,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     } else { 
       preview.src = "";
     }
+   
   };
 
   $scope.saveAvatar = function(){
@@ -395,6 +413,12 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }).success(function() {
       console.log('Image saved to database');
     });
+  }
+
+  $scope.cancelAvatar = function(){
+    console.log('canceling avatar');
+    var str = "url('" + $scope.user.avatar + "')";
+    $('#avatarDisplay').css('background-image', str);
   }
 
  $scope.toggleStats = function(){
