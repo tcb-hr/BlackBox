@@ -75,13 +75,8 @@ io.sockets.on('connection', function (socket) {
     newChat.save(function(err) {
       if (err) {
         console.log('err', err);
-        return res.json(400, err);
-      } else{
-        return res.end();
       }
     });
-
-
   });
 });
 
