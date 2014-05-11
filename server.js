@@ -46,7 +46,7 @@ var io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
   socket.emit('init');
   var d = new Date();
-  d.setDate(d.getDate() - 1);
+  d.setDate(d.getDate());
   d.setTime(d.getTime()-d.getHours()*3600*1000-d.getMinutes()*60*1000);
   var chatStream = Chat.chatModel.find().where('timestamp').gt(d).stream();
   chatStream.on('data', function (chat) { 
@@ -66,6 +66,24 @@ io.sockets.on('connection', function (socket) {
       });
      }
   });
+});
+
+io.sockets.on('newChat', function (chat) {
+  console.log('herro', chat);
+  var newChat = new Chat.chatModel(chat);
+  console.log('chat create invoked');
+  newChat.provider = 'local';
+  console.log('creating');
+  newChat.save(function(err) {
+    if (err) {
+      console.log('err', err);
+      return res.json(400, err);
+    } else{
+      return res.end();
+    }
+  });
+
+
 });
 
 
