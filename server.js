@@ -84,6 +84,7 @@ io.sockets.on('connection', function (socket) {
           .on('error', function(err) {
             console.log(err);
           });
+          socket.emit('newMessage', {data: chatFromDb[0]});
         });
       }
     });
