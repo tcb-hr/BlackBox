@@ -41,7 +41,7 @@ var server = app.listen(config.port, config.ip, function () {
 
 // Sockets
 var io = require('socket.io').listen(server);
-  var Chat = require('./lib/models/chat');
+var Chat = require('./lib/models/chat');
 
 io.sockets.on('connection', function (socket) {
   socket.emit('init');
@@ -80,8 +80,8 @@ io.sockets.on('connection', function (socket) {
           if(err){
             console.log(err);
           }  
-          console.log('lookie!!!!!!!!!!!!!!!!!!!!!!!!',chatFromDb);
-          socket.emit('newMessage', {data: chatFromDb[0]}).on('error', function(err) {
+          socket.broadcast.emit('newMessage', {data: chatFromDb[0]})
+          .on('error', function(err) {
             console.log(err);
           });
         });
