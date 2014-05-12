@@ -375,12 +375,14 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         console.log('POST success!');
       });
     }
-  }
+  };
 
   $scope.showPanelRight = false;
   $scope.togglePanelRight = function() {
     $scope.showPanelRight = ($scope.showPanelRight) ? false : true;
   };
+
+  $scope.showAvatarControls = false;
 
   $scope.loadAvatar = function(){
     $http.get('/api/users/me').success(function(user) {
@@ -390,9 +392,11 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }).error(function(data, status, headers, config) {
       console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
     });
-  }
+  };
 
   var previewPhoto = function(file, canvas){
+    $scope.showAvatarControls = true;
+    $scope.$apply();
     var image = new Image;
     var reader = new FileReader();
     reader.onload = function(e){
@@ -430,18 +434,21 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
   $scope.saveAvatar = function(){
     var encoding = document.getElementById("avatarCanvas").toDataURL();
-    console.log('save encoding', encoding);
     $http.post('/api/users/me', {
       propertyValue: encoding,
       propertyKey: 'avatar',
       userId: $scope.user._id
     }).success(function() {
+      $scope.resetAvatarControls(); 
+      $scope.loadAvatar();
       console.log('Image saved to database');
     });
   }
 
-  $scope.cancelAvatar = function(){
-    $('#avatarImage').attr('src', '');
+  $scope.resetAvatarControls = function(){
+    $('#avatarInput').replaceWith('<input id="avatarInput" ng-show="showAvatar" onchange="angular.element(this).scope().previewAvatar()" type="file" accept="image/*" capture="camera">');
+    $scope.showAvatarControls = false;
+    $scope.$apply();
   }
 
  $scope.toggleStats = function(){
