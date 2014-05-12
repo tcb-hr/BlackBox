@@ -320,6 +320,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     // console.log('show', this.show);
   };
 
+  //chat sockets
   $scope.chats = {};
 
   socket.on('newMessage', function(data) {
@@ -471,21 +472,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }
   };
 
-  // $http.get('/api/chat').success(function(chats) {
-  //   console.log('GET success!');
-  //   $scope.chats = chats;
-  // }).error(function(data, status, headers, config) {
-  //   console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
-  // });
-
-  // $scope.doneUp = function() {
-  //   $http.get('/download').success(function() {
-  //     console.log('GET success!');
-  //   }).error(function(data, status, headers, config) {
-  //     console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
-  //   });
-  // };
-
   var isChatValid = function(chat) {
     if(chat.body === undefined || chat.body.length > 140) {
       return false;
@@ -507,30 +493,11 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     });
   };
 
-  // $scope.sendChat = function(chat) {
-  //   // console.log('sendChat invoked. chat.name:', chat.name, 'chat.body:', chat.body, 'this:', this);
-  //   if(!isChatValid(chat)) {
-  //     console.log('Invalid chat, overriding "send".');
-  //     return;
-  //   }
-  //   $http.post('/api/chat', {
-  //     user: $scope.user.name,
-  //     body: chat.body,
-  //     image: ''
-  //   }).success(function() {
-  //     console.log('POST success!');
-  //     $http.get('/api/chat').success(function(chats) {
-  //       console.log('GET success!');
-  //       $scope.chats = chats;
-  //     }).error(function(data, status, headers, config) {
-  //       console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
-  //     });
-  //     resetChatForm(chat);
-  //   }).error(function(data, status, headers, config) {
-  //     console.log('POST error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
-  //   });
-  // };
-  
+  $scope.layer;
+  $scope.map;
+  $scope.dropMarker;
+  $scope.pickMarker;
+
   $scope.layer;
   $scope.map;
   $scope.dropMarker;
@@ -575,10 +542,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     // console.log(chat);
     if(chat.image !== undefined) {
       // $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center'); // jQ refactored to JS below.
-      var pic = document.getElementById('pic');
-      pic.style.backgroundImage = 'url(' + chat.image + ')';
-      pic.style.backgroundRepeat = 'no-repeat';
-      pic.style.backgroundPosition = 'center center';
+      document.getElementById('pic').style.background = 'url(' + chat.image + ') no-repeat center center';
       $scope.hidePic = false;
     }
     if(chat.pickCoordinates !== undefined) {
@@ -597,6 +561,67 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }
   };
 });
+//   $scope.hideMap = true;
+//   $scope.createMap = function() {
+//     $scope.layer = new L.StamenTileLayer('toner');
+//     $scope.map = new L.Map('map', {
+//       center: new L.LatLng(37.7, -122.4),
+//       zoom: 14
+//     });
+//     $scope.map.addLayer($scope.layer);
+
+//     //drop Location
+//     var redMarker = L.AwesomeMarkers.icon({
+//       icon: 'coffee',
+//       markerColor: 'red'
+//     });
+
+//     //pick Location
+//     var greenMarker = L.AwesomeMarkers.icon({
+//       icon: 'coffee',
+//       markerColor: 'green'
+//     });
+
+//     $scope.pickMarker = L.marker([37.8, -120], { icon: greenMarker }).addTo($scope.map);
+//     $scope.dropMarker = L.marker([37.7, -122.4], { icon: redMarker }).addTo($scope.map);
+
+//     // $('#map').height($(window).height()); // jQ refactored to JS below.
+//     document.getElementById('map').style.height = window.innerHeight;
+//     $scope.map.invalidateSize();
+//   };
+
+//   $scope.hidePic = true;
+//   $scope.createPic = function() {
+//     // $('#pic').height($(window).height()); // jQuery refactor to vanilla JS below.
+//     document.getElementById('pic').style.height = window.innerHeight;
+//   };
+
+//   $scope.showMapOrPic = function(chat) {
+//     // console.log(chat);
+//     if(chat.image !== undefined) {
+//       // $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center'); // jQ refactored to JS below.
+//       var pic = document.getElementById('pic');
+//       pic.style.backgroundImage = 'url(' + chat.image + ')';
+//       pic.style.backgroundRepeat = 'no-repeat';
+//       pic.style.backgroundPosition = 'center center';
+//       $scope.hidePic = false;
+//     }
+//     if(chat.pickCoordinates !== undefined) {
+//       var pickLat = JSON.parse(chat.pickCoordinates).lat;
+//       var pickLng = JSON.parse(chat.pickCoordinates).lng;
+//       var dropLat = JSON.parse(chat.dropCoordinates).lat;
+//       var dropLng = JSON.parse(chat.dropCoordinates).lng;
+//       $scope.map.panTo(new L.LatLng(dropLat, dropLng));
+//       $scope.dropMarker.setLatLng([dropLat, dropLng]);
+//       if((pickLat === dropLat) && (pickLng === dropLng)) {
+//         $scope.pickMarker.setLatLng([0,0]);
+//       } else {
+//         $scope.pickMarker.setLatLng([pickLat, pickLng]);
+//       }
+//       $scope.hideMap = false;
+//     }
+//   };
+// });
 
 app.filter('searchFor', function() {
   return function(arr, searchString) {
