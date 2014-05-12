@@ -435,31 +435,10 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     //
     //-------------------------------------------------
 
-    var toolsVisible = false;
-    
-    $scope.showTools = function() {
-        return toolsVisible;
-    };
-
-    $scope.toggleTools = function() {
-        var feed = document.getElementById('feed');
-        if (toolsVisible === true) {
-            toolsVisible = false;
-            feed.style.bottom = '44px';
-            feed.scrollTop = feed.scrollHeight + 44;
-            $scope.searchString = '';
-            $scope.cannedModel = '';
-        } else {
-            toolsVisible = true;
-            feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools.
-            feed.scrollTop = feed.scrollHeight + (44 + 40 * 3); // 3 tools.
-        }
-    };
-
     $scope.chats = {};
 
     socket.on('newMessage', function(data) {
-        console.log('fishon', data);
+        // console.log('fishon', data);
         var newChat = data.data;
         $scope.chats[newChat._id] = newChat;
     });
@@ -497,6 +476,25 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             $scope.settings.users = user.settings.users;
             console.log($scope.settings.users);
         });
+    };
+
+    var toolsVisible = false;
+    $scope.showTools = function() {
+        return toolsVisible;
+    };
+    $scope.toggleTools = function() {
+        var feed = document.getElementById('feed');
+        if (toolsVisible === true) {
+            toolsVisible = false;
+            feed.style.bottom = '44px';
+            feed.scrollTop = feed.scrollHeight + 44;
+            $scope.searchString = '';
+            $scope.cannedModel = '';
+        } else {
+            toolsVisible = true;
+            feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools.
+            feed.scrollTop = feed.scrollHeight + (44 + 40 * 3); // 3 tools.
+        }
     };
 
     $scope.layer;
@@ -544,7 +542,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     };
 
     $scope.showMapOrPic = function(chat) {
-        // console.log(chat);
+        console.log(chat);
         if (chat.image !== undefined) {
             // $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center'); // jQ refactored to JS below.
             var pic = document.getElementById('pic');
