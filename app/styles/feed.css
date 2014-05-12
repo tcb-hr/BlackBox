@@ -69,20 +69,20 @@ body {
 }
 .settingsButton {
   position: absolute;
-  left: 10px;
-  top: 5px;
+  left: 0px;
+  top: 0px;
   font-size: 30px;
   height: 40px;
-  width: 60px;
-  color: darkgrey;
+  padding: 0px 10px;
+  color: darkgrey; 
 }
 .dashboardButton {
   position: absolute;
   right: 0px;
   top: 0px;
   font-size: 30px;
-  height: 30px;
-  padding: 6px 10px;
+  height: 40px;
+  padding:0px 10px;
   color: darkgrey;
 }
 /*
