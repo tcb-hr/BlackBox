@@ -324,7 +324,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.chats = {};
 
   socket.on('newMessage', function(data) {
-    console.log('fishon', data);
+    // console.log('fishon', data);
     var newChat = data.data;
     $scope.chats[newChat._id] = newChat;
   });
