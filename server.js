@@ -63,7 +63,7 @@ io.sockets.on('connection', function (socket) {
         }
         socket.emit('newMessage', {data: chatFromDb[0]});
         socket.emit('newMessage', {data: chatFromDb[1]});
-      }
+      });
      }
   });
   socket.on('newChat', function (chat) {
