@@ -325,16 +325,13 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       var idOfLastItem = $scope.chats[$scope.chats.length-1]._id;
       if (idOfLastItem !== newChat._id) {
         $scope.chats.push(newChat);
-        console.log('new message added');
       }
     } else {
         $scope.chats.push(newChat);
-        console.log('freshie');
     }
   });
 
   $scope.sendChat = function(chat) {
-    console.log('sendChat invoked. chat.name:', chat.name, 'chat.body:', chat.body, 'this:', this);
     if(!isChatValid(chat)) {
       console.log('Invalid chat, overriding "send".');
       return;
@@ -344,18 +341,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       body: chat.body,
       image: '',
       type: 200
-    });//.success(function() {
-    //   console.log('POST success!');
-    //   $http.get('/api/chat').success(function(chats) {
-    //     console.log('GET success!');
-    //     $scope.chats = chats;
-    //   }).error(function(data, status, headers, config) {
-    //     console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
-    //   });
-      resetChatForm(chat);
-    // }).error(function(data, status, headers, config) {
-    //   console.log('POST error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
-    // });
+    });
+    resetChatForm(chat);
   };
 
   $scope.showPanelLeft = false;
