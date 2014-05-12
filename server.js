@@ -59,40 +59,13 @@ io.sockets.on('connection', function (socket) {
     console.log('arg!', arg);
   });
 
-  // var otherStream = Chat.chatModel.find().tailable().stream();
-  // otherStream.on('data', function (chat) {
-  //   socket.emit('newMessage', {data:chat});
-  // });
-
-
-  // fs.watchFile('/var/lib/mongodb/fullstack-dev.0', function(curr, prev){
-  //   if(curr.mtime.getTime() !== prev.mtime.getTime()){  
-  //     Chat.chatModel.find().sort({_id: -1}).limit(3).exec(function(err, chatFromDb){
-  //       if(err){
-  //         console.log(err);
-  //       }  
-  //       socket.broadcast.emit('newMessage', {data: chatFromDb[0]})
-  //       .on('error', function(err) {
-  //         console.log(err);
-  //       });
-  //       socket.emit('newMessage', {data: chatFromDb[0]});
-  //     });
-  //   }
-  // });
   socket.on('newChat', function (chat) {
     var newChat = new Chat.chatModel(chat);
     newChat.provider = 'local';
     newChat.save(function(err) {
       if (err) {
         console.log('err', err);
-      } else {
-        // Chat.chatModel.find().limit(1).exec(function(err, chatFromDb){
-        //   if(err){
-        //     console.log(err);
-        //   }  
-        //   socket.emit('newMessage', {data: chatFromDb[0]});
-        });
-      }
+      } 
     });
   });
 });
