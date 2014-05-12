@@ -59,7 +59,10 @@ io.sockets.on('connection', function (socket) {
     console.log('arg!', arg);
   });
 
-  Chat.chatModel.find().tailable().stream().pipe(chatStream);
+  var otherStream = Chat.chatModel.find().tailable().stream();
+  otherStream.on('data', function (chat) {
+    socket.emit('newMessage', {data:chat});
+  }
 
 
   // fs.watchFile('/var/lib/mongodb/fullstack-dev.0', function(curr, prev){
