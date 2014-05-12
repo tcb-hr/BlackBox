@@ -353,10 +353,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
     });
   }
-  
-  $scope.previewAvatar = function(){
-    var preview = $('#avatarImage');
-    var file = $('input[type=file]')[0].files[0];
+
+  var previewPhoto = function(file, canvas){
     var image = new Image;
     var reader = new FileReader();
     reader.onload = function(e){
@@ -378,7 +376,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
           height = MAX_HEIGHT;
         }
       }
-      var canvas = document.getElementById("canvas");
       canvas.width = width;
       canvas.height = height;
       var ctx = canvas.getContext("2d");
@@ -387,8 +384,14 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     reader.readAsDataURL(file);
   };
 
+  $scope.previewAvatar = function(){
+    var file = document.getElementById('avatarInput').files[0];
+    var canvas = document.getElementById('avatarCanvas');
+    previewPhoto(file, canvas);
+  }
+
   $scope.saveAvatar = function(){
-    var encoding = document.getElementById("canvas").toDataURL();
+    var encoding = document.getElementById("avatarCanvas").toDataURL();
     console.log('save encoding', encoding);
     $http.post('/api/users/me', {
       propertyValue: encoding,
