@@ -357,12 +357,37 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   $scope.previewAvatar = function(){
     var preview = $('#avatarImage');
     var file = $('input[type=file]')[0].files[0];
-    /*
-    // scale image
-    var canvas = document.getElementById("canvas");
-    var ctx = canvas.getContext("2d");
-    var img = new Image();
+    var image = new Image;
+    var reader = new FileReader();
+    reader.onload = function(e){
+      image.src = e.target.result;
+    //}
+    //reader.readAsDataURL(file);
 
+    //scale image
+    var MAX_WIDTH = 80;
+    var MAX_HEIGHT = 80;
+    var width = image.width;
+    var height = image.height;
+    if(width > height){
+      if(width > MAX_WIDTH){
+         height *= MAX_WIDTH / width;
+         width = MAX_WIDTH;
+      }
+    } else {
+      if(height > MAX_HEIGHT){
+        width *= MAX_HEIGHT / height;
+        height = MAX_HEIGHT;
+      }
+    }
+    var canvas = document.getElementById("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(image, 0, 0, width, height);
+    }
+    reader.readAsDataURL(file);
+/*
     img.onload=function(){
       canvas.width = 80;
       canvas.height= 80;
@@ -372,27 +397,21 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     img.src = "http://photos-b.ak.instagram.com/hphotos-ak-prn/10349597_231346097060593_998036877_n.jpg";
     */
 
-    
+ /*   
     var reader = new FileReader();
     reader.onloadend = function(){
-      console.log('done loading');
-      preview.src= reader.result;
+      var img = new Image():
+      image.onload = function(){
+        canvas.width = 80;
+        canvas.height = 80;
+        ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, 80, 80);
+      }
+      img.src = reader.result;
+      //preview.src= reader.result;
       $scope.encodedImage = reader.result;
       var str = "url('" + preview.src + "')";
-      console.log('loaded', str);
       //$('#avatarDisplay').css('background-image', str);
       $('#avatarImage').attr('src', preview.src);
-
-      /*
-      $http.post('/api/users/me', {
-        propertyValue: $('#avatarImage').src,
-        propertyKey: 'avatar',
-        userId: $scope.user._id
-      }).success(function() {
-        console.log('Image saved to database');
-      });
-      */
-   
    
     }
 
@@ -400,14 +419,15 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       reader.readAsDataURL(file);
     } else { 
       preview.src = "";
-    }
-   
+    } 
+*/ 
   };
 
   $scope.saveAvatar = function(){
-    console.log('src', $scope.encodedImage);
+    var encoding = document.getElementById("canvas").toDataURL();
+    console.log('save encoding', encoding);
     $http.post('/api/users/me', {
-      propertyValue: $scope.encodedImage,
+      propertyValue: encoding,
       propertyKey: 'avatar',
       userId: $scope.user._id
     }).success(function() {
@@ -416,9 +436,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   }
 
   $scope.cancelAvatar = function(){
-    console.log('canceling avatar');
-    var str = "url('" + $scope.user.avatar + "')";
-    $('#avatarDisplay').css('background-image', str);
+    $('#avatarImage').attr('src', '');
   }
 
  $scope.toggleStats = function(){

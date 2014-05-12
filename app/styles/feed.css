@@ -404,3 +404,9 @@ font-style: italic;
 .danger {
   background-color: #ff5050;
 }
+#avatarImage{
+  height: 80px;
+  width: 80px;
+  border: 1px solid black;
+  background-color: white;
+}
