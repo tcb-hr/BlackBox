@@ -361,66 +361,30 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     var reader = new FileReader();
     reader.onload = function(e){
       image.src = e.target.result;
-    //}
-    //reader.readAsDataURL(file);
 
-    //scale image
-    var MAX_WIDTH = 80;
-    var MAX_HEIGHT = 80;
-    var width = image.width;
-    var height = image.height;
-    if(width > height){
-      if(width > MAX_WIDTH){
-         height *= MAX_WIDTH / width;
-         width = MAX_WIDTH;
+      //scale image
+      var MAX_WIDTH = 80;
+      var MAX_HEIGHT = 80;
+      var width = image.width;
+      var height = image.height;
+      if(width > height){
+        if(width > MAX_WIDTH){
+           height *= MAX_WIDTH / width;
+           width = MAX_WIDTH;
+        }
+      } else {
+        if(height > MAX_HEIGHT){
+          width *= MAX_HEIGHT / height;
+          height = MAX_HEIGHT;
+        }
       }
-    } else {
-      if(height > MAX_HEIGHT){
-        width *= MAX_HEIGHT / height;
-        height = MAX_HEIGHT;
-      }
-    }
-    var canvas = document.getElementById("canvas");
-    canvas.width = width;
-    canvas.height = height;
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(image, 0, 0, width, height);
+      var canvas = document.getElementById("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(image, 0, 0, width, height);
     }
     reader.readAsDataURL(file);
-/*
-    img.onload=function(){
-      canvas.width = 80;
-      canvas.height= 80;
-      ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, 80, 80);
-    }
-
-    img.src = "http://photos-b.ak.instagram.com/hphotos-ak-prn/10349597_231346097060593_998036877_n.jpg";
-    */
-
- /*   
-    var reader = new FileReader();
-    reader.onloadend = function(){
-      var img = new Image():
-      image.onload = function(){
-        canvas.width = 80;
-        canvas.height = 80;
-        ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, 80, 80);
-      }
-      img.src = reader.result;
-      //preview.src= reader.result;
-      $scope.encodedImage = reader.result;
-      var str = "url('" + preview.src + "')";
-      //$('#avatarDisplay').css('background-image', str);
-      $('#avatarImage').attr('src', preview.src);
-   
-    }
-
-    if (file) {
-      reader.readAsDataURL(file);
-    } else { 
-      preview.src = "";
-    } 
-*/ 
   };
 
   $scope.saveAvatar = function(){

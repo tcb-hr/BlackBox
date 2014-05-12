@@ -40,8 +40,7 @@
     <div class="dashboardCategory" ng-show="showAvatar">My Profile Pic:<br>
       <div id="avatarDisplay" ng-show="showAvatar" ng-init="loadAvatar()"></div><br>
       <input id="avatarInput" ng-show="showAvatar" onchange="angular.element(this).scope().previewAvatar()" type="file" accept="image/*" capture="camera"></i>
-      <img id="avatarImage" ng-show="showAvatar"><br>
-      <canvas id="canvas" ng-show="showAvatar" width=100 height=100></canvas><br>
+      <canvas id="canvas" ng-show="showAvatar" height="5" width="5"></canvas><br>
       <button id="submitAvatar" ng-show="showAvatar" ng-click="saveAvatar()"><i class="fa fa-check"></i> Submit</button><br>
       <button id="cancelAvatar" ng-show="showAvatar" ng-click="cancelAvatar()"><i class="fa fa-undo"></i> Cancel</button>
     </div>
