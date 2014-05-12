@@ -20,7 +20,11 @@ input {
   font-family: 'Josefin Sans', Arial, sans-serif;
   font-size: 14pt;
 }
-button, a {
+ul, li {
+  list-style-type: none;
+}
+/* Buttons */
+button {
   outline: 0;
   overflow: visible;
   cursor: pointer;
@@ -28,9 +32,102 @@ button, a {
   background-color: transparent;
   color: lightgrey;
 }
-ul, li {
-  list-style-type: none;
+.button {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  text-indent: -9999px;
+  outline: none;
+  vertical-align: middle;
 }
+#cancelButton {
+  background-image: url("../images/cancel-icon.png");
+  background-size: 30px 30px;
+  background-position: 3px 3px;
+}
+.closeButtonLeft {
+  background-image: url("../images/arrow-angular-left.png");
+  background-size: 40px 50px;
+  background-position: 0 0;
+  /*margin-bottom: 9999px;*/
+}
+.closeButtonRight {
+  background-image: url("../images/arrow-angular-right.png");
+  background-size: 40px 50px;
+  background-position: 0 0;
+  /*margin-bottom: 9999px;*/
+}
+.dashboardButton {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  font-size: 30px;
+  height: 40px;
+  padding:0px 10px;
+  color: lightgrey;
+  /*background-image: url("../images/dash.png");*/
+  /*background-size: 40px 40px;*/
+}
+.filterButton{
+  border-color: white;
+  border-style: solid;
+  border-width: 0px 0px 2px 0px;
+  font-size: 16px;
+  margin: 1px 2%;
+  padding: 5px 0px;
+  width: 96%;
+  text-align: left;
+  padding-left: 20px;
+}
+.groupTitleButton{
+  border-color: white;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+  font-size: 19px;
+  padding: 5px;
+}
+#picButton {
+  position: relative;
+  top: 6px;
+  font-size: 12pt;
+  width: 90%;
+  height: 28px;
+  padding-top: 0;
+}
+.selectAllButton{
+font-size: 20px;
+font-style: italic;
+}
+#sendButton {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-image: url("../images/send.png");
+  background-size: 54px 54px;
+  background-position: -9px -9px;
+}
+.settingsButton {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  font-size: 30px;
+  height: 40px;
+  padding: 0px 10px;
+  width: 60px;
+  color: lightgrey;
+  /*background-image: url("../images/gear.png");*/
+  /*background-size: 40px 40px;*/
+}
+#toolsButton {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background-image: url("../images/tool.png");
+  background-size: 27px 27px;
+  background-position: 4px 4px;
+}
+
 .floatLeft {
   float: left;
 }
@@ -57,57 +154,13 @@ ul, li {
   margin: 0 auto;
   text-align: center;
 }
-.button {
+#navTitle {
   position: relative;
-  width: 40px;
-  height: 40px;
-  background-repeat: no-repeat;
-  text-indent: -9999px;
-  outline: none;
-  vertical-align: middle;
-}
-#appLogo {
-  position: relative;
-  top: 8px;
-  font-size: 16pt;
+  top: 10px;
+  font-size: 17pt;
   font-weight: 700;
   color: #aaa;
 }
-.settingsButton {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  font-size: 30px;
-  height: 40px;
-  padding: 0px 10px;
-  width: 60px;
-  color: lightgrey;
-}
-.dashboardButton {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  font-size: 30px;
-  height: 40px;
-  padding:0px 10px;
-  color: lightgrey;
-}
-/*
-#settingsBtn {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  background-image: url("../images/gear.png");
-  background-size: 40px 40px;
-}
-#dashBtn {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  background-image: url("../images/dash.png");
-  background-size: 40px 40px;
-}
-*/
 #pinnedBar {
   display: none;
 }
@@ -182,45 +235,12 @@ ul, li {
 .tool {
   height: 40px;
 }
-#toolsBtn {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  background-image: url("../images/tool.png");
-  background-size: 27px 27px;
-  background-position: 4px 4px;
-}
-#picBtn {
-  position: relative;
-  top: 6px;
-  font-size: 12pt;
-  width: 90%;
-  height: 28px;
-  padding-top: 0;
-}
 #thumb {
   display: inline-block;
 }
 #thumb img {
   height: 40px;
   vertical-align: middle;
-}
-#cancelBtn {
-  background-image: url("../images/cancel-icon.png");
-  background-size: 30px 30px;
-  background-position: 3px 3px;
-}
-.closeBtnLeft {
-  background-image: url("../images/arrow-angular-left.png");
-  background-size: 40px 50px;
-  background-position: 0 0;
-  /*margin-bottom: 9999px;*/
-}
-.closeBtnRight {
-  background-image: url("../images/arrow-angular-right.png");
-  background-size: 40px 50px;
-  background-position: 0 0;
-  /*margin-bottom: 9999px;*/
 }
 .textField {
   position: relative;
@@ -243,14 +263,6 @@ ul, li {
   width: 67%;
   height: 30px;
   /*font-size: 12pt;*/
-}
-#sendBtn {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  background-image: url("../images/send.png");
-  background-size: 54px 54px;
-  background-position: -9px -9px;
 }
 #cannedSelect {
   /*width: 90%;*/
@@ -351,34 +363,11 @@ ul, li {
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 9999;
 }
-.filterButton{
-  border-color: white;
-  border-style: solid;
-  border-width: 0px 0px 2px 0px;
-  font-size: 16px;
-  margin: 1px 2%;
-  padding: 5px 0px;
-  width: 96%;
-  text-align: left;
-  padding-left: 20px;
-}
-.groupTitleButton{
-  border-color: white;
-  border-width: 1px 0 0 0;
-  border-style: solid;
-  font-size: 19px;
-  padding: 5px;
-}
 i {
 width: 30px;
 text-align: center;
 padding-right: 10px;
 }
-.selectAllButton{
-font-size: 20px;
-font-style: italic;
-}
-
 #avatarDisplay{
   background-color: white;
   background-position: center center;
