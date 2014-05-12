@@ -50,7 +50,7 @@ io.sockets.on('connection', function (socket) {
   d.setDate(d.getDate());
   d.setTime(d.getTime()-d.getHours()*3600*1000-d.getMinutes()*60*1000);
   
-  var chatStream = Chat.chatModel.find().where('timestamp').gt(d).stream();
+  var chatStream = Chat.chatModel.find().where('timestamp').gt(d).tailable().stream();
   chatStream.on('data', function (chat) { 
     socket.emit('newMessage', {data: chat});
   }).on('error', function(err) {
@@ -59,10 +59,10 @@ io.sockets.on('connection', function (socket) {
     console.log('arg!', arg);
   });
 
-  var otherStream = Chat.chatModel.find().tailable().stream();
-  otherStream.on('data', function (chat) {
-    socket.emit('newMessage', {data:chat});
-  });
+  // var otherStream = Chat.chatModel.find().tailable().stream();
+  // otherStream.on('data', function (chat) {
+  //   socket.emit('newMessage', {data:chat});
+  // });
 
 
   // fs.watchFile('/var/lib/mongodb/fullstack-dev.0', function(curr, prev){
@@ -79,22 +79,22 @@ io.sockets.on('connection', function (socket) {
   //     });
   //   }
   // });
-  socket.on('newChat', function (chat) {
-    var newChat = new Chat.chatModel(chat);
-    newChat.provider = 'local';
-    newChat.save(function(err) {
-      if (err) {
-        console.log('err', err);
-      } else {
-        Chat.chatModel.find().limit(1).exec(function(err, chatFromDb){
-          if(err){
-            console.log(err);
-          }  
-          socket.emit('newMessage', {data: chatFromDb[0]});
-        });
-      }
-    });
-  });
+  // socket.on('newChat', function (chat) {
+  //   var newChat = new Chat.chatModel(chat);
+  //   newChat.provider = 'local';
+  //   newChat.save(function(err) {
+  //     if (err) {
+  //       console.log('err', err);
+  //     } else {
+  //       Chat.chatModel.find().limit(1).exec(function(err, chatFromDb){
+  //         if(err){
+  //           console.log(err);
+  //         }  
+  //         socket.emit('newMessage', {data: chatFromDb[0]});
+  //       });
+  //     }
+  //   });
+  // });
 });
 
 
