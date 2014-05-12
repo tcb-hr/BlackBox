@@ -54,7 +54,7 @@ io.sockets.on('connection', function (socket) {
   chatStream.on('data', function (chat) { 
     socket.emit('newMessage', {data: chat});
   }).on('error', function(err) {
-    return res.send(err);
+    console.log('chatStream err', err);
   }).on('end', function (arg){
     console.log('arg!', arg);
   });
