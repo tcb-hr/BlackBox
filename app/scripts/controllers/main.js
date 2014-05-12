@@ -331,6 +331,19 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }
   });
 
+  socket.on('dbUpdate', function(data) {
+    console.log('free-basing DXM', data);
+    var newChat = data.data[0] || data.data;
+    if ($scope.chats.length !== 0){
+      var idOfLastItem = $scope.chats[$scope.chats.length-1]._id;
+      if (idOfLastItem !== newChat._id) {
+        $scope.chats.push(newChat);
+      }
+    } else {
+        $scope.chats.push(newChat);
+    }
+  });
+
   $scope.sendChat = function(chat) {
     if(!isChatValid(chat)) {
       console.log('Invalid chat, overriding "send".');

@@ -62,7 +62,7 @@ io.sockets.on('connection', function (socket) {
         if(err){
           console.log(err);
         }  
-        socket.emit('newMessage', {data: chat});
+        socket.emit('dbUpdate', {data: chat});
       });
      }
   });
