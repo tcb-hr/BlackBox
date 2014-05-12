@@ -575,7 +575,10 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     // console.log(chat);
     if(chat.image !== undefined) {
       // $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center'); // jQ refactored to JS below.
-      document.getElementById('pic').style.background = 'url(' + chat.image + ') no-repeat center center';
+      var pic = document.getElementById('pic');
+      pic.style.backgroundImage = 'url(' + chat.image + ')';
+      pic.style.backgroundRepeat = 'no-repeat';
+      pic.style.backgroundPosition = 'center center';
       $scope.hidePic = false;
     }
     if(chat.pickCoordinates !== undefined) {
