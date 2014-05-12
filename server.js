@@ -56,12 +56,7 @@ io.sockets.on('connection', function (socket) {
   });
   fs.watchFile('/var/lib/mongodb/fullstack-dev.0', function(curr, prev){
     if(curr.mtime.getTime() !== prev.mtime.getTime()){  
-      Chat.chatModel.find().sort({_id: -1}).limit(1).exec(function(err, chat){
-        if(err){
-          console.log(err);
-        }  
-        socket.emit('dbUpdate', {data: chat});
-      });
+      Chat.chatModel.find().sort({_id: -1}).limit(10).stream().pipe(chatStream);
      }
   });
   socket.on('newChat', function (chat) {
