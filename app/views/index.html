@@ -9,17 +9,16 @@
     <base href="/">
     <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(app) styles/vendor.css -->
     <!-- bower:css -->
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/feed.css">
+    <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/leaflet.css" />
-    <link rel="stylesheet" href="styles/bootstrap-switch.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.0/leaflet.awesome-markers.css" />
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
    <!-- endbuild -->
@@ -54,7 +53,6 @@
     <!-- bower:js -->
 
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <!-- // <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script> -->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -66,18 +64,17 @@
     <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
     <script src="http://maps.stamen.com/js/tile.stamen.js?v1.2.4"></script>
     <script src="bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js"></script>
-    <script src="bower_components/bootstrap-switch/dist/js/bootstrap-switch.js"></script>
     <script src="http://www.mapquestapi.com/sdk/leaflet/v1.0/mq-map.js?key=Fmjtd%7Cluub2g6bl1%2Cra%3Do5-9ual56"></script>
     <script src="http://www.mapquestapi.com/sdk/leaflet/v1.0/mq-geocoding.js?key=Fmjtd%7Cluub2g6bl1%2Cra%3Do5-9ual56"></script>
     <script src="http://open.mapquestapi.com/sdk/leaflet/v1.0/mq-routing.js?key=Fmjtd%7Cluub2g6bl1%2Cra%3Do5-9ual56"></script>
 
     <!-- endbower -->
 
-    <script src="./socket.io/socket.io.js"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
     <script src="http://138.91.64.150:80/socket.io/socket.io.js"></script>
-    
+
     <script>
-      var socket = io.connect('http://localhost:80');
+      // var socket = io.connect('localhost:80');
       var socket = io.connect('http://138.91.64.150:80');
       socket.on('news', function (data) {
         console.log(data);
