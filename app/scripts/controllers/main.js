@@ -546,6 +546,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         if (chat.image !== undefined) {
             // $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center'); // jQ refactored to JS below.
             var pic = document.getElementById('pic');
+            console.log(pic);
             pic.style.backgroundImage = 'url(' + chat.image + ')';
             pic.style.backgroundRepeat = 'no-repeat';
             pic.style.backgroundPosition = 'center center';
