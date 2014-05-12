@@ -42,7 +42,7 @@
       <input id="avatarInput" ng-show="showAvatar" onchange="angular.element(this).scope().previewAvatar()" type="file" accept="image/*" capture="camera"></i><br>
       <canvas id="avatarCanvas" ng-show="showAvatarControls" height="5" width="5"></canvas><br>
       <button id="submitAvatar" ng-show="showAvatarControls" ng-click="saveAvatar()"><i class="fa fa-check"></i> Submit</button><br>
-      <button id="cancelAvatar" ng-show="showAvatarControls" ng-click="cancelAvatar()"><i class="fa fa-undo"></i> Cancel</button>
+      <button id="cancelAvatar" ng-show="showAvatarControls" ng-click="resetAvatarControls()"><i class="fa fa-undo"></i> Cancel</button>
     </div>
 
   </div>

@@ -401,15 +401,13 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       propertyKey: 'avatar',
       userId: $scope.user._id
     }).success(function() {
-      $scope.showAvatarControls = false;
-      $scope.$apply();
-      $('#avatarInput').replaceWith("<input type='file' id='avatarInput'/>");
+      $scope.resetAvatarControls(); 
       $scope.loadAvatar();
       console.log('Image saved to database');
     });
   }
 
-  $scope.cancelAvatar = function(){
+  $scope.resetAvatarControls = function(){
     $('#avatarInput').replaceWith('<input id="avatarInput" ng-show="showAvatar" onchange="angular.element(this).scope().previewAvatar()" type="file" accept="image/*" capture="camera">');
     $scope.showAvatarControls = false;
     $scope.$apply();
