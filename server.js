@@ -58,11 +58,17 @@ io.sockets.on('connection', function (socket) {
   });
   fs.watchFile('/var/lib/mongodb/fullstack-dev.0', function(curr, prev){
     if(curr.mtime.getTime() !== prev.mtime.getTime()){  
-      Chat.chatModel.find().sort({_id: -1}).limit(2).stream().pipe(chatStream);
+      Chat.chatModel.find().sort({_id: -1}).limit(1).exec(function(err, chatFromDb){
+        if(err){
+          console.log(err);
+        }  
+        socket.broadcast.emit('newMessage', {data: chatFromDb[0]})
+        .on('error', function(err) {
+          console.log(err);
+        });
+        socket.emit('newMessage', {data: chatFromDb[0]});
+      });
     }
-    chatStream.on('end', function (arg){
-      console.log('db update arg!', arg);
-    });
   });
   socket.on('newChat', function (chat) {
     var newChat = new Chat.chatModel(chat);
