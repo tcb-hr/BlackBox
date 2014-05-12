@@ -541,12 +541,11 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         document.getElementById('pic').style.height = window.innerHeight;
     };
 
-    $scope.showMapOrPic = function(chat) {
+    $scope.showMapOrPic = function(chat, $scope) {
         console.log(chat);
         if (chat.image !== undefined) {
             // $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center'); // jQ refactored to JS below.
             var pic = document.getElementById('pic');
-            console.log(pic);
             pic.style.backgroundImage = 'url(' + chat.image + ')';
             pic.style.backgroundRepeat = 'no-repeat';
             pic.style.backgroundPosition = 'center center';
