@@ -346,7 +346,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
   $scope.loadAvatar = function(){
     $http.get('/api/users/me').success(function(user) {
-      user.avatar
       var str = "url('" + user.avatar + "')";
       $('#avatarDisplay').css('background-image', str);
 
@@ -354,47 +353,54 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
     });
   }
-
+  
   $scope.previewAvatar = function(){
-    console.log('preview avatar');
     var preview = $('#avatarImage');
     var file = $('input[type=file]')[0].files[0];
-
+    var image = new Image;
     var reader = new FileReader();
-    reader.onloadend = function(){
-      console.log('done loading');
-      preview.src= reader.result;
-      $scope.encodedImage = reader.result;
-      var str = "url('" + preview.src + "')";
-      console.log('loaded', str);
-      $('#avatarDisplay').css('background-image', str);
-      /*
-      $http.post('/api/users/me', {
-        propertyValue: $('#avatarImage').src,
-        propertyKey: 'avatar',
-        userId: $scope.user._id
-      }).success(function() {
-        console.log('Image saved to database');
-      });
-      */
-    }
+    reader.onload = function(e){
+      image.src = e.target.result;
 
-    if (file) {
-      reader.readAsDataURL(file);
-    } else { 
-      preview.src = "";
+      //scale image
+      var MAX_WIDTH = 80;
+      var MAX_HEIGHT = 80;
+      var width = image.width;
+      var height = image.height;
+      if(width > height){
+        if(width > MAX_WIDTH){
+           height *= MAX_WIDTH / width;
+           width = MAX_WIDTH;
+        }
+      } else {
+        if(height > MAX_HEIGHT){
+          width *= MAX_HEIGHT / height;
+          height = MAX_HEIGHT;
+        }
+      }
+      var canvas = document.getElementById("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(image, 0, 0, width, height);
     }
+    reader.readAsDataURL(file);
   };
 
   $scope.saveAvatar = function(){
-    console.log('src', $scope.encodedImage);
+    var encoding = document.getElementById("canvas").toDataURL();
+    console.log('save encoding', encoding);
     $http.post('/api/users/me', {
-      propertyValue: $scope.encodedImage,
+      propertyValue: encoding,
       propertyKey: 'avatar',
       userId: $scope.user._id
     }).success(function() {
       console.log('Image saved to database');
     });
+  }
+
+  $scope.cancelAvatar = function(){
+    $('#avatarImage').attr('src', '');
   }
 
  $scope.toggleStats = function(){
