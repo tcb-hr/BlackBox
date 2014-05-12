@@ -53,7 +53,9 @@ io.sockets.on('connection', function (socket) {
     socket.emit('newMessage', {data: chat});
   }).on('error', function(err) {
     return res.send(err);
-  });
+  }).on('end', function (arg){
+    console.log('arg!', arg);
+  })
   fs.watchFile('/var/lib/mongodb/fullstack-dev.0', function(curr, prev){
     if(curr.mtime.getTime() !== prev.mtime.getTime()){  
       Chat.chatModel.find().sort({_id: -1}).limit(2).stream().pipe(chatStream);
