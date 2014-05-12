@@ -487,13 +487,13 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   //   console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
   // });
 
-  $scope.doneUp = function() {
-    $http.get('/download').success(function() {
-      console.log('GET success!');
-    }).error(function(data, status, headers, config) {
-      console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
-    });
-  };
+  // $scope.doneUp = function() {
+  //   $http.get('/download').success(function() {
+  //     console.log('GET success!');
+  //   }).error(function(data, status, headers, config) {
+  //     console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
+  //   });
+  // };
 
   var isChatValid = function(chat) {
     if(chat.body === undefined || chat.body.length > 140) {

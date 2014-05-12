@@ -46,7 +46,7 @@ var Chat = require('./lib/models/chat');
 io.sockets.on('connection', function (socket) {
   socket.emit('init');
   var d = new Date();
-  d.setDate(d.getDate()-1);
+  d.setDate(d.getDate());
   d.setTime(d.getTime()-d.getHours()*3600*1000-d.getMinutes()*60*1000);
   var chatStream = Chat.chatModel.find().where('timestamp').gt(d).stream();
   chatStream.on('data', function (chat) { 
