@@ -55,11 +55,14 @@ io.sockets.on('connection', function (socket) {
     return res.send(err);
   }).on('end', function (arg){
     console.log('arg!', arg);
-  })
+  });
   fs.watchFile('/var/lib/mongodb/fullstack-dev.0', function(curr, prev){
     if(curr.mtime.getTime() !== prev.mtime.getTime()){  
       Chat.chatModel.find().sort({_id: -1}).limit(2).stream().pipe(chatStream);
-     }
+    }
+    chatStream.on('end', function (arg){
+      console.log('db update arg!', arg);
+    });
   });
   socket.on('newChat', function (chat) {
     var newChat = new Chat.chatModel(chat);
