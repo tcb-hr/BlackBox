@@ -320,7 +320,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
   socket.on('newMessage', function(data) {
     console.log('fishon', data);
-    var newChat = data['data'];
+    var newChat = data.data[0] || data.data;
     if ($scope.chats.length !== 0){
       var idOfLastItem = $scope.chats[$scope.chats.length-1]._id;
       if (idOfLastItem !== newChat._id) {
