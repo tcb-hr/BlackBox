@@ -46,23 +46,29 @@ var Chat = require('./lib/models/chat');
 io.sockets.on('connection', function (socket) {
   socket.emit('init');
   var d = new Date();
-  d.setDate(d.getDate()-1);
+  d.setDate(d.getDate());
   d.setTime(d.getTime()-d.getHours()*3600*1000-d.getMinutes()*60*1000);
   var chatStream = Chat.chatModel.find().where('timestamp').gt(d).stream();
   chatStream.on('data', function (chat) { 
     socket.emit('newMessage', {data: chat});
   }).on('error', function(err) {
     return res.send(err);
+  }).on('end', function (arg){
+    console.log('arg!', arg);
   });
   fs.watchFile('/var/lib/mongodb/fullstack-dev.0', function(curr, prev){
     if(curr.mtime.getTime() !== prev.mtime.getTime()){  
-      Chat.chatModel.find().sort({_id: -1}).limit(1).exec(function(err, chat){
+      Chat.chatModel.find().sort({_id: -1}).limit(1).exec(function(err, chatFromDb){
         if(err){
           console.log(err);
         }  
-        socket.emit('dbUpdate', {data: chat});
+        socket.broadcast.emit('newMessage', {data: chatFromDb[0]})
+        .on('error', function(err) {
+          console.log(err);
+        });
+        socket.emit('newMessage', {data: chatFromDb[0]});
       });
-     }
+    }
   });
   socket.on('newChat', function (chat) {
     var newChat = new Chat.chatModel(chat);

@@ -320,35 +320,12 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     // console.log('show', this.show);
   };
 
-  $scope.chats = [];
-
-  var checkChats = function(chat) {
-    var len = $scope.chats.length;
-    var comp = true;
-    if (len > 0) {
-      for (var i = 0; i  < len; i++) {
-        if (chat._id === $scope.chats[i]._id) {
-          comp = false;
-        } else {
-          comp = true;
-        }
-      }
-    }
-    if (comp) {
-      $scope.chats.push(chat);
-    }
-  };
+  $scope.chats = {};
 
   socket.on('newMessage', function(data) {
     console.log('fishon', data);
     var newChat = data.data;
-    checkChats(newChat);
-  });
-
-  socket.on('dbUpdate', function(data) {
-    console.log('free-basing DXM', data);
-    var newChat = data.data[0];
-    checkChats(newChat);
+    $scope.chats[newChat._id] = newChat;
   });
 
   $scope.sendChat = function(chat) {
@@ -501,13 +478,13 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   //   console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
   // });
 
-  $scope.doneUp = function() {
-    $http.get('/download').success(function() {
-      console.log('GET success!');
-    }).error(function(data, status, headers, config) {
-      console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
-    });
-  };
+  // $scope.doneUp = function() {
+  //   $http.get('/download').success(function() {
+  //     console.log('GET success!');
+  //   }).error(function(data, status, headers, config) {
+  //     console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
+  //   });
+  // };
 
   var isChatValid = function(chat) {
     if(chat.body === undefined || chat.body.length > 140) {
