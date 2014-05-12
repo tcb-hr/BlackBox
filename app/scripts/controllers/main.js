@@ -316,23 +316,10 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     // console.log('show', this.show);
   };
 
-  $scope.chats = [];
+  $scope.chats = {};
 
   var checkChats = function(chat){
-    var len = $scope.chats.length;
-    var comp = true;
-    if (len > 0) {
-      for (var i = 0; i  < len; i++){
-        if (chat._id === $scope.chats[i]._id){
-          comp = false;
-        } else {
-          comp = true;
-        }
-      }
-    }
-    if (comp) {
-      $scope.chats.push(chat);
-    }
+    $scope.chats[chat._id] = chat;
   };
 
  
