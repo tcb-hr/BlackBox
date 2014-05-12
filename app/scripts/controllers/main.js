@@ -318,22 +318,9 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
   $scope.chats = {};
 
-  var checkChats = function(chat){
-    $scope.chats[chat._id] = chat;
-  };
-
- 
-
   socket.on('newMessage', function(data) {
-    console.log('fishon', data);
     var newChat = data.data;
-    checkChats(newChat);
-  });
-
-  socket.on('dbUpdate', function(data) {
-    console.log('free-basing DXM', data);
-    var newChat = data.data[0];
-    checkChats(newChat);
+    $scope.chats[chat._id] = chat;
   });
 
   $scope.sendChat = function(chat) {
