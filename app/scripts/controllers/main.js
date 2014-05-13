@@ -464,7 +464,9 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         _id: '999999999999999999999999',
         timestamp: '2113-12-31T23:59:59.361Z',
         body: 'Godspeed You! Black Emperor',
-        user: 'Mitsuo Yanagimachi'
+        user: 'Mitsuo_Yanagimachi',
+        image: './images/Alfred_E_Neuman.jpg',
+        pic: './images/Alfred_E_Neuman.jpg'
       }
     };
 
@@ -479,20 +481,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     socket.on('newMessage', function(data) {
         // // console.log('fishon', data);
         var newChat = data.data;
-
         $scope.chats[newChat._id] = newChat;
-        // var not = true;
-        // for (var i = 0; i < $scope.chats.length; i++){
-        //   if (not){
-        //     if ($scope.chats[i]._id === newChat._id){
-        //       not = false;
-        //     }
-        //   }
-        // }
-        // // // console.log(not);
-        // if (not) {
-        //   $scope.chats.push(newChat);
-        // }
     });
 
     $scope.sendChat = function(chat) {
@@ -508,27 +497,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         });
         resetChatForm(chat);
     }
-
-// <<<<<<< HEAD
-// =======
-//     var toolsVisible = false;
-//     $scope.showTools = function() {
-//         return toolsVisible;
-//     };
-//     $scope.toggleTools = function() {
-//         var feed = document.getElementById('feed');
-//         if (toolsVisible === true) {
-//             toolsVisible = false;
-//             feed.style.bottom = '44px';
-//             feed.scrollTop = feed.scrollHeight + 44;
-//             $scope.searchString = '';
-//             $scope.cannedModel = '';
-//         } else {
-//             toolsVisible = true;
-//             feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools.
-//             feed.scrollTop = feed.scrollHeight + (44 + 40 * 3); // 3 tools.
-//         }
-//     };
 
     $scope.getAvatars = function(){
       $scope.avatars = {};
