@@ -61,7 +61,7 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('fetch', function(chat){
     console.log('fetched', chat)
-    var fetchStream = Chat.chatModel.find().where('id').lt(chat._id).limit(25).stream();
+    var fetchStream = Chat.chatModel.find().where('_id').lt(chat._id).limit(25).stream();
     fetchStream.on('data', function (chat) { 
       socket.emit('newMessage', {data: chat});
     }).on('error', function(err) {
