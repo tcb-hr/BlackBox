@@ -550,9 +550,9 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             pic.style.backgroundImage = 'url(' + chat.image + ')';
             pic.style.backgroundRepeat = 'no-repeat';
             pic.style.backgroundPosition = 'center center';
-            console.log($scope.hidePic)
-            $scope.hidePic = false;
-            console.log($scope.hidePic)
+            console.log($scope.$parent.hidePic)
+            $scope.$parent.hidePic = false;
+            console.log($scope.$parent.hidePic)
         }
         if (chat.pickCoordinates !== undefined) {
             var pickLat = JSON.parse(chat.pickCoordinates).lat;
