@@ -459,12 +459,10 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     //
     //-------------------------------------------------
 
-    $scope.chats = {
-      // {
-      //   _id: '999999999999999999999999',
-      //   timestamp: '2024-05-12T21:52:56.361Z'
-      // }
-    };
+    $scope.chats = [{
+      _id: '999999999999999999999999',
+      timestamp: '2024-05-12T21:52:56.361Z'
+    }];
 
     $scope.fetchChats = function() {
       var chat = $scope.chats[1] || $scope.chats[1];
@@ -477,18 +475,19 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         var newChat = data.data;
 
         $scope.chats[newChat._id] = newChat;
-        // var not = true;
-        // for (var i = 0; i < $scope.chats.length; i++){
-        //   if (not){
-        //     if ($scope.chats[i]._id === newChat._id){
-        //       not = false;
-        //     }
-        //   }
-        // }
-        // console.log(not);
-        // if (not) {
-        //   $scope.chats.push(newChat);
-        // }
+        var not = true;
+        for (var i = 0; i < $scope.chats.length; i++){
+          if (not){
+            console.log($scope.chats[i]._id, newChat._id)
+            if ($scope.chats[i]._id === newChat._id){
+              not = false;
+            }
+          }
+        }
+        console.log(not);
+        if (not) {
+          $scope.chats.push(newChat);
+        }
     });
 
     $scope.sendChat = function(chat) {
