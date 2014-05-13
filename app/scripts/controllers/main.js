@@ -548,12 +548,12 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
     $scope.hidePic = true;
     $scope.createPic = function() {
-        // $('#pic').height($(window).height()); // jQuery refactor to vanilla JS below.
+        $('#pic').height($(window).height()); // jQuery refactor to vanilla JS below.
         // need to create div not select div
         // document.getElementById('pic').style.height = window.innerHeight;
-        var pic = document.createElement('div');
-        pic.id = 'pic';
-        pic.style.height = window.innerHeight;
+        // var pic = document.createElement('div');
+        // pic.id = 'pic';
+        // pic.style.height = window.innerHeight;
     };
 
     $scope.showMapOrPic = function(chat) {
