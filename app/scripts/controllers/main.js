@@ -473,7 +473,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.fetchChats = function() {
       var chatArr = $scope.chats;
       chatArr = Object.keys(chatArr).sort();
-      var chat = $scope.chats[chatArr[1]];
+      var chat = $scope.chats[chatArr[1] || chatArr[0]];
       // // console.log(chatArr, chat);
       socket.emit('fetch', chat)
     } 
