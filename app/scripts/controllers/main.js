@@ -475,18 +475,18 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         var newChat = data.data;
 
         $scope.chats[newChat._id] = newChat;
-        var not = true;
-        for (var i = 0; i < $scope.chats.length; i++){
-          if (not){
-            if ($scope.chats[i]._id === newChat._id){
-              not = false;
-            }
-          }
-        }
-        console.log(not);
-        if (not) {
-          $scope.chats.push(newChat);
-        }
+        // var not = true;
+        // for (var i = 0; i < $scope.chats.length; i++){
+        //   if (not){
+        //     if ($scope.chats[i]._id === newChat._id){
+        //       not = false;
+        //     }
+        //   }
+        // }
+        // console.log(not);
+        // if (not) {
+        //   $scope.chats.push(newChat);
+        // }
     });
 
     $scope.sendChat = function(chat) {
