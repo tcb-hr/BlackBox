@@ -27,7 +27,7 @@ ul, li {
 /* Buttons */
 button {
   border: 0;
-  outline: 0;
+  /*outline: 0;*/
   overflow: visible;
   cursor: pointer;
   background-color: transparent;
@@ -37,7 +37,6 @@ button {
   height: 40px;
   background-repeat: no-repeat;
   /*text-indent: -9999px;*/
-  outline: none;
   vertical-align: middle;
 }
 .button {
@@ -105,20 +104,42 @@ button {
   background-color: gray;
   border-radius: 6px;
 }
-#googleLoginButton {
+#registerButton {
   box-sizing: border-box;
-  width: 11em;
+  width: 304px;
   height: 32px;
   margin: 4px;
+  padding: 0 16px;
   font-size: 11pt;
   background-color: gray;
   border-radius: 6px;
 }
-#registerButton {
+#googleLoginButton {
   box-sizing: border-box;
-  width: 11em;
+  /*display: block;*/
+  width: 146px;
   height: 32px;
-  margin: 4px;
+  margin: 4px 2px;
+  font-size: 11pt;
+  background-color: gray;
+  border-radius: 6px;
+}
+#navToRegisterButton {
+  box-sizing: border-box;
+  /*display: block;*/
+  width: 146px;
+  height: 32px;
+  margin: 4px 2px;
+  font-size: 11pt;
+  background-color: gray;
+  border-radius: 6px;
+}
+#navToLoginButton {
+  box-sizing: border-box;
+  /*display: block;*/
+  width: 146px;
+  height: 32px;
+  margin: 4px 2px;
   font-size: 11pt;
   background-color: gray;
   border-radius: 6px;
@@ -163,6 +184,9 @@ button {
   background-size: 27px 27px;
   background-position: 4px 4px;
 }
+.noUnderline {
+  text-decoration: none;
+}
 
 /* Login Page */
 .appSig {
@@ -170,11 +194,12 @@ button {
   height: 67%;
   align-items: center;
 }
-.login {
+.authBlock {
   position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
+  padding: 4px;
   text-align: center;
   background-color: #222;
 }
@@ -195,7 +220,6 @@ button {
   text-align: center;
 }
 .emailLogin {
-  padding: 4px;
 }
 .googleLogin {
   height: 44px;

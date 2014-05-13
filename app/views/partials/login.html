@@ -10,9 +10,9 @@
 
   </div>
 
-  <div class="login">
+  <div class="authBlock">
 
-    <div class="emailLogin">
+    <div class="primAuthBlock">
       <form class="form" name="form" ng-submit="login(form)" novalidate>
 
         <div class="form-group"><input placeholder="Email" type="text" name="email" class="form-control loginField" ng-model="user.email" /></div>
@@ -28,12 +28,9 @@
       </form>
     </div>
 
-    <div class="googleLogin">
-      <button id="googleLoginButton" data-ng-click="loginOauth('google')">Log in with Google</button>
-    </div>
-
-    <div class="register">
-      <a href="/signup"><button id="registerButton" type="button" class="text-center new-account">Create an account.</button></a>
+    <div class="altAuthBlock">
+      <button id="googleLoginButton" data-ng-click="loginOauth('google')">Google Login</button>
+      <a href="/signup" class="noUnderline"><button id="navToRegisterButton" type="button" class="text-center new-account">New Account</button></a>
     </div>
 
   </div>
