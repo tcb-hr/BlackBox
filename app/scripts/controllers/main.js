@@ -320,8 +320,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     // console.log('show', this.show);
   };
 
-  $scope.chats = [];
-
+  $scope.chats = {};
   var checkChats = function(chat) {
     var len = $scope.chats.length;
     var comp = true;
@@ -342,7 +341,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
   socket.on('newMessage', function(data) {
     console.log('fishon', data);
     var newChat = data.data;
-    checkChats(newChat);
+    $scope.chats[newChat._id] = newChat;
   });
 
   socket.on('dbUpdate', function(data) {
