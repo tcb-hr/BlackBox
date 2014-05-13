@@ -15,7 +15,7 @@
   <button class="selectAllButton" ng-show="displayUsers" ng-click="selectAll(settings.users)"><i ng-show="selectAllUsers" class="fa fa-check-square-o"></i><i ng-hide="selectAllUsers" class="fa fa-square-o"></i>Select All</button>
     <button class="filterButton" ng-repeat="user in settings.users" ng-show="displayUsers" ng-click="user.show = !user.show" ng-class="{'on':user.show}"><i ng-hide="user.show" class="fa fa-circle-o"></i><i ng-show="user.show" class="fa fa-check-circle-o"></i>{{user.name}}</button>  
   </div>
-<!--   <button class="button closeBtnLeft floatRight" id="closePanelLeft" ng-click="togglePanelLeft()">close</button>
+<!--   <button class="button closeButtonLeft floatRight" id="closePanelLeft" ng-click="togglePanelLeft()">close</button>
   <h1>Settings</h1>
   <div class="groupTitleButton" ng-click="showZones = !showZones" ng-init="showZones = false"><i class="fa fa-map-marker"></i>Zones</div>
   <button class="zoneFilterButton" ng-repeat="zone in zones" ng-show="showZones"ng-click="zone.show = !zone.show" ng-class="{ 'on': zone.show }">{{zone.label}}</button>
@@ -65,7 +65,7 @@
                <span class="handle">{{chat.user || 'guest'}}</span>
             </div>
             <div class="msgText">{{chat.body}}</div>
-            <div class="msgText">{{chat.slogan}}</div>
+            <div class="slogan">{{chat.slogan}}</div>
             <div class="time" am-time-ago="chat.timestamp"></div>
           </div>
         </div>
@@ -107,9 +107,9 @@
 
           <form id="chatForm" name="chat" ng-init="configureUserSettings()" ng-submit="sendChat(chat)">
             <div id="bottomRow">
-              <button type="button" class="button" id="toolsBtn" ng-click="toggleTools()">tools</button>
+              <button type="button" class="button" id="toolsButton" ng-click="toggleTools()">tools</button>
               <input type="text" placeholder="compose" id="composeField" class="form-control textField" ng-model="chat.body" char-limit="140" />
-              <button type="submit" class="button" id="sendBtn">send</button>
+              <button type="submit" class="button" id="sendButton">send</button>
             </div>
           </form>
 
