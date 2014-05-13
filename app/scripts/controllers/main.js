@@ -462,7 +462,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.chats = {
       999999999999999999999999: {
         _id: '999999999999999999999999',
-        timestamp: '2024-05-12T21:52:56.361Z'
+        timestamp: '2024-05-12T21:52:56.361Z',
         body: '<button id="loginButton" class="btn btn-lg btn-primary textButton" ng-click="fetchChats()"> Get More</button>',
         user: 'We Out Here'
       }
