@@ -436,8 +436,9 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   border-width: 0px 0px 2px 0px;
   font-size: 14px;
   margin: 1px 2%;
-  padding: 5px 0px;
+  padding: 0px 0px;
   width: 96%;
+  height: 20px;
   text-align: left;
   padding-left: 20px;
 }
