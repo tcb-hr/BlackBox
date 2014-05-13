@@ -482,6 +482,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             }
           }
         }
+        console.log(not);
         if (not) {
           $scope.chats.push(newChat);
         }
