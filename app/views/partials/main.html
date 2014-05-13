@@ -52,7 +52,7 @@
       <div id="feed" scroll-bottom>
         <div class="msgBlock">
           <div class=content>
-          <button id="loginButton" class="btn btn-lg btn-primary textButton" ng-click="fetchChats()"> Get More</button>
+          <button id="loginButton" class="btn btn-lg btn-primary textButton" ng-click="fetchChats()" ng-swipe-down="fetchChats()">Get More</button>
           </div>
         </div>
         <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString | filter: messageFilter" ng-click="showMapOrPic(chat)" scroll-bottom>
