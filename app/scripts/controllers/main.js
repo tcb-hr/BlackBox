@@ -325,20 +325,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     };
 
 
-    $scope.sendChat = function(chat) {
-        if (!isChatValid(chat)) {
-            console.log('Invalid chat, overriding "send".');
-            return;
-        }
-        socket.emit('newChat', {
-            user: $scope.user.name,
-            body: chat.body,
-            image: '',
-            type: 200
-        });
-        resetChatForm(chat);
-    };
-
     $scope.showPanelLeft = false;
     $scope.togglePanelLeft = function() {
         $scope.showPanelLeft = ($scope.showPanelLeft) ? false : true;
@@ -445,47 +431,42 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
     //--------------------------------------------------
     //
-    //  MAIN PANEL fix bork
+    //  MAIN PANEL twinjet
     //
     //-------------------------------------------------
 
-    var toolsVisible = false;
-    $scope.showTools = function() {
-        return toolsVisible;
-    };
-    $scope.toggleTools = function() {
-        var feed = document.getElementById('feed');
-        if (toolsVisible === true) {
-            toolsVisible = false;
-            feed.style.bottom = '44px';
-            feed.scrollTop = feed.scrollHeight + 44;
-            $scope.searchString = '';
-            $scope.cannedModel = '';
-        } else {
-            toolsVisible = true;
-            feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools.
-            feed.scrollTop = feed.scrollHeight + (44 + 40 * 3); // 3 tools.
-        }
-    };
-
-    $scope.chats = {};
+    $scope.chats = [];
 
     socket.on('newMessage', function(data) {
         console.log('fishon', data);
         var newChat = data.data;
-        $scope.chats[newChat._id] = newChat;
-        // var not = true;
-        // for (var i = 0; i < $scope.chats.length; i++){
-        //   if (not){
-        //     if ($scope.chats[i]._id === newChat._id){
-        //       not = false;
-        //     }
-        //   }
-        // }
-        // if (not) {
-        //   $scope.chats.push(newChat);
-        // }
+        // $scope.chats[newChat._id] = newChat;
+        var not = true;
+        for (var i = 0; i < $scope.chats.length; i++){
+          if (not){
+            if ($scope.chats[i]._id === newChat._id){
+              not = false;
+            }
+          }
+        }
+        if (not) {
+          $scope.chats.push(newChat);
+        }
     });
+
+    $scope.sendChat = function(chat) {
+        if (!isChatValid(chat)) {
+            console.log('Invalid chat, overriding "send".');
+            return;
+        }
+        socket.emit('newChat', {
+            user: $scope.user.name,
+            body: chat.body,
+            image: '',
+            type: 200
+        });
+        resetChatForm(chat);
+    };
 
     var isChatValid = function(chat) {
         if (chat.body === undefined || chat.body.length > 140) {
@@ -508,29 +489,24 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         });
     };
 
-    // $scope.sendChat = function(chat) {
-    //   // console.log('sendChat invoked. chat.name:', chat.name, 'chat.body:', chat.body, 'this:', this);
-    //   if(!isChatValid(chat)) {
-    //     console.log('Invalid chat, overriding "send".');
-    //     return;
-    //   }
-    //   $http.post('/api/chat', {
-    //     user: $scope.user.name,
-    //     body: chat.body,
-    //     image: ''
-    //   }).success(function() {
-    //     console.log('POST success!');
-    //     $http.get('/api/chat').success(function(chats) {
-    //       console.log('GET success!');
-    //       $scope.chats = chats;
-    //     }).error(function(data, status, headers, config) {
-    //       console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
-    //     });
-    //     resetChatForm(chat);
-    //   }).error(function(data, status, headers, config) {
-    //     console.log('POST error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
-    //   });
-    // };
+    var toolsVisible = false;
+    $scope.showTools = function() {
+        return toolsVisible;
+    };
+    $scope.toggleTools = function() {
+        var feed = document.getElementById('feed');
+        if (toolsVisible === true) {
+            toolsVisible = false;
+            feed.style.bottom = '44px';
+            feed.scrollTop = feed.scrollHeight + 44;
+            $scope.searchString = '';
+            $scope.cannedModel = '';
+        } else {
+            toolsVisible = true;
+            feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools.
+            feed.scrollTop = feed.scrollHeight + (44 + 40 * 3); // 3 tools.
+        }
+    };
 
     $scope.layer;
     $scope.map;
@@ -572,8 +548,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
     $scope.hidePic = true;
     $scope.createPic = function() {
-        $('#pic').height($(window).height()); // jQuery refactor to vanilla JS below.
-        // document.getElementById('pic').style.height = window.innerHeight;
+        // $('#pic').height($(window).height()); // jQuery refactor to vanilla JS below.
+        document.getElementById('pic').style.height = window.innerHeight;
     };
 
     $scope.showMapOrPic = function(chat) {
@@ -581,10 +557,14 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         if (chat.image !== undefined) {
             // $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center'); // jQ refactored to JS below.
             var pic = document.getElementById('pic');
+            console.log(pic);
             pic.style.backgroundImage = 'url(' + chat.image + ')';
             pic.style.backgroundRepeat = 'no-repeat';
             pic.style.backgroundPosition = 'center center';
+            console.log($scope.hidePic)
+
             $scope.hidePic = false;
+            console.log($scope.hidePic)
         }
         if (chat.pickCoordinates !== undefined) {
             var pickLat = JSON.parse(chat.pickCoordinates).lat;
