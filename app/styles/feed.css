@@ -7,7 +7,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   vertical-align: baseline;
 }
 body {
-  font-family: 'Josefin Sans', Arial, sans-serif;
+  font-family: 'Maven Pro', Arial, sans-serif;
   width: 100%;
   height: 100%;
   color: #000;
@@ -17,8 +17,8 @@ body {
   font-size: 11pt;
   position: absolute;
 }
-input {
-  font-family: 'Josefin Sans', Arial, sans-serif;
+select, option, input {
+  font-family: 'Maven Pro', Arial, sans-serif;
   font-size: 14pt;
 }
 ul, li {
@@ -286,7 +286,7 @@ button {
 }
 #navTitle {
   position: relative;
-  top: 10px;
+  top: 5px;
   font-size: 17pt;
   font-weight: 700;
   color: #aaa;
@@ -314,7 +314,7 @@ button {
   height: 32px;
 }
 .handle {
-  font-size: 10pt;
+  font-size: 9pt;
   color: #007aff;
 }
 .msgText {
@@ -387,8 +387,9 @@ button {
 }
 .textField {
   position: relative;
-  padding-left: 10px;
   top: 6px;
+  box-sizing: border-box;
+  padding: 0 8px 4px 8px;
   background-color: #fff;
   border-style: solid;
   border-width: 1px;
