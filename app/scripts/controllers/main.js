@@ -551,8 +551,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             pic.style.backgroundRepeat = 'no-repeat';
             pic.style.backgroundPosition = 'center center';
             console.log($scope.$parent.$parent.hidePic)
-            $scope.$parent.$parent.hidePic = false;
-            console.log($scope.$parent.$parent.hidePic)
+            $scope.$parent.hidePic = false;
+            console.log($scope.$parent.hidePic)
         }
         if (chat.pickCoordinates !== undefined) {
             var pickLat = JSON.parse(chat.pickCoordinates).lat;
@@ -562,9 +562,9 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             $scope.$parent.map.panTo(new L.LatLng(dropLat, dropLng));
             $scope.$parent.dropMarker.setLatLng([dropLat, dropLng]);
             if ((pickLat === dropLat) && (pickLng === dropLng)) {
-                $scope.pickMarker.setLatLng([0, 0]);
+                $scope.$parent.pickMarker.setLatLng([0, 0]);
             } else {
-                $scope.pickMarker.setLatLng([pickLat, pickLng]);
+                $scope.$parent.pickMarker.setLatLng([pickLat, pickLng]);
             }
             $scope.$parent.hideMap = false;
         }
