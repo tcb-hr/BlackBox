@@ -459,10 +459,12 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     //
     //-------------------------------------------------
 
-    $scope.chats = {{
-      _id: '999999999999999999999999',
-      timestamp: '2024-05-12T21:52:56.361Z'
-    }};
+    $scope.chats = {
+      // {
+      //   _id: '999999999999999999999999',
+      //   timestamp: '2024-05-12T21:52:56.361Z'
+      // }
+    };
 
     $scope.fetchChats = function() {
       var chat = $scope.chats[1] || $scope.chats[1];
