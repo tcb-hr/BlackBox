@@ -478,7 +478,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         var not = true;
         for (var i = 0; i < $scope.chats.length; i++){
           if (not){
-            console.log($scope.chats[i]._id, newChat._id)
             if ($scope.chats[i]._id === newChat._id){
               not = false;
             }
