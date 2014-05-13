@@ -324,23 +324,23 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         // console.log('show', this.show);
     };
 
- $scope.chats = [];
+ $scope.chats = {};
 
     socket.on('newMessage', function(data) {
         console.log('fishon', data);
         var newChat = data.data;
-        // $scope.chats[newChat._id] = newChat;
-        var not = true;
-        for (var i = 0; i < $scope.chats.length; i++){
-          if (not){
-            if ($scope.chats[i]._id === newChat._id){
-              not = false;
-            }
-          }
-        }
-        if (not) {
-          $scope.chats.push(newChat);
-        }
+        $scope.chats[newChat._id] = newChat;
+        // var not = true;
+        // for (var i = 0; i < $scope.chats.length; i++){
+        //   if (not){
+        //     if ($scope.chats[i]._id === newChat._id){
+        //       not = false;
+        //     }
+        //   }
+        // }
+        // if (not) {
+        //   $scope.chats.push(newChat);
+        // }
     });
 
     $scope.sendChat = function(chat) {
