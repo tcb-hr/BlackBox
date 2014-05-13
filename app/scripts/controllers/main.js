@@ -467,7 +467,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     };
 
     $scope.fetchChats = function() {
-      var chatArr = $scope.chats
+      var chatArr = $scope.chats;
       chatArr = Object.keys(chatArr).sort();
       var chat = chatArr[1];
       console.log(chatArr, chat);
