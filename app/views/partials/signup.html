@@ -33,12 +33,14 @@
           <div class="help-block whiteText" ng-show="form.password.$error.mongoose">{{ errors.password }}</div>
         </div>
 
-        <button id="registerButton" class="btn btn-lg btn-primary textButton" type="submit">Register</button>
+        <button type="submit" id="registerButton" class="btn btn-lg btn-primary textButton">Register</button>
 
       </form>
     </div>
 
-    <div class="altAuthBlock textButton"><a href="/login" class="noUnderline"><button id="navToLoginButton" type="button" class="text-center new-account">Email Login</button></a></div>
+    <div class="altAuthBlock">
+      <a href="/login" class="noUnderline"><button id="navToLoginButton" type="button" class="text-center new-account textButton">Email Login</button></a>
+    </div>
 
   </div>
 
