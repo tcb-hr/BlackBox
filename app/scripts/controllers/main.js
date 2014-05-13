@@ -552,7 +552,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         // need to create div not select div
         // document.getElementById('pic').style.height = window.innerHeight;
         var pic = document.createElement('div');
-        pic.setAttribute('id', 'pic');
+        pic.id = 'pic';
         pic.style.height = window.innerHeight;
     };
 
