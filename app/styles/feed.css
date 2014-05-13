@@ -105,14 +105,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   padding-top: 0;
 }
 #registerButton {
-  box-sizing: border-box;
   width: 304px;
-  height: 32px;
-  margin: 4px;
-  padding: 0 16px;
-  font-size: 11pt;
-  background-color: gray;
-  border-radius: 6px;
 }
 .selectAllButton{
   font-size: 20px;
