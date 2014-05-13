@@ -139,6 +139,12 @@ ul, li {
   text-align: left;
   /*font-size: 11pt;*/
 }
+.slogan {
+  margin-left: 38px;
+  text-align: left;
+  color: grey;  
+  font-size: 10pt;
+}
 .time {
   float: right;
   position: relative;

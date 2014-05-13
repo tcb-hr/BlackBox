@@ -541,14 +541,14 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             icon: redMarker
         }).addTo($scope.map);
 
-        $('#map').height($(window).innerHeight()); // jQ refactored to JS below.
+        $('#map').height($(window).height() - 40 ); // jQ refactored to JS below.
         // document.getElementById('map').style.height = window.innerHeight;
         $scope.map.invalidateSize();
     };
 
     $scope.hidePic = true;
     $scope.createPic = function() {
-        $('#pic').height($(window).innerHeight()); // jQuery refactor to vanilla JS below.
+        $('#pic').height($(window).height() - 40 ); // jQuery refactor to vanilla JS below.
         // wtf
         // document.getElementById('pic').style.height = window.innerHeight;
         // var pic = document.createElement('div');
