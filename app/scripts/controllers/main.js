@@ -478,94 +478,186 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         });
     };
 
-    var toolsVisible = false;
-    $scope.showTools = function() {
-        return toolsVisible;
-    };
-    $scope.toggleTools = function() {
-        var feed = document.getElementById('feed');
-        if (toolsVisible === true) {
-            toolsVisible = false;
-            feed.style.bottom = '44px';
-            feed.scrollTop = feed.scrollHeight + 44;
-            $scope.searchString = '';
-            $scope.cannedModel = '';
-        } else {
-            toolsVisible = true;
-            feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools.
-            feed.scrollTop = feed.scrollHeight + (44 + 40 * 3); // 3 tools.
-        }
-    };
+//     var toolsVisible = false;
+//     $scope.showTools = function() {
+//         return toolsVisible;
+//     };
+//     $scope.toggleTools = function() {
+//         var feed = document.getElementById('feed');
+//         if (toolsVisible === true) {
+//             toolsVisible = false;
+//             feed.style.bottom = '44px';
+//             feed.scrollTop = feed.scrollHeight + 44;
+//             $scope.searchString = '';
+//             $scope.cannedModel = '';
+//         } else {
+//             toolsVisible = true;
+//             feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools.
+//             feed.scrollTop = feed.scrollHeight + (44 + 40 * 3); // 3 tools.
+//         }
+//     };
 
-    $scope.layer;
-    $scope.map;
-    $scope.dropMarker;
-    $scope.pickMarker;
+//     $scope.layer;
+//     $scope.map;
+//     $scope.dropMarker;
+//     $scope.pickMarker;
 
-    $scope.hideMap = true;
-    $scope.createMap = function() {
-        $scope.layer = new L.StamenTileLayer('toner');
-        $scope.map = new L.Map('map', {
-            center: new L.LatLng(37.7, - 122.4),
-            zoom: 14
-        });
-        $scope.map.addLayer($scope.layer);
+//     $scope.hideMap = true;
+//     $scope.createMap = function() {
+//         $scope.layer = new L.StamenTileLayer('toner');
+//         $scope.map = new L.Map('map', {
+//             center: new L.LatLng(37.7, - 122.4),
+//             zoom: 14
+//         });
+//         $scope.map.addLayer($scope.layer);
 
-        //drop Location
-        var redMarker = L.AwesomeMarkers.icon({
-            icon: 'coffee',
-            markerColor: 'red'
-        });
+//         //drop Location
+//         var redMarker = L.AwesomeMarkers.icon({
+//             icon: 'coffee',
+//             markerColor: 'red'
+//         });
 
-        //pick Location
-        var greenMarker = L.AwesomeMarkers.icon({
-            icon: 'coffee',
-            markerColor: 'green'
-        });
+//         //pick Location
+//         var greenMarker = L.AwesomeMarkers.icon({
+//             icon: 'coffee',
+//             markerColor: 'green'
+//         });
 
-        $scope.pickMarker = L.marker([37.8, - 120], {
-            icon: greenMarker
-        }).addTo($scope.map);
-        $scope.dropMarker = L.marker([37.7, - 122.4], {
-            icon: redMarker
-        }).addTo($scope.map);
+//         $scope.pickMarker = L.marker([37.8, - 120], {
+//             icon: greenMarker
+//         }).addTo($scope.map);
+//         $scope.dropMarker = L.marker([37.7, - 122.4], {
+//             icon: redMarker
+//         }).addTo($scope.map);
 
-        // $('#map').height($(window).height()); // jQ refactored to JS below.
-        document.getElementById('map').style.height = window.innerHeight;
-        $scope.map.invalidateSize();
-    };
+//         // $('#map').height($(window).height()); // jQ refactored to JS below.
+//         document.getElementById('map').style.height = window.innerHeight;
+//         $scope.map.invalidateSize();
+//     };
 
-    $scope.hidePic = true;
-    $scope.createPic = function() {
-        // $('#pic').height($(window).height()); // jQuery refactor to vanilla JS below.
-        document.getElementById('pic').style.height = window.innerHeight;
-    };
+//     $scope.hidePic = true;
+//     $scope.createPic = function() {
+//         // $('#pic').height($(window).height()); // jQuery refactor to vanilla JS below.
+//         document.getElementById('pic').style.height = window.innerHeight;
+//     };
 
-    $scope.showMapOrPic = function(chat) {
-        console.log(chat);
-        if (chat.image !== undefined) {
-            $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center'); // jQ refactored to JS below.
-            // var pic = document.getElementById('pic');
-            // pic.style.backgroundImage = 'url(' + chat.image + ')';
-            // pic.style.backgroundRepeat = 'no-repeat';
-            // pic.style.backgroundPosition = 'center center';
-            $scope.hidePic = false;
-        }
-        if (chat.pickCoordinates !== undefined) {
-            var pickLat = JSON.parse(chat.pickCoordinates).lat;
-            var pickLng = JSON.parse(chat.pickCoordinates).lng;
-            var dropLat = JSON.parse(chat.dropCoordinates).lat;
-            var dropLng = JSON.parse(chat.dropCoordinates).lng;
-            $scope.map.panTo(new L.LatLng(dropLat, dropLng));
-            $scope.dropMarker.setLatLng([dropLat, dropLng]);
-            if ((pickLat === dropLat) && (pickLng === dropLng)) {
-                $scope.pickMarker.setLatLng([0, 0]);
-            } else {
-                $scope.pickMarker.setLatLng([pickLat, pickLng]);
-            }
-            $scope.hideMap = false;
-        }
-    };
+//     $scope.showMapOrPic = function(chat) {
+//         console.log(chat);
+//         if (chat.image !== undefined) {
+//             $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center'); // jQ refactored to JS below.
+//             // var pic = document.getElementById('pic');
+//             // pic.style.backgroundImage = 'url(' + chat.image + ')';
+//             // pic.style.backgroundRepeat = 'no-repeat';
+//             // pic.style.backgroundPosition = 'center center';
+//             $scope.hidePic = false;
+//         }
+//         if (chat.pickCoordinates !== undefined) {
+//             var pickLat = JSON.parse(chat.pickCoordinates).lat;
+//             var pickLng = JSON.parse(chat.pickCoordinates).lng;
+//             var dropLat = JSON.parse(chat.dropCoordinates).lat;
+//             var dropLng = JSON.parse(chat.dropCoordinates).lng;
+//             $scope.map.panTo(new L.LatLng(dropLat, dropLng));
+//             $scope.dropMarker.setLatLng([dropLat, dropLng]);
+//             if ((pickLat === dropLat) && (pickLng === dropLng)) {
+//                 $scope.pickMarker.setLatLng([0, 0]);
+//             } else {
+//                 $scope.pickMarker.setLatLng([pickLat, pickLng]);
+//             }
+//             $scope.hideMap = false;
+//         }
+//     };
+// });
+
+//--------------------------------------------------
+//
+//  MAIN PANEL
+//
+//-------------------------------------------------
+
+  var toolsVisible = false;
+  $scope.showTools = function() {
+    return toolsVisible;
+  };
+  $scope.toggleTools = function() {
+    var feed = document.getElementById('feed');
+    if(toolsVisible === true) {
+      toolsVisible = false;
+      feed.style.bottom = '44px';
+      feed.scrollTop = feed.scrollHeight + 44;
+      $scope.searchString = '';
+      $scope.cannedModel = '';
+    } else {
+      toolsVisible = true;
+      feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools.
+      feed.scrollTop = feed.scrollHeight + (44 + 40 * 3); // 3 tools.
+    }
+  };
+  
+  $scope.layer;
+  $scope.map;
+  $scope.dropMarker;
+  $scope.pickMarker;
+
+  $scope.hideMap = true;
+  $scope.createMap = function() {
+    $scope.layer = new L.StamenTileLayer('toner');
+    $scope.map = new L.Map('map', {
+      center: new L.LatLng(37.7, -122.4),
+      zoom: 14
+    });
+    $scope.map.addLayer($scope.layer);
+
+    //drop Location
+    var redMarker = L.AwesomeMarkers.icon({
+      icon: 'coffee',
+      markerColor: 'red'
+    });
+
+    //pick Location
+    var greenMarker = L.AwesomeMarkers.icon({
+      icon: 'coffee',
+      markerColor: 'green'
+    });
+
+    $scope.pickMarker = L.marker([37.8, -120], { icon: greenMarker }).addTo($scope.map);
+    $scope.dropMarker = L.marker([37.7, -122.4], { icon: redMarker }).addTo($scope.map);
+
+    // $('#map').height($(window).height()); // jQ refactored to JS below.
+    document.getElementById('map').style.height = window.innerHeight;
+    $scope.map.invalidateSize();
+  };
+
+  $scope.hidePic = true;
+  $scope.createPic = function() {
+    $('#pic').height($(window).height()); // jQuery refactor to vanilla JS below.
+    // document.getElementById('pic').style.height = window.innerHeight;
+  };
+
+  $scope.showMapOrPic = function(chat) {
+    console.log(chat);
+    if(chat.image !== undefined) {
+      // $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center'); // jQ refactored to JS below.
+      var pic = document.getElementById('pic');
+      pic.style.backgroundImage = 'url(' + chat.image + ')';
+      pic.style.backgroundRepeat = 'no-repeat';
+      pic.style.backgroundPosition = 'center center';
+      $scope.hidePic = false;
+    }
+    if(chat.pickCoordinates !== undefined) {
+      var pickLat = JSON.parse(chat.pickCoordinates).lat;
+      var pickLng = JSON.parse(chat.pickCoordinates).lng;
+      var dropLat = JSON.parse(chat.dropCoordinates).lat;
+      var dropLng = JSON.parse(chat.dropCoordinates).lng;
+      $scope.map.panTo(new L.LatLng(dropLat, dropLng));
+      $scope.dropMarker.setLatLng([dropLat, dropLng]);
+      if((pickLat === dropLat) && (pickLng === dropLng)) {
+        $scope.pickMarker.setLatLng([0,0]);
+      } else {
+        $scope.pickMarker.setLatLng([pickLat, pickLng]);
+      }
+      $scope.hideMap = false;
+    }
+  };
 });
 
 app.filter('searchFor', function() {
@@ -583,3 +675,5 @@ app.filter('searchFor', function() {
         return result;
     };
 });
+
+
