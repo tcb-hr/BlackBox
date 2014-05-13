@@ -541,15 +541,15 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             icon: redMarker
         }).addTo($scope.map);
 
-        // $('#map').height($(window).height()); // jQ refactored to JS below.
-        document.getElementById('map').style.height = window.innerHeight;
+        $('#map').height($(window).innerHeight()); // jQ refactored to JS below.
+        // document.getElementById('map').style.height = window.innerHeight;
         $scope.map.invalidateSize();
     };
 
     $scope.hidePic = true;
     $scope.createPic = function() {
-        $('#pic').height($(window).height()); // jQuery refactor to vanilla JS below.
-        // need to create div not select div
+        $('#pic').height($(window).innerHeight()); // jQuery refactor to vanilla JS below.
+        // wtf
         // document.getElementById('pic').style.height = window.innerHeight;
         // var pic = document.createElement('div');
         // pic.id = 'pic';
