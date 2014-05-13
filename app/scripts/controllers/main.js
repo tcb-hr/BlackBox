@@ -312,6 +312,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         }).error(function(data, status, headers, config) {
             console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
         });
+      $scope.getAvatars();
     };
 
     $scope.updateFilters = function() {
@@ -386,6 +387,29 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         };
         reader.readAsDataURL(file);
     };
+  
+  $scope.toggle = function () {
+    // console.log('show', this.show);
+    this.show = !this.show;
+    // console.log('show', this.show);
+  };
+
+  var checkChats = function(chat){
+    var len = $scope.chats.length;
+    var comp = true;
+    if (len > 0) {
+      for (var i = 0; i  < len; i++){
+        if (chat._id === $scope.chats[i]._id){
+          comp = false;
+        } else {
+          comp = true;
+        }
+      }
+    }
+    if (comp) {
+      $scope.chats.push(chat);
+    }
+  };
 
     $scope.previewAvatar = function() {
         var file = document.getElementById('avatarInput').files[0];
@@ -455,7 +479,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             type: 200
         });
         resetChatForm(chat);
-    };
+    }
 
     var toolsVisible = false;
     $scope.showTools = function() {
@@ -474,6 +498,15 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools.
             feed.scrollTop = feed.scrollHeight + (44 + 40 * 3); // 3 tools.
         }
+    };
+
+    $scope.getAvatars = function(){
+      $scope.avatars = {};
+      $http.get('/api/users').success(function(usersInDB){
+        for(var i=0; i<usersInDB.length; i++){
+          $scope.avatars[usersInDB[i].name] = usersInDB[i].avatar;
+        }
+      });
     };
 
     var isChatValid = function(chat) {

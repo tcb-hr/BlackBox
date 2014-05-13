@@ -61,7 +61,7 @@
         <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString | filter: messageFilter" ng-click="showMapOrPic(chat)" scroll-bottom>
           <div class="content">
             <div class="author">
-               <img class="avatar" src={{chat.pic}} />
+               <img class="avatar" ng-src="{{avatars && avatars[chat.user]}}"/>
                <span class="handle">{{chat.user || 'guest'}}</span>
             </div>
             <div class="msgText">{{chat.body}}</div>
