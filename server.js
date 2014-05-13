@@ -50,7 +50,7 @@ io.sockets.on('connection', function (socket) {
   d.setDate(d.getDate());
   d.setTime(d.getTime()-d.getHours()*3600*1000-d.getMinutes()*60*1000);
   
-  var chatStream = Chat.chatModel.find().where('timestamp').gt(d).tailable().stream();
+  var chatStream = Chat.chatModel.find().limit(25).tailable().stream();
   chatStream.on('data', function (chat) { 
     socket.emit('newMessage', {data: chat});
   }).on('error', function(err) {
@@ -58,6 +58,17 @@ io.sockets.on('connection', function (socket) {
   }).on('end', function (arg){
     console.log('arg!', arg);
   });
+
+  socket.on('fetch', function(chat){
+    var fetchStream = Chat.chatModel.find().where('id').lt(chat.id).limit(25).stream();
+    fetchStream.on('data', function (chat) { 
+      socket.emit('newMessage', {data: chat});
+    }).on('error', function(err) {
+      console.log('fetchStream err', err);
+    }).on('end', function (arg){
+      console.log('arg!', arg);
+    });    
+  })
 
   socket.on('newChat', function (chat) {
     var newChat = new Chat.chatModel(chat);

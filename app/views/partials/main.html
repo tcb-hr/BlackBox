@@ -58,6 +58,11 @@
     <div ng-include="'partials/navbar'"></div>
 
       <div id="feed" scroll-bottom>
+        <div class="msgBlock">
+          <div class=content>
+            <div class="msgText" ng-click="fetchChats()"></div>
+          </div>
+        </div>
         <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString | filter: messageFilter" ng-click="showMapOrPic(chat)" scroll-bottom>
           <div class="content">
             <div class="author">

@@ -459,10 +459,16 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     //
     //-------------------------------------------------
 
-    $scope.chats = [];
+    $scope.chats = [{
+      _id: '999999999999999999999999'
+    }];
+
+    $scope.fetchChats = function() {
+      socket.emit('fetch')
+    } 
 
     socket.on('newMessage', function(data) {
-        console.log('fishon', data);
+        //console.log('fishon', data);
         var newChat = data.data;
         // $scope.chats[newChat._id] = newChat;
         var not = true;
@@ -612,7 +618,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     };
 
     $scope.showMapOrPic = function(chat) {
-        console.log(chat);
+        //console.log(chat);
         if (chat.image !== undefined) {
             // $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center'); // jQ refactored to JS below.
             var pic = document.getElementById('pic');
