@@ -16,12 +16,11 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Josefin+Sans:400,700">
     <link rel="stylesheet" href="styles/feed.css">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/leaflet.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.0/leaflet.awesome-markers.css" />
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
    <!-- endbuild -->
   </head>
 
@@ -53,7 +52,7 @@
     <!-- build:js(app) scripts/vendor.js -->
     <!-- bower:js -->
 
-    <!-- <script src="bower_components/jquery/dist/jquery.js"></script> -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -71,12 +70,16 @@
 
     <!-- endbower -->
 
-    <!-- <script src="/socket.io/socket.io.js"></script> -->
-    <script src="http://191.236.103.192:80/socket.io/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- <script src="http://138.91.64.150:80/socket.io/socket.io.js"></script> -->
 
     <script>
-      // var socket = io.connect('localhost:80');
-      var socket = io.connect('http://191.236.103.192:80');
+      var socket = io.connect('localhost:80');
+      // var socket = io.connect('http://138.91.64.150:80');
+      socket.on('news', function (data) {
+        console.log(data);
+        alert(data['hello']);
+      });
     </script>
 
     <!-- endbuild -->
