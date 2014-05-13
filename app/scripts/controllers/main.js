@@ -460,20 +460,20 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     //-------------------------------------------------
 
     $scope.chats = {
-      999999999999999999999999: {
-        _id: '999999999999999999999999',
-        timestamp: '2112-12-31T23:59:59.361Z',
-        body: 'Godspeed You! Black Emperor',
-        user: 'Mitsuo_Yanagimachi',
-        image: './images/Alfred_E_Neuman.jpg',
-        pic: './images/Alfred_E_Neuman.jpg'
-      }
+      // 999999999999999999999999: {
+      //   _id: '999999999999999999999999',
+      //   timestamp: '2112-12-31T23:59:59.361Z',
+      //   body: 'Godspeed You! Black Emperor',
+      //   user: 'Mitsuo_Yanagimachi',
+      //   image: './images/Alfred_E_Neuman.jpg',
+      //   pic: './images/Alfred_E_Neuman.jpg'
+      // }
     };
 
     $scope.fetchChats = function() {
       var chatArr = $scope.chats;
       chatArr = Object.keys(chatArr).sort();
-      var chat = $scope.chats[chatArr[1] || chatArr[0]];
+      var chat = $scope.chats[chatArr[0]];
       // // console.log(chatArr, chat);
       socket.emit('fetch', chat)
     } 
