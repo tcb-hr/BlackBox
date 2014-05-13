@@ -462,7 +462,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.chats = {
       999999999999999999999999: {
         _id: '999999999999999999999999',
-        timestamp: '2113-12-31T23:59:59.361Z',
+        timestamp: '2112-12-31T23:59:59.361Z',
         body: 'Godspeed You! Black Emperor',
         user: 'Mitsuo_Yanagimachi',
         image: './images/Alfred_E_Neuman.jpg',
