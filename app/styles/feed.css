@@ -6,6 +6,20 @@ font-size: 100%;
 font: inherit;
 vertical-align: baseline;
 }
+body {
+  font-family: 'Josefin Sans', Arial, sans-serif;
+  width: 100%;
+  height: 100%;
+  color: #000;
+  background-color: #fff;
+  /*padding: 0;*/
+  /*margin: 0;*/
+  font-size: 11pt;
+}
+input {
+  font-family: 'Josefin Sans', Arial, sans-serif;
+  font-size: 14pt;
+}
 button, a {
   outline: 0;
   overflow: visible;
@@ -22,15 +36,6 @@ ul, li {
 }
 .floatRight {
   float: right;
-}
-body {
-  font-family: sans-serif;
-  width: 100%;
-  height: 100%;
-  color: #000;
-  background-color: #fff;
-  /*padding: 0;*/
-  /*margin: 0;*/
 }
 #container {
   margin: 0;
@@ -64,7 +69,7 @@ body {
 #appLogo {
   position: relative;
   top: 8px;
-  font-size: 14pt;
+  font-size: 16pt;
   font-weight: 700;
   color: #aaa;
 }
@@ -126,20 +131,20 @@ body {
   height: 32px;
 }
 .handle {
-  font-size: 9pt;
+  font-size: 10pt;
   color: #007aff;
 }
 .msgText {
   margin-left: 38px;
   text-align: left;
-  font-size: 10pt;
+  /*font-size: 11pt;*/
 }
 .time {
   float: right;
   position: relative;
   top: -14px;
   text-align: right;
-  font-size: 9pt;
+  font-size: 10pt;
   color: gray;
 }
 #feed {
@@ -226,7 +231,7 @@ body {
   border-width: 1px;
   border-color: #ccc;
   border-radius: 6px;
-  font-size: 12pt;
+  /*font-size: 12pt;*/
   text-align: center;
 }
 #searchField {
@@ -237,7 +242,7 @@ body {
 #composeField {
   width: 67%;
   height: 30px;
-  font-size: 12pt;
+  /*font-size: 12pt;*/
 }
 #sendBtn {
   position: absolute;
@@ -249,6 +254,7 @@ body {
 }
 #cannedSelect {
   /*width: 90%;*/
+  font-size: 12pt;
 }
 #map {
   height: 100%;
@@ -262,7 +268,7 @@ body {
 }
 .panel {
   position: fixed;
-  /*top: 0;*/
+  top: 0;
   width: 75%;
   height: 100%;
   z-index: 1000;
@@ -360,7 +366,7 @@ body {
   border-color: white;
   border-width: 1px 0 0 0;
   border-style: solid;
-  font-size: 24px;
+  font-size: 19px;
   padding: 5px;
 }
 i {
