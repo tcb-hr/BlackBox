@@ -504,12 +504,12 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
     $scope.hideMap = true;
     $scope.createMap = function() {
-        $scope.layer = new L.StamenTileLayer('toner');
-        $scope.map = new L.Map('map', {
+        $scope.$parent.layer = new L.StamenTileLayer('toner');
+        $scope.$parent.map = new L.Map('map', {
             center: new L.LatLng(37.7, - 122.4),
             zoom: 14
         });
-        $scope.map.addLayer($scope.layer);
+        $scope.$parent.map.addLayer($scope.layer);
 
         //drop Location
         var redMarker = L.AwesomeMarkers.icon({
@@ -523,12 +523,12 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             markerColor: 'green'
         });
 
-        $scope.pickMarker = L.marker([37.8, - 120], {
+        $scope.$parent.pickMarker = L.marker([37.8, - 120], {
             icon: greenMarker
-        }).addTo($scope.map);
-        $scope.dropMarker = L.marker([37.7, - 122.4], {
+        }).addTo($scope.$parent.map);
+        $scope.$parent.dropMarker = L.marker([37.7, - 122.4], {
             icon: redMarker
-        }).addTo($scope.map);
+        }).addTo($scope.$parent.map);
 
         // $('#map').height($(window).height()); // jQ refactored to JS below.
         document.getElementById('map').style.height = window.innerHeight;
@@ -550,23 +550,23 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             pic.style.backgroundImage = 'url(' + chat.image + ')';
             pic.style.backgroundRepeat = 'no-repeat';
             pic.style.backgroundPosition = 'center center';
-            console.log($scope.$parent.hidePic)
-            $scope.$parent.hidePic = false;
-            console.log($scope.$parent.hidePic)
+            console.log($scope.$parent.$parent.hidePic)
+            $scope.$parent.$parent.hidePic = false;
+            console.log($scope.$parent.$parent.hidePic)
         }
         if (chat.pickCoordinates !== undefined) {
             var pickLat = JSON.parse(chat.pickCoordinates).lat;
             var pickLng = JSON.parse(chat.pickCoordinates).lng;
             var dropLat = JSON.parse(chat.dropCoordinates).lat;
             var dropLng = JSON.parse(chat.dropCoordinates).lng;
-            $scope.map.panTo(new L.LatLng(dropLat, dropLng));
-            $scope.dropMarker.setLatLng([dropLat, dropLng]);
+            $scope.$parent.map.panTo(new L.LatLng(dropLat, dropLng));
+            $scope.$parent.dropMarker.setLatLng([dropLat, dropLng]);
             if ((pickLat === dropLat) && (pickLng === dropLng)) {
                 $scope.pickMarker.setLatLng([0, 0]);
             } else {
                 $scope.pickMarker.setLatLng([pickLat, pickLng]);
             }
-            $scope.hideMap = false;
+            $scope.$parent.hideMap = false;
         }
     };
 });
