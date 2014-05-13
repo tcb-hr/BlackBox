@@ -6,23 +6,15 @@
     <button class="selectAllButton" ng-show="displayZones" ng-click="selectAll(settings.zones)"><i ng-show="selectAllZones" class="fa fa-check-square-o"></i><i ng-hide="selectAllZones" class="fa fa-square-o"></i> Select All</button>
     <button class="filterButton" ng-repeat="zone in settings.zones" ng-show="displayZones" ng-click="zone.show = !zone.show"><i ng-hide="zone.show" class="fa fa-circle-o"></i><i ng-show="zone.show" class="fa fa-check-circle-o"></i>{{zone.label}}</button>
 
-    <div class="groupTitleButton" ng-click="toggleMessageTypes()"><i class="fa fa-envelope"></i>Message Types</div>
+    <div class="groupTitleButton" ng-click="toggleMessageTypes()"><i class="fa fa-inbox"></i>Message Types</div>
     <button class="selectAllButton" ng-show="displayMessageTypes" ng-click="selectAll(settings.messageTypes)"><i ng-show="selectAllMessageTypes" class="fa fa-check-square-o"></i><i ng-hide="selectAllMessageTypes" class="fa fa-square-o"></i>Select All</button>
     <button class="filterButton" ng-repeat="type in settings.messageTypes" ng-show="displayMessageTypes" ng-click="type.show = !type.show" ng-class="{'on':type.show}"><i ng-hide="type.show" class="fa fa-circle-o"></i><i ng-show="type.show" class="fa fa-check-circle-o"></i>{{type.label}}</button>
-
 
     <div class="groupTitleButton" ng-click="toggleUsers()" ng-init="showUsers = false"><i class="fa fa-user"></i>Users</div>
   <button class="selectAllButton" ng-show="displayUsers" ng-click="selectAll(settings.users)"><i ng-show="selectAllUsers" class="fa fa-check-square-o"></i><i ng-hide="selectAllUsers" class="fa fa-square-o"></i>Select All</button>
     <button class="filterButton" ng-repeat="user in settings.users" ng-show="displayUsers" ng-click="user.show = !user.show" ng-class="{'on':user.show}"><i ng-hide="user.show" class="fa fa-circle-o"></i><i ng-show="user.show" class="fa fa-check-circle-o"></i>{{user.name}}</button>  
   </div>
-<!--   <button class="button closeButtonLeft floatRight" id="closePanelLeft" ng-click="togglePanelLeft()">close</button>
-  <h1>Settings</h1>
-  <div class="groupTitleButton" ng-click="showZones = !showZones" ng-init="showZones = false"><i class="fa fa-map-marker"></i>Zones</div>
-  <button class="zoneFilterButton" ng-repeat="zone in zones" ng-show="showZones"ng-click="zone.show = !zone.show" ng-class="{ 'on': zone.show }">{{zone.label}}</button>
-  <div class="groupTitleButton" ng-click="showTypes = !showTypes" ng-init="showTypes = false"><i class="fa fa-envelope"></i>Message Types</div>
-  <button class="typeFilterButton" ng-repeat="type in messageTypes" ng-show="showTypes" ng-click="type.show = !type.show" ng-class="{ 'on': type.show }">{{type.label}}</button>
-  <div class="groupTitleButton" ng-click="showUsers = !showUsers" ng-init="showUsers = false"><i class="fa fa-user"></i>Users</div>
-  <button class="userFilterButton" ng-repeat="user in users" ng-show="showUsers" ng-click="user.show = !user.show" ng-class="{ 'on': user.show }">{{user.label}}</button> -->
+
 </div>
 
 <div class="panel" id="panelRight" ng-class="{ hide: !showPanelRight, slide: showPanelRight }">
@@ -107,9 +99,10 @@
 
           <form id="chatForm" name="chat" ng-init="configureUserSettings()" ng-submit="sendChat(chat)">
             <div id="bottomRow">
-              <button type="button" class="button" id="toolsButton" ng-click="toggleTools()">tools</button>
+              <!-- <button type="button" class="button" id="toolsButton" ng-click="toggleTools()">tools</button> -->
+              <button type="button" id="toolsButton" ng-click="toggleTools()"><i class="fa fa-wrench"></i></button>
               <input type="text" placeholder="compose" id="composeField" class="form-control textField" ng-model="chat.body" char-limit="140" />
-              <button type="submit" class="button" id="sendButton">send</button>
+              <button type="submit" id="sendButton"><i class="fa fa-envelope"></i></button>
             </div>
           </form>
 
