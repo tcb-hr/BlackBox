@@ -303,7 +303,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     }
     }).error(function(data, status, headers, config) {
       console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
-    });  
+    });
+  $scope.getAvatars();  
   };
   
   $scope.updateFilters = function(){
