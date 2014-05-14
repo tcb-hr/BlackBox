@@ -61,14 +61,11 @@ io.sockets.on('connection', function (socket) {
   })
 
   socket.on('fetch', function(chat){
-    var d = new Date();
-    d.setDate(d.getDate());
-    d.setTime(d.getTime()-d.getHours()*3600*500-d.getMinutes()*60*1000);
     
     console.log('fetched', chat)
     
     console.log('fetched chat is thus: ', chat);
-    var fetchStream = Chat.chatModel.find().where('timestamp').lt(chat.timestamp).limit(25).stream();
+    var fetchStream = Chat.chatModel.find().where('timestamp').lt(chat._id).limit(25).stream();
   
     fetchStream.on('data', function (chatter) {
       console.log('chatback', chatter);
