@@ -92,15 +92,13 @@
               </div>
 
               <div class="tool" id="cannedTool">
+                <button id="refreshButton" class="btn btn-lg btn-primary textButton" ng-click="refreshChats()" ng-swipe-down="fetchChats()">Refresh</button>
                 <select id="cannedSelect" ng-model="cannedModel" ng-change="composeCanned(chat)" ng-disabled="140 <= chat.body.length">
                   <option></option>
                   <option>10-4</option>
                   <option>on my way</option>
                   <option>need help</option>
                 </select>
-              </div>
-              <div>
-                <button id="refreshButton" class="btn btn-lg btn-primary textButton" ng-click="refreshChats()" ng-swipe-down="fetchChats()">Refresh</button>
               </div>
             </div>
           </div>
