@@ -56,24 +56,22 @@ io.sockets.on('connection', function (socket) {
     }).on('error', function(err) {
       console.log('chatStream err', err);
     }).on('end', function (arg){
-      console.log('arg!', arg);
+      // console.log('arg!', arg);
     });
   })
 
   socket.on('fetch', function(chat){
-    
-    console.log('fetched', chat)
-    
-    console.log('fetched chat is thus: ', chat);
-    var fetchStream = Chat.chatModel.find().where('_id').gt(chat._id).limit(25).stream();
-  
+    // console.log('fetched', chat);
+    // console.log('fetched chat is thus: ', chat);
+    var hex = chat._id;
+    var fetchStream = Chat.chatModel.find().where('_id').lt(chat._id).sort('-timestamp').limit(25).stream();
     fetchStream.on('data', function (chatter) {
-      console.log('chatback', chatter);
+      // console.log('chatback', chatter);
       socket.emit('newMessage', {data: chatter});
     }).on('error', function(err) {
       console.log('fetchStream err', err);
     }).on('end', function (arg){
-      console.log('arg!', arg);
+      // console.log('arg!', arg);
     });    
   })
 
