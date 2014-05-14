@@ -121,6 +121,10 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       socket.emit('hello');
     }
     $scope.refreshChats();
+    $scope.pullChats = function(){
+      $scope.refreshChats();
+      $scope.fetchChats();
+    }
 
     $scope.messageFilter = function(chat) {
       for (var i = 0; i < $scope.settings.messageTypes.length; i++) {
