@@ -49,7 +49,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('hello', function(){
     var d = new Date();
     d.setDate(d.getDate());
-    d.setTime(d.getTime()-d.getHours()*3600*500-d.getMinutes()*60*1000);
+    d.setTime(d.getTime()-d.getHours()*3600*300-d.getMinutes()*60*1000);
     var chatStream = Chat.chatModel.find().where('timestamp').gt(d).limit(15).tailable().stream();
     chatStream.on('data', function (chat) { 
       socket.emit('newMessage', {data: chat});
@@ -63,7 +63,6 @@ io.sockets.on('connection', function (socket) {
   socket.on('fetch', function(chat){
     // console.log('fetched', chat);
     // console.log('fetched chat is thus: ', chat);
-    var hex = chat._id;
     var fetchStream = Chat.chatModel.find().where('_id').lt(chat._id).sort('-timestamp').limit(25).stream();
     fetchStream.on('data', function (chatter) {
       // console.log('chatback', chatter);
