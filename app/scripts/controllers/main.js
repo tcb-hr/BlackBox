@@ -123,12 +123,12 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.refreshChats();
 
     $scope.messageFilter = function(chat) {
-        for (var i = 0; i < $scope.settings.messageTypes.length; i++) {
-            if ((chat.type === $scope.settings.messageTypes[i].dbLabel) && $scope.settings.messageTypes[i].show) {
-                return true;
-            }
+      for (var i = 0; i < $scope.settings.messageTypes.length; i++) {
+        if ((chat.type === $scope.settings.messageTypes[i].dbLabel) && $scope.settings.messageTypes[i].show) {
+          return true;
         }
-        return false;
+      }
+      return false;
     };
 
     $scope.toggleZones = function() {
