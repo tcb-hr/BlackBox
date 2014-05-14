@@ -348,7 +348,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
 }
 #cannedSelect {
   font-size: 12pt;
-  padding-bottom: 6px
+  padding-bottom: 5px
 }
 #map {
   height: 100%;
