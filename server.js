@@ -47,10 +47,10 @@ io.sockets.on('connection', function (socket) {
   socket.emit('init');
   
   socket.on('hello', function(){
-    // var d = new Date();
-    // d.setDate(d.getDate());
-    // d.setTime(d.getTime()-d.getHours()*3600*500-d.getMinutes()*60*1000);
-    var chatStream = Chat.chatModel.find().limit(15).tailable().stream();
+    var d = new Date();
+    d.setDate(d.getDate());
+    d.setTime(d.getTime()-d.getHours()*3600*500-d.getMinutes()*60*1000);
+    var chatStream = Chat.chatModel.find().where('timestamp').gt(d).limit(15).stream();
     chatStream.on('data', function (chat) { 
       socket.emit('newMessage', {data: chat});
     }).on('error', function(err) {
