@@ -50,7 +50,7 @@ io.sockets.on('connection', function (socket) {
     var d = new Date();
     d.setDate(d.getDate());
     d.setTime(d.getTime()-d.getHours()*3600*500-d.getMinutes()*60*1000);
-    var chatStream = Chat.chatModel.find().where('timestamp').gt(d).limit(15).stream();
+    var chatStream = Chat.chatModel.find().where('timestamp').gt(d).limit(15).tailable().stream();
     chatStream.on('data', function (chat) { 
       socket.emit('newMessage', {data: chat});
     }).on('error', function(err) {
@@ -66,15 +66,13 @@ io.sockets.on('connection', function (socket) {
     d.setTime(d.getTime()-d.getHours()*3600*500-d.getMinutes()*60*1000);
     
     console.log('fetched', chat)
-    if (chat){
-      console.log('fetched chat is thus: ', chat);
-      var fetchStream = Chat.chatModel.find().where('timestamp').gt(chat.timestamp).limit(25).stream();
-    } else {
-      var fetchStream = Chat.chatModel.find().where('timestamp').gt(d).limit(25).stream();
-    }
-    fetchStream.on('data', function (chat) {
-      console.log('chatback', chat);
-      socket.emit('newMessage', {data: chat});
+    
+    console.log('fetched chat is thus: ', chat);
+    var fetchStream = Chat.chatModel.find().where('timestamp').lt(chat.timestamp).limit(25).stream();
+  
+    fetchStream.on('data', function (chatter) {
+      console.log('chatback', chatter);
+      socket.emit('newMessage', {data: chatter});
     }).on('error', function(err) {
       console.log('fetchStream err', err);
     }).on('end', function (arg){
