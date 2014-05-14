@@ -61,12 +61,10 @@ io.sockets.on('connection', function (socket) {
   })
 
   socket.on('fetch', function(chat){
-    
-    console.log('fetched', chat)
-    
+    console.log('fetched', chat);
     console.log('fetched chat is thus: ', chat);
-    var fetchStream = Chat.chatModel.find().where('_id').gt(chat._id).limit(25).stream();
-  
+    var hex = chat._id;
+    var fetchStream = Chat.chatModel.find().where('_id').lt(chat._id-25).limit(25).stream();
     fetchStream.on('data', function (chatter) {
       console.log('chatback', chatter);
       socket.emit('newMessage', {data: chatter});
