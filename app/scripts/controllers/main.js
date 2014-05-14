@@ -116,7 +116,11 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     socket.on('init', function(data) {
         // // console.log('Socket connection established.');
     });
-    socket.emit('hello');
+
+    $scope.refreshChats = function(){
+      socket.emit('hello');
+    }
+    $scope.refreshChats();
 
     $scope.messageFilter = function(chat) {
         for (var i = 0; i < $scope.settings.messageTypes.length; i++) {
