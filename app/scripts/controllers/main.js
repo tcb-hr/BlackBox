@@ -116,6 +116,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     socket.on('init', function(data) {
         // // console.log('Socket connection established.');
     });
+    socket.emit('hello');
 
     $scope.messageFilter = function(chat) {
         for (var i = 0; i < $scope.settings.messageTypes.length; i++) {
@@ -394,22 +395,22 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     // // // console.log('show', this.show);
   };
 
-  var checkChats = function(chat){
-    var len = $scope.chats.length;
-    var comp = true;
-    if (len > 0) {
-      for (var i = 0; i  < len; i++){
-        if (chat._id === $scope.chats[i]._id){
-          comp = false;
-        } else {
-          comp = true;
-        }
-      }
-    }
-    if (comp) {
-      $scope.chats.push(chat);
-    }
-  };
+  // var checkChats = function(chat){
+  //   var len = $scope.chats.length;
+  //   var comp = true;
+  //   if (len > 0) {
+  //     for (var i = 0; i  < len; i++){
+  //       if (chat._id === $scope.chats[i]._id){
+  //         comp = false;
+  //       } else {
+  //         comp = true;
+  //       }
+  //     }
+  //   }
+  //   if (comp) {
+  //     $scope.chats.push(chat);
+  //   }
+  // };
 
     $scope.previewAvatar = function() {
         var file = document.getElementById('avatarInput').files[0];
