@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "foundation": "zurb/bower-foundation#~5.2.2",
-    "bootstrap-switch": "~3.0.0"
+    "bootstrap-switch": "~3.0.0",
+    "angular-pull-to-refresh": "~0.3.0"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",
