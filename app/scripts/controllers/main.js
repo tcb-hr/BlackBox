@@ -117,143 +117,82 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         console.log('Socket connection established.');
     });
 
-    $scope.messageFilter = function(chat) {
-        for (var i = 0; i < $scope.settings.messageTypes.length; i++) {
-            if ((chat.type === $scope.settings.messageTypes[i].dbLabel) && $scope.settings.messageTypes[i].show) {
-                return true;
-            }
+    $scope.messageFilter = function(chats) {
+      var result = {};
+      angular.forEach(chats, function(value, key){
+        var showThisType = $scope.settings.messageTypes[value.type].show;
+        if(showThisType){
+          result[key] = value;
         }
-        return false;
+      });
+      return result;
     };
 
-    $scope.toggleZones = function() {
-        $scope.displayZones = !$scope.displayZones;
-        $scope.displayMessageTypes = false;
-        $scope.displayUsers = false;
-    };
 
-    $scope.toggleMessageTypes = function() {
-        $scope.displayMessageTypes = !$scope.displayMessageTypes;
-        $scope.displayZones = false;
-        $scope.displayUsers = false;
-    };
-
-    $scope.toggleUsers = function() {
-        $scope.displayUsers = !$scope.displayUsers;
-        $scope.displayZones = false;
-        $scope.displayMessageTypes = false;
-    };
-
-    $scope.selectAllZones = true;
-    $scope.selectAllMessageTypes = true;
-    $scope.selectAllUsers = true;
-
-    $scope.selectAll = function(arr) {
-        var value;
-        if (arr === $scope.settings.zones) {
-            $scope.selectAllZones = !$scope.selectAllZones;
-            value = $scope.selectAllZones;
-        }
-        if (arr === $scope.settings.messageTypes) {
-            $scope.selectAllMessageTypes = !$scope.selectAllMessageTypes;
-            value = $scope.selectAllMessageTypes;
-        }
-        if (arr === $scope.settings.users) {
-            $scope.selectAllUsers = !$scope.selectAllUsers;
-            value = $scope.selectAllUsers;
-        }
-        for (var i = 0; i < arr.length; i++) {
-            arr[i].show = value;
-        }
+    $scope.display = {
+      zones: {selectAll: true, show: false},
+      messageTypes: {selectAll: true, show: false},
+      users: {selectAll: true, show: false}
     };
 
     $scope.settings = {
+      zones: {
+        '1': {show: true},
+        '2': {show: true},
+        '3': {show: true},
+        '4': {show: true},
+        '5': {show: true},
+        '6': {show: true},
+        '7': {show: true}
+      },
+     messageTypes: {
+      'Chats': {dbLabel: 200, show: true},
+      'Instagram': {dbLabel: 300, show: true},
+      'Courier check-in': {dbLabel: 101, show: true},
+      'Courier check-out': {dbLabel: 102, show: true},
+      'Job created': {dbLabel: 103, show: true}, 
+      'Job cancelled': {dbLabel: 104, show: true},
+      'Job edited': {dbLabel: 105, show: true},
+      'Job ready': {dbLabel: 106, show: true},
+      'Job assigned': {dbLabel: 107, show: true},
+      'Job picked': {dbLabel: 108, show: true},
+      'Job delivered': {dbLabel: 109, show: true},
+      'Job complete': {dbLabel: 110, show: true},
+      'Job late': {dbLabel: 111, show: true}
+    },
+    users: []
+  };
 
-        zones: [{
-            label: '1',
-            show: true
-        }, {
-            label: '2',
-            show: true
-        }, {
-            label: '3',
-            show: true
-        }, {
-            label: '4',
-            show: true
-        }, {
-            label: '5',
-            show: true
-        }, {
-            label: '6',
-            show: true
-        }, {
-            label: '7',
-            show: true
-        }],
 
-        messageTypes: [{
-            label: 'Chats',
-            dbLabel: 200,
-            show: true
-        }, {
-            label: 'Instagram',
-            dbLabel: 300,
-            show: true,
-        }, {
-            label: 'Courier check-in',
-            dbLabel: 101,
-            show: true
-        }, {
-            label: 'Courier check-out',
-            dbLabel: 102,
-            show: true
-        }, {
-            label: 'Job created',
-            dbLabel: 103,
-            show: true
-        }, {
-            label: 'Job cancelled',
-            dbLabel: 104,
-            show: true
-        }, {
-            label: 'Job edited',
-            dbLabel: 105,
-            show: true
-        }, {
-            label: 'Job ready',
-            dbLabel: 106,
-            show: true
-        }, {
-            label: 'Job assigned',
-            dbLabel: 107,
-            show: true
-        }, {
-            label: 'Job picked',
-            dbLabel: 108,
-            show: true
-        }, {
-            label: 'Job delivered',
-            dbLabel: 109,
-            show: true
-        }, {
-            label: 'Job complete',
-            dbLabel: 110,
-            show: true
-        }, {
-            label: 'Job late',
-            dbLabel: 111,
-            show: true
-        }],
-
-        users: []
-
+    $scope.toggleSection = function(section) {
+      console.log('before', $scope.display);
+      for(var key in $scope.display){
+        if(key === section){
+          if($scope.display[key].show === true){
+            $scope.display[key].show = false;
+          } else{
+            $scope.display[key].show = true;
+          }
+        } else{
+          $scope.display[key].show = false;
+        }
+      }
+      console.log('after', $scope.display);
     };
 
-    //  $scope.showUsers = false;
+
+    $scope.selectAll = function(section) {
+      var newValue = !$scope.display[section].selectAll;
+      $scope.display[section].selectAll = newValue;
+      for(var key in $scope.settings[section]){
+        $scope.settings[section][key].show = newValue;
+      }
+    };
+
 
     $scope.configureUserSettings = function() {
-        // sets up settings for a logged in user
+      // sets up settings for a logged in user
+      /*
         $http.get('/api/users/me').success(function(user) {
             $scope.user = user || 'guest';
             if (user.settings === undefined) {
@@ -312,6 +251,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         }).error(function(data, status, headers, config) {
             console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
         });
+      */
       $scope.getAvatars();
     };
 
