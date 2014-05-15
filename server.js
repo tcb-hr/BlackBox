@@ -48,7 +48,7 @@ io.sockets.on('connection', function (socket) {
   
   socket.on('hello', function(){
     var now = new Date();
-    var chatStream = Chat.chatModel.find({timestamp: {$lte: now}}).limit(15).tailable().stream();
+    var chatStream = Chat.chatModel.find({timestamp: {$lte: now}}).tailable().limit(15).stream();
     chatStream.on('data', function (chat) { 
       socket.emit('newMessage', {data: chat});
     }).on('error', function(err) {
