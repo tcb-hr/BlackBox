@@ -50,7 +50,7 @@ io.sockets.on('connection', function (socket) {
     console.log('hello')
     var d = new Date();
     d.setDate(d.getDate());
-    d.setTime(d.getTime()-d.getHours()*3600*200-d.getMinutes()*60*1000);
+    d.setTime(d.getTime()-d.getHours()*3600*300-d.getMinutes()*60*1000);
     var chatStream = Chat.chatModel.find().where('timestamp').gt(d).limit(15).tailable().stream();
     chatStream.on('data', function (chat) { 
       socket.emit('newMessage', {data: chat});
