@@ -254,6 +254,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
 .msgText {
   margin-left: 38px;
   text-align: left;
+  width: 80%;
 }
 .slogan {
   margin-left: 38px;
