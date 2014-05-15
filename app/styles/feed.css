@@ -250,6 +250,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
 .handle {
   font-size: 9pt;
   color: #777;
+  vertical-align: baseline;
 }
 .msgText {
   margin-left: 38px;
