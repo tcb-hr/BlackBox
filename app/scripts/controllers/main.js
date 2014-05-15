@@ -117,10 +117,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         // // console.log('Socket connection established.');
     });
 
-    $scope.refreshChats = function(){
-      socket.emit('hello');
-    }
-    $scope.refreshChats();
+    
     
 
     $scope.messageFilter = function(chat) {
@@ -475,6 +472,19 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       //   pic: './images/Alfred_E_Neuman.jpg'
       // }
     };
+
+    $scope.refreshChats = function(){
+      socket.emit('hello');
+    }
+
+    $scope.refreshChats();
+
+    $scope.pullChats() = function (){
+      alert('hello pull chats');
+      $scope.refreshChats();
+      $scope.fetchChats();
+    }
+
 
     $scope.fetchChats = function() {
       var chatArr = $scope.chats;
