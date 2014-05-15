@@ -151,22 +151,17 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
      messageTypes: {
       200: {label: 'Chats', show: true},
       300: {label: 'Instagram', show: true},
-      101: {label: 'Courier check-in', show: true}
-      /*
-      'Chats': {dbLabel: 200, show: true},
-      'Instagram': {dbLabel: 300, show: true},
-      'Courier check-in': {dbLabel: 101, show: true},
-      'Courier check-out': {dbLabel: 102, show: true},
-      'Job created': {dbLabel: 103, show: true}, 
-      'Job cancelled': {dbLabel: 104, show: true},
-      'Job edited': {dbLabel: 105, show: true},
-      'Job ready': {dbLabel: 106, show: true},
-      'Job assigned': {dbLabel: 107, show: true},
-      'Job picked': {dbLabel: 108, show: true},
-      'Job delivered': {dbLabel: 109, show: true},
-      'Job complete': {dbLabel: 110, show: true},
-      'Job late': {dbLabel: 111, show: true}
-      */
+      101: {label: 'Courier check-in', show: true},
+      102: {label: 'Courier check-out', show: true},
+      103: {label: 'Job created', show: true},
+      104: {label: 'Job cancelled', show: true},
+      105: {label: 'Job edited', show: true},
+      106: {label: 'Job ready', show: true}, 
+      107: {label: 'Job assigned', show: true},
+      108: {label: 'Job picked', show: true},
+      109: {label: 'Job delivered', show: true},
+      110: {label: 'Job complete', show: true},
+      111: {label: 'Job late', show: true} 
     },
     users: []
   };
