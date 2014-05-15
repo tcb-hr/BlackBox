@@ -58,7 +58,7 @@
             ng-click="refreshChats()">Refresh</button>
           </div>
         </div>
-        <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString | filter: messageFilter" pull-to-refresh="pullChats()" ng-click="showMapOrPic(chat)" scroll-bottom>
+        <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString | filter: messageFilter" ng-click="showMapOrPic(chat)" scroll-bottom>
           <div class="content">
             <div class="author">
                <img class="avatar" ng-src="{{avatars && avatars[chat.user]}}"/>
