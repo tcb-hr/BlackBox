@@ -50,7 +50,7 @@
     <div ng-include="'partials/navbar'"></div>
 
       <div id="feed" scroll-bottom>
-        <div class="msgBlock" ng-repeat="(key, prop) in chats | messageFilter: settings" ng-click="showMapOrPic(chat)" scroll-bottom>
+        <div class="msgBlock" ng-repeat="(key, prop) in chats | searchFor: searchString | messageFilter: settings" ng-click="showMapOrPic(chat)" scroll-bottom>
           <div class="content">
             <div class="author">
                <img class="avatar" ng-src="{{avatars && avatars[prop.user]}}"/>
