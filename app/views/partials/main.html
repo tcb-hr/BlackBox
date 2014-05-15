@@ -8,7 +8,7 @@
 
     <div class="groupTitleButton" ng-click="toggleSection('messageTypes')"><i class="fa fa-inbox"></i>Message Types</div>
     <button class="selectAllButton" ng-show="display.messageTypes.show" ng-click="selectAll('messageTypes')"><i ng-show="display.messageTypes.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.messageTypes.selectAll" class="fa fa-square-o"></i>Select All</button>
-    <button class="filterButton" ng-repeat="(key, prop) in settings.messageTypes" ng-show="display.messageTypes.show" ng-click="prop.show = !prop.show"><i ng-hide="prop.show" class="fa fa-circle-o"></i><i ng-show="prop.show" class="fa fa-check-circle-o"></i>{{key}}</button>
+    <button class="filterButton" ng-repeat="(key, prop) in settings.messageTypes" ng-show="display.messageTypes.show" ng-click="prop.show = !prop.show"><i ng-hide="prop.show" class="fa fa-circle-o"></i><i ng-show="prop.show" class="fa fa-check-circle-o"></i>{{prop.label}}</button>
 
     <div class="groupTitleButton" ng-click="toggleSection('users')"><i class="fa fa-user"></i>Users</div>
     <button class="selectAllButton" ng-show="display.users.show" ng-click="selectAll('users')"><i ng-show="display.users.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.users.selectAll" class="fa fa-square-o"></i>Select All</button>
@@ -50,7 +50,7 @@
     <div ng-include="'partials/navbar'"></div>
 
       <div id="feed" scroll-bottom>
-        <div class="msgBlock" ng-repeat="(key, prop) in chats" ng-click="showMapOrPic(chat)" scroll-bottom>
+        <div class="msgBlock" ng-repeat="(key, prop) in chats | messageFilter: settings" ng-click="showMapOrPic(chat)" scroll-bottom>
           <div class="content">
             <div class="author">
                <img class="avatar" ng-src="{{avatars && avatars[prop.user]}}"/>

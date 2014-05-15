@@ -117,17 +117,20 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         console.log('Socket connection established.');
     });
 
+/*
     $scope.messageFilter = function(chats) {
       var result = {};
       angular.forEach(chats, function(value, key){
+        console.log('value.type', value.type);
         var showThisType = $scope.settings.messageTypes[value.type].show;
         if(showThisType){
           result[key] = value;
         }
       });
+      console.log('result', result);
       return result;
     };
-
+*/
 
     $scope.display = {
       zones: {selectAll: true, show: false},
@@ -146,6 +149,10 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         '7': {show: true}
       },
      messageTypes: {
+      200: {label: 'Chats', show: true},
+      300: {label: 'Instagram', show: true},
+      101: {label: 'Courier check-in', show: true}
+      /*
       'Chats': {dbLabel: 200, show: true},
       'Instagram': {dbLabel: 300, show: true},
       'Courier check-in': {dbLabel: 101, show: true},
@@ -159,13 +166,13 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       'Job delivered': {dbLabel: 109, show: true},
       'Job complete': {dbLabel: 110, show: true},
       'Job late': {dbLabel: 111, show: true}
+      */
     },
     users: []
   };
 
 
     $scope.toggleSection = function(section) {
-      console.log('before', $scope.display);
       for(var key in $scope.display){
         if(key === section){
           if($scope.display[key].show === true){
@@ -177,7 +184,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
           $scope.display[key].show = false;
         }
       }
-      console.log('after', $scope.display);
     };
 
 
@@ -191,11 +197,10 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
 
     $scope.configureUserSettings = function() {
-      // sets up settings for a logged in user
-      /*
-        $http.get('/api/users/me').success(function(user) {
-            $scope.user = user || 'guest';
-            if (user.settings === undefined) {
+      $http.get('/api/users/me').success(function(user) {
+        $scope.user = user || 'guest';
+        /*
+        if (user.settings === undefined) {
                 console.log('new user or guest');
                 $http.get('/api/users').success(function(currentUsers) {
                     var userFilter = [];
@@ -248,10 +253,10 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
                     }
                 });
             }
+*/
         }).error(function(data, status, headers, config) {
             console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
         });
-      */
       $scope.getAvatars();
     };
 
@@ -556,3 +561,19 @@ app.filter('searchFor', function() {
         return result;
     };
 });
+
+app.filter('messageFilter', function(){
+  return function (input, settings){
+    var result = {};
+    angular.forEach(input, function(value, key){   
+     var showType = settings.messageTypes[value.type].show;
+     //var showZone = settings.zones[value.zone].show;
+     //var showUser = settings.users[value.user].show;
+     if(showType){  //if(showType && showZone && showUser){
+       result[key] = value;
+     }
+    });
+    return result;
+  };
+});
+  
