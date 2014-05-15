@@ -49,7 +49,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('hello', function(){
     var d = new Date();
     d.setDate(d.getDate());
-    d.setTime(d.getTime()-d.getHours()*3600*1000-d.getMinutes()*60*1000);
+    d.setTime(d.getTime()-d.getHours()*3600*100-d.getMinutes()*60*1000);
     console.log('hello', d);
     var chatStream = Chat.chatModel.find().where('timestamp').gt(d).limit(15).tailable().stream();
     chatStream.on('data', function (chat) { 
