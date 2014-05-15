@@ -117,14 +117,57 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         // // console.log('Socket connection established.');
     });
 
+    $scope.chats = {
+      // 999999999999999999999999: {
+      //   _id: '999999999999999999999999',
+      //   timestamp: '2112-12-31T23:59:59.361Z',
+      //   body: 'Godspeed You! Black Emperor',
+      //   user: 'Mitsuo_Yanagimachi',
+      //   image: './images/Alfred_E_Neuman.jpg',
+      //   pic: './images/Alfred_E_Neuman.jpg'
+      // }
+    };
+
+
+    socket.on('newMessage', function(data) {
+        // console.log('fishon', data);
+        var newChat = data.data;
+        $scope.chats[newChat._id] = newChat;
+    });
+
+    $scope.sendChat = function(chat) {
+        if (!isChatValid(chat)) {
+            // // console.log('Invalid chat, overriding "send".');
+            return;
+        }
+        socket.emit('newChat', {
+            user: $scope.user.name,
+            body: chat.body,
+            image: '',
+            type: 200
+        });
+        resetChatForm(chat);
+    };
+    
+    $scope.fetchChats = function() {
+      var chatArr = $scope.chats;
+      chatArr = Object.keys(chatArr).sort();
+      var chat = $scope.chats[chatArr[0]];
+      // // console.log(chatArr, chat);
+      socket.emit('fetch', chat)
+    };
+
     $scope.refreshChats = function(){
       socket.emit('hello');
-    }
+    };
+    
     $scope.refreshChats();
+    
     $scope.pullChats = function(){
+      alert('hello pull');
       $scope.refreshChats();
       $scope.fetchChats();
-    }
+    };
 
     $scope.messageFilter = function(chat) {
       for (var i = 0; i < $scope.settings.messageTypes.length; i++) {
@@ -468,44 +511,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     //
     //-------------------------------------------------
 
-    $scope.chats = {
-      // 999999999999999999999999: {
-      //   _id: '999999999999999999999999',
-      //   timestamp: '2112-12-31T23:59:59.361Z',
-      //   body: 'Godspeed You! Black Emperor',
-      //   user: 'Mitsuo_Yanagimachi',
-      //   image: './images/Alfred_E_Neuman.jpg',
-      //   pic: './images/Alfred_E_Neuman.jpg'
-      // }
-    };
-
-    $scope.fetchChats = function() {
-      var chatArr = $scope.chats;
-      chatArr = Object.keys(chatArr).sort();
-      var chat = $scope.chats[chatArr[0]];
-      // // console.log(chatArr, chat);
-      socket.emit('fetch', chat)
-    } 
-
-    socket.on('newMessage', function(data) {
-        // console.log('fishon', data);
-        var newChat = data.data;
-        $scope.chats[newChat._id] = newChat;
-    });
-
-    $scope.sendChat = function(chat) {
-        if (!isChatValid(chat)) {
-            // // console.log('Invalid chat, overriding "send".');
-            return;
-        }
-        socket.emit('newChat', {
-            user: $scope.user.name,
-            body: chat.body,
-            image: '',
-            type: 200
-        });
-        resetChatForm(chat);
-    }
 
     $scope.getAvatars = function(){
       $scope.avatars = {};
