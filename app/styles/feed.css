@@ -141,6 +141,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   font-size: 11pt;
   background-color: #666;
   border-radius: 6px;
+  border-color: #080808;
 }
 .textButton:active, .textButton:focus, .textButton:hover {
   background-color: #999;
