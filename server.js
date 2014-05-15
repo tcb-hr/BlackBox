@@ -47,6 +47,7 @@ io.sockets.on('connection', function (socket) {
   socket.emit('init');
   
   socket.on('hello', function(){
+    console.log('hello')
     var d = new Date();
     d.setDate(d.getDate());
     d.setTime(d.getTime()-d.getHours()*3600*200-d.getMinutes()*60*1000);
@@ -61,7 +62,7 @@ io.sockets.on('connection', function (socket) {
   })
 
   socket.on('fetch', function(chat){
-    // console.log('fetched', chat);
+    console.log('fetched', chat);
     // console.log('fetched chat is thus: ', chat);
     var fetchStream = Chat.chatModel.find().where('_id').lt(chat._id).sort('-timestamp').limit(25).stream();
     fetchStream.on('data', function (chatter) {
