@@ -479,7 +479,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
     $scope.refreshChats();
 
-    $scope.pullChats() = function (){
+    $scope.pullChats = function (){
       alert('hello pull chats');
       $scope.refreshChats();
       $scope.fetchChats();
