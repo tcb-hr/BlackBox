@@ -47,10 +47,10 @@ io.sockets.on('connection', function (socket) {
   socket.emit('init');
   
   socket.on('hello', function(){
-    console.log('hello')
     var d = new Date();
-    d.setDate(d.getDate());
+    d.setDate(d.getDate()-0.5);
     d.setTime(d.getTime()-d.getHours()*3600*1000-d.getMinutes()*60*1000);
+    console.log('hello', d)
     var chatStream = Chat.chatModel.find().where('timestamp').gt(d).tailable().stream();
     chatStream.on('data', function (chat) { 
       socket.emit('newMessage', {data: chat});
