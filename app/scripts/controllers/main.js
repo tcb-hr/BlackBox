@@ -490,7 +490,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       var chatArr = $scope.chats;
       chatArr = Object.keys(chatArr).sort();
       var chat = $scope.chats[chatArr[0]];
-      // // console.log(chatArr, chat);
+      // console.log(chatArr, chat);
       socket.emit('fetch', chat)
     } 
 
@@ -502,7 +502,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
     $scope.sendChat = function(chat) {
         if (!isChatValid(chat)) {
-            // // console.log('Invalid chat, overriding "send".');
+            // console.log('Invalid chat, overriding "send".');
             return;
         }
         socket.emit('newChat', {

@@ -49,7 +49,7 @@
 
     <div ng-include="'partials/navbar'"></div>
 
-      <div id="feed" scroll-bottom pull-to-refresh="pullChats()">
+      <div id="feed" scroll-bottom>
         <div class="msgBlock">
           <div class=content>
           <button id="fetchButton" class="btn btn-lg btn-primary textButton" 
@@ -64,9 +64,9 @@
                <img class="avatar" ng-src="{{avatars && avatars[chat.user]}}"/>
                <span class="handle">{{chat.user || 'guest'}}</span>
             </div>
+            <div class="time" am-time-ago="chat.timestamp"></div>
             <div class="msgText">{{chat.body}}</div>
             <div class="slogan">{{chat.slogan}}</div>
-            <div class="time" am-time-ago="chat.timestamp"></div>
           </div>
         </div>
       </div>

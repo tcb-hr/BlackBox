@@ -265,7 +265,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
 .time {
   float: right;
   position: relative;
-  bottom: -14px;
+  bottom: 0px;
   text-align: right;
   font-size: 10pt;
   color: #999;
