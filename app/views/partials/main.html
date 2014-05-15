@@ -49,8 +49,8 @@
 
     <div ng-include="'partials/navbar'"></div>
 
-      <div id="feed" scroll-bottom>
-        <div class="msgBlock" pull-to-refresh="pullChats()">
+      <div id="feed" scroll-bottom pull-to-refresh="pullChats()">
+        <div class="msgBlock">
           <div class=content>
           <button id="fetchButton" class="btn btn-lg btn-primary textButton" 
             ng-click="fetchChats()">Get More</button>
