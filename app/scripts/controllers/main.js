@@ -256,61 +256,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.configureUserSettings = function() {
         $http.get('/api/users/me').success(function(user) {
             $scope.user = user || 'guest';
-            /*
-        if (user.settings === undefined) {
-                console.log('new user or guest');
-                $http.get('/api/users').success(function(currentUsers) {
-                    var userFilter = [];
-                    for (var i = 0; i < currentUsers.length; i++) {
-                        userFilter.push({
-                            name: currentUsers[i].name,
-                            show: true
-                        });
-                    }
-                    $scope.settings.users = userFilter;
-                    if ($scope.user !== 'guest') {
-                        $http.post('/api/users/me', {
-                            propertyValue: $scope.settings,
-                            propertyKey: 'settings',
-                            userId: $scope.user._id
-                        }).success(function() {
-                            console.log('User settings updated in db');
-                        });
-                    }
-                });
-            } else {
-                // check to see if their user list is up to date
-                $scope.settings = user.settings;
-                $http.get('/api/users').success(function(currentUsers) {
-                    var updated = false;
-                    for (var i = 0; i < currentUsers.length; i++) {
-                        user = currentUsers[i].name;
-                        var found = false;
-                        for (var j = 0; j < $scope.settings.users.length; j++) {
-                            if ($scope.settings.users[j].name === user) {
-                                found = true;
-                                updated = true;
-                            }
-                        }
-                        if (found === false) {
-                            $scope.settings.users.push({
-                                name: user,
-                                show: true
-                            });
-                        }
-                    }
-                    if (updated) {
-                        $http.post('/api/users/me', {
-                            propertyValue: $scope.settings,
-                            propertyKey: 'settings',
-                            userId: $scope.user._id
-                        }).success(function() {
-                            console.log('User people prefernces updated');
-                        });
-                    }
-                });
-            }
-*/
         }).error(function(data, status, headers, config) {
             console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
         });
