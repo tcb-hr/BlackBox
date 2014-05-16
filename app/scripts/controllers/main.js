@@ -114,11 +114,10 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     };
 
     socket.on('init', function(data) {
-        // // console.log('Socket connection established.');
+        console.log('Socket connection established.');
     });
 
-<<<<<<< HEAD
-/*
+    /*
     $scope.messageFilter = function(chats) {
       var result = {};
       angular.forEach(chats, function(value, key){
@@ -130,90 +129,134 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       });
       console.log('result', result);
       return result;
-=======
-    
-    
-
-    $scope.messageFilter = function(chat) {
-      for (var i = 0; i < $scope.settings.messageTypes.length; i++) {
-        if ((chat.type === $scope.settings.messageTypes[i].dbLabel) && $scope.settings.messageTypes[i].show) {
-          return true;
-        }
-      }
-      return false;
-    };
-
-    $scope.toggleZones = function() {
-        $scope.displayZones = !$scope.displayZones;
-        $scope.displayMessageTypes = false;
-        $scope.displayUsers = false;
->>>>>>> master
     };
 */
 
     $scope.display = {
-      zones: {selectAll: true, show: false},
-      messageTypes: {selectAll: true, show: false},
-      users: {selectAll: true, show: false}
+        zones: {
+            selectAll: true,
+            show: false
+        },
+        messageTypes: {
+            selectAll: true,
+            show: false
+        },
+        users: {
+            selectAll: true,
+            show: false
+        }
     };
 
     $scope.settings = {
-      zones: {
-        '1': {show: true},
-        '2': {show: true},
-        '3': {show: true},
-        '4': {show: true},
-        '5': {show: true},
-        '6': {show: true},
-        '7': {show: true}
-      },
-     messageTypes: {
-      200: {label: 'Chats', show: true},
-      300: {label: 'Instagram', show: true},
-      101: {label: 'Courier check-in', show: true},
-      102: {label: 'Courier check-out', show: true},
-      103: {label: 'Job created', show: true},
-      104: {label: 'Job cancelled', show: true},
-      105: {label: 'Job edited', show: true},
-      106: {label: 'Job ready', show: true}, 
-      107: {label: 'Job assigned', show: true},
-      108: {label: 'Job picked', show: true},
-      109: {label: 'Job delivered', show: true},
-      110: {label: 'Job complete', show: true},
-      111: {label: 'Job late', show: true} 
-    },
-    users: []
-  };
+        zones: {
+            '1': {
+                show: true
+            },
+            '2': {
+                show: true
+            },
+            '3': {
+                show: true
+            },
+            '4': {
+                show: true
+            },
+            '5': {
+                show: true
+            },
+            '6': {
+                show: true
+            },
+            '7': {
+                show: true
+            }
+        },
+        messageTypes: {
+            200: {
+                label: 'Chats',
+                show: true
+            },
+            300: {
+                label: 'Instagram',
+                show: true
+            },
+            101: {
+                label: 'Courier check-in',
+                show: true
+            },
+            102: {
+                label: 'Courier check-out',
+                show: true
+            },
+            103: {
+                label: 'Job created',
+                show: true
+            },
+            104: {
+                label: 'Job cancelled',
+                show: true
+            },
+            105: {
+                label: 'Job edited',
+                show: true
+            },
+            106: {
+                label: 'Job ready',
+                show: true
+            },
+            107: {
+                label: 'Job assigned',
+                show: true
+            },
+            108: {
+                label: 'Job picked',
+                show: true
+            },
+            109: {
+                label: 'Job delivered',
+                show: true
+            },
+            110: {
+                label: 'Job complete',
+                show: true
+            },
+            111: {
+                label: 'Job late',
+                show: true
+            }
+        },
+        users: []
+    };
 
 
     $scope.toggleSection = function(section) {
-      for(var key in $scope.display){
-        if(key === section){
-          if($scope.display[key].show === true){
-            $scope.display[key].show = false;
-          } else{
-            $scope.display[key].show = true;
-          }
-        } else{
-          $scope.display[key].show = false;
+        for (var key in $scope.display) {
+            if (key === section) {
+                if ($scope.display[key].show === true) {
+                    $scope.display[key].show = false;
+                } else {
+                    $scope.display[key].show = true;
+                }
+            } else {
+                $scope.display[key].show = false;
+            }
         }
-      }
     };
 
 
     $scope.selectAll = function(section) {
-      var newValue = !$scope.display[section].selectAll;
-      $scope.display[section].selectAll = newValue;
-      for(var key in $scope.settings[section]){
-        $scope.settings[section][key].show = newValue;
-      }
+        var newValue = !$scope.display[section].selectAll;
+        $scope.display[section].selectAll = newValue;
+        for (var key in $scope.settings[section]) {
+            $scope.settings[section][key].show = newValue;
+        }
     };
 
 
     $scope.configureUserSettings = function() {
-      $http.get('/api/users/me').success(function(user) {
-        $scope.user = user || 'guest';
-        /*
+        $http.get('/api/users/me').success(function(user) {
+            $scope.user = user || 'guest';
+            /*
         if (user.settings === undefined) {
                 console.log('new user or guest');
                 $http.get('/api/users').success(function(currentUsers) {
@@ -231,7 +274,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
                             propertyKey: 'settings',
                             userId: $scope.user._id
                         }).success(function() {
-                            // // console.log('User settings updated in db');
+                            console.log('User settings updated in db');
                         });
                     }
                 });
@@ -262,26 +305,26 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
                             propertyKey: 'settings',
                             userId: $scope.user._id
                         }).success(function() {
-                            // // console.log('User people prefernces updated');
+                            console.log('User people prefernces updated');
                         });
                     }
                 });
             }
 */
         }).error(function(data, status, headers, config) {
-            // // console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
+            console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
         });
-      $scope.getAvatars();
+        $scope.getAvatars();
     };
 
     $scope.updateFilters = function() {
-        // // console.log('change');
+        console.log('change');
     };
 
     $scope.toggle = function() {
-        // // // console.log('show', this.show);
+        // console.log('show', this.show);
         this.show = !this.show;
-        // // // console.log('show', this.show);
+        // console.log('show', this.show);
     };
 
 
@@ -294,7 +337,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
                 propertyValue: $scope.settings,
                 userId: $scope.user._id
             }).success(function() {
-                // // console.log('POST success!');
+                console.log('POST success!');
             });
         }
     };
@@ -311,7 +354,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             // $('#avatarDisplay').css('background-image', str); // jQuery refactored to vanilla JS below.
             document.getElementById('avatarDisplay').style.backgroundImage = str;
         }).error(function(data, status, headers, config) {
-            // // console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
+            console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
         });
     };
 
@@ -346,29 +389,29 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         };
         reader.readAsDataURL(file);
     };
-  
-  $scope.toggle = function () {
-    // // // console.log('show', this.show);
-    this.show = !this.show;
-    // // // console.log('show', this.show);
-  };
 
-  // var checkChats = function(chat){
-  //   var len = $scope.chats.length;
-  //   var comp = true;
-  //   if (len > 0) {
-  //     for (var i = 0; i  < len; i++){
-  //       if (chat._id === $scope.chats[i]._id){
-  //         comp = false;
-  //       } else {
-  //         comp = true;
-  //       }
-  //     }
-  //   }
-  //   if (comp) {
-  //     $scope.chats.push(chat);
-  //   }
-  // };
+    $scope.toggle = function() {
+        // console.log('show', this.show);
+        this.show = !this.show;
+        // console.log('show', this.show);
+    };
+
+    var checkChats = function(chat) {
+        var len = $scope.chats.length;
+        var comp = true;
+        if (len > 0) {
+            for (var i = 0; i < len; i++) {
+                if (chat._id === $scope.chats[i]._id) {
+                    comp = false;
+                } else {
+                    comp = true;
+                }
+            }
+        }
+        if (comp) {
+            $scope.chats.push(chat);
+        }
+    };
 
     $scope.previewAvatar = function() {
         var file = document.getElementById('avatarInput').files[0];
@@ -378,7 +421,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
     $scope.saveAvatar = function() {
         var encoding = document.getElementById('avatarCanvas').toDataURL();
-        // // console.log('save encoding', encoding);
+        console.log('save encoding', encoding);
         $http.post('/api/users/me', {
             propertyValue: encoding,
             propertyKey: 'avatar',
@@ -386,7 +429,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         }).success(function() {
             $scope.resetAvatarControls();
             $scope.loadAvatar();
-            // // console.log('Image saved to database');
+            console.log('Image saved to database');
         });
     };
 
@@ -414,51 +457,21 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
     //--------------------------------------------------
     //
-    //  MAIN PANEL twinjet
+    //  MAIN PANEL
     //
     //-------------------------------------------------
 
-    $scope.chats = {
-      // 999999999999999999999999: {
-      //   _id: '999999999999999999999999',
-      //   timestamp: '2112-12-31T23:59:59.361Z',
-      //   body: 'Godspeed You! Black Emperor',
-      //   user: 'Mitsuo_Yanagimachi',
-      //   image: './images/Alfred_E_Neuman.jpg',
-      //   pic: './images/Alfred_E_Neuman.jpg'
-      // }
-    };
-
-    $scope.refreshChats = function(){
-      socket.emit('hello');
-    }
-
-    $scope.refreshChats();
-
-    $scope.pullChats = function (){
-      alert('hello pull chats');
-      $scope.refreshChats();
-      $scope.fetchChats();
-    }
-
-
-    $scope.fetchChats = function() {
-      var chatArr = $scope.chats;
-      chatArr = Object.keys(chatArr).sort();
-      var chat = $scope.chats[chatArr[0]];
-      // console.log(chatArr, chat);
-      socket.emit('fetch', chat)
-    } 
+    $scope.chats = {};
 
     socket.on('newMessage', function(data) {
-        // console.log('fishon', data);
+        console.log('fishon', data);
         var newChat = data.data;
         $scope.chats[newChat._id] = newChat;
     });
 
     $scope.sendChat = function(chat) {
         if (!isChatValid(chat)) {
-            // console.log('Invalid chat, overriding "send".');
+            console.log('Invalid chat, overriding "send".');
             return;
         }
         socket.emit('newChat', {
@@ -470,13 +483,32 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         resetChatForm(chat);
     }
 
-    $scope.getAvatars = function(){
-      $scope.avatars = {};
-      $http.get('/api/users').success(function(usersInDB){
-        for(var i=0; i<usersInDB.length; i++){
-          $scope.avatars[usersInDB[i].name] = usersInDB[i].avatar;
+    var toolsVisible = false;
+    $scope.showTools = function() {
+        return toolsVisible;
+    };
+    $scope.toggleTools = function() {
+        var feed = document.getElementById('feed');
+        if (toolsVisible === true) {
+            toolsVisible = false;
+            feed.style.bottom = '44px';
+            feed.scrollTop = feed.scrollHeight + 44;
+            $scope.searchString = '';
+            $scope.cannedModel = '';
+        } else {
+            toolsVisible = true;
+            feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools.
+            feed.scrollTop = feed.scrollHeight + (44 + 40 * 3); // 3 tools.
         }
-      });
+    };
+
+    $scope.getAvatars = function() {
+        $scope.avatars = {};
+        $http.get('/api/users').success(function(usersInDB) {
+            for (var i = 0; i < usersInDB.length; i++) {
+                $scope.avatars[usersInDB[i].name] = usersInDB[i].avatar;
+            }
+        });
     };
 
     var isChatValid = function(chat) {
@@ -496,27 +528,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         $http.get('/api/users/me').success(function(user) {
             $scope.currentUser = user;
             $scope.settings.users = user.settings.users;
-            // // console.log($scope.settings.users);
+            console.log($scope.settings.users);
         });
-    };
-
-    var toolsVisible = false;
-    $scope.showTools = function() {
-        return toolsVisible;
-    };
-    $scope.toggleTools = function() {
-        var feed = document.getElementById('feed');
-        if (toolsVisible === true) {
-            toolsVisible = false;
-            feed.style.bottom = '44px';
-            feed.scrollTop = feed.scrollHeight + 44;
-            $scope.searchString = '';
-            $scope.cannedModel = '';
-        } else {
-            toolsVisible = true;
-            feed.style.bottom = (44 + 40 * 3) + 'px'; // 3 tools.
-            feed.scrollTop = feed.scrollHeight + (44 + 40 * 3); // 3 tools.
-        }
     };
 
     $scope.layer;
@@ -552,43 +565,33 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             icon: redMarker
         }).addTo($scope.map);
 
-        $('#map').height($(window).height() - 40 ); // jQ refactored to JS below.
-        // document.getElementById('map').style.height = window.innerHeight;
+        // $('#map').height($(window).height()); // jQ refactored to JS below.
+        document.getElementById('map').style.height = window.innerHeight;
         $scope.map.invalidateSize();
     };
 
     $scope.hidePic = true;
     $scope.createPic = function() {
-        $('#pic').height($(window).height() - 40 ); // jQuery refactor to vanilla JS below.
-        // wtf
-        // document.getElementById('pic').style.height = window.innerHeight;
-        // var pic = document.createElement('div');
-        // pic.id = 'pic';
-        // pic.style.height = window.innerHeight;
+        // $('#pic').height($(window).height()); // jQuery refactor to vanilla JS below.
+        document.getElementById('pic').style.height = window.innerHeight;
     };
 
     $scope.showMapOrPic = function(chat) {
-        //// // console.log(chat);
+        // console.log(chat);
         if (chat.image !== undefined) {
             // $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center'); // jQ refactored to JS below.
             var pic = document.getElementById('pic');
-            // // console.log(pic);
-            pic.style.backgroundImage = 'url(../images/loading.gif)'
             pic.style.backgroundImage = 'url(' + chat.image + ')';
             pic.style.backgroundRepeat = 'no-repeat';
             pic.style.backgroundPosition = 'center center';
-            // // console.log($scope.hidePic)
-
             $scope.hidePic = false;
-            // // console.log($scope.hidePic)
         }
         if (chat.pickCoordinates !== undefined) {
             var pickLat = JSON.parse(chat.pickCoordinates).lat;
             var pickLng = JSON.parse(chat.pickCoordinates).lng;
             var dropLat = JSON.parse(chat.dropCoordinates).lat;
             var dropLng = JSON.parse(chat.dropCoordinates).lng;
-            var panLat = (pickLat + dropLat)/2;
-            var panLng = (pickLng + dropLng)/2;
+            $scope.map.panTo(new L.LatLng(dropLat, dropLng));
             $scope.dropMarker.setLatLng([dropLat, dropLng]);
             if ((pickLat === dropLat) && (pickLng === dropLng)) {
                 $scope.pickMarker.setLatLng([0, 0]);
@@ -596,7 +599,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
                 $scope.pickMarker.setLatLng([pickLat, pickLng]);
             }
             $scope.hideMap = false;
-            $scope.map.panTo(new L.LatLng(panLat, panLng));
         }
     };
 });
@@ -617,18 +619,17 @@ app.filter('searchFor', function() {
     };
 });
 
-app.filter('messageFilter', function(){
-  return function (input, settings){
-    var result = {};
-    angular.forEach(input, function(value, key){   
-     var showType = settings.messageTypes[value.type].show;
-     //var showZone = settings.zones[value.zone].show;
-     //var showUser = settings.users[value.user].show;
-     if(showType){  //if(showType && showZone && showUser){
-       result[key] = value;
-     }
-    });
-    return result;
-  };
+app.filter('messageFilter', function() {
+    return function(input, settings) {
+        var result = {};
+        angular.forEach(input, function(value, key) {
+            var showType = settings.messageTypes[value.type].show;
+            //var showZone = settings.zones[value.zone].show;
+            //var showUser = settings.users[value.user].show;
+            if (showType) { //if(showType && showZone && showUser){
+                result[key] = value;
+            }
+        });
+        return result;
+    };
 });
-  
