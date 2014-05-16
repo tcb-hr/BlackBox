@@ -396,23 +396,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         // console.log('show', this.show);
     };
 
-    var checkChats = function(chat) {
-        var len = $scope.chats.length;
-        var comp = true;
-        if (len > 0) {
-            for (var i = 0; i < len; i++) {
-                if (chat._id === $scope.chats[i]._id) {
-                    comp = false;
-                } else {
-                    comp = true;
-                }
-            }
-        }
-        if (comp) {
-            $scope.chats.push(chat);
-        }
-    };
-
     $scope.previewAvatar = function() {
         var file = document.getElementById('avatarInput').files[0];
         var canvas = document.getElementById('avatarCanvas');
@@ -461,27 +444,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     //
     //-------------------------------------------------
 
-    // $scope.chats = {};
-
-    // socket.on('newMessage', function(data) {
-    //     console.log('fishon', data);
-    //     var newChat = data.data;
-    //     $scope.chats[newChat._id] = newChat;
-    // });
-
-    // $scope.sendChat = function(chat) {
-    //     if (!isChatValid(chat)) {
-    //         console.log('Invalid chat, overriding "send".');
-    //         return;
-    //     }
-    //     socket.emit('newChat', {
-    //         user: $scope.user.name,
-    //         body: chat.body,
-    //         image: '',
-    //         type: 200
-    //     });
-    //     resetChatForm(chat);
-    // }
     $scope.chats = {
       // 999999999999999999999999: {
       //   _id: '999999999999999999999999',
@@ -518,6 +480,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         // console.log('fishon', data);
         var newChat = data.data;
         $scope.chats[newChat._id] = newChat;
+        $scope.getAvatars();
     });
 
     $scope.sendChat = function(chat) {
