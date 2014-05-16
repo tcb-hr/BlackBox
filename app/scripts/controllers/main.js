@@ -481,6 +481,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         var newChat = data.data;
         $scope.chats[newChat._id] = newChat;
         $scope.getAvatars();
+        console.log($scope.avatars);
     });
 
     $scope.sendChat = function(chat) {
