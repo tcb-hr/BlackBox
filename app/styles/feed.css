@@ -173,11 +173,11 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   text-align: center;
 }
 .appLogo {
-  width: 128px;
-  height: 128px;
+  width: 150px;
+  height: 150px;
   margin: 8px;
   background-image: url("../images/bb-logo_256px.png");
-  background-size: 128px 128px;
+  background-size: 150px 150px;
 }
 .appName {
   font-size: 24pt;
