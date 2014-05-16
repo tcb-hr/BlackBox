@@ -480,7 +480,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         // console.log('fishon', data);
         var newChat = data.data;
         $scope.chats[newChat._id] = newChat;
-        newChat.type !== 200 ? $scope.avatars[newChat.user] = newChat.pic;
+        newChat.type === 200 ? console.log('hey hey') : $scope.avatars[newChat.user] = newChat.pic;
     });
 
     $scope.sendChat = function(chat) {
