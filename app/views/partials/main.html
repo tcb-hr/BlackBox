@@ -2,17 +2,17 @@
   <button class="settingsButton" ng-click="togglePanelLeft()"><i class="fa fa-angle-left"></i></button>
   <div class="panelContent">
     <h1 class="settingsTitle">Settings</h1>
-    <div class="groupTitleButton" ng-click="toggleZones()"><i class="fa fa-map-marker"></i>Zones</div>
-    <button class="selectAllButton" ng-show="displayZones" ng-click="selectAll(settings.zones)"><i ng-show="selectAllZones" class="fa fa-check-square-o"></i><i ng-hide="selectAllZones" class="fa fa-square-o"></i> Select All</button>
-    <button class="filterButton" ng-repeat="zone in settings.zones" ng-show="displayZones" ng-click="zone.show = !zone.show"><i ng-hide="zone.show" class="fa fa-circle-o"></i><i ng-show="zone.show" class="fa fa-check-circle-o"></i>{{zone.label}}</button>
+    <div class="groupTitleButton" ng-click="toggleSection('zones')"><i class="fa fa-map-marker"></i>Zones</div>
+    <button class="selectAllButton" ng-show="display.zones.show" ng-click="selectAll('zones')"><i ng-show="display.zones.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.zones.selectAll" class="fa fa-square-o"></i> Select All</button>
+    <button class="filterButton" ng-repeat="(key, prop) in settings.zones" ng-show="display.zones.show" ng-click="prop.show = !prop.show"><i ng-hide="prop.show" class="fa fa-circle-o"></i><i ng-show="prop.show" class="fa fa-check-circle-o"></i>{{key}}</button>
 
-    <div class="groupTitleButton" ng-click="toggleMessageTypes()"><i class="fa fa-inbox"></i>Message Types</div>
-    <button class="selectAllButton" ng-show="displayMessageTypes" ng-click="selectAll(settings.messageTypes)"><i ng-show="selectAllMessageTypes" class="fa fa-check-square-o"></i><i ng-hide="selectAllMessageTypes" class="fa fa-square-o"></i>Select All</button>
-    <button class="filterButton" ng-repeat="type in settings.messageTypes" ng-show="displayMessageTypes" ng-click="type.show = !type.show" ng-class="{'on':type.show}"><i ng-hide="type.show" class="fa fa-circle-o"></i><i ng-show="type.show" class="fa fa-check-circle-o"></i>{{type.label}}</button>
+    <div class="groupTitleButton" ng-click="toggleSection('messageTypes')"><i class="fa fa-inbox"></i>Message Types</div>
+    <button class="selectAllButton" ng-show="display.messageTypes.show" ng-click="selectAll('messageTypes')"><i ng-show="display.messageTypes.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.messageTypes.selectAll" class="fa fa-square-o"></i>Select All</button>
+    <button class="filterButton" ng-repeat="(key, prop) in settings.messageTypes" ng-show="display.messageTypes.show" ng-click="prop.show = !prop.show"><i ng-hide="prop.show" class="fa fa-circle-o"></i><i ng-show="prop.show" class="fa fa-check-circle-o"></i>{{prop.label}}</button>
 
-    <div class="groupTitleButton" ng-click="toggleUsers()" ng-init="showUsers = false"><i class="fa fa-user"></i>Users</div>
-  <button class="selectAllButton" ng-show="displayUsers" ng-click="selectAll(settings.users)"><i ng-show="selectAllUsers" class="fa fa-check-square-o"></i><i ng-hide="selectAllUsers" class="fa fa-square-o"></i>Select All</button>
-    <button class="filterButton" ng-repeat="user in settings.users" ng-show="displayUsers" ng-click="user.show = !user.show" ng-class="{'on':user.show}"><i ng-hide="user.show" class="fa fa-circle-o"></i><i ng-show="user.show" class="fa fa-check-circle-o"></i>{{user.name}}</button>  
+    <div class="groupTitleButton" ng-click="toggleSection('users')"><i class="fa fa-user"></i>Users</div>
+    <button class="selectAllButton" ng-show="display.users.show" ng-click="selectAll('users')"><i ng-show="display.users.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.users.selectAll" class="fa fa-square-o"></i>Select All</button>
+    <button class="filterButton" ng-repeat="users in settings.users" ng-show="display.users.show" ng-click="user.show = !user.show"><i ng-hide="user.show" class="fa fa-circle-o"></i><i ng-show="user.show" class="fa fa-check-circle-o"></i>{{user.name}}</button>  
   </div>
 
 </div>
@@ -74,27 +74,22 @@
       </div>
     </div>
 
-      <div class="hamburger"></div>
+<!--       <div class="hamburger"></div>
       <div class="msgMenu">
         <div>reply</div>
         <div>mute</div>
         <div>grab</div>
         <div>info</div>
       </div>
-
     </div>
-
+ -->
     <div id="footer">
-      <!-- <form id="chatForm" name="chat" ng-submit="sendChat(chat)"> --> <!-- Placing 'form' here causes 'return' keypress anywhere in form to trigger 'flow.js'. -->
         <div class="content">
-
           <div id="toolbox" ng-show="showTools()">
             <div id="tools">
-
               <div class="tool" id="searchTool">
                 <input type="text" class="textField" id="searchField" ng-model="searchString" placeholder="search" />
               </div>
-
               <div class="tool" id="cannedTool">
                 <button id="fetchButton" class="btn btn-lg btn-primary textButton" 
                   ng-click="fetchChats()">Get More</button>
@@ -109,7 +104,6 @@
               </div>
             </div>
           </div>
-
           <form id="chatForm" name="chat" ng-init="configureUserSettings()" ng-submit="sendChat(chat)">
             <div id="bottomRow">
               <!-- <button type="button" class="button" id="toolsButton" ng-click="toggleTools()">tools</button> -->
@@ -118,9 +112,6 @@
               <button type="submit" id="sendButton"><i class="fa fa-envelope"></i></button>
             </div>
           </form>
-
-      <!-- </form> --> <!-- Placing 'form' here causes 'return' keypress anywhere in form to trigger 'flow.js'. -->
+        </div>        
+      </div>
     </div>
-
-  </div>
-</div>
