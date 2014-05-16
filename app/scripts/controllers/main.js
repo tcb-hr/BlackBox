@@ -566,13 +566,15 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
         //drop Location
         var redMarker = L.AwesomeMarkers.icon({
-            icon: 'coffee',
+            icon: 'bolt',
+            prefix: 'fa',
             markerColor: 'red'
         });
 
         //pick Location
         var greenMarker = L.AwesomeMarkers.icon({
-            icon: 'coffee',
+            icon: 'plane',
+            prefix: 'fa',
             markerColor: 'green'
         });
 
