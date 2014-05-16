@@ -598,29 +598,30 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
     $scope.showMapOrPic = function(chat) {
         // console.log(chat);
-        if (chat.image !== undefined) {
-            var pic = document.getElementById('pic');
-            pic.style.backgroundImage = 'url(' + chat.image + ')';
-            pic.style.backgroundRepeat = 'no-repeat';
-            pic.style.backgroundPosition = 'center center';
-            $scope.hidePic = false;
-        }
-        if (chat.pickCoordinates !== undefined || chat.dropCoordinates !== undefined) {
-            var pickLat = JSON.parse(chat.pickCoordinates).lat;
-            var pickLng = JSON.parse(chat.pickCoordinates).lng;
-            var dropLat = JSON.parse(chat.dropCoordinates).lat;
-            var dropLng = JSON.parse(chat.dropCoordinates).lng;
-            //pan-center map to the mid-point btw pick & drop
-            var panLat = (pickLat + dropLat)/2;
-            var panLng = (pickLng + dropLng)/2;
-            $scope.dropMarker.setLatLng([dropLat, dropLng]);
-            if ((pickLat === dropLat) && (pickLng === dropLng)) {
-                $scope.pickMarker.setLatLng([0, 0]);
-            } else {
-                $scope.pickMarker.setLatLng([pickLat, pickLng]);
+        if (chat.image && chat.dropCoordinates){
+            if (chat.image !== undefined) {
+                var pic = document.getElementById('pic');
+                pic.style.backgroundImage = 'url(' + chat.image + ')';
+                pic.style.backgroundRepeat = 'no-repeat';
+                pic.style.backgroundPosition = 'center center';
+                $scope.hidePic = false;
+            } else if (chat.pickCoordinates !== undefined || chat.dropCoordinates !== undefined) {
+                var pickLat = JSON.parse(chat.pickCoordinates).lat;
+                var pickLng = JSON.parse(chat.pickCoordinates).lng;
+                var dropLat = JSON.parse(chat.dropCoordinates).lat;
+                var dropLng = JSON.parse(chat.dropCoordinates).lng;
+                //pan-center map to the mid-point btw pick & drop
+                var panLat = (pickLat + dropLat)/2;
+                var panLng = (pickLng + dropLng)/2;
+                $scope.dropMarker.setLatLng([dropLat, dropLng]);
+                if ((pickLat === dropLat) && (pickLng === dropLng)) {
+                    $scope.pickMarker.setLatLng([0, 0]);
+                } else {
+                    $scope.pickMarker.setLatLng([pickLat, pickLng]);
+                }
+                $scope.hideMap = false;
+                $scope.map.setView(new L.LatLng(panLat, panLng), 14);
             }
-            $scope.hideMap = false;
-            $scope.map.setView(new L.LatLng(panLat, panLng), 14);
         }
     };
 });
