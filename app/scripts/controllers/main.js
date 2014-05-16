@@ -524,8 +524,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             }
         });
         angular.forEach($scope.chats, function(chat, hash){
-            if (chat.avatar){
                 console.log(chat);
+            if (chat.avatar){
                 $scope.avatars[chat.user] = chat.avatar;
             }
         })
