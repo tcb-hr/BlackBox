@@ -480,8 +480,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         // console.log('fishon', data);
         var newChat = data.data;
         $scope.chats[newChat._id] = newChat;
-        $scope.getAvatars();
-        console.log($scope.avatars);
+        $scope.avatars[newChat.user] = newChat.pic;
     });
 
     $scope.sendChat = function(chat) {
@@ -524,7 +523,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             }
         });
         angular.forEach($scope.chats, function(chat, hash){
-                console.log(chat);
             if (chat.type === 300){
                 $scope.avatars[chat.user] = chat.pic;
             }
@@ -610,6 +608,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             var pickLng = JSON.parse(chat.pickCoordinates).lng;
             var dropLat = JSON.parse(chat.dropCoordinates).lat;
             var dropLng = JSON.parse(chat.dropCoordinates).lng;
+            //pan-center map to the mid-point btw pick & drop
             var panLat = (pickLat + dropLat)/2;
             var panLng = (pickLng + dropLng)/2;
             $scope.dropMarker.setLatLng([dropLat, dropLng]);
