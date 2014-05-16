@@ -559,6 +559,11 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
                 $scope.avatars[usersInDB[i].name] = usersInDB[i].avatar;
             }
         });
+        angular.forEach($scope.chats, function(chat, hash){
+            if (chat.avatar){
+                $scope.avatars[chat.user] = chat.avatar;
+            }
+        })
     };
 
     var isChatValid = function(chat) {
@@ -629,7 +634,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.showMapOrPic = function(chat) {
         // console.log(chat);
         if (chat.image !== undefined) {
-            // $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center'); // jQ refactored to JS below.
             var pic = document.getElementById('pic');
             pic.style.backgroundImage = 'url(' + chat.image + ')';
             pic.style.backgroundRepeat = 'no-repeat';
