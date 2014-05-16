@@ -457,7 +457,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
     //--------------------------------------------------
     //
-    //  MAIN PANEL
+    //  MAIN PANEL grunt
     //
     //-------------------------------------------------
 
@@ -636,7 +636,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             pic.style.backgroundPosition = 'center center';
             $scope.hidePic = false;
         }
-        if (chat.pickCoordinates !== undefined || chat.dropCoordinates !undefined) {
+        if (chat.pickCoordinates !== undefined || chat.dropCoordinates !== undefined) {
             var pickLat = JSON.parse(chat.pickCoordinates).lat;
             var pickLng = JSON.parse(chat.pickCoordinates).lng;
             var dropLat = JSON.parse(chat.dropCoordinates).lat;
