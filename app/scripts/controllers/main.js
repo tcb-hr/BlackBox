@@ -117,6 +117,20 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         // // console.log('Socket connection established.');
     });
 
+<<<<<<< HEAD
+/*
+    $scope.messageFilter = function(chats) {
+      var result = {};
+      angular.forEach(chats, function(value, key){
+        console.log('value.type', value.type);
+        var showThisType = $scope.settings.messageTypes[value.type].show;
+        if(showThisType){
+          result[key] = value;
+        }
+      });
+      console.log('result', result);
+      return result;
+=======
     
     
 
@@ -133,134 +147,75 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         $scope.displayZones = !$scope.displayZones;
         $scope.displayMessageTypes = false;
         $scope.displayUsers = false;
+>>>>>>> master
     };
+*/
 
-    $scope.toggleMessageTypes = function() {
-        $scope.displayMessageTypes = !$scope.displayMessageTypes;
-        $scope.displayZones = false;
-        $scope.displayUsers = false;
-    };
-
-    $scope.toggleUsers = function() {
-        $scope.displayUsers = !$scope.displayUsers;
-        $scope.displayZones = false;
-        $scope.displayMessageTypes = false;
-    };
-
-    $scope.selectAllZones = true;
-    $scope.selectAllMessageTypes = true;
-    $scope.selectAllUsers = true;
-
-    $scope.selectAll = function(arr) {
-        var value;
-        if (arr === $scope.settings.zones) {
-            $scope.selectAllZones = !$scope.selectAllZones;
-            value = $scope.selectAllZones;
-        }
-        if (arr === $scope.settings.messageTypes) {
-            $scope.selectAllMessageTypes = !$scope.selectAllMessageTypes;
-            value = $scope.selectAllMessageTypes;
-        }
-        if (arr === $scope.settings.users) {
-            $scope.selectAllUsers = !$scope.selectAllUsers;
-            value = $scope.selectAllUsers;
-        }
-        for (var i = 0; i < arr.length; i++) {
-            arr[i].show = value;
-        }
+    $scope.display = {
+      zones: {selectAll: true, show: false},
+      messageTypes: {selectAll: true, show: false},
+      users: {selectAll: true, show: false}
     };
 
     $scope.settings = {
+      zones: {
+        '1': {show: true},
+        '2': {show: true},
+        '3': {show: true},
+        '4': {show: true},
+        '5': {show: true},
+        '6': {show: true},
+        '7': {show: true}
+      },
+     messageTypes: {
+      200: {label: 'Chats', show: true},
+      300: {label: 'Instagram', show: true},
+      101: {label: 'Courier check-in', show: true},
+      102: {label: 'Courier check-out', show: true},
+      103: {label: 'Job created', show: true},
+      104: {label: 'Job cancelled', show: true},
+      105: {label: 'Job edited', show: true},
+      106: {label: 'Job ready', show: true}, 
+      107: {label: 'Job assigned', show: true},
+      108: {label: 'Job picked', show: true},
+      109: {label: 'Job delivered', show: true},
+      110: {label: 'Job complete', show: true},
+      111: {label: 'Job late', show: true} 
+    },
+    users: []
+  };
 
-        zones: [{
-            label: '1',
-            show: true
-        }, {
-            label: '2',
-            show: true
-        }, {
-            label: '3',
-            show: true
-        }, {
-            label: '4',
-            show: true
-        }, {
-            label: '5',
-            show: true
-        }, {
-            label: '6',
-            show: true
-        }, {
-            label: '7',
-            show: true
-        }],
 
-        messageTypes: [{
-            label: 'Chats',
-            dbLabel: 200,
-            show: true
-        }, {
-            label: 'Instagram',
-            dbLabel: 300,
-            show: true,
-        }, {
-            label: 'Courier check-in',
-            dbLabel: 101,
-            show: true
-        }, {
-            label: 'Courier check-out',
-            dbLabel: 102,
-            show: true
-        }, {
-            label: 'Job created',
-            dbLabel: 103,
-            show: true
-        }, {
-            label: 'Job cancelled',
-            dbLabel: 104,
-            show: true
-        }, {
-            label: 'Job edited',
-            dbLabel: 105,
-            show: true
-        }, {
-            label: 'Job ready',
-            dbLabel: 106,
-            show: true
-        }, {
-            label: 'Job assigned',
-            dbLabel: 107,
-            show: true
-        }, {
-            label: 'Job picked',
-            dbLabel: 108,
-            show: true
-        }, {
-            label: 'Job delivered',
-            dbLabel: 109,
-            show: true
-        }, {
-            label: 'Job complete',
-            dbLabel: 110,
-            show: true
-        }, {
-            label: 'Job late',
-            dbLabel: 111,
-            show: true
-        }],
-
-        users: []
-
+    $scope.toggleSection = function(section) {
+      for(var key in $scope.display){
+        if(key === section){
+          if($scope.display[key].show === true){
+            $scope.display[key].show = false;
+          } else{
+            $scope.display[key].show = true;
+          }
+        } else{
+          $scope.display[key].show = false;
+        }
+      }
     };
 
-    //  $scope.showUsers = false;
+
+    $scope.selectAll = function(section) {
+      var newValue = !$scope.display[section].selectAll;
+      $scope.display[section].selectAll = newValue;
+      for(var key in $scope.settings[section]){
+        $scope.settings[section][key].show = newValue;
+      }
+    };
+
 
     $scope.configureUserSettings = function() {
-        // sets up settings for a logged in user
-        $http.get('/api/users/me').success(function(user) {
-            $scope.user = user || 'guest';
-            if (user.settings === undefined) {
-                // // console.log('new user or guest');
+      $http.get('/api/users/me').success(function(user) {
+        $scope.user = user || 'guest';
+        /*
+        if (user.settings === undefined) {
+                console.log('new user or guest');
                 $http.get('/api/users').success(function(currentUsers) {
                     var userFilter = [];
                     for (var i = 0; i < currentUsers.length; i++) {
@@ -312,6 +267,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
                     }
                 });
             }
+*/
         }).error(function(data, status, headers, config) {
             // // console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
         });
@@ -660,3 +616,19 @@ app.filter('searchFor', function() {
         return result;
     };
 });
+
+app.filter('messageFilter', function(){
+  return function (input, settings){
+    var result = {};
+    angular.forEach(input, function(value, key){   
+     var showType = settings.messageTypes[value.type].show;
+     //var showZone = settings.zones[value.zone].show;
+     //var showUser = settings.users[value.user].show;
+     if(showType){  //if(showType && showZone && showUser){
+       result[key] = value;
+     }
+    });
+    return result;
+  };
+});
+  
