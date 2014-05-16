@@ -72,7 +72,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   border-width: 0px 0px 2px 0;
   font-size: 16px;
   margin: 1px 2%;
-  padding: 5px 0;
+  padding: 0px 0;
   width: 96%;
   text-align: left;
   padding-left: 20px;
@@ -139,6 +139,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   font-size: 11pt;
   background-color: #666;
   border-radius: 6px;
+  border-color: #080808;
 }
 .textButton:active, .textButton:focus, .textButton:hover {
   background-color: #999;
@@ -174,12 +175,12 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
 .appLogo {
   width: 128px;
   height: 128px;
-  margin: 11px;
-  border-radius: 16px;
-  background-color: gray;
+  margin: 8px;
+  background-image: url("../images/bb-logo_256px.png");
+  background-size: 128px 128px;
 }
 .appName {
-  font-size: 21pt;
+  font-size: 24pt;
   font-weight: 700;
   text-align: center;
 }
@@ -217,7 +218,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
 }
 #navTitle {
   position: relative;
-  top: 5px;
+  top: 8px;
   font-size: 17pt;
   font-weight: 700;
   color: #aaa;
@@ -248,15 +249,24 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
 .handle {
   font-size: 9pt;
   color: #777;
+  vertical-align: baseline;
 }
 .msgText {
   margin-left: 38px;
   text-align: left;
+  width: 70%;
+}
+.slogan {
+  margin-left: 38px;
+  text-align: left;
+  color: darkgrey;  
+  font-style:italic
+  font-size: 10pt;
 }
 .time {
   float: right;
   position: relative;
-  bottom: -14px;
+  bottom: 0px;
   text-align: right;
   font-size: 10pt;
   color: #999;
@@ -339,6 +349,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
 }
 #cannedSelect {
   font-size: 12pt;
+  padding-bottom: 5px
 }
 #map {
   height: 100%;
@@ -347,7 +358,8 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
 }
 #pic {
   width: 100%;
-  position: relative;
+  height: 100%;
+  position: fixed;
   z-index: 100;
 }
 .panel {
@@ -420,8 +432,33 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 9999;
 }
+.filterButton{
+  border-color: white;
+  border-style: solid;
+  border-width: 0px 0px 2px 0px;
+  font-size: 14px;
+  margin: 0px 2%;
+  padding: 0px 0px;
+  width: 96%;
+  height: 20px;
+  text-align: left;
+  padding-left: 20px;
+}
+.groupTitleButton{
+  border-color: white;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+  font-size: 19px;
+  padding: 5px;
+}
+
 i {
   color: #999;
+}
+
+.selectAllButton{
+font-size: 18px;
+font-style: italic;
 }
 .panel i {
   width: 30px;

@@ -6,6 +6,7 @@ var app = angular.module('feedApp', [
   'ngRoute',
   'ngSanitize',
   'ngTouch',
+  // 'mgcrea.pullToRefresh',
   'angularMoment'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {

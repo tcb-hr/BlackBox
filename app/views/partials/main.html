@@ -50,53 +50,60 @@
     <div ng-include="'partials/navbar'"></div>
 
       <div id="feed" scroll-bottom>
-        <div class="msgBlock" ng-repeat="(key, prop) in chats | searchFor: searchString | messageFilter: settings" ng-click="showMapOrPic(chat)" scroll-bottom>
+        <div class="msgBlock">
+          <div class=content>
+          <button id="fetchButton" class="btn btn-lg btn-primary textButton" 
+            ng-click="fetchChats()">Get More</button>
+          <button id="refreshButton" class="btn btn-lg btn-primary textButton" 
+            ng-click="refreshChats()">Refresh</button>
+          </div>
+        </div>
+        <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString | filter: messageFilter" ng-click="showMapOrPic(chat)" scroll-bottom>
           <div class="content">
             <div class="author">
-               <img class="avatar" ng-src="{{avatars && avatars[prop.user]}}"/>
-               <span class="handle">{{prop.user || 'guest'}}</span>
+             <img class="avatar" ng-src="{{avatars && avatars[chat.user]}}"/>
             </div>
-            <div class="msgText">{{prop.body}}</div>
-            <div class="slogan">{{prop.slogan}}</div>
-            <div class="time" am-time-ago="chat.timestamp"></div>
+            <div class="time"> 
+              <div am-time-ago="chat.timestamp"></div>
+              <span class="handle">{{chat.user || 'guest'}}</span>
+            </div>
+            <div class="msgText">{{chat.body}}</div>
+            <div class="slogan">{{chat.slogan}}</div>
           </div>
         </div>
       </div>
     </div>
 
-      <div class="hamburger"></div>
+<!--       <div class="hamburger"></div>
       <div class="msgMenu">
         <div>reply</div>
         <div>mute</div>
         <div>grab</div>
         <div>info</div>
       </div>
-
     </div>
-
+ -->
     <div id="footer">
-      <!-- <form id="chatForm" name="chat" ng-submit="sendChat(chat)"> --> <!-- Placing 'form' here causes 'return' keypress anywhere in form to trigger 'flow.js'. -->
         <div class="content">
-
           <div id="toolbox" ng-show="showTools()">
             <div id="tools">
-
               <div class="tool" id="searchTool">
                 <input type="text" class="textField" id="searchField" ng-model="searchString" placeholder="search" />
               </div>
-
               <div class="tool" id="cannedTool">
-                <select id="cannedSelect" ng-model="cannedModel" ng-change="composeCanned(chat)" ng-disabled="140 <= chat.body.length">
+                <button id="fetchButton" class="btn btn-lg btn-primary textButton" 
+                  ng-click="fetchChats()">Get More</button>
+                <button id="refreshButton" class="btn btn-lg btn-primary textButton" 
+                  ng-click="refreshChats()">Refresh</button>
+                <select id="cannedSelect" class="btn btn-lg btn-primary textButton" ng-model="cannedModel" ng-change="composeCanned(chat)" ng-disabled="140 <= chat.body.length"><span>Canned</span>
                   <option></option>
                   <option>10-4</option>
                   <option>on my way</option>
                   <option>need help</option>
                 </select>
               </div>
-
             </div>
           </div>
-
           <form id="chatForm" name="chat" ng-init="configureUserSettings()" ng-submit="sendChat(chat)">
             <div id="bottomRow">
               <!-- <button type="button" class="button" id="toolsButton" ng-click="toggleTools()">tools</button> -->
@@ -105,9 +112,6 @@
               <button type="submit" id="sendButton"><i class="fa fa-envelope"></i></button>
             </div>
           </form>
-
-      <!-- </form> --> <!-- Placing 'form' here causes 'return' keypress anywhere in form to trigger 'flow.js'. -->
+        </div>        
+      </div>
     </div>
-
-  </div>
-</div>

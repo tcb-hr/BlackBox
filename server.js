@@ -45,49 +45,40 @@ var Chat = require('./lib/models/chat');
 
 io.sockets.on('connection', function (socket) {
   socket.emit('init');
-  var d = new Date();
-  d.setDate(d.getDate());
-  d.setTime(d.getTime()-d.getHours()*3600*1000-d.getMinutes()*60*1000);
-  var chatStream = Chat.chatModel.find().where('timestamp').gt(d).stream();
-  chatStream.on('data', function (chat) { 
-    socket.emit('newMessage', {data: chat});
-  }).on('error', function(err) {
-    return res.send(err);
-  }).on('end', function (arg){
-    console.log('arg!', arg);
-  });
-  fs.watchFile('/var/lib/mongodb/fullstack-dev.0', function(curr, prev){
-    if(curr.mtime.getTime() !== prev.mtime.getTime()){  
-      Chat.chatModel.find().sort({_id: -1}).limit(1).exec(function(err, chatFromDb){
-        if(err){
-          console.log(err);
-        }  
-        socket.broadcast.emit('newMessage', {data: chatFromDb[0]})
-        .on('error', function(err) {
-          console.log(err);
-        });
-        socket.emit('newMessage', {data: chatFromDb[0]});
-      });
-    }
-  });
+  
+  socket.on('hello', function(){
+    var now = new Date(new Date().getTime() - (3 * 60 * 60 * 1000));
+    var chatStream = Chat.chatModel.find({timestamp: {$gte: now}}).tailable().stream();
+    chatStream.on('data', function (chat) { 
+      socket.emit('newMessage', {data: chat});
+    }).on('error', function(err) {
+      console.log('chatStream err', err);
+    }).on('end', function (arg){
+      // console.log('arg!', arg);
+    });
+  })
+
+  socket.on('fetch', function(chat){
+    console.log('fetched', chat);
+    // console.log('fetched chat is thus: ', chat);
+    var fetchStream = Chat.chatModel.find().where('_id').lt(chat._id).sort('-timestamp').limit(25).stream();
+    fetchStream.on('data', function (chatter) {
+      // console.log('chatback', chatter);
+      socket.emit('newMessage', {data: chatter});
+    }).on('error', function(err) {
+      console.log('fetchStream err', err);
+    }).on('end', function (arg){
+      // console.log('arg!', arg);
+    });    
+  })
+
   socket.on('newChat', function (chat) {
     var newChat = new Chat.chatModel(chat);
     newChat.provider = 'local';
     newChat.save(function(err) {
       if (err) {
         console.log('err', err);
-      } else {
-        Chat.chatModel.find().sort({_id: -1}).limit(1).exec(function(err, chatFromDb){
-          if(err){
-            console.log(err);
-          }  
-          socket.broadcast.emit('newMessage', {data: chatFromDb[0]})
-          .on('error', function(err) {
-            console.log(err);
-          });
-          socket.emit('newMessage', {data: chatFromDb[0]});
-        });
-      }
+      } 
     });
   });
 });
