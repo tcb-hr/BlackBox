@@ -523,7 +523,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
             }
         });
         angular.forEach($scope.chats, function(chat, hash){
-            if (chat.type === 300){
+            if (chat.type !== 200){
                 $scope.avatars[chat.user] = chat.pic;
             }
         })
