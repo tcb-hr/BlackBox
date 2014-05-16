@@ -117,7 +117,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         // // console.log('Socket connection established.');
     });
 
-<<<<<<< HEAD
 /*
     $scope.messageFilter = function(chats) {
       var result = {};
@@ -130,24 +129,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
       });
       console.log('result', result);
       return result;
-=======
-    
-    
-
-    $scope.messageFilter = function(chat) {
-      for (var i = 0; i < $scope.settings.messageTypes.length; i++) {
-        if ((chat.type === $scope.settings.messageTypes[i].dbLabel) && $scope.settings.messageTypes[i].show) {
-          return true;
-        }
-      }
-      return false;
-    };
-
-    $scope.toggleZones = function() {
-        $scope.displayZones = !$scope.displayZones;
-        $scope.displayMessageTypes = false;
-        $scope.displayUsers = false;
->>>>>>> master
     };
 */
 
