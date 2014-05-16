@@ -611,7 +611,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
                     $scope.pickMarker.setLatLng([pickLat, pickLng]);
                 }
                 $scope.hideMap = false;
-                $scope.map.setView(new L.LatLng(panLat, panLng), 14);
+                $scope.map.panTo(new L.LatLng(panLat, panLng), {animate: true, duration: 0.5, easeLinearity: 0.25});
             }
         }
     };
