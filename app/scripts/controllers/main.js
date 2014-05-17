@@ -99,8 +99,15 @@ app.directive('charLimit', function() { // MOVE DIRECTIVES TO A SEPARATE FILE?
     };
 });
 
-app.controller('MainCtrl', function($scope, $http, $window, socket) {
-    // BREAK SOME OF THESE PIECES BELOW INTO SEPARATE CONTROLLERS?
+app.controller('MainCtrl', function($scope, $http, $window, socket, $location, Auth) {
+      
+  $scope.logout = function() {
+    Auth.logout()
+    .then(function() {
+      $location.path('/login');
+    });
+  };
+// BREAK SOME OF THESE PIECES BELOW INTO SEPARATE CONTROLLERS?
 
     // This function is called if the user makes a dropdown selection.
     $scope.composeCanned = function(chat) {
