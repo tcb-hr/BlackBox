@@ -53,7 +53,7 @@
     <!-- build:js(app) scripts/vendor.js -->
     <!-- bower:js -->
 
-    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <!-- <script src="bower_components/jquery/dist/jquery.js"></script> -->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -71,12 +71,12 @@
 
     <!-- endbower -->
 
-    <script src="/socket.io/socket.io.js"></script>
-    <!-- <script src="http://191.236.103.192:80/socket.io/socket.io.js"></script> -->
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script src="http://191.236.103.192:80/socket.io/socket.io.js"></script>
 
     <script>
-      var socket = io.connect('localhost:80');
-      // var socket = io.connect('http://191.236.103.192:80');
+      // var socket = io.connect('localhost:80');
+      var socket = io.connect('http://191.236.103.192:80');
     </script>
 
     <!-- endbuild -->

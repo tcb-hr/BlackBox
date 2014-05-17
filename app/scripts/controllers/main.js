@@ -99,8 +99,15 @@ app.directive('charLimit', function() { // MOVE DIRECTIVES TO A SEPARATE FILE?
     };
 });
 
-app.controller('MainCtrl', function($scope, $http, $window, socket) {
-    // BREAK SOME OF THESE PIECES BELOW INTO SEPARATE CONTROLLERS?
+app.controller('MainCtrl', function($scope, $http, $window, socket, $location, Auth) {
+      
+  $scope.logout = function() {
+    Auth.logout()
+    .then(function() {
+      $location.path('/login');
+    });
+  };
+// BREAK SOME OF THESE PIECES BELOW INTO SEPARATE CONTROLLERS?
 
     // This function is called if the user makes a dropdown selection.
     $scope.composeCanned = function(chat) {
@@ -256,61 +263,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
     $scope.configureUserSettings = function() {
         $http.get('/api/users/me').success(function(user) {
             $scope.user = user || 'guest';
-            /*
-        if (user.settings === undefined) {
-                console.log('new user or guest');
-                $http.get('/api/users').success(function(currentUsers) {
-                    var userFilter = [];
-                    for (var i = 0; i < currentUsers.length; i++) {
-                        userFilter.push({
-                            name: currentUsers[i].name,
-                            show: true
-                        });
-                    }
-                    $scope.settings.users = userFilter;
-                    if ($scope.user !== 'guest') {
-                        $http.post('/api/users/me', {
-                            propertyValue: $scope.settings,
-                            propertyKey: 'settings',
-                            userId: $scope.user._id
-                        }).success(function() {
-                            console.log('User settings updated in db');
-                        });
-                    }
-                });
-            } else {
-                // check to see if their user list is up to date
-                $scope.settings = user.settings;
-                $http.get('/api/users').success(function(currentUsers) {
-                    var updated = false;
-                    for (var i = 0; i < currentUsers.length; i++) {
-                        user = currentUsers[i].name;
-                        var found = false;
-                        for (var j = 0; j < $scope.settings.users.length; j++) {
-                            if ($scope.settings.users[j].name === user) {
-                                found = true;
-                                updated = true;
-                            }
-                        }
-                        if (found === false) {
-                            $scope.settings.users.push({
-                                name: user,
-                                show: true
-                            });
-                        }
-                    }
-                    if (updated) {
-                        $http.post('/api/users/me', {
-                            propertyValue: $scope.settings,
-                            propertyKey: 'settings',
-                            userId: $scope.user._id
-                        }).success(function() {
-                            console.log('User people prefernces updated');
-                        });
-                    }
-                });
-            }
-*/
         }).error(function(data, status, headers, config) {
             console.log('GET error!', '\ndata:', data, '\nstatus:', status, '\nheaders:', headers, '\nconfig:', config);
         });
@@ -396,23 +348,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         // console.log('show', this.show);
     };
 
-    var checkChats = function(chat) {
-        var len = $scope.chats.length;
-        var comp = true;
-        if (len > 0) {
-            for (var i = 0; i < len; i++) {
-                if (chat._id === $scope.chats[i]._id) {
-                    comp = false;
-                } else {
-                    comp = true;
-                }
-            }
-        }
-        if (comp) {
-            $scope.chats.push(chat);
-        }
-    };
-
     $scope.previewAvatar = function() {
         var file = document.getElementById('avatarInput').files[0];
         var canvas = document.getElementById('avatarCanvas');
@@ -457,41 +392,11 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
     //--------------------------------------------------
     //
-    //  MAIN PANEL
+    //  MAIN PANEL grunt
     //
     //-------------------------------------------------
 
-    // $scope.chats = {};
-
-    // socket.on('newMessage', function(data) {
-    //     console.log('fishon', data);
-    //     var newChat = data.data;
-    //     $scope.chats[newChat._id] = newChat;
-    // });
-
-    // $scope.sendChat = function(chat) {
-    //     if (!isChatValid(chat)) {
-    //         console.log('Invalid chat, overriding "send".');
-    //         return;
-    //     }
-    //     socket.emit('newChat', {
-    //         user: $scope.user.name,
-    //         body: chat.body,
-    //         image: '',
-    //         type: 200
-    //     });
-    //     resetChatForm(chat);
-    // }
-    $scope.chats = {
-      // 999999999999999999999999: {
-      //   _id: '999999999999999999999999',
-      //   timestamp: '2112-12-31T23:59:59.361Z',
-      //   body: 'Godspeed You! Black Emperor',
-      //   user: 'Mitsuo_Yanagimachi',
-      //   image: './images/Alfred_E_Neuman.jpg',
-      //   pic: './images/Alfred_E_Neuman.jpg'
-      // }
-    };
+    $scope.chats = {};
 
     $scope.refreshChats = function(){
       socket.emit('hello');
@@ -518,6 +423,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
         // console.log('fishon', data);
         var newChat = data.data;
         $scope.chats[newChat._id] = newChat;
+        $scope.getAvatars();
     });
 
     $scope.sendChat = function(chat) {
@@ -559,6 +465,11 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
                 $scope.avatars[usersInDB[i].name] = usersInDB[i].avatar;
             }
         });
+        angular.forEach($scope.chats, function(chat, hash){
+            if (chat.type !== 200){
+                $scope.avatars[chat.user] = chat.pic;
+            }
+        })
     };
 
     var isChatValid = function(chat) {
@@ -598,13 +509,15 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
         //drop Location
         var redMarker = L.AwesomeMarkers.icon({
-            icon: 'coffee',
+            icon: 'bolt',
+            prefix: 'fa',
             markerColor: 'red'
         });
 
         //pick Location
         var greenMarker = L.AwesomeMarkers.icon({
-            icon: 'coffee',
+            icon: 'plane',
+            prefix: 'fa',
             markerColor: 'green'
         });
 
@@ -628,29 +541,30 @@ app.controller('MainCtrl', function($scope, $http, $window, socket) {
 
     $scope.showMapOrPic = function(chat) {
         // console.log(chat);
-        if (chat.image !== undefined) {
-            // $('#pic').css('background', 'url(' + chat.image + ') no-repeat center center'); // jQ refactored to JS below.
-            var pic = document.getElementById('pic');
-            pic.style.backgroundImage = 'url(' + chat.image + ')';
-            pic.style.backgroundRepeat = 'no-repeat';
-            pic.style.backgroundPosition = 'center center';
-            $scope.hidePic = false;
-        }
-        if (chat.pickCoordinates !== undefined || chat.dropCoordinates !undefined) {
-            var pickLat = JSON.parse(chat.pickCoordinates).lat;
-            var pickLng = JSON.parse(chat.pickCoordinates).lng;
-            var dropLat = JSON.parse(chat.dropCoordinates).lat;
-            var dropLng = JSON.parse(chat.dropCoordinates).lng;
-            var panLat = (pickLat + dropLat)/2;
-            var panLng = (pickLng + dropLng)/2;
-            $scope.dropMarker.setLatLng([dropLat, dropLng]);
-            if ((pickLat === dropLat) && (pickLng === dropLng)) {
-                $scope.pickMarker.setLatLng([0, 0]);
-            } else {
-                $scope.pickMarker.setLatLng([pickLat, pickLng]);
+        if (chat.image || chat.dropCoordinates){
+            if (chat.image !== undefined) {
+                var pic = document.getElementById('pic');
+                pic.style.backgroundImage = 'url(' + chat.image + ')';
+                pic.style.backgroundRepeat = 'no-repeat';
+                pic.style.backgroundPosition = 'center center';
+                $scope.hidePic = false;
+            } else if (chat.pickCoordinates !== undefined || chat.dropCoordinates !== undefined) {
+                var pickLat = JSON.parse(chat.pickCoordinates).lat;
+                var pickLng = JSON.parse(chat.pickCoordinates).lng;
+                var dropLat = JSON.parse(chat.dropCoordinates).lat;
+                var dropLng = JSON.parse(chat.dropCoordinates).lng;
+                //pan-center map to the mid-point btw pick & drop
+                var panLat = (pickLat + dropLat)/2;
+                var panLng = (pickLng + dropLng)/2;
+                $scope.dropMarker.setLatLng([dropLat, dropLng]);
+                if ((pickLat === dropLat) && (pickLng === dropLng)) {
+                    $scope.pickMarker.setLatLng([0, 0]);
+                } else {
+                    $scope.pickMarker.setLatLng([pickLat, pickLng]);
+                }
+                $scope.hideMap = false;
+                $scope.map.panTo(new L.LatLng(panLat, panLng), {animate: true, duration: 0.5, easeLinearity: 0.25});
             }
-            $scope.hideMap = false;
-            $scope.map.panTo(new L.LatLng(panLat, panLng));
         }
     };
 });
@@ -675,6 +589,8 @@ app.filter('messageFilter', function() {
     return function(input, settings) {
         var result = {};
         angular.forEach(input, function(value, key) {
+            // console.log('value', value, key);
+            // console.log('obj crap', settings.messageTypes[value.type]);
             var showType = settings.messageTypes[value.type].show;
             //var showZone = settings.zones[value.zone].show;
             //var showUser = settings.users[value.user].show;
