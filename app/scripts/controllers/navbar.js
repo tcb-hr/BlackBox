@@ -3,16 +3,16 @@
 var app = angular.module('feedApp');
 
 app.controller('NavbarCtrl', function ($scope, $location, Auth) {
-  $scope.menu = [{
-    'title': 'Dashboard',
-    'link': '/dashboard'
-  }, {
-    'title': 'Twinjet',
-    'link': '/'
-  }, {
-    'title': 'Settings',
-    'link': '/settings'
-  }];
+  // $scope.menu = [{
+  //   'title': 'Dashboard',
+  //   'link': '/dashboard'
+  // }, {
+  //   'title': 'Twinjet',
+  //   'link': '/'
+  // }, {
+  //   'title': 'Settings',
+  //   'link': '/settings'
+  // }];
   
   $scope.logout = function() {
     Auth.logout()
