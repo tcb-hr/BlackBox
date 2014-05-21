@@ -45,7 +45,6 @@ var Chat = require('./lib/models/chat');
 
 io.sockets.on('connection', function (socket) {
   socket.emit('init');
-  console.log('emit...');
   socket.emit('ping', { message: 'Hello from server ' + Date.now() });
   socket.on('pong', function (data) {
     console.log(data.message);
