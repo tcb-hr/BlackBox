@@ -60,6 +60,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   background-position: 0 0;
 }
 .dashboardButton {
+  padding-right: 26%;
   position: absolute;
   top: 0;
   right: 0;
@@ -74,7 +75,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   margin: 1px 2%;
   padding: 0px 0;
   width: 96%;
-  text-align: left;
+  text-align: right;
   padding-left: 20px;
 }
 #googleLoginButton {
@@ -113,11 +114,13 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
 }
 #sendButton {
   position: absolute;
+  padding-right: 25.5%;
   right: 4px;
   font-size: 30px;
 }
 .settingsButton {
   position: absolute;
+  padding-left: 26%;
   left: 0;
   top: 0;
   font-size: 30px;
@@ -145,6 +148,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   background-color: #999;
 }
 #toolsButton {
+  padding-left: 26%;
   position: absolute;
   top: 0;
   left: 4px;
@@ -275,8 +279,10 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   top: 44px;
   bottom: 44px;
   position: fixed;
+  width: 49%;
   left: 0;
   right: 0;
+  margin: 0 auto;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -344,7 +350,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   padding-top: 0;
 }
 #composeField {
-  width: 60%;
+  width: 40%;
   height: 30px;
 }
 #cannedSelect {
@@ -375,10 +381,11 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   font-size: 11pt;
 }
 #panelLeft {
-  left: -75%;
+  left: -50%;
+  text-align: right;
 }
 #panelRight {
-  right: -75%;
+  right: -50%;
 }
 #panelLeft.slide {
   left: 0;
@@ -437,7 +444,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   border-style: solid;
   border-width: 0px 0px 2px 0px;
   font-size: 14px;
-  margin: 0px 2%;
+  margin: 0px 1%;
   padding: 0px 0px;
   width: 96%;
   height: 20px;
