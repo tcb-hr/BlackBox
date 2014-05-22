@@ -344,7 +344,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   padding-top: 0;
 }
 #composeField {
-  width: 67%;
+  width: 60%;
   height: 30px;
 }
 #cannedSelect {
