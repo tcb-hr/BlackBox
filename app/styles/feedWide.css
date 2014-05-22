@@ -60,7 +60,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   background-position: 0 0;
 }
 .dashboardButton {
-  padding-right: 25%
+  padding-right: 25%;
   position: absolute;
   top: 0;
   right: 0;
