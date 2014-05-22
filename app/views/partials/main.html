@@ -65,8 +65,9 @@
              <img class="avatar" ng-src="{{avatars && avatars[chat.user]}}"/>
             </div>
             <div class="time"> 
-              <div am-time-ago="chat.timestamp"></div>
-              <span class="handle">{{chat.user || 'guest'}}</span>
+              <span class="handle">{{chat.user || 'guest'}}</span><br>
+              <div am-time-ago="chat.timestamp" class="handle"></div>
+              <span>{{chat.timestamp | amDateFormat:'h:mm a'}}</span>
             </div>
             <div class="msgText">{{chat.body}}</div>
             <div class="slogan">{{chat.slogan}}</div>
