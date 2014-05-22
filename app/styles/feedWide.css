@@ -114,7 +114,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
 }
 #sendButton {
   position: absolute;
-  padding-right: 26%;
+  padding-right: 25.5%;
   right: 4px;
   font-size: 30px;
 }
