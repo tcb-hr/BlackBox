@@ -63,6 +63,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   position: absolute;
   top: 0;
   right: 0;
+  padding-right: 3px;
   height: 40px;
   font-size: 30px;
 }
@@ -114,12 +115,14 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
 #sendButton {
   position: absolute;
   right: 4px;
+  padding-right: 3px;
   font-size: 30px;
 }
 .settingsButton {
   position: absolute;
   left: 0;
   top: 0;
+  padding-left: 3px;
   font-size: 30px;
   height: 40px;
 }
@@ -146,6 +149,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
 }
 #toolsButton {
   position: absolute;
+  padding-left: 3px;
   top: 0;
   left: 4px;
   font-size: 30px;
