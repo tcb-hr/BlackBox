@@ -60,7 +60,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   background-position: 0 0;
 }
 .dashboardButton {
-  padding-right: 25%;
+  padding-right: 26%;
   position: absolute;
   top: 0;
   right: 0;
@@ -114,13 +114,13 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
 }
 #sendButton {
   position: absolute;
-  padding-right: 25%;
+  padding-right: 26%;
   right: 4px;
   font-size: 30px;
 }
 .settingsButton {
   position: absolute;
-  padding-left: 25%;
+  padding-left: 26%;
   left: 0;
   top: 0;
   font-size: 30px;
@@ -148,7 +148,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   background-color: #999;
 }
 #toolsButton {
-  padding-left: 25%;
+  padding-left: 26%;
   position: absolute;
   top: 0;
   left: 4px;
