@@ -5,6 +5,6 @@ RogerWilco is a newsfeed and an internal chat. The intent of the news feed is to
 
 The newsfeed is supplied by several data sources: our internal logistics software, instagram, and a twitter-like chat with image upload.
 
-The server updates the client via a websocket for a realtime chat in sigle page application..
+The server updates the client via a websocket for a realtime chat in a single page application..
 
 There is a local authentication and external oAuth via Google.
