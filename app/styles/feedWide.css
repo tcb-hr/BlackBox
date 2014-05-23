@@ -345,7 +345,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   text-align: center;
 }
 #searchField {
-  width: 60%;
+  width: 40%;
   height: 24px;
   padding-top: 0;
 }
