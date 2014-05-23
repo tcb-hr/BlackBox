@@ -18,6 +18,7 @@ body {
 select, option, input {
   font-family: 'Maven Pro', Arial, sans-serif;
   font-size: 14pt;
+  float: right;
 }
 ul, li {
   list-style-type: none;
