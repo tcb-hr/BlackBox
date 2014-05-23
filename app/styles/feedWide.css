@@ -482,7 +482,7 @@ i:active, i:focus, i:hover {
   border: 1px solid black;
   height: 80px;
   width: 80px;
-  text-align: right;
+  float: right;
 }
 .dashboardTitle{
   font-size: 24px;
