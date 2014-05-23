@@ -2,17 +2,26 @@
   <button class="settingsButton" ng-click="togglePanelLeft()"><i class="fa fa-angle-left"></i></button>
   <div class="panelContent">
     <h1 class="settingsTitle">Settings</h1>
-    <div class="groupTitleButton" ng-click="toggleSection('zones')"><i class="fa fa-map-marker"></i>Zones</div>
+ <!--    <div class="groupTitleButton" ng-click="toggleSection('zones')"><i class="fa fa-map-marker"></i>Zones</div>
     <button class="selectAllButton" ng-show="display.zones.show" ng-click="selectAll('zones')"><i ng-show="display.zones.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.zones.selectAll" class="fa fa-square-o"></i> Select All</button>
     <button class="filterButton" ng-repeat="(key, prop) in settings.zones" ng-show="display.zones.show" ng-click="prop.show = !prop.show"><i ng-hide="prop.show" class="fa fa-circle-o"></i><i ng-show="prop.show" class="fa fa-check-circle-o"></i>{{key}}</button>
-
+ -->
     <div class="groupTitleButton" ng-click="toggleSection('messageTypes')"><i class="fa fa-inbox"></i>Message Types</div>
     <button class="selectAllButton" ng-show="display.messageTypes.show" ng-click="selectAll('messageTypes')"><i ng-show="display.messageTypes.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.messageTypes.selectAll" class="fa fa-square-o"></i>Select All</button>
     <button class="filterButton" ng-repeat="(key, prop) in settings.messageTypes" ng-show="display.messageTypes.show" ng-click="prop.show = !prop.show"><i ng-hide="prop.show" class="fa fa-circle-o"></i><i ng-show="prop.show" class="fa fa-check-circle-o"></i>{{prop.label}}</button>
 
     <div class="groupTitleButton" ng-click="toggleSection('users')"><i class="fa fa-user"></i>Users</div>
     <button class="selectAllButton" ng-show="display.users.show" ng-click="selectAll('users')"><i ng-show="display.users.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.users.selectAll" class="fa fa-square-o"></i>Select All</button>
-    <button class="filterButton" ng-repeat="users in settings.users" ng-show="display.users.show" ng-click="user.show = !user.show"><i ng-hide="user.show" class="fa fa-circle-o"></i><i ng-show="user.show" class="fa fa-check-circle-o"></i>{{user.name}}</button>  
+    <!-- <button class="filterButton" ng-repeat="users in settings.users" ng-show="display.users.show" ng-click="user.show = !user.show"><i ng-hide="user.show" class="fa fa-circle-o"></i><i ng-show="user.show" class="fa fa-check-circle-o"></i>{{user.name}}</button>   -->
+    <div class="groupTitleButton" ng-click="toggleAvatar()" ng-init="showAvatar = false"><i class="fa fa-camera-retro"></i> Profile Picture</div>
+    <div class="dashboardCategory" ng-show="showAvatar">My Profile Pic:<br>
+      <div id="avatarDisplay" ng-show="showAvatar" ng-init="loadAvatar()"></div><br>
+      <input id="avatarInput" ng-show="showAvatar" onchange="angular.element(this).scope().previewAvatar()" type="file" accept="image/*" capture="camera"></i><br>
+      <canvas id="avatarCanvas" ng-show="showAvatarControls" height="5" width="5"></canvas><br>
+      <button id="submitAvatar" ng-show="showAvatarControls" ng-click="saveAvatar()"><i class="fa fa-check"></i> Submit</button><br>
+      <button id="cancelAvatar" ng-show="showAvatarControls" ng-click="resetAvatarControls()"><i class="fa fa-undo"></i> Cancel</button>
+    </div>
+    <div class="groupTitleButton" ng-click="$parent.logout()"><i class="fa fa-sign-out"></i>Logout</div>
   </div>
 
 </div>
@@ -28,16 +37,6 @@
     <div class="dashboardCategory" ng-show="showStats">Total Earnings:<br><span id="earningsStat">$1024</span></div>
     <div class="dashboardCategory" ng-show="showStats">On-Time:<br><span id="onTimeStat">86.7%</span></div>
 
-    <div class="groupTitleButton" ng-click="toggleAvatar()" ng-init="showAvatar = false"><i class="fa fa-camera-retro"></i> Profile Picture</div>
-    <div class="dashboardCategory" ng-show="showAvatar">My Profile Pic:<br>
-      <div id="avatarDisplay" ng-show="showAvatar" ng-init="loadAvatar()"></div><br>
-      <input id="avatarInput" ng-show="showAvatar" onchange="angular.element(this).scope().previewAvatar()" type="file" accept="image/*" capture="camera"></i><br>
-      <canvas id="avatarCanvas" ng-show="showAvatarControls" height="5" width="5"></canvas><br>
-      <button id="submitAvatar" ng-show="showAvatarControls" ng-click="saveAvatar()"><i class="fa fa-check"></i> Submit</button><br>
-      <button id="cancelAvatar" ng-show="showAvatarControls" ng-click="resetAvatarControls()"><i class="fa fa-undo"></i> Cancel</button>
-    </div>
-
-    <div class="groupTitleButton" ng-click="$parent.logout()"><i class="fa fa-sign-out"></i>Logout</div>
   </div>
 </div>
 
