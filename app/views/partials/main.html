@@ -32,11 +32,11 @@
   <button class="dashboardButton" ng-click="togglePanelRight()"><i class="fa fa-angle-right"></i></button>
   
   <div class="panelContent">
-    <div class="groupTitleButton" ng-click="toggleStats()" ng-init="showStats = false"><i class="fa fa-usd"></i> Stats</div>
+    <div class="groupTitleButton" ng-click="toggleStats()" ng-init="showStats = true"><i class="fa fa-usd"></i> Stats</div>
     
-    <div class="dashboardCategory" ng-show="showStats">Total Jobs:<br><span id="jobsStat">122</span></div>
+    <div class="dashboardCategory" ng-show="showStats">Current Leader:<br><span id="jobsStat">22 Kutty Kourier</span></div>
     <div class="dashboardCategory" ng-show="showStats">Total Earnings:<br><span id="earningsStat">$1024</span></div>
-    <div class="dashboardCategory" ng-show="showStats">On-Time:<br><span id="onTimeStat">86.7%</span></div>
+    <div class="dashboardCategory" ng-show="showStats">Timeleft:<br><span id="onTimeStat">4 hr 20 min</span></div>
 
   </div>
 </div>
