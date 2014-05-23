@@ -37,15 +37,16 @@
     <div class="dashboardCategory" ng-show="showStats">Current Leader:<br><span id="jobsStat">22 Kutty Kourier</span></div>
     <div class="dashboardCategory" ng-show="showStats">Total Earnings:<br><span id="earningsStat">$1024</span></div>
     <div class="dashboardCategory" ng-show="showStats">Timeleft:<br><span id="onTimeStat">4 hr 20 min</span></div>
-    <div class="dashboardCategory" ng-show="showStats">Leaderboard:<br><span id="onTimeStat">Top 5</span></div>
-    <div class="filterButton" ng-show="showStats">33 Fast Fucker:<br><span id="onTimeStat">$1001</span></div>
-    <div class="filterButton" ng-show="showStats">44 Speedy Gonzales:<br><span id="onTimeStat">$999</span></div>
-    <div class="filterButton" ng-show="showStats">59 Matt Savoia:<br><span id="onTimeStat">$723</span></div>
-    <div class="filterButton" ng-show="showStats">12 Josh Whitesnake:<br><span id="onTimeStat">$666</span></div>
-    <div class="filterButton" ng-show="showStats">28 Austin Horse:<br><span id="onTimeStat">$124</span></div>
-    <div class="filterButton" ng-show="showStats">11 Willy Wonker:<br><span id="onTimeStat">$-111</span></div>
-
   </div>
+  <div class="groupTitleButton" ng-click="toggleStats()" ng-init="showStats = true"><i class="fa fa-usd"></i> Stats</div>
+    <div class="dashboardCategory" ng-show="showStats">Leaderboard:<br><span id="showStats">Top 5</span></div>
+    <div class="filterButton" ng-show="showStats">33 Fast Fucker:<br><span id="showStats">$1001</span></div>
+    <div class="filterButton" ng-show="showStats">44 Speedy Gonzales:<br><span id="showStats">$999</span></div>
+    <div class="filterButton" ng-show="showStats">59 Matt Savoia:<br><span id="showStats">$723</span></div>
+    <div class="filterButton" ng-show="showStats">12 Josh Whitesnake:<br><span id="showStats">$666</span></div>
+    <div class="filterButton" ng-show="showStats">28 Austin Horse:<br><span id="showStats">$124</span></div>
+    <div class="filterButton" ng-show="showStats">11 Willy Wonker:<br><span id="showStats">$-111</span></div>
+
 </div>
 
 <div id="map" ng-init="createMap()" ng-hide="hideMap" ng-click="hideMap = !hideMap"></div>
