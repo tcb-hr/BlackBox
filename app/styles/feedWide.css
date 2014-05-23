@@ -448,7 +448,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   padding: 0px 0px;
   width: 96%;
   height: 20px;
-  text-align: left;
+  text-align: right;
   padding-left: 20px;
 }
 .groupTitleButton{
