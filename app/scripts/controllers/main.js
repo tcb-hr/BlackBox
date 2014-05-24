@@ -595,7 +595,7 @@ app.filter('messageFilter', function() {
         angular.forEach(input, function(value, key) {
             console.log('value', value, key);
             console.log('obj crap', settings.messageTypes[value.type]);
-            // var showType = settings.messageTypes[value.type].show;
+            var showType = settings.messageTypes[value.type].show;
             //var showZone = settings.zones[value.zone].show;
             //var showUser = settings.users[value.user].show;
             if (showType) { //if(showType && showZone && showUser){
