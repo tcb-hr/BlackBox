@@ -124,7 +124,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
         console.log('Socket connection established.');
     });
 
-    /*
+    
     $scope.messageFilter = function(chats) {
       var result = {};
       angular.forEach(chats, function(value, key){
@@ -137,7 +137,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
       console.log('result', result);
       return result;
     };
-*/
+
 
     $scope.display = {
         zones: {
