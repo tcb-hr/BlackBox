@@ -250,6 +250,9 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   height: 32px;
   margin-bottom: -2px;
 }
+#avatarInput {
+ float: right;
+}
 .handle {
   font-size: 9pt;
   color: #777;
