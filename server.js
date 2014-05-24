@@ -40,7 +40,9 @@ var server = app.listen(config.port, config.ip, function () {
 });
 
 // Sockets
-var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server, {
+  'log level': 1
+});
 var Chat = require('./lib/models/chat');
 
 io.sockets.on('connection', function (socket) {
