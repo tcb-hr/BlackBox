@@ -125,18 +125,18 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     });
 
     
-    $scope.messageFilter = function(chats) {
-      var result = {};
-      angular.forEach(chats, function(value, key){
-        console.log('value.type', value.type);
-        var showThisType = $scope.settings.messageTypes[value.type].show;
-        if(showThisType){
-          result[key] = value;
-        }
-      });
-      console.log('result', result);
-      return result;
-    };
+    // $scope.messageFilter = function(chats) {
+    //   var result = {};
+    //   angular.forEach(chats, function(value, key){
+    //     console.log('value.type', value.type);
+    //     var showThisType = $scope.settings.messageTypes[value.type].show;
+    //     if(showThisType){
+    //       result[key] = value;
+    //     }
+    //   });
+    //   console.log('result', result);
+    //   return result;
+    // };
 
 
     $scope.display = {
