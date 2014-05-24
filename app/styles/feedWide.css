@@ -501,7 +501,7 @@ i:active, i:focus, i:hover {
   padding: 5px 0 5px 50px;
 }
 #jobsStat, #earningsStat, #onTimeStat{
-  font-size: 48px;
+  font-size: 36px;
 }
 #submitAvatar, #cancelAvatar {
   font-size: 18px;
