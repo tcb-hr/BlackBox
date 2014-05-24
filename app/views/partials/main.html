@@ -104,9 +104,9 @@
               </div>
               <div class="tool" id="cannedTool">
                 <button id="fetchButton" class="btn btn-lg btn-primary textButton" 
-                  ng-click="fetchChats()"><i class="fa fa-history"></i>Get More</button>
+                  ng-click="fetchChats()"><i class="fa fa-history"></i> Get More</button>
                 <button id="refreshButton" class="btn btn-lg btn-primary textButton" 
-                  ng-click="refreshChats()"><i class="fa fa-refresh"></i>Refresh</button>
+                  ng-click="refreshChats()"><i class="fa fa-refresh"></i> Refresh</button>
                 <select id="cannedSelect" class="btn btn-lg btn-primary textButton" ng-model="cannedModel" ng-change="composeCanned(chat)" ng-disabled="140 <= chat.body.length"><span>Canned</span>
                   <option></option>
                   <option>10-4</option>
@@ -119,7 +119,7 @@
           <form id="chatForm" name="chat" ng-init="configureUserSettings()" ng-submit="sendChat(chat)">
             <div id="bottomRow">
               <!-- <button type="button" class="button" id="toolsButton" ng-click="toggleTools()">tools</button> -->
-              <button type="button" id="toolsButton" ng-click="toggleTools()"><i class="fa-chevron-circle-up"></i></button>
+              <button type="button" id="toolsButton" ng-click="toggleTools()"><i class="fa fa-chevron-circle-up"></i></button>
               <input type="text" placeholder="compose" id="composeField" class="form-control textField" ng-model="chat.body" char-limit="140" />
               <button type="submit" id="sendButton"><i class="fa fa-comment"></i></button>
             </div>
