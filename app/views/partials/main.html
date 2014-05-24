@@ -28,17 +28,18 @@
 </div>
 
 <div class="panel" id="panelRight" ng-class="{ hide: !showPanelRight, slide: showPanelRight }">
-  <h1 class="dashboardTitle">Dashboard</h1>
+  <h1 class="dashboardTitle">Standings</h1>
   <button class="dashboardButton" ng-click="togglePanelRight()"><i class="fa fa-angle-right"></i></button>
   
   <div class="panelContent">
-    <div class="groupTitleButton" ng-click="toggleStats()" ng-init="showStats = true"><i class="fa fa-usd"></i> Stats</div>
+    <div class="groupTitleButton" ng-click="toggleStats()" ng-init="showStats = true"><i class="fa fa-thumbs-up"></i>Race Leader</div>
     
     <div class="dashboardCategory" ng-show="showStats">Current Leader:<br><span id="jobsStat">22 Kutty Kourier</span></div>
     <div class="dashboardCategory" ng-show="showStats">Total Earnings:<br><span id="earningsStat">$1024</span></div>
     <div class="dashboardCategory" ng-show="showStats">Timeleft:<br><span id="onTimeStat">4 hr 20 min</span></div>
-    <div class="groupTitleButton" ng-click="toggleLeader()" ng-init="showLeader = true"><i class="fa fa-usd"></i>Leaderboard</div>
+    <div class="groupTitleButton" ng-click="toggleLeader()" ng-init="showLeader = true"><i class="fa fa-group"></i>Leaderboard</div>
 
+    <div class="leaderBoard" ng-show="showLeader">22 Kutty Kourier:<span id="showLeader">$1024</span></div>
     <div class="leaderBoard" ng-show="showLeader"><span id="showLeader">33 Fast Fucker:$1001</span></div>
     <div class="leaderBoard" ng-show="showLeader">44 Speedy Gonzales:<span id="showLeader">$999</span></div>
     <div class="leaderBoard" ng-show="showLeader">59 Matt Savoia:<span id="showLeader">$723</span></div>
