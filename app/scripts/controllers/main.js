@@ -187,50 +187,50 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
                 label: 'Instagram',
                 show: true
             },
-            101: {
-                label: 'Courier check-in',
-                show: true
-            },
-            102: {
-                label: 'Courier check-out',
-                show: true
-            },
-            103: {
-                label: 'Job created',
-                show: true
-            },
-            104: {
-                label: 'Job cancelled',
-                show: true
-            },
-            105: {
-                label: 'Job edited',
-                show: true
-            },
-            106: {
-                label: 'Job ready',
-                show: true
-            },
-            107: {
-                label: 'Job assigned',
-                show: true
-            },
-            108: {
-                label: 'Job picked',
-                show: true
-            },
-            109: {
-                label: 'Job delivered',
-                show: true
-            },
-            110: {
-                label: 'Job complete',
-                show: true
-            },
-            111: {
-                label: 'Job late',
-                show: true
-            },
+            // 101: {
+            //     label: 'Courier check-in',
+            //     show: true
+            // },
+            // 102: {
+            //     label: 'Courier check-out',
+            //     show: true
+            // },
+            // 103: {
+            //     label: 'Job created',
+            //     show: true
+            // },
+            // 104: {
+            //     label: 'Job cancelled',
+            //     show: true
+            // },
+            // 105: {
+            //     label: 'Job edited',
+            //     show: true
+            // },
+            // 106: {
+            //     label: 'Job ready',
+            //     show: true
+            // },
+            // 107: {
+            //     label: 'Job assigned',
+            //     show: true
+            // },
+            // 108: {
+            //     label: 'Job picked',
+            //     show: true
+            // },
+            // 109: {
+            //     label: 'Job delivered',
+            //     show: true
+            // },
+            // 110: {
+            //     label: 'Job complete',
+            //     show: true
+            // },
+            // 111: {
+            //     label: 'Job late',
+            //     show: true
+            // },
             600: {
                 label: 'Race Event',
                 show: true
