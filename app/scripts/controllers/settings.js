@@ -18,4 +18,15 @@ angular.module('feedApp')
         });
       }
 		};
+    $scope.changeUsername = function(form) {
+      $scope.submitted = true;
+        Auth.changeUsername( $scope.user.oldUsername, $scope.user.newUsername )
+        .then( function() {
+          $scope.message = 'Username successfully changed.';
+        })
+        .catch( function() {
+          form.Username.$setValidity('mongoose', false);
+          $scope.errors.other = 'Incorrect Username';
+        });
+    };
   });
