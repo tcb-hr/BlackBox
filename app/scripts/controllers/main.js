@@ -412,8 +412,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
       place : 1,
       team : '#CMWC14',
       country : 'MEX',
-      city : 'Mexico City'
-      racer_number : '1234'
+      city : 'Mexico City',
+      racer_number : '1234',
       current_earnings : 0,
       number_of_jobs : 0
     }
