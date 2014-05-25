@@ -11,15 +11,51 @@
     <button class="filterButton" ng-repeat="(key, prop) in settings.messageTypes" ng-show="display.messageTypes.show" ng-click="prop.show = !prop.show"><i ng-hide="prop.show" class="fa fa-circle-o"></i><i ng-show="prop.show" class="fa fa-check-circle-o"></i>{{prop.label}}</button>
 
     <div class="groupTitleButton" ng-click="toggleSection('users')"><i class="fa fa-user"></i>Users</div>
-    <button class="selectAllButton" ng-show="display.users.show" ng-click="selectAll('users')"><i ng-show="display.users.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.users.selectAll" class="fa fa-square-o"></i>Select All</button>
-    <button class="filterButton" ng-repeat="users in settings.users" ng-show="display.users.show" ng-click="user.show = !user.show"><i ng-hide="user.show" class="fa fa-circle-o"></i><i ng-show="user.show" class="fa fa-check-circle-o"></i>{{user.name}}</button>  
-    <div class="groupTitleButton" ng-click="toggleAvatar()" ng-init="showAvatar = false"><i class="fa fa-camera-retro"></i> Profile Picture</div>
+    <button class="selectAllButton" ng-show="display.users.show" ng-click="selectAll('users')">
+      <i ng-show="display.users.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.users.selectAll" class="fa fa-square-o"></i>Select All
+    </button>
+
+    <button class="filterButton" 
+      ng-repeat="users in settings.users" 
+      ng-show="display.users.show" 
+      ng-click="user.show = !user.show">
+      <i ng-hide="user.show" class="fa fa-circle-o"></i><i ng-show="user.show" class="fa fa-check-circle-o"></i>{{user.name}}
+    </button>
+
+    <div class="groupTitleButton" ng-click="toggleAvatar()" ng-init="showAvatar = false">
+      <i class="fa fa-camera-retro"></i> Profile Picture
+    </div>
+
     <div class="dashboardCategory" ng-show="showAvatar">My Profile Pic:<br>
-      <div id="avatarDisplay" ng-show="showAvatar" ng-init="loadAvatar()"></div><br>
-      <input id="avatarInput" ng-show="showAvatar" onchange="angular.element(this).scope().previewAvatar()" type="file" accept="image/*" capture="camera"></i><br>
-      <canvas id="avatarCanvas" ng-show="showAvatarControls" height="5" width="5"></canvas><br>
-      <button id="submitAvatar" ng-show="showAvatarControls" ng-click="saveAvatar()"><i class="fa fa-check"></i> Submit</button><br>
-      <button id="cancelAvatar" ng-show="showAvatarControls" ng-click="resetAvatarControls()"><i class="fa fa-undo"></i> Cancel</button>
+      <div id="avatarDisplay" 
+        ng-show="showAvatar" 
+        ng-init="loadAvatar()">
+      </div>
+      <br>
+      <input id="avatarInput" 
+        ng-show="showAvatar" 
+        onchange="angular.element(this).scope().previewAvatar()" 
+        type="file" 
+        accept="image/*" 
+        capture="camera">
+      </i>
+      <br>
+      <canvas id="avatarCanvas" 
+        ng-show="showAvatarControls" 
+        height="5" width="5">
+      </canvas>
+      <br>
+      <button id="submitAvatar" 
+        ng-show="showAvatarControls" 
+        ng-click="saveAvatar()">
+        <i class="fa fa-check"></i> Submit
+      </button>
+      <br>
+      <button id="cancelAvatar" 
+        ng-show="showAvatarControls" 
+        ng-click="resetAvatarControls()">
+        <i class="fa fa-undo"></i> Cancel
+      </button>
     </div>
 
     <div class="groupTitleButton" ng-click="$parent.logout()"><i class="fa fa-sign-out"></i>Logout</div>
@@ -39,13 +75,7 @@
     <div class="dashboardCategory" ng-show="showStats">Timeleft:<br><span id="onTimeStat">4 hr 20 min</span></div>
     <div class="groupTitleButton" ng-click="toggleLeader()" ng-init="showLeader = true"><i class="fa fa-group"></i>Leaderboard</div>
 
-    <div class="leaderBoard" ng-show="showLeader">22 Kutty Kourier:<span id="showLeader">$1024</span></div>
-    <div class="leaderBoard" ng-show="showLeader"><span id="showLeader">33 Fast Fucker:$1001</span></div>
-    <div class="leaderBoard" ng-show="showLeader">44 Speedy Gonzales:<span id="showLeader">$999</span></div>
-    <div class="leaderBoard" ng-show="showLeader">59 Matt Savoia:<span id="showLeader">$723</span></div>
-    <div class="leaderBoard" ng-show="showLeader">12 Josh Whitesnake:<span id="showLeader">$666</span></div>
-    <div class="leaderBoard" ng-show="showLeader">28 Austin Horse:<span id="showLeader">$124</span></div>
-    <div class="leaderBoard" ng-show="showLeader">11 Willy Wonker:<span id="showLeader">$-111</span></div>
+    <div class="leaderBoard" ng-show="showRacers" ng-repeat"racer in racers | orderBy:'place':false"></div>
   </div>
 </div>
 
@@ -86,15 +116,6 @@
       </div>
     </div>
 
-<!--       <div class="hamburger"></div>
-      <div class="msgMenu">
-        <div>reply</div>
-        <div>mute</div>
-        <div>grab</div>
-        <div>info</div>
-      </div>
-    </div>
- -->
     <div id="footer">
         <div class="content">
           <div id="toolbox" ng-show="showTools()">
@@ -104,16 +125,16 @@
               </div>
               <div class="tool" id="cannedTool">
                 <button id="fetchButton" class="btn btn-lg btn-primary textButton" 
-                  ng-click="fetchChats()"><i class="fa fa-history"> </i> Get More</button>
+                  ng-click="fetchChats()"><i class="fa fa-refresh"> </i>Get More</button>
                 <button id="refreshButton" class="btn btn-lg btn-primary textButton" 
-                  ng-click="refreshChats()"><i class="fa fa-refresh"> </i> Refresh</button>
+                  ng-click="refreshChats()"><i class="fa fa-refresh"> </i>Refresh</button>
                 <select id="cannedSelect" class="btn btn-lg btn-primary textButton" ng-model="cannedModel" ng-change="composeCanned(chat)" ng-disabled="140 <= chat.body.length"><span>Canned</span>
                   <option>#CMWC2014</option>
                   <option>Mo' Money?</option>
                   <option>Mo' Problems!</option>
                   <option>Get hot rookie!</option>
                   <option>So fucking fast.</option>
-                  <option></option>
+                  <!-- <option></option> -->
                 </select>
               </div>
             </div>

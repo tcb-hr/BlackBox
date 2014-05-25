@@ -67,7 +67,7 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('standings', function(){
     var racerStream = Racer.racerModel.find({}).tailable().stream();
-    cracerStream.on('data', function (racer) { 
+    racerStream.on('data', function (racer) { 
       socket.emit('newStanding', {data: racer});
     }).on('error', function(err) {
       console.log('racerStream err', err);

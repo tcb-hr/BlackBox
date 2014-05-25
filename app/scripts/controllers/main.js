@@ -401,12 +401,27 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     //-------------------------------------------------
 
     $scope.chats = {};
+    $scope.racers = [];
+    $scope.leader = {
+      id: 1234,
+      timestamp: Date.now,
+      type : 500,
+      pic : '../images/Alfred_E_Neuman.jpg',
+      user : Nobody,
+      image : '../images/Alfred_E_Neuman.jpg',,
+      place : 1,
+      team : '#CMWC14',
+      country : 'MEX',
+      city : 'Mexico City'
+      racer_number : '1234'
+      current_earnings : 0,
+      number_of_jobs : 0
+    }
 
     $scope.refreshChats = function(){
       socket.emit('hello');
+      socket.emit('standings');
     }
-
-    $scope.refreshChats();
 
     $scope.pullChats = function (){
       alert('hello pull chats');
@@ -414,21 +429,36 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
       $scope.fetchChats();
     }
 
-
-    $scope.fetchChats = function() {
+    $scope.fetchChats = function () {
       var chatArr = $scope.chats;
       chatArr = Object.keys(chatArr).sort();
       var chat = $scope.chats[chatArr[0]];
       // console.log(chatArr, chat);
       socket.emit('fetch', chat)
+    }
+
+    $scope.getStandings = function () {
+        socket.emit('standings');
     } 
 
-    socket.on('newMessage', function(data) {
+    $scope.refreshChats();
+    // $scope.getStandings();
+
+    socket.on('newMessage', function (data) {
         // console.log('fishon', data);
         var newChat = data.data;
         $scope.chats[newChat._id] = newChat;
         $scope.getAvatars();
     });
+
+    socket.on('newStanding', function(data) {
+        // console.log('fishon', data);
+        var racer = data.data;
+        $scope.racers.push(racer);
+        if (racer.place = 1){
+            $scope.leader = racer;
+        }
+    })
 
     $scope.sendChat = function(chat) {
         if (!isChatValid(chat)) {
