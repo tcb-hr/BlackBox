@@ -49,10 +49,10 @@ var Thing = require('./lib/models/thing');
 
 io.sockets.on('connection', function (socket) {
   socket.emit('init');
-  socket.emit('ping', { message: 'Hello from server ' + Date.now() });
-  socket.on('pong', function (data) {
-    console.log(data.message);
-  });
+  // socket.emit('ping', { message: 'Hello from server ' + Date.now() });
+  // socket.on('pong', function (data) {
+  //   console.log(data.message);
+  // });
   
   socket.on('hello', function(){
     var now = new Date(new Date().getTime() - (1 * 60 * 60 * 1000));
@@ -78,7 +78,7 @@ io.sockets.on('connection', function (socket) {
     });
   })
 
-  socket.on('schedule', function(){
+  socket.on('sched', function(){
     console.log('hello schedule');
     var thingStream = Thing.model.find().stream();
     thingStream.on('data', function (thing) { 
