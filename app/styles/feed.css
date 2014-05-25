@@ -373,6 +373,8 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   color: #aaa;
   box-sizing: border-box;
   font-size: 11pt;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 #panelLeft {
   left: -100%;
@@ -436,7 +438,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   border-color: white;
   border-style: solid;
   border-width: 0px 0px 2px 0px;
-  font-size: 14px;
+  font-size: 16px;
   margin: 0px 2%;
   padding: 0px 0px;
   width: 96%;
