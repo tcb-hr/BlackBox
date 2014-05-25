@@ -384,11 +384,11 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   font-size: 11pt;
 }
 #panelLeft {
-  left: -50%;
+  left: -75%;
   text-align: right;
 }
 #panelRight {
-  right: -50%;
+  right: -75%;
 }
 #panelLeft.slide {
   left: 0;
