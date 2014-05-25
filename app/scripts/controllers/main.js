@@ -449,6 +449,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
         var newChat = data.data;
         $scope.chats[newChat._id] = newChat;
         $scope.getAvatars();
+        socket.emit('standings');
     });
 
     socket.on('newStanding', function(data) {
