@@ -401,7 +401,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     //-------------------------------------------------
 
     $scope.chats = {};
-    $scope.racers = [];
+    $scope.racers = {};
     $scope.leader = {
       id: 1234,
       timestamp: Date.now,
