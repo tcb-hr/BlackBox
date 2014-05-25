@@ -455,7 +455,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     socket.on('newStanding', function(data) {
         console.log('fishon', data);
         var racer = data.data;
-        $scope.racers.push(racer);
+        $scope.racers[racer.racer_number] = racer;
         if (racer.place = 1){
             $scope.leader = racer;
         }
