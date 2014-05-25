@@ -4,7 +4,16 @@
   "dependencies": {
     "foundation": "zurb/bower-foundation#~5.2.2",
     "bootstrap-switch": "~3.0.0",
-    "angular-pull-to-refresh": "~0.3.0"
+    "angular-pull-to-refresh": "~0.3.0",
+    "angular-moment": "~0.7.1",
+    "angular-cookie": "~4.0.0",
+    "angular-sanitize": "~1.2.16",
+    "angular-touch": "~1.2.16",
+    "angular-cookies": "~1.2.16",
+    "angular-resource": "~1.2.16",
+    "angular-route": "~1.2.16",
+    "leaflet": "~0.7.2",
+    "Leaflet": "https://github.com/lvoogdt/Leaflet.awesome-markers"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",
