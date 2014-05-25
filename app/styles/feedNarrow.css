@@ -369,7 +369,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
 .panel {
   position: fixed;
   top: 0;
-  width: 75%;
+  width: 100%;
   height: 100%;
   z-index: 1000;
   border: 1px solid #080808;
@@ -381,10 +381,10 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   overflow-x: hidden;
 }
 #panelLeft {
-  left: -75%;
+  left: -100%;
 }
 #panelRight {
-  right: -75%;
+  right: -100%;
 }
 #panelLeft.slide {
   left: 0;
