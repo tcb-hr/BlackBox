@@ -417,6 +417,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
       current_earnings : 0,
       number_of_jobs : 0
     }
+    $scope.reverse = false;
+    $scope.sortType = 'place';
 
     $scope.refreshChats = function(){
       socket.emit('hello');
