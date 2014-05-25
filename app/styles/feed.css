@@ -180,7 +180,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   background-size: 150px 150px;
 }
 .appName {
-  font-size: 24pt;
+  font-size: 20pt;
   font-weight: 700;
   text-align: center;
 }
