@@ -262,6 +262,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   margin-left: 38px;
   text-align: left;
   width: 70%;
+  font-size: large
 }
 .slogan {
   margin-left: 38px;
