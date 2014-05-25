@@ -75,7 +75,28 @@
     <div class="dashboardCategory" ng-show="showStats">Timeleft:<br><span id="onTimeStat">4 hr 20 min</span></div>
     <div class="groupTitleButton" ng-click="toggleLeader()" ng-init="showLeader = true"><i class="fa fa-group"></i>Leaderboard</div>
 
-    <div class="leaderBoard" ng-repeat="racer in racers">{{racer.place}} {{racer.racer_number}} {{racer.racer_name}} {{racer.city}} {{racer.country}}</div>
+    <div class="leaderBoard">
+      <table>
+        <tr>
+          <td>Placing</td>
+          <td></td>
+          <td>Number</td>
+          <td>Name</td>
+          <td>Team</td>
+          <td>City</td>
+          <td>Country</td>
+        </tr>        
+        <tr ng-repeat="racer in racers">
+          <td>{{racer.place}}</td>
+          <td>{{racer.pic}}</td>
+          <td>{{racer.racer_number}}</td>
+          <td>{{racer.user}}</td>
+          <td>{{racer.team}}</td>
+          <td>{{racer.city}}</td>
+          <td>{{racer.country}}</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
 
