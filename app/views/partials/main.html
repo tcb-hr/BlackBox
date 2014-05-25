@@ -70,8 +70,8 @@
   <div class="panelContent">
     <div class="groupTitleButton" ng-click="toggleStats()" ng-init="showStats = true"><i class="fa fa-thumbs-up"></i>Race Leader</div>
     
-    <div class="dashboardCategory" ng-show="showStats">Current Leader:<br><span id="jobsStat">22 Kutty Kourier</span></div>
-    <div class="dashboardCategory" ng-show="showStats">Total Earnings:<br><span id="earningsStat">$1024</span></div>
+    <div class="dashboardCategory" ng-show="showStats">Current Leader:<br><span id="jobsStat"><img ={{leader.image}}> {{leader.racer_number}} {{leader.user}} {{racer.country}}</span></div>
+    <div class="dashboardCategory" ng-show="showStats">Dollars & Drops:<br><span id="earningsStat">${{leader.current_earnings}}.00 & {{leader.current_earnings}}</span></div>
     <div class="dashboardCategory" ng-show="showStats">Timeleft:<br><span id="onTimeStat">4 hr 20 min</span></div>
     <div class="groupTitleButton" ng-click="toggleLeader()" ng-init="showLeader = true"><i class="fa fa-group"></i>Leaderboard</div>
 
@@ -79,7 +79,6 @@
       <table>
         <tr>
           <td>Placing</td>
-          <td></td>
           <td>Number</td>
           <td>Name</td>
           <td>Team</td>
@@ -93,6 +92,8 @@
           <td>{{racer.team}}</td>
           <td>{{racer.city}}</td>
           <td>{{racer.country}}</td>
+          <td>${{racer.current_earnings}}.00</td>
+          <td>{{racer.number_of_jobs}}</td>
         </tr>
       </table>
     </div>
