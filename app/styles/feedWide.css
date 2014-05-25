@@ -371,10 +371,6 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   position: fixed;
   z-index: 100;
 }
-.leaderBoard {
-  text-align: left;
-}
-
 .panel {
   position: fixed;
   top: 0;
