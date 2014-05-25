@@ -408,7 +408,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
       type : 500,
       pic : '../images/Alfred_E_Neuman.jpg',
       user : Nobody,
-      image : '../images/Alfred_E_Neuman.jpg',,
+      image : '../images/Alfred_E_Neuman.jpg',
       place : 1,
       team : '#CMWC14',
       country : 'MEX',
