@@ -452,12 +452,14 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     });
 
     socket.on('newStanding', function(data) {
-        // console.log('fishon', data);
+        console.log('fishon', data);
         var racer = data.data;
         $scope.racers.push(racer);
         if (racer.place = 1){
             $scope.leader = racer;
         }
+        console.log($scope.racers, $scope.leader)
+
     })
 
     $scope.sendChat = function(chat) {
