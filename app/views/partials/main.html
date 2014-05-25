@@ -6,11 +6,11 @@
     <button class="selectAllButton" ng-show="display.zones.show" ng-click="selectAll('zones')"><i ng-show="display.zones.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.zones.selectAll" class="fa fa-square-o"></i> Select All</button>
     <button class="filterButton" ng-repeat="(key, prop) in settings.zones" ng-show="display.zones.show" ng-click="prop.show = !prop.show"><i ng-hide="prop.show" class="fa fa-circle-o"></i><i ng-show="prop.show" class="fa fa-check-circle-o"></i>{{key}}</button> -->
 
-    <div class="groupTitleButton" ng-click="toggleSection('messageTypes')"><i class="fa fa-filter"></i>Feed Filter</div>
+    <div class="groupTitleButton" ng-click="toggleSection('messageTypes')"><i class="fa fa-filter"></i>Feed Filters</div>
     <button class="selectAllButton" ng-show="display.messageTypes.show" ng-click="selectAll('messageTypes')"><i ng-show="display.messageTypes.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.messageTypes.selectAll" class="fa fa-square-o"></i>Select All</button>
     <button class="filterButton" ng-repeat="(key, prop) in settings.messageTypes" ng-show="display.messageTypes.show" ng-click="prop.show = !prop.show"><i ng-hide="prop.show" class="fa fa-circle-o"></i><i ng-show="prop.show" class="fa fa-check-circle-o"></i>{{prop.label}}</button>
 
-    <div class="groupTitleButton" ng-click="toggleSection('users')"><i class="fa fa-user"></i>User Filter</div>
+    <div class="groupTitleButton" ng-click="toggleSection('users')"><i class="fa fa-user"></i>User Filters</div>
     <button class="selectAllButton" ng-show="display.users.show" ng-click="selectAll('users')">
       <i ng-show="display.users.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.users.selectAll" class="fa fa-square-o"></i>Select All
     </button>
@@ -32,30 +32,34 @@
         ng-init="loadAvatar()">
       </div>
       <br>
-      <input id="avatarInput" 
-        ng-show="showAvatar" 
-        onchange="angular.element(this).scope().previewAvatar()" 
-        type="file" 
-        accept="image/*" 
-        capture="camera">
-      </i>
-      <br>
-      <canvas id="avatarCanvas" 
-        ng-show="showAvatarControls" 
-        height="5" width="5">
-      </canvas>
-      <br>
-      <button id="submitAvatar" 
-        ng-show="showAvatarControls" 
-        ng-click="saveAvatar()">
-        <i class="fa fa-check"></i> Submit
-      </button>
-      <br>
-      <button id="cancelAvatar" 
-        ng-show="showAvatarControls" 
-        ng-click="resetAvatarControls()">
-        <i class="fa fa-undo"></i> Cancel
-      </button>
+      <div>
+        <input id="avatarInput" 
+          ng-show="showAvatar" 
+          onchange="angular.element(this).scope().previewAvatar()" 
+          type="file" 
+          accept="image/*" 
+          capture="camera">
+        <!-- </i> -->
+      </div>
+      <div>
+        <br>
+        <canvas id="avatarCanvas" 
+          ng-show="showAvatarControls" 
+          height="5" width="5">
+        </canvas>
+        <br>
+        <button id="submitAvatar" 
+          ng-show="showAvatarControls" 
+          ng-click="saveAvatar()">
+          <i class="fa fa-check"></i> Submit
+        </button>
+        <br>
+        <button id="cancelAvatar" 
+          ng-show="showAvatarControls" 
+          ng-click="resetAvatarControls()">
+          <i class="fa fa-undo"></i> Cancel
+        </button>
+      </div>
     </div>
 
     <div class="groupTitleButton" ng-click="$parent.logout()"><i class="fa fa-sign-out"></i>Logout</div>
@@ -70,10 +74,18 @@
   <div class="panelContent">
     <div class="groupTitleButton" ng-click="toggleStats()" ng-init="showStats = true"><i class="fa fa-thumbs-up"></i>Race Leader</div>
     
-    <div class="dashboardCategory" ng-show="showStats">Current Leader:<br><span id="jobsStat"><img ={{leader.image}}> {{leader.racer_number}} {{leader.user}} {{racer.country}}</span></div>
-    <div class="dashboardCategory" ng-show="showStats">Dollars & Drops:<br><span id="earningsStat">${{leader.current_earnings}}.00 & {{leader.current_earnings}}</span></div>
+    <div class="dashboardCategory" ng-show="showStats">Current Leader:
+      <br>
+      <span id="jobsStat"><img ={{leader.image}}> {{leader.racer_number}} {{leader.user}} {{racer.country}}</span>
+    </div>
+    <div class="dashboardCategory" ng-show="showStats">Dollars & Drops:
+      <br>
+      <span id="earningsStat">${{leader.current_earnings}}.00 & {{leader.current_earnings}}</span>
+    </div>
     <div class="dashboardCategory" ng-show="showStats">Timeleft:<br><span id="onTimeStat">4 hr 20 min</span></div>
-    <div class="groupTitleButton" ng-click="toggleLeader()" ng-init="showLeader = true"><i class="fa fa-group"></i>Leaderboard</div>
+    <div class="groupTitleButton" ng-click="toggleLeader()" ng-init="showLeader = true">
+      <i class="fa fa-group"></i>Leaderboard
+    </div>
 
     <div class="leaderBoard">
       <table>
