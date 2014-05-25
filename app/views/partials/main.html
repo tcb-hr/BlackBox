@@ -78,18 +78,20 @@
     <div class="leaderBoard">
       <table>
         <tr>
-          <td ng-click='sortType = "place"; reverse = !reverse'>Place</td>
-          <td ng-click='sortType = "racer_number"; reverse = !reverse'>Number</td>
-          <td ng-click='sortType = "user"; reverse = !reverse'>Name</td>
-          <td ng-click='sortType = "team"; reverse = !reverse'>Team</td>
-          <td ng-click='sortType = "city"; reverse = !reverse'>City</td>
-          <td ng-click='sortType = "country"; reverse = !reverse'>Country</td>
-          <td ng-click='sortType = "current_earnings"; reverse = !reverse'>Earnings</td>
-          <td ng-click='sortType = "number_of_jobs"; reverse = !reverse'>Drops</td>
+          <td ng-click='sortType = "place"; reverse = !reverse' style="width: 5%">Place</td>
+          <td style="width: 10%"></td>
+          <td ng-click='sortType = "racer_number"; reverse = !reverse' style="width: 10%">Number</td>
+          <td ng-click='sortType = "user"; reverse = !reverse' style="width: 15%">Name</td>
+          <td ng-click='sortType = "team"; reverse = !reverse' style="width: 10%">Team</td>
+          <td ng-click='sortType = "city"; reverse = !reverse' style="width: 10%">City</td>
+          <td ng-click='sortType = "country"; reverse = !reverse' style="width: 10%">Country</td>
+          <td ng-click='sortType = "current_earnings"; reverse = !reverse' style="width: 15%">Earnings</td>
+          <td ng-click='sortType = "number_of_jobs"; reverse = !reverse' style="width: 10%">Drops</td>
         </tr>        
         <tr ng-repeat="racer in racers">
           <td>{{racer.place}}</td>
-          <td><img src={{racer.pic}} class="avatar">{{racer.racer_number}}</td>
+          <td><img src={{racer.pic}} class="avatar"></td>
+          <td>{{racer.racer_number}}</td>
           <td>{{racer.user}}</td>
           <td>{{racer.team}}</td>
           <td>{{racer.city}}</td>
