@@ -369,7 +369,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
 .panel {
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 75%;
   height: 100%;
   z-index: 1000;
   border: 1px solid #080808;
