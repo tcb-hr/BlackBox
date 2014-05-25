@@ -407,7 +407,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
       timestamp: Date.now,
       type : 500,
       pic : '../images/Alfred_E_Neuman.jpg',
-      user : Nobody,
+      user : 'Nobody',
       image : '../images/Alfred_E_Neuman.jpg',
       place : 1,
       team : '#CMWC14',
