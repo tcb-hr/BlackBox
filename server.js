@@ -45,6 +45,7 @@ var io = require('socket.io').listen(server, {
 });
 var Chat = require('./lib/models/chat');
 var Racer = require('./lib/models/racer');
+var Thing = require('./lib/models/thing');
 
 io.sockets.on('connection', function (socket) {
   socket.emit('init');
@@ -72,6 +73,18 @@ io.sockets.on('connection', function (socket) {
       socket.emit('newStanding', {data: racer});
     }).on('error', function(err) {
       console.log('racerStream err', err);
+    }).on('end', function (arg){
+      // console.log('arg!', arg);
+    });
+  })
+
+  socket.on('schedule', function(){
+    console.log('hello schedule');
+    var thingStream = Thing.thingModel.find().stream();
+    thingStream.on('data', function (thing) { 
+      socket.emit('newMessage', {data: thing});
+    }).on('error', function(err) {
+      console.log('thingStream err', err);
     }).on('end', function (arg){
       // console.log('arg!', arg);
     });

@@ -441,6 +441,10 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
 
     $scope.getStandings = function () {
         socket.emit('standings');
+    }
+
+    $scope.getSched = function () {
+        socket.emit('schedule');
     } 
 
     $scope.refreshChats();
