@@ -181,7 +181,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   height: 200px;
   margin: 8px;
   background-image: url("../images/bb-logo_256px.png");
-  background-size: 150px 150px;
+  background-size: 200px 200px;
 }
 .appName {
   font-size: 24pt;

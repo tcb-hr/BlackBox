@@ -32,7 +32,7 @@
         ng-init="loadAvatar()">
       </div>
       <br>
-      <div class="groupTitleButton">
+      <div>
         <input id="avatarInput" 
           ng-show="showAvatar" 
           onchange="angular.element(this).scope().previewAvatar()" 
@@ -41,7 +41,7 @@
           capture="camera">
         <!-- </i> -->
       </div>
-      <div class="groupTitleButton">
+      <div>
         <br>
         <canvas id="avatarCanvas" 
           ng-show="showAvatarControls" 
