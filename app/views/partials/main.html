@@ -23,7 +23,7 @@
     </button>
 
     <div class="groupTitleButton" ng-click="toggleAvatar()" ng-init="showAvatar = false">
-      <i class="fa fa-camera-retro"></i> Profile Picture
+      <i class="fa fa-camera-retro"></i>Profile Pic
     </div>
 
     <div class="dashboardCategory" ng-show="showAvatar">My Profile Pic:<br>
@@ -32,7 +32,7 @@
         ng-init="loadAvatar()">
       </div>
       <br>
-      <div>
+      <div class="groupTitleButton">
         <input id="avatarInput" 
           ng-show="showAvatar" 
           onchange="angular.element(this).scope().previewAvatar()" 
@@ -41,7 +41,7 @@
           capture="camera">
         <!-- </i> -->
       </div>
-      <div>
+      <div class="groupTitleButton">
         <br>
         <canvas id="avatarCanvas" 
           ng-show="showAvatarControls" 
