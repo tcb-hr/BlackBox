@@ -451,7 +451,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     // $scope.getStandings();
 
     socket.on('newMessage', function (data) {
-        // console.log('fishon', data);
+        console.log('fishon', data);
         var newChat = data.data;
         $scope.chats[newChat._id] = newChat;
         $scope.getAvatars();
@@ -585,15 +585,16 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     $scope.showMapOrPic = function(chat) {
         // console.log(chat);
         if (chat.image || chat.dropCoordinates){
-            if (chat.image !== undefined) {
+        console.log(chat);
+           if (chat.image !== undefined) {
                 var pic = document.getElementById('pic');
                 pic.style.backgroundImage = 'url(' + chat.image + ')';
                 pic.style.backgroundRepeat = 'no-repeat';
                 pic.style.backgroundPosition = 'center center';
                 $scope.hidePic = false;
             } else if (chat.pickCoordinates !== undefined || chat.dropCoordinates !== undefined) {
-                var pickLat = JSON.parse(chat.pickCoordinates).lat;
-                var pickLng = JSON.parse(chat.pickCoordinates).lng;
+//                var pickLat = JSON.parse(chat.pickCoordinates).lat;
+//                var pickLng = JSON.parse(chat.pickCoordinates).lng;
                 var dropLat = JSON.parse(chat.dropCoordinates).lat;
                 var dropLng = JSON.parse(chat.dropCoordinates).lng;
                 //pan-center map to the mid-point btw pick & drop
