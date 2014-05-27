@@ -30,7 +30,8 @@
     "passport-oauth2": "^1.1.2",
     "qs": "^0.6.6",
     "socket.io": "~0.9.16",
-    "static-favicon": "~1.0.1"
+    "static-favicon": "~1.0.1",
+    "timezone": "0.0.30"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
