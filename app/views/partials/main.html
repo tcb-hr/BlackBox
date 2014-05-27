@@ -9,7 +9,7 @@
     <div class="groupTitleButton" ng-click="toggleSection('messageTypes')"><i class="fa fa-filter"></i>Feed Filters</div>
     <button class="selectAllButton" ng-show="display.messageTypes.show" ng-click="selectAll('messageTypes')"><i ng-show="display.messageTypes.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.messageTypes.selectAll" class="fa fa-square-o"></i>Select All</button>
     <button class="filterButton" ng-repeat="(key, prop) in settings.messageTypes" ng-show="display.messageTypes.show" ng-click="prop.show = !prop.show"><i ng-hide="prop.show" class="fa fa-circle-o"></i><i ng-show="prop.show" class="fa fa-check-circle-o"></i>{{prop.label}}</button>
-
+<!-- 
     <div class="groupTitleButton" ng-click="toggleSection('users')"><i class="fa fa-user"></i>User Filters</div>
     <button class="selectAllButton" ng-show="display.users.show" ng-click="selectAll('users')">
       <i ng-show="display.users.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.users.selectAll" class="fa fa-square-o"></i>Select All
@@ -20,7 +20,7 @@
       ng-show="display.users.show" 
       ng-click="user.show = !user.show">
       <i ng-hide="user.show" class="fa fa-circle-o"></i><i ng-show="user.show" class="fa fa-check-circle-o"></i>{{user.name}}
-    </button>
+    </button> -->
 
     <div class="groupTitleButton" ng-click="toggleAvatar()" ng-init="showAvatar = false">
       <i class="fa fa-camera-retro"></i>Profile Pic
@@ -157,7 +157,7 @@
             </div>
             <div class="time"> 
               <span class="handle">{{event.user || 'guest'}}</span><br>
-              <span>{{event.timestamp | amDateFormat:'h:mm a'}}</span>
+              <span>{{event.timestamp | amDateFormat:'ddd, h:mm a'}}</span>
               <div am-time-ago="event.timestamp" class="handle"></div>
             </div>
             <div class="msgText">{{event.body}}</div>
