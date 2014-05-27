@@ -153,7 +153,7 @@
         <div class="msgBlock" ng-repeat="event in schedule | orderBy:'timestamp':false | searchFor:searchString | messageFilter: settings" ng-click="showMapOrPic(event)" scroll-bottom>
           <div class="content">
             <div class="author">
-             <img class="avatar" src={{event.pic}}/>
+             <img class="avatar" src="{{event.pic}}"/>
             </div>
             <div class="time"> 
               <span class="handle">{{event.user || 'guest'}}</span><br>
