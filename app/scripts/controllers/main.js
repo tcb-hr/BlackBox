@@ -400,7 +400,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     //
     //-------------------------------------------------
 
-    $scope.showSched = false;
     $scope.chats = {}
     $scope.schedule = {};
     $scope.racers = {};
