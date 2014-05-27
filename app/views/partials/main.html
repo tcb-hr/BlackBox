@@ -150,7 +150,7 @@
             <div class="slogan">{{chat.slogan}}</div>
           </div>
         </div>
-        <div class="msgBlock" ng-repeat="event in schedule | orderBy:'timestamp':false | searchFor:searchString | messageFilter: settings" ng-click="showMapOrPic(event)" scroll-bottom ng-show="showSched">
+        <div class="msgBlock" ng-repeat="event in schedule | orderBy:'timestamp':false | searchFor:searchString | messageFilter: settings" ng-click="showMapOrPic(event)" scroll-bottom>
           <div class="content">
             <div class="author">
              <img class="avatar" src="{{event.pic}}"/>

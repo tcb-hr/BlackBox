@@ -446,10 +446,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     }
 
     $scope.getSched = function () {
-        if ($scope.showSched =  false) {
-            socket.emit('sched');
-        }
-        $scope.showSched = !$scope.showSched;
+        socket.emit('sched');
     } 
 
     $scope.refreshChats();
