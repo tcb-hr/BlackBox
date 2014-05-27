@@ -136,7 +136,7 @@
               ng-click="refreshChats()"><i class="fa fa-refresh"></i>Refresh</button>
           </div>
         </div>
-        <div class="msgBlock" ng-click="showMapOrPic(chat)"  ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString | messageFilter: settings" ng-click="showMapOrPic(chat)" scroll-bottom>
+        <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString | messageFilter: settings" ng-click="showMapOrPic(chat)" scroll-bottom>
           <div class="content">
             <div class="author">
              <img class="avatar" ng-src="{{avatars && avatars[chat.user]}}"/>
@@ -148,6 +148,20 @@
             </div>
             <div class="msgText">{{chat.body}}</div>
             <div class="slogan">{{chat.slogan}}</div>
+          </div>
+        </div>
+        <div class="msgBlock" ng-repeat="event in schedule | orderBy:'timestamp':false | searchFor:searchString | messageFilter: settings" ng-click="showMapOrPic(event)" scroll-bottom>
+          <div class="content">
+            <div class="author">
+             <img class="avatar" ng-src="{{avatars && avatars[event.user]}}"/>
+            </div>
+            <div class="time"> 
+              <span class="handle">{{event.user || 'guest'}}</span><br>
+              <span>{{event.timestamp | amDateFormat:'h:mm a'}}</span>
+              <div am-time-ago="event.timestamp" class="handle"></div>
+            </div>
+            <div class="msgText">{{event.body}}</div>
+            <div class="slogan">{{event.slogan}}</div>
           </div>
         </div>
       </div>

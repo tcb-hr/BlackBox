@@ -400,7 +400,8 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     //
     //-------------------------------------------------
 
-    $scope.chats = {};
+    $scope.chats = {}
+    $scope.schedule = {};
     $scope.racers = {};
     $scope.leader = {
       id: 1234,
@@ -454,6 +455,14 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
         console.log('fishon', data);
         var newChat = data.data;
         $scope.chats[newChat._id] = newChat;
+        $scope.getAvatars();
+        // socket.emit('standings');
+    });
+
+    socket.on('newSched', function (data) {
+        console.log('sched some light', data);
+        var newChat = data.data;
+        $scope.schedule[newChat._id] = newChat;
         $scope.getAvatars();
         // socket.emit('standings');
     });

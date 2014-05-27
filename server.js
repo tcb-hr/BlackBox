@@ -83,7 +83,7 @@ io.sockets.on('connection', function (socket) {
     var thingStream = Thing.model.find().stream();
     thingStream.on('data', function (thing) { 
       console.log('things be streamin', thing);
-      socket.emit('newMessage', {data: thing});
+      socket.emit('newSched', {data: thing});
     }).on('error', function(err) {
       console.log('thingStream err', err);
     }).on('end', function (arg){
