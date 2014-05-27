@@ -134,6 +134,8 @@
               ng-click="fetchChats()"><i class="fa fa-beer"></i>Get More</button>
             <button id="refreshButton" class="btn btn-lg btn-primary textButton" 
               ng-click="refreshChats()"><i class="fa fa-refresh"></i>Refresh</button>
+            <button id="fetchButton" class="btn btn-lg btn-primary textButton" 
+              ng-click="getSched()"><i class="fa fa-calendar"></i>Schedule</button>
           </div>
         </div>
         <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString | messageFilter: settings" ng-click="showMapOrPic(chat)" scroll-bottom>
