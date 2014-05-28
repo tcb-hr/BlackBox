@@ -408,16 +408,17 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
       timestamp: Date.now,
       type : 500,
       pic : '../images/Alfred_E_Neuman.jpg',
-      user : 'Nobody',
+      user : 'Cooper Ray',
       image : '../images/Alfred_E_Neuman.jpg',
       place : 1,
-      team : '#CMWC14',
-      country : 'MEX',
-      city : 'Mexico City',
+      team : 'I Love More Than You',
+      country : 'USA',
+      city : 'NYC',
       racer_number : '1234',
       current_earnings : 0,
       number_of_jobs : 0
     }
+    $scope.racers['1234'] = $scope.leader;
     $scope.reverse = false;
     $scope.sortType = 'place';
 
