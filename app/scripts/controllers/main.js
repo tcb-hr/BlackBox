@@ -414,7 +414,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
       team : 'Samurai',
       country : 'USA',
       city : 'NYC',
-      racer_number : '1234',
+      racer_number : '646',
       current_earnings : 0,
       number_of_jobs : 0
     }
