@@ -472,9 +472,9 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
         console.log('fishon', data);
         var racer = data.data;
         $scope.racers[racer.racer_number] = racer;
-        if (racer.place = 1){
-            $scope.leader = racer;
-        }
+        // if (racer.place = 1){
+        //     $scope.leader = racer;
+        // }
         console.log($scope.racers, $scope.leader)
 
     })
