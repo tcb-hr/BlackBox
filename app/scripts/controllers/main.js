@@ -478,7 +478,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     });
 
     socket.on('newStanding', function(data) {
-        if ($scope.racers.['1234']){
+        if ($scope.racers['1234']){
             delete $scope.racers['1234'];
         }
         console.log('fishon', data);
