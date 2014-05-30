@@ -75,7 +75,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   margin: 1px 2%;
   padding: 0px 0;
   width: 96%;
-  text-align: left;
+  text-align: right;
   padding-left: 20px;
 }
 #googleLoginButton {
