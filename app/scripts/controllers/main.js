@@ -403,7 +403,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     $scope.chats = {}
     $scope.schedule = {};
     $scope.racers = {};
-    $scope.chas = {
+    $scope.leader = {
       id: 1234,
       timestamp: Date.now,
       type : 500,
@@ -423,13 +423,6 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     $scope.reverse = false;
     $scope.sortType = 'place';
 
-    $scope.leader = function () {
-        angular.forEach($scope.racers, function(racer, hash){
-            if (racer.place === 1){
-                return racer;
-            }
-        })
-    }
 
     $scope.refreshChats = function(){
       socket.emit('hello');
@@ -478,7 +471,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     });
 
     socket.on('newStanding', function(data) {
-        if ($scope.racers['1234']){
+        if ($scope.racers.['1234']){
             delete $scope.racers['1234'];
         }
         console.log('fishon', data);
