@@ -414,7 +414,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
       team : 'TCB',
       country : 'USA',
       city : 'SF',
-      racer_number : '352'
+      racer_number : '352',
       current_earnings : 0,
       number_of_jobs : 0
     }
@@ -453,7 +453,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     // $scope.getStandings();
 
     socket.on('newMessage', function (data) {
-        console.log('fishon', data);
+        // console.log('fishon', data);
         var newChat = data.data;
         $scope.chats[newChat._id] = newChat;
         $scope.getAvatars();
@@ -461,7 +461,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     });
 
     socket.on('newSched', function (data) {
-        console.log('sched some light', data);
+        // console.log('sched some light', data);
         var newChat = data.data;
         $scope.schedule[newChat._id] = newChat;
         $scope.getAvatars();
