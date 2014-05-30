@@ -419,7 +419,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
       number_of_jobs : 0
     };
 
-    $scope.racers['1234'] = $scope.chas;
+    $scope.racers['1234'] = $scope.leader;
     $scope.reverse = false;
     $scope.sortType = 'place';
 
