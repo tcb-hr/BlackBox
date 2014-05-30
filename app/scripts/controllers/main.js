@@ -408,17 +408,17 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
       timestamp: Date.now,
       type : 500,
       pic : '../images/Alfred_E_Neuman.jpg',
-      user : 'Chas Christiansen',
+      user : 'Crihs Thorman',
       image : '../images/Alfred_E_Neuman.jpg',
       place : 1,
-      team : 'TCB',
+      team : 'I Love NY More than You',
       country : 'USA',
-      city : 'SF',
-      racer_number : '352',
+      city : 'NYC',
+      racer_number : '970',
       current_earnings : 0,
       number_of_jobs : 0
     };
-
+// 970 Thorman Chris   Crihs   M   New York    United States   Messenger   yes False
     $scope.racers['1234'] = $scope.leader;
     $scope.reverse = false;
     $scope.sortType = 'place';
