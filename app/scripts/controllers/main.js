@@ -403,7 +403,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     $scope.chats = {}
     $scope.schedule = {};
     $scope.racers = {};
-    $scope.leader = {
+    $scope.chas = {
       id: 1234,
       timestamp: Date.now,
       type : 500,
@@ -417,10 +417,19 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
       racer_number : '352',
       current_earnings : 0,
       number_of_jobs : 0
-    }
-    $scope.racers['1234'] = $scope.leader;
+    };
+
+    $scope.racers['1234'] = $scope.chas;
     $scope.reverse = false;
     $scope.sortType = 'place';
+
+    $scope.leader = function () {
+        angular.forEach($scope.racers, function(racer, hash){
+            if (racer.place === 1){
+                return racer;
+            }
+        })
+    }
 
     $scope.refreshChats = function(){
       socket.emit('hello');
@@ -469,6 +478,9 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     });
 
     socket.on('newStanding', function(data) {
+        if ($scope.racers.['1234']){
+            delete $scope.racers['1234'];
+        }
         console.log('fishon', data);
         var racer = data.data;
         $scope.racers[racer.racer_number] = racer;
@@ -593,9 +605,9 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     };
 
     $scope.showMapOrPic = function(chat) {
-        console.log(chat);
+        // console.log(chat);
         if (chat.image || chat.dropLat){
-        console.log(chat);
+        // console.log(chat);
            if (chat.image !== undefined) {
                 var pic = document.getElementById('pic');
                 pic.style.backgroundImage = 'url(' + chat.image + ')';
