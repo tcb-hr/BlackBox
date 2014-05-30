@@ -2,44 +2,125 @@
   <button class="settingsButton" ng-click="togglePanelLeft()"><i class="fa fa-angle-left"></i></button>
   <div class="panelContent">
     <h1 class="settingsTitle">Settings</h1>
-    <div class="groupTitleButton" ng-click="toggleSection('zones')"><i class="fa fa-map-marker"></i>Zones</div>
+<!--     <div class="groupTitleButton" ng-click="toggleSection('zones')"><i class="fa fa-map-marker"></i>Zones</div>
     <button class="selectAllButton" ng-show="display.zones.show" ng-click="selectAll('zones')"><i ng-show="display.zones.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.zones.selectAll" class="fa fa-square-o"></i> Select All</button>
-    <button class="filterButton" ng-repeat="(key, prop) in settings.zones" ng-show="display.zones.show" ng-click="prop.show = !prop.show"><i ng-hide="prop.show" class="fa fa-circle-o"></i><i ng-show="prop.show" class="fa fa-check-circle-o"></i>{{key}}</button>
+    <button class="filterButton" ng-repeat="(key, prop) in settings.zones" ng-show="display.zones.show" ng-click="prop.show = !prop.show"><i ng-hide="prop.show" class="fa fa-circle-o"></i><i ng-show="prop.show" class="fa fa-check-circle-o"></i>{{key}}</button> -->
 
-    <div class="groupTitleButton" ng-click="toggleSection('messageTypes')"><i class="fa fa-inbox"></i>Message Types</div>
+    <div class="groupTitleButton" ng-click="toggleSection('messageTypes')"><i class="fa fa-filter"></i>Feed Filters</div>
     <button class="selectAllButton" ng-show="display.messageTypes.show" ng-click="selectAll('messageTypes')"><i ng-show="display.messageTypes.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.messageTypes.selectAll" class="fa fa-square-o"></i>Select All</button>
     <button class="filterButton" ng-repeat="(key, prop) in settings.messageTypes" ng-show="display.messageTypes.show" ng-click="prop.show = !prop.show"><i ng-hide="prop.show" class="fa fa-circle-o"></i><i ng-show="prop.show" class="fa fa-check-circle-o"></i>{{prop.label}}</button>
+<!-- 
+    <div class="groupTitleButton" ng-click="toggleSection('users')"><i class="fa fa-user"></i>User Filters</div>
+    <button class="selectAllButton" ng-show="display.users.show" ng-click="selectAll('users')">
+      <i ng-show="display.users.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.users.selectAll" class="fa fa-square-o"></i>Select All
+    </button>
 
-    <div class="groupTitleButton" ng-click="toggleSection('users')"><i class="fa fa-user"></i>Users</div>
-    <button class="selectAllButton" ng-show="display.users.show" ng-click="selectAll('users')"><i ng-show="display.users.selectAll" class="fa fa-check-square-o"></i><i ng-hide="display.users.selectAll" class="fa fa-square-o"></i>Select All</button>
-    <button class="filterButton" ng-repeat="users in settings.users" ng-show="display.users.show" ng-click="user.show = !user.show"><i ng-hide="user.show" class="fa fa-circle-o"></i><i ng-show="user.show" class="fa fa-check-circle-o"></i>{{user.name}}</button>  
+    <button class="filterButton" 
+      ng-repeat="users in settings.users" 
+      ng-show="display.users.show" 
+      ng-click="user.show = !user.show">
+      <i ng-hide="user.show" class="fa fa-circle-o"></i><i ng-show="user.show" class="fa fa-check-circle-o"></i>{{user.name}}
+    </button> -->
+
+    <div class="groupTitleButton" ng-click="toggleAvatar()" ng-init="showAvatar = false">
+      <i class="fa fa-camera-retro"></i>Profile Pic
+    </div>
+
+    <div class="dashboardCategory" ng-show="showAvatar">My Profile Pic:<br>
+      <div id="avatarDisplay" 
+        ng-show="showAvatar" 
+        ng-init="loadAvatar()">
+      </div>
+      <br>
+      <div>
+        <input id="avatarInput" 
+          ng-show="showAvatar" 
+          onchange="angular.element(this).scope().previewAvatar()" 
+          type="file" 
+          accept="image/*" 
+          capture="camera">
+        <!-- </i> -->
+      </div>
+      <div>
+        <br>
+        <canvas id="avatarCanvas" 
+          ng-show="showAvatarControls" 
+          height="5" width="5">
+        </canvas>
+        <br>
+        <button id="submitAvatar" 
+          ng-show="showAvatarControls" 
+          ng-click="saveAvatar()">
+          <i class="fa fa-check"></i> Submit
+        </button>
+        <br>
+        <button id="cancelAvatar" 
+          ng-show="showAvatarControls" 
+          ng-click="resetAvatarControls()">
+          <i class="fa fa-undo"></i> Cancel
+        </button>
+      </div>
+    </div>
+
+    <div class="groupTitleButton" ng-click="$parent.logout()"><i class="fa fa-sign-out"></i>Logout</div>
   </div>
 
 </div>
 
 <div class="panel" id="panelRight" ng-class="{ hide: !showPanelRight, slide: showPanelRight }">
-  <h1 class="dashboardTitle">Dashboard</h1>
+  <h1 class="dashboardTitle">Standings</h1>
   <button class="dashboardButton" ng-click="togglePanelRight()"><i class="fa fa-angle-right"></i></button>
   
   <div class="panelContent">
-    <div class="groupTitleButton" ng-click="toggleStats()" ng-init="showStats = false"><i class="fa fa-usd"></i> Stats</div>
+    <div class="groupTitleButton" ng-click="toggleStats()" ng-init="showStats = true"><i class="fa fa-thumbs-up"></i>Race Leader</div>
     
-    <div class="dashboardCategory" ng-show="showStats">Total Jobs:<br><span id="jobsStat">122</span></div>
-    <div class="dashboardCategory" ng-show="showStats">Total Earnings:<br><span id="earningsStat">$1024</span></div>
-    <div class="dashboardCategory" ng-show="showStats">On-Time:<br><span id="onTimeStat">86.7%</span></div>
-
-    <div class="groupTitleButton" ng-click="toggleAvatar()" ng-init="showAvatar = false"><i class="fa fa-camera-retro"></i> Profile Picture</div>
-    <div class="dashboardCategory" ng-show="showAvatar">My Profile Pic:<br>
-      <div id="avatarDisplay" ng-show="showAvatar" ng-init="loadAvatar()"></div><br>
-      <input id="avatarInput" ng-show="showAvatar" onchange="angular.element(this).scope().previewAvatar()" type="file" accept="image/*" capture="camera"></i><br>
-      <canvas id="avatarCanvas" ng-show="showAvatarControls" height="5" width="5"></canvas><br>
-      <button id="submitAvatar" ng-show="showAvatarControls" ng-click="saveAvatar()"><i class="fa fa-check"></i> Submit</button><br>
-      <button id="cancelAvatar" ng-show="showAvatarControls" ng-click="resetAvatarControls()"><i class="fa fa-undo"></i> Cancel</button>
+    <div class="dashboardCategory" ng-show="showStats">Current Leader:
+      <br>
+      <span id="jobsStat"><img ={{leader.image}}> {{leader.racer_number}} {{leader.user}} {{racer.country}}</span>
+    </div>
+    <div class="dashboardCategory" ng-show="showStats">Side Event: Velodrome
+      <br>
+      <span id="earningsStat">Omnium</span>
+    </div>
+<!--     <div class="dashboardCategory" ng-show="showStats">Dollars & Drops:
+      <br>
+      <span id="earningsStat">${{leader.current_earnings}}.00 & {{leader.current_earnings}}</span>
+    </div> -->
+    <div class="dashboardCategory" ng-show="showStats">Timeleft:<br><span id="onTimeStat">4 hr 20 min</span></div>
+    <div class="groupTitleButton" ng-click="toggleLeader()" ng-init="showLeader = true">
+      <i class="fa fa-group"></i>Leaderboard
     </div>
 
-    <div class="groupTitleButton" ng-click="$parent.logout()"><i class="fa fa-sign-out"></i>Logout</div>
+    <div class="leaderBoard">
+      <table>
+        <tr>
+          <td ng-click='sortType = "place"; reverse = !reverse' style="width: 5%">Place</td>
+          <td style="width: 5%"></td>
+          <td ng-click='sortType = "racer_number"; reverse = !reverse' style="width: 10%">Number</td>
+          <td ng-click='sortType = "user"; reverse = !reverse' style="width: 20%">Name</td>
+          <td ng-click='sortType = "team"; reverse = !reverse' style="width: 10%">Team</td>
+          <td ng-click='sortType = "city"; reverse = !reverse' style="width: 20%">City</td>
+          <td ng-click='sortType = "country"; reverse = !reverse' style="width: 10%">Country</td>
+          <td ng-click='sortType = "current_earnings"; reverse = !reverse' style="width: 10%">Earnings</td>
+          <td ng-click='sortType = "number_of_jobs"; reverse = !reverse' style="width: 5%">Drops</td>
+        </tr>        
+        <tr ng-repeat="racer in racers">
+          <td>{{racer.place}}</td>
+          <td><img src={{racer.pic}} class="avatar"></td>
+          <td>{{racer.racer_number}}</td>
+          <td>{{racer.user}}</td>
+          <td>{{racer.team}}</td>
+          <td>{{racer.city}}</td>
+          <td>{{racer.country}}</td>
+          <td>${{racer.current_earnings}}.00</td>
+          <td>{{racer.number_of_jobs}}</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
+
+
 
 <div id="map" ng-init="createMap()" ng-hide="hideMap" ng-click="hideMap = !hideMap"></div>
 <div id="pic" ng-init="createPic()" ng-hide="hidePic" ng-click="hidePic = !hidePic"></div>
@@ -53,10 +134,12 @@
       <div id="feed" scroll-bottom>
         <div class="msgBlock">
           <div class=content>
-          <button id="fetchButton" class="btn btn-lg btn-primary textButton" 
-            ng-click="fetchChats()">Get More</button>
-          <button id="refreshButton" class="btn btn-lg btn-primary textButton" 
-            ng-click="refreshChats()">Refresh</button>
+            <button id="fetchButton" class="btn btn-lg btn-primary textButton" 
+              ng-click="fetchChats()"><i class="fa fa-beer"></i>Get More</button>
+            <button id="refreshButton" class="btn btn-lg btn-primary textButton" 
+              ng-click="refreshChats()"><i class="fa fa-refresh"></i>Refresh</button>
+            <button id="fetchButton" class="btn btn-lg btn-primary textButton" 
+              ng-click="getSched()"><i class="fa fa-calendar"></i>Schedule</button>
           </div>
         </div>
         <div class="msgBlock" ng-repeat="chat in chats | orderBy:'timestamp':false | searchFor:searchString | messageFilter: settings" ng-click="showMapOrPic(chat)" scroll-bottom>
@@ -73,18 +156,23 @@
             <div class="slogan">{{chat.slogan}}</div>
           </div>
         </div>
+        <div class="msgBlock" ng-repeat="event in schedule | orderBy:'timestamp':false | searchFor:searchString | messageFilter: settings" ng-click="showMapOrPic(event)" scroll-bottom>
+          <div class="content">
+            <div class="author">
+             <img class="avatar" src="{{event.pic}}"/>
+            </div>
+            <div class="time"> 
+              <span class="handle">{{event.user || 'guest'}}</span><br>
+              <span>{{event.timestamp | amDateFormat:'ddd, h:mm a'}}</span>
+              <div am-time-ago="event.timestamp" class="handle"></div>
+            </div>
+            <div class="msgText">{{event.body}}</div>
+            <div class="slogan">{{event.slogan}}</div>
+          </div>
+        </div>
       </div>
     </div>
 
-<!--       <div class="hamburger"></div>
-      <div class="msgMenu">
-        <div>reply</div>
-        <div>mute</div>
-        <div>grab</div>
-        <div>info</div>
-      </div>
-    </div>
- -->
     <div id="footer">
         <div class="content">
           <div id="toolbox" ng-show="showTools()">
@@ -94,24 +182,28 @@
               </div>
               <div class="tool" id="cannedTool">
                 <button id="fetchButton" class="btn btn-lg btn-primary textButton" 
-                  ng-click="fetchChats()">Get More</button>
+                  ng-click="fetchChats()"><i class="fa fa-beer"> </i>Get More</button>
                 <button id="refreshButton" class="btn btn-lg btn-primary textButton" 
-                  ng-click="refreshChats()">Refresh</button>
-                <select id="cannedSelect" class="btn btn-lg btn-primary textButton" ng-model="cannedModel" ng-change="composeCanned(chat)" ng-disabled="140 <= chat.body.length"><span>Canned</span>
+                  ng-click="refreshChats()"><i class="fa fa-refresh"> </i>Refresh</button>
+                <button id="fetchButton" class="btn btn-lg btn-primary textButton" 
+                  ng-click="getSched()"><i class="fa fa-calendar"></i>Schedule</button>
+<!--                 <select id="cannedSelect" class="btn btn-lg btn-primary textButton" ng-model="cannedModel" ng-change="composeCanned(chat)" ng-disabled="140 <= chat.body.length"><span>Canned</span>
+                  <option>#CMWC2014</option>
+                  <option>Mo' Money?</option>
+                  <option>Mo' Problems!</option>
+                  <option>Get hot rookie!</option>
+                  <option>So fucking fast.</option>
                   <option></option>
-                  <option>10-4</option>
-                  <option>on my way</option>
-                  <option>need help</option>
-                </select>
+                </select> -->
               </div>
             </div>
           </div>
           <form id="chatForm" name="chat" ng-init="configureUserSettings()" ng-submit="sendChat(chat)">
             <div id="bottomRow">
               <!-- <button type="button" class="button" id="toolsButton" ng-click="toggleTools()">tools</button> -->
-              <button type="button" id="toolsButton" ng-click="toggleTools()"><i class="fa fa-wrench"></i></button>
+              <button type="button" id="toolsButton" ng-click="toggleTools()"><i class="fa fa-info-circle"></i></button>
               <input type="text" placeholder="compose" id="composeField" class="form-control textField" ng-model="chat.body" char-limit="140" />
-              <button type="submit" id="sendButton"><i class="fa fa-envelope"></i></button>
+              <button type="submit" id="sendButton"><i class="fa fa-comment"></i></button>
             </div>
           </form>
         </div>        

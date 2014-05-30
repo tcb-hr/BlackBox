@@ -67,7 +67,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   height: 40px;
   font-size: 30px;
 }
-.filterButton{
+.leaderBoard{
   border-color: white;
   border-style: solid;
   border-width: 0px 0px 2px 0;
@@ -177,11 +177,11 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   text-align: center;
 }
 .appLogo {
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   margin: 8px;
   background-image: url("../images/bb-logo_256px.png");
-  background-size: 150px 150px;
+  background-size: 200px 200px;
 }
 .appName {
   font-size: 24pt;
@@ -250,6 +250,9 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   height: 32px;
   margin-bottom: -2px;
 }
+#avatarInput {
+ float: right;
+}
 .handle {
   font-size: 9pt;
   color: #777;
@@ -259,6 +262,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   margin-left: 38px;
   text-align: left;
   width: 70%;
+  font-size: large
 }
 .slogan {
   margin-left: 38px;
@@ -379,6 +383,8 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   color: #aaa;
   box-sizing: border-box;
   font-size: 11pt;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 #panelLeft {
   left: -50%;
@@ -443,7 +449,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   border-color: white;
   border-style: solid;
   border-width: 0px 0px 2px 0px;
-  font-size: 14px;
+  font-size: 16px;
   margin: 0px 1%;
   padding: 0px 0px;
   width: 96%;
@@ -482,6 +488,7 @@ i:active, i:focus, i:hover {
   border: 1px solid black;
   height: 80px;
   width: 80px;
+  float: right;
 }
 .dashboardTitle{
   font-size: 24px;
@@ -497,7 +504,7 @@ i:active, i:focus, i:hover {
   padding: 5px 0 5px 50px;
 }
 #jobsStat, #earningsStat, #onTimeStat{
-  font-size: 48px;
+  font-size: 24px;
 }
 #submitAvatar, #cancelAvatar {
   font-size: 18px;

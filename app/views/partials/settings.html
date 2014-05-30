@@ -1,10 +1,73 @@
-<div class="row">
-  <div class="col-sm-12">
-    <h1>Change Password</h1>
+
+
+
+
+<div id="all">
+
+  <div class="appSig">
+
+    <div class="content">
+      <div class="appLogo">
+      </div>
+      <div class="appName">#CWMC2014</div>
+    </div>
+
   </div>
-  <div class="col-sm-12">
-    <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
-    	
+
+  <div class="authBlock">
+
+    <div class="primAuthBlock">
+<!--       <form class="form" name="form" ng-submit="register(form)" novalidate>
+
+        <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted, 'has-error': form.name.$invalid && submitted }">
+          <input placeholder="Name" type="text" name="name" class="form-control loginField" ng-model="user.name" required />
+          <div class="help-block whiteText" ng-show="form.name.$error.required && submitted">Name Required</div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted, 'has-error': form.email.$invalid && submitted }">
+          <input placeholder="Email" type="email" name="email" class="form-control loginField" ng-model="user.email" required mongoose-error/>
+          <div class="help-block whiteText" ng-show="form.email.$error.email && submitted">Invalid Email</div>
+          <div class="help-block whiteText" ng-show="form.email.$error.required && submitted">Email Address</div>
+          <div class="help-block whiteText" ng-show="form.email.$error.mongoose">{{ errors.email }}</div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted, 'has-error': form.password.$invalid && submitted }">
+          <input placeholder="Password" type="password" name="password" class="form-control loginField" ng-model="user.password" ng-minlength="3" required mongoose-error/>
+          <div class="help-block whiteText" ng-show="(form.password.$error.minlength || form.password.$error.required) && submitted">Minimum 3 Characters</div>
+          <div class="help-block whiteText" ng-show="form.password.$error.mongoose">{{ errors.password }}</div>
+        </div>
+
+        <button type="submit" id="registerButton" class="btn btn-lg btn-primary textButton">Register</button>
+
+      </form>
+      <a href="/login" class="noUnderline"><button id="registerButton" type="button" class="text-center new-account textButton">Email Login</button></a>
+    </div>
+
+    <div class="altAuthBlock">
+      <a href="/login" class="noUnderline"><button id="navToLoginButton" type="button" class="text-center new-account textButton">Email Login</button></a>
+    </div>
+ -->
+ <form class="form" name="username" ng-submit="changeUsername(username)" novalidate>
+      
+      <div class="form-group">
+        <label>Current Username</label>
+
+        <input type="text" name="oldUsername" class="form-control" ng-model="user.oldUsername">    
+
+      </div>
+
+      <div class="form-group">
+        <label>New Username</label>
+
+        <input type="test" name="newUsername" class="form-control" ng-model="user.newUsername">
+      </div>
+
+      <p class="help-block"> {{ message }} </p>
+
+      <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
+    </form>
+     <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
+      
       <div class="form-group">
         <label>Current Password</label>
 
@@ -32,4 +95,5 @@
       <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
     </form>
   </div>
+
 </div>
