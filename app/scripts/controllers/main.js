@@ -480,7 +480,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
         if (racer.place = 1){
             $scope.leader = racer;
         }
-        console.log($scope.racers, $scope.leader)
+        console.log('scope crap', $scope.racers, $scope.leader)
 
     })
 
