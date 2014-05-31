@@ -286,7 +286,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   width: 49%;
   left: 0;
   right: 0;
-  margin: 0 0 0 auto;
+  margin: 0 auto;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -375,7 +375,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
 .panel {
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 75%;
   height: 100%;
   z-index: 1000;
   border: 1px solid #080808;
@@ -387,7 +387,7 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   overflow-x: hidden;
 }
 #panelLeft {
-  left: -100%;
+  left: -50%;
   text-align: right;
 }
 #panelRight {
