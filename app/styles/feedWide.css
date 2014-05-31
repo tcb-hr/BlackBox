@@ -387,11 +387,11 @@ button:active, button:focus, button:hover, .groupTitleButton:active, .groupTitle
   overflow-x: hidden;
 }
 #panelLeft {
-  left: -25%;
+  left: -75%;
   text-align: right;
 }
 #panelRight {
-  right: -75%;
+  right: -25%;
 }
 #panelLeft.slide {
   left: 0;
