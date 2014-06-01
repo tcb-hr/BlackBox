@@ -93,21 +93,63 @@
     </div>
 
     <div class="leaderBoard">
-      <table>
-        <tr>
-          <td ng-click='sortType = "place"; reverse = !reverse' style="width: 5%">Place</td>
+ <table class="table table-bordered">
+    <thead>
+      <tr>
+<!--           <td ng-click='sortType = "place"; reverse = !reverse' style="width: 5%">Place</td>
           <td style="width: 5%"></td>
           <td ng-click='sortType = "racer_number"; reverse = !reverse' style="width: 10%">Number</td>
           <td ng-click='sortType = "racer_name"; reverse = !reverse' style="width: 20%">Name</td>
           <td ng-click='sortType = "team"; reverse = !reverse' style="width: 10%">Team</td>
           <td ng-click='sortType = "city"; reverse = !reverse' style="width: 20%">City</td>
           <td ng-click='sortType = "country"; reverse = !reverse' style="width: 10%">Country</td>
-          <td ng-click='sortType = "current_earnings"; reverse = !reverse' style="width: 10%">Earnings</td>
-<!--           <td ng-click='sortType = "number_of_jobs"; reverse = !reverse' style="width: 5%">Drops</td>
- -->        </tr>        
-        <tr ng-repeat="racer in racers | orderBy:'current_earnings':true | searchFor:searchString" >
+          <td ng-click='sortType = "current_earnings"; reverse = !reverse' style="width: 10%">Earnings</td> -->
+        <th>
+          <a href="#" ng-click="orderByField='place'; reverseSort = !reverseSort">
+          place <span ng-show="orderByField == 'place'"><span ng-show="!reverseSort">^</span>
+          <span ng-show="reverseSort">v</span></span>
+          </a>
+        </th>
+                <th>
+          <a href="#" ng-click="orderByField='racer_number'; reverseSort = !reverseSort">
+          racer number <span ng-show="orderByField == 'racer_number'"><span ng-show="!reverseSort">^</span>
+          <span ng-show="reverseSort">v</span></span>
+          </a>
+        </th>
+        <th>
+          <a href="#" ng-click="orderByField='name'; reverseSort = !reverseSort">
+          name <span ng-show="orderByField == 'name'"><span ng-show="!reverseSort">^</span>
+          <span ng-show="reverseSort">v</span></span>
+          </a>
+        </th>
+        <th>
+          <a href="#" ng-click="orderByField='team'; reverseSort = !reverseSort">
+          team <span ng-show="orderByField == 'team'"><span ng-show="!reverseSort">^</span>
+          <span ng-show="reverseSort">v</span></span>
+          </a>
+        </th>
+        <th>
+          <a href="#" ng-click="orderByField='city'; reverseSort = !reverseSort">
+          city <span ng-show="orderByField == 'city'"><span ng-show="!reverseSort">^</span>
+          <span ng-show="reverseSort">v</span></span>
+          </a>
+        </th>        <th>
+          <a href="#" ng-click="orderByField='country'; reverseSort = !reverseSort">
+          country <span ng-show="orderByField == 'country'"><span ng-show="!reverseSort">^</span>
+          <span ng-show="reverseSort">v</span></span>
+          </a>
+        </th>        <th>
+          <a href="#" ng-click="orderByField='current_earnings'; reverseSort = !reverseSort">
+          current earnings <span ng-show="orderByField == 'current_earnings'"><span ng-show="!reverseSort">^</span>
+          <span ng-show="reverseSort">v</span></span>
+          </a>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="racer in racers|orderBy:orderByField:reverseSort">
           <td>{{racer.place}}</td>
-          <td><img src={{racer.pic}} class="avatar"></td>
+          <!-- <td><img src={{racer.pic}} class="avatar"></td> -->
           <td>{{racer.racer_number}}</td>
           <td>{{racer.racer_name}}</td>
           <td>{{racer.team}}</td>
@@ -115,8 +157,9 @@
           <td>{{racer.country}}</td>
           <td>${{racer.current_earnings}}</td>
           <td>{{racer.number_of_jobs}}</td>
-        </tr>
-      </table>
+      </tr>
+    </tbody>
+  </table>
     </div>
   </div>
 </div>
