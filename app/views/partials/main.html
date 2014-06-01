@@ -78,16 +78,16 @@
       <br>
       <span id="jobsStat"><img ={{leader.image}}> {{leader.racer_number}} {{leader.user}} {{racer.country}}</span>
     </div>
-    <div class="dashboardCategory" ng-show="showStats">Side Event: Alleycat
+    <div class="dashboardCategory" ng-show="showStats">Main Race: Qualifier
       <br>
-      <span id="earningsStat">KOS</span>
+      <span id="earningsStat">Top Seed</span>
     </div>
-<!--     <div class="dashboardCategory" ng-show="showStats">Dollars & Drops:
+    <div class="dashboardCategory" ng-show="showStats">Dollars & Drops:
       <br>
-      <span id="earningsStat">${{leader.current_earnings}}.00 & {{leader.current_earnings}}</span>
-    </div> -->
-    <div class="dashboardCategory" ng-show="showStats">Timeleft:<br><span id="onTimeStat">4 hr 20 min</span></div>
-    <div class="groupTitleButton" ng-click="toggleLeader()" ng-init="showLeader = true">
+      <span id="earningsStat">${{leader.current_earnings}} & {{leader.current_earnings}}</span>
+    </div>
+<!--     <div class="dashboardCategory" ng-show="showStats">Timeleft:<br><span id="onTimeStat">4 hr 20 min</span></div>
+ -->    <div class="groupTitleButton" ng-click="toggleLeader()" ng-init="showLeader = true">
       <i class="fa fa-group"></i>Leaderboard
     </div>
 
