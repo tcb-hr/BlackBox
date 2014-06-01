@@ -401,6 +401,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     //-------------------------------------------------
 
     $scope.chats = {}
+    $scope.finish = Date.parse('2014-06-01T21:00:00Z')
     $scope.schedule = {};
     $scope.racers = {};
     $scope.leader = {
