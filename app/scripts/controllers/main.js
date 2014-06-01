@@ -477,7 +477,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
             if ($scope.racers['1234']){
                 delete $scope.racers['1234'];
             }
-            console.log('fishon', data[i]);
+            // console.log('fishon', data[i]);
             var racer = data[i];
             if (racer.racer_number){
                 $scope.racers[racer.racer_number] = racer;
