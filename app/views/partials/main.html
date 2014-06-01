@@ -78,16 +78,17 @@
       <br>
       <span id="jobsStat"><img ={{leader.image}}> {{leader.racer_number}} {{leader.user}} {{racer.country}}</span>
     </div>
-    <div class="dashboardCategory" ng-show="showStats">Main Race: Qualifier
+    <div class="dashboardCategory" ng-show="showStats">Main Race: Final
       <br>
-      <span id="earningsStat">Top Seed</span>
+      <span id="earningsStat">Current Leader</span>
     </div>
-    <div class="dashboardCategory" ng-show="showStats">Dollars & Drops:
+    <div class="dashboardCategory" ng-show="showStats">Earnings:
       <br>
-      <span id="earningsStat">${{leader.current_earnings}} & {{leader.number_of_jobs}}</span>
+      <span id="earningsStat">${{leader.current_earnings}}</span>
     </div>
-<!--     <div class="dashboardCategory" ng-show="showStats">Timeleft:<br><span id="onTimeStat">4 hr 20 min</span></div>
- -->    <div class="groupTitleButton" ng-click="toggleLeader()" ng-init="showLeader = true">
+    <div class="dashboardCategory" ng-show="showStats">Timeleft:<br><div am-time-ago="finish"></div>
+</div>
+    <div class="groupTitleButton" ng-click="toggleLeader()" ng-init="showLeader = true">
       <i class="fa fa-group"></i>Leaderboard
     </div>
 
@@ -102,8 +103,8 @@
           <td ng-click='sortType = "city"; reverse = !reverse' style="width: 20%">City</td>
           <td ng-click='sortType = "country"; reverse = !reverse' style="width: 10%">Country</td>
           <td ng-click='sortType = "current_earnings"; reverse = !reverse' style="width: 10%">Earnings</td>
-          <td ng-click='sortType = "number_of_jobs"; reverse = !reverse' style="width: 5%">Drops</td>
-        </tr>        
+<!--           <td ng-click='sortType = "number_of_jobs"; reverse = !reverse' style="width: 5%">Drops</td>
+ -->        </tr>        
         <tr ng-repeat="racer in racers">
           <td>{{racer.place}}</td>
           <td><img src={{racer.pic}} class="avatar"></td>
