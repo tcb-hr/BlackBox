@@ -104,23 +104,19 @@
           <td ng-click='sortType = "country"; reverse = !reverse' style="width: 10%">Country</td>
           <td ng-click='sortType = "current_earnings"; reverse = !reverse' style="width: 10%">Earnings</td>
 <!--           <td ng-click='sortType = "number_of_jobs"; reverse = !reverse' style="width: 5%">Drops</td>
--->        </tr>
-       </table>
-      <div ng-repeat="racer in racers | orderBy:'racer.current_earnings'">
-       <table>    
-          <tr>
-            <td>{{racer.place}}</td>
-            <td><img src={{racer.pic}} class="avatar"></td>
-            <td>{{racer.racer_number}}</td>
-            <td>{{racer.racer_name}}</td>
-            <td>{{racer.team}}</td>
-            <td>{{racer.city}}</td>
-            <td>{{racer.country}}</td>
-            <td>${{racer.current_earnings}}</td>
-            <td>{{racer.number_of_jobs}}</td>
-          </tr>
-        </table>
-      </div>
+ -->        </tr>        
+        <tr ng-repeat="racer in racers | orderBy:'current_earnings':true | searchFor:searchString" >
+          <td>{{racer.place}}</td>
+          <td><img src={{racer.pic}} class="avatar"></td>
+          <td>{{racer.racer_number}}</td>
+          <td>{{racer.racer_name}}</td>
+          <td>{{racer.team}}</td>
+          <td>{{racer.city}}</td>
+          <td>{{racer.country}}</td>
+          <td>${{racer.current_earnings}}</td>
+          <td>{{racer.number_of_jobs}}</td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
