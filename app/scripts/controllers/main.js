@@ -482,7 +482,7 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
             var racer = data[i];
             if (racer.racer_number){
                 $scope.racers[racer.racer_number] = racer;
-                if (racer.place === 1){
+                if (racer.current_earnings > $scope.leader.current_earnings){
                     $scope.leader = racer;
                 }
             }
