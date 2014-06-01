@@ -76,7 +76,7 @@
     
     <div class="dashboardCategory" ng-show="showStats">Current Leader:
       <br>
-      <span id="jobsStat"><img ={{leader.image}}> {{leader.racer_number}} {{leader.user}} {{racer.country}}</span>
+      <span id="jobsStat"><img ={{leader.image}}> {{leader.racer_number}} {{leader.racer_name}} {{racer.country}}</span>
     </div>
     <div class="dashboardCategory" ng-show="showStats">Main Race: Final
       <br>
@@ -98,7 +98,7 @@
           <td ng-click='sortType = "place"; reverse = !reverse' style="width: 5%">Place</td>
           <td style="width: 5%"></td>
           <td ng-click='sortType = "racer_number"; reverse = !reverse' style="width: 10%">Number</td>
-          <td ng-click='sortType = "user"; reverse = !reverse' style="width: 20%">Name</td>
+          <td ng-click='sortType = "racer_name"; reverse = !reverse' style="width: 20%">Name</td>
           <td ng-click='sortType = "team"; reverse = !reverse' style="width: 10%">Team</td>
           <td ng-click='sortType = "city"; reverse = !reverse' style="width: 20%">City</td>
           <td ng-click='sortType = "country"; reverse = !reverse' style="width: 10%">Country</td>
@@ -109,7 +109,7 @@
           <td>{{racer.place}}</td>
           <td><img src={{racer.pic}} class="avatar"></td>
           <td>{{racer.racer_number}}</td>
-          <td>{{racer.user}}</td>
+          <td>{{racer.racer_name}}</td>
           <td>{{racer.team}}</td>
           <td>{{racer.city}}</td>
           <td>{{racer.country}}</td>
