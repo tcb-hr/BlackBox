@@ -85,7 +85,7 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('standings', function(){
     console.log('hello standings');
-    Racer.racerModel.find(function (err, chat){
+    Racer.racerModel.find({}, function (err, chat){
 console.log('standarr', chat)
       socket.emit('newStanding', chat)
     });
