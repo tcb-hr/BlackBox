@@ -105,7 +105,7 @@
           <td ng-click='sortType = "current_earnings"; reverse = !reverse' style="width: 10%">Earnings</td>
 <!--           <td ng-click='sortType = "number_of_jobs"; reverse = !reverse' style="width: 5%">Drops</td>
  -->        </tr>        
-        <tr ng-repeat="racer in racers | orderBy:'current_earnings':true">
+        <tr ng-repeat="racer in racers | orderBy:'current_earnings'">
           <td>{{racer.place}}</td>
           <td><img src={{racer.pic}} class="avatar"></td>
           <td>{{racer.racer_number}}</td>
