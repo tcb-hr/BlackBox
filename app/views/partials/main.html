@@ -95,7 +95,7 @@
     <div class="leaderBoard">
       <table>
         <tr>
-          <td ng-click='sortType = "current_earnings"; reverse = !reverse' style="width: 5%">Place</td>
+          <td ng-click='sortType = "place"; reverse = !reverse' style="width: 5%">Place</td>
           <td style="width: 5%"></td>
           <td ng-click='sortType = "racer_number"; reverse = !reverse' style="width: 10%">Number</td>
           <td ng-click='sortType = "user"; reverse = !reverse' style="width: 20%">Name</td>
@@ -105,7 +105,7 @@
           <td ng-click='sortType = "current_earnings"; reverse = !reverse' style="width: 10%">Earnings</td>
 <!--           <td ng-click='sortType = "number_of_jobs"; reverse = !reverse' style="width: 5%">Drops</td>
  -->        </tr>        
-        <tr ng-repeat="racer in racers | orderBy:'current_earnings':reverse ">
+        <tr ng-repeat="racer in racers | orderBy:'current_earnings'">
           <td>{{racer.place}}</td>
           <td><img src={{racer.pic}} class="avatar"></td>
           <td>{{racer.racer_number}}</td>
