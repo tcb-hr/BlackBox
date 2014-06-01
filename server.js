@@ -85,14 +85,17 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('standings', function(){
     console.log('hello standings');
-    var racerStream = Racer.racerModel.find().stream();
-    racerStream.on('data', function (racer) { 
-      socket.emit('newStanding', {data: racer});
-    }).on('error', function(err) {
-      console.log('racerStream err', err);
-    }).on('end', function (arg){
-      // console.log('arg!', arg);
+    Racer.racerModel.find(function (err, chat){
+console.log('standarr', chat)
+      socket.emit('newStanding', chat)
     });
+    // racerStream.on('data', function (racer) { 
+    //   socket.emit('newStanding', {data: racer});
+    // }).on('error', function(err) {
+    //   console.log('racerStream err', err);
+    // }).on('end', function (arg){
+    //   // console.log('arg!', arg);
+    // });
   })
 
   socket.on('sched', function(){
