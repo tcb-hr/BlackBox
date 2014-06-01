@@ -86,7 +86,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('standings', function(){
     console.log('hello standings');
     Racer.racerModel.find({}, function (err, chat){
-console.log('standarr', chat)
+      console.log('standarr', chat)
       socket.emit('newStanding', chat)
     });
     // racerStream.on('data', function (racer) { 
@@ -99,12 +99,12 @@ console.log('standarr', chat)
   })
 
   socket.on('sched', function(){
-    console.log('hello schedule');
+    // console.log('hello schedule');
     var now = new Date(new Date().getTime() - (1 * 60 * 60 * 1000));
     var thingStream = Thing.model.find({timestamp: {$gte: now}}).stream();
     // var thingStream = Thing.model.find().stream();
     thingStream.on('data', function (thing) { 
-      console.log('things be streamin', thing);
+      // console.log('things be streamin', thing);
       socket.emit('newSched', {data: thing});
     }).on('error', function(err) {
       console.log('thingStream err', err);
