@@ -478,10 +478,12 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
                 delete $scope.racers['1234'];
             }
             // console.log('fishon', data);
-            var racer = data.data;
-            $scope.racers[racer.racer_number] = racer;
-            if (racer.place = 1){
-                $scope.leader = racer;
+            var racer = data[i].data;
+            if (racer.racer_number){
+                $scope.racers[racer.racer_number] = racer;
+                if (racer.place = 1){
+                    $scope.leader = racer;
+                }
             }
         }
         console.log('scope crap', $scope.racers, $scope.leader)
