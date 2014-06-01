@@ -471,14 +471,14 @@ app.controller('MainCtrl', function($scope, $http, $window, socket, $location, A
     });
 
     socket.on('newStanding', function(data) {
-        console.log(data);
+        console.log('new standings', data);
         for (var i = 0; i < data.length; i++){
 
             if ($scope.racers['1234']){
                 delete $scope.racers['1234'];
             }
             // console.log('fishon', data);
-            var racer = data[i].data;
+            var racer = data[i];
             if (racer.racer_number){
                 $scope.racers[racer.racer_number] = racer;
                 if (racer.place = 1){
